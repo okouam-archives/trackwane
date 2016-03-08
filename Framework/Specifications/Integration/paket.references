@@ -1,0 +1,4 @@
+NUnit
+structuremap
+NLog
+NLog.Targets.Syslog

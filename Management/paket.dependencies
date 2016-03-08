@@ -1,0 +1,44 @@
+source https://www.nuget.org/api/v2
+framework >= net461
+nuget Antlr 3.5.0.2
+nuget CommonServiceLocator 1.3
+nuget Faker
+nuget FluentValidation
+nuget Geo
+nuget JWT
+nuget FAKE
+nuget OctopusTools
+nuget log4net 2.0.5
+nuget Microsoft.AspNet.Mvc
+nuget Microsoft.AspNet.Razor
+nuget Microsoft.AspNet.WebApi
+nuget Microsoft.AspNet.WebApi.Client
+nuget Microsoft.AspNet.WebApi.Core
+nuget Microsoft.AspNet.WebApi.Owin
+nuget Microsoft.AspNet.WebApi.SelfHost
+nuget Microsoft.AspNet.WebApi.WebHost
+nuget Microsoft.AspNet.WebPages
+nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform 1.0.1
+nuget Microsoft.Net.Compilers 1.1.1
+nuget Microsoft.Owin
+nuget Microsoft.Owin.Host.HttpListener
+nuget Microsoft.Owin.Host.SystemWeb
+nuget Microsoft.Owin.Hosting
+nuget Microsoft.Web.Infrastructure
+nuget Newtonsoft.Json
+nuget NLog
+nuget NLog.Config 4.2.3
+nuget NLog.Schema 4.2.3
+nuget NLog.Targets.Syslog
+nuget NUnit
+nuget NUnit.Console
+nuget OctoPack
+nuget Owin
+nuget Polly
+nuget RavenDB.Client
+nuget RavenDB.Database
+nuget RestSharp
+nuget Shouldly
+nuget structuremap
+nuget WebActivatorEx
+nuget RabbitMQ.Client

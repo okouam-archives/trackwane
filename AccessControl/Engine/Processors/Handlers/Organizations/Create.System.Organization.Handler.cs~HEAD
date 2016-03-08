@@ -1,0 +1,25 @@
+﻿using System.Collections.Generic;
+using paramore.brighter.commandprocessor.Logging;
+using Trackwane.Framework.Common;
+using Trackwane.Framework.Events;
+using Trackwane.Framework.Infrastructure.Requests;
+using Trackwane.Identity.Runtime.Configuration.Requests;
+
+namespace Trackwane.Identity.Runtime.Configuration.Handlers
+{
+    public class CreateSystemOrganizationHandler : TransactionalHandler<CreateSystemOrganization>
+    {
+        public CreateSystemOrganizationHandler(
+            IProvideTransactions transaction, 
+            IPublishEvents publisher,
+            ILog log) : 
+            base(transaction, publisher, log)
+        {
+        }
+
+        protected override IEnumerable<Event> Handle(CreateSystemOrganization command, IRepository repository)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}

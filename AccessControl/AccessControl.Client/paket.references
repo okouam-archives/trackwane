@@ -1,0 +1,15 @@
+CommonServiceLocator
+Faker
+FluentValidation
+Geo
+JWT
+Microsoft.AspNet.WebApi
+Microsoft.AspNet.WebApi.SelfHost
+NLog
+Polly
+RabbitMQ.Client
+RavenDB.Database
+RestSharp
+Shouldly
+structuremap
+WebActivatorEx

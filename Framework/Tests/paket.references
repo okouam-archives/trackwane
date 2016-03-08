@@ -1,0 +1,12 @@
+FluentValidation
+NLog
+NSubstitute
+NUnit
+NUnit.Console
+RavenDB.Client
+RavenDB.Database content: none
+Shouldly
+structuremap
+RestSharp
+Microsoft.AspNet.WebApi.Core
+NLog.Targets.Syslog

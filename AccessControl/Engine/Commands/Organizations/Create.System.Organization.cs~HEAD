@@ -1,0 +1,11 @@
+﻿using Trackwane.Framework.Infrastructure;
+
+namespace Trackwane.Identity.Runtime.Configuration.Requests
+{
+    public class CreateSystemOrganization : Command
+    {
+        public CreateSystemOrganization(string requesterId) : base(requesterId)
+        {
+        }
+    }
+}

@@ -1,0 +1,12 @@
+Hangfire
+Hangfire.Core
+Hangfire.SqlServer
+Hangfire.StructureMap3
+log4net
+Microsoft.CodeDom.Providers.DotNetCompilerPlatform
+Microsoft.Net.Compilers
+Microsoft.Owin
+Microsoft.Owin.Host.SystemWeb
+Newtonsoft.Json
+Owin
+structuremap

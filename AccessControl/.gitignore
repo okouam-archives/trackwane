@@ -1,0 +1,11 @@
+Bin/
+Debug/
+Obj/
+.vs/
+*.DotSettings
+*.user
+packages/
+node_modules/
+Raven.Studio.Html5.zip
+.build/
+.fake/

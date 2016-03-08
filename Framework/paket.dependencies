@@ -1,0 +1,32 @@
+source http://packages.wylesight.ws/api/odata
+source https://api.nuget.org/v3/index.json
+framework: net461
+content: none
+
+nuget CommonServiceLocator 
+nuget EventStore.Client
+nuget Faker
+nuget FluentValidation 
+nuget Geo 
+nuget JWT 
+nuget LibLog
+nuget Microsoft.AspNet.WebApi
+nuget Microsoft.AspNet.WebApi.Client
+nuget Microsoft.AspNet.WebApi.Core
+nuget Microsoft.AspNet.WebApi.SelfHost
+nuget Microsoft.Web.Infrastructure
+nuget Microsoft.WindowsAzure.ConfigurationManager 
+nuget Newtonsoft.Json 
+nuget NLog 
+nuget NLog.Targets.Syslog
+nuget NSubstitute
+nuget NUnit
+nuget NUnit.Console
+nuget Polly 3.0.0
+nuget RabbitMQ.Client
+nuget RavenDB.Client 
+nuget RavenDB.Database 
+nuget RestSharp 
+nuget Shouldly
+nuget structuremap
+nuget WindowsAzure.ServiceBus

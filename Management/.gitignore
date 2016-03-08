@@ -1,0 +1,10 @@
+Bin/
+Debug/
+Obj/
+.vs/
+*.DotSettings
+*.user
+packages/
+node_modules/
+.fake/
+.build/

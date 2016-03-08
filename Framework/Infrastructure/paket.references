@@ -1,0 +1,10 @@
+FluentValidation
+JWT
+Newtonsoft.Json
+NLog
+Polly
+RabbitMQ.Client
+RavenDB.Client
+RavenDB.Database content: none
+structuremap
+Microsoft.AspNet.WebApi.SelfHost

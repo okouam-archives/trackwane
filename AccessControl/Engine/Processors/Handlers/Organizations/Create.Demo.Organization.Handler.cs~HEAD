@@ -1,0 +1,24 @@
+﻿using System.Collections.Generic;
+using paramore.brighter.commandprocessor.Logging;
+using Trackwane.Framework.Common;
+using Trackwane.Framework.Events;
+using Trackwane.Framework.Infrastructure.Requests;
+using Trackwane.Identity.Runtime.Configuration.Requests;
+
+namespace Trackwane.Identity.Runtime.Configuration.Handlers
+{
+    public class ConfigureDemoHandler : TransactionalHandler<CreateDemoOrganization>
+    {
+        public ConfigureDemoHandler(
+            IProvideTransactions transaction, 
+            IPublishEvents publisher, ILog log) : 
+            base(transaction, publisher, log)
+        {
+        }
+
+        protected override IEnumerable<Event> Handle(CreateDemoOrganization command, IRepository repository)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}

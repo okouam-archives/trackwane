@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{971EE991-90B0-4D5D-AE18-00BA961DC508}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Trackwane.Management.Responses</RootNamespace>
+    <AssemblyName>Trackwane.Management.Responses</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alerts\Alert.Details.cs" />
+    <Compile Include="Alerts\Alert.Summary.cs" />
+    <Compile Include="Alerts\Create.Alert.Model.cs" />
+    <Compile Include="Alerts\Search.Criteria.Model.cs" />
+    <Compile Include="Alerts\Update.Alert.Model.cs" />
+    <Compile Include="Boundaries\Boundary.Details.cs" />
+    <Compile Include="Boundaries\Boundary.Summary.cs" />
+    <Compile Include="Boundaries\Create.Boundary.Model.cs" />
+    <Compile Include="Boundaries\Search.Criteria.Model.cs" />
+    <Compile Include="Boundaries\Update.Boundary.Model.cs" />
+    <Compile Include="Drivers\Create.Driver.Model.cs" />
+    <Compile Include="Drivers\Driver.Details.cs" />
+    <Compile Include="Drivers\Driver.Summary.cs" />
+    <Compile Include="Drivers\Search.Criteria.Model.cs" />
+    <Compile Include="Drivers\Update.Driver.Model.cs" />
+    <Compile Include="Locations\Create.Location.Model.cs" />
+    <Compile Include="Locations\Location.Details.cs" />
+    <Compile Include="Locations\Location.Summary.cs" />
+    <Compile Include="Locations\Search.Criteria.Model.cs" />
+    <Compile Include="Locations\Update.Location.Model.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trackers\Create.Tracker.Model.cs" />
+    <Compile Include="Trackers\Search.Criteria.Model.cs" />
+    <Compile Include="Trackers\Tracker.Details.cs" />
+    <Compile Include="Trackers\Tracker.Summary.cs" />
+    <Compile Include="Trackers\Update.Tracker.Model.cs" />
+    <Compile Include="Vehicles\Register.Vehicle.Model.cs" />
+    <Compile Include="Vehicles\Search.Criteria.Model.cs" />
+    <Compile Include="Vehicles\Update.Vehicle.Model.cs" />
+    <Compile Include="Vehicles\Vehicle.Details.cs" />
+    <Compile Include="Vehicles\Vehicle.Summary.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="Geo">
+          <HintPath>..\packages\Geo\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Geo.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+</Project>

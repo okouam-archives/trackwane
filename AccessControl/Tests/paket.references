@@ -1,0 +1,20 @@
+CommonServiceLocator
+Faker
+FluentValidation
+Geo
+JWT
+log4net
+Microsoft.AspNet.WebApi
+Microsoft.AspNet.WebApi.SelfHost
+NLog
+NLog.Schema
+NUnit
+NUnit.Console
+Polly
+RabbitMQ.Client
+RavenDB.Database content: none
+RestSharp
+Shouldly
+structuremap
+WebActivatorEx
+NLog.Targets.Syslog

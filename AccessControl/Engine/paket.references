@@ -1,0 +1,10 @@
+FluentValidation
+Geo
+JWT
+Newtonsoft.Json
+NLog
+Polly
+RabbitMQ.Client
+RavenDB.Database
+structuremap
+Microsoft.AspNet.WebApi.Core

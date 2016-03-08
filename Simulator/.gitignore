@@ -1,0 +1,7 @@
+Bin/
+Debug/
+Obj/
+.vs/
+*.DotSettings
+*.user
+packages/

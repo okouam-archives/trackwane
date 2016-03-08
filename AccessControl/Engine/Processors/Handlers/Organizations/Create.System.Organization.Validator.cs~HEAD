@@ -1,0 +1,9 @@
+﻿using FluentValidation;
+using Trackwane.Identity.Runtime.Configuration.Requests;
+
+namespace Trackwane.Identity.Runtime.Configuration.Validators
+{
+    public class CreateSystemOrganizationValidator : AbstractValidator<CreateSystemOrganization>
+    {
+    }
+}

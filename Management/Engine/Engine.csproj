@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC82FE86-A127-4131-9270-4B43618276EB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Trackwane.Management.Engine</RootNamespace>
+    <AssemblyName>Trackwane.Management.Engine</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Raven.Database">
+      <HintPath>..\..\Framework\packages\RavenDB.Database\lib\net45\Raven.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Version.cs">
+      <Link>Properties\Version.cs</Link>
+    </Compile>
+    <Compile Include="Commands\Alerts\Archive.Alert.cs" />
+    <Compile Include="Commands\Alerts\Create.Alert.cs" />
+    <Compile Include="Commands\Alerts\Update.Alert.cs" />
+    <Compile Include="Commands\Boundaries\Archive.Boundary.cs" />
+    <Compile Include="Commands\Boundaries\BoundaryType.cs" />
+    <Compile Include="Commands\Boundaries\Create.Boundary.cs" />
+    <Compile Include="Commands\Boundaries\Update.Boundary.cs" />
+    <Compile Include="Commands\Drivers\Archive.Driver.cs" />
+    <Compile Include="Commands\Drivers\Register.Driver.cs" />
+    <Compile Include="Commands\Drivers\Update.Driver.cs" />
+    <Compile Include="Commands\Locations\Archive.Location.cs" />
+    <Compile Include="Commands\Locations\Register.Location.cs" />
+    <Compile Include="Commands\Locations\Update.Location.cs" />
+    <Compile Include="Commands\Trackers\Archive.Tracker.cs" />
+    <Compile Include="Commands\Trackers\Register.Tracker.cs" />
+    <Compile Include="Commands\Vehicles\Archive.Vehicle.cs" />
+    <Compile Include="Commands\Vehicles\Assign.Driver.To.Vehicle.cs" />
+    <Compile Include="Commands\Vehicles\Assign.Tracker.To.Vehicle.cs" />
+    <Compile Include="Commands\Vehicles\Register.Vehicle.cs" />
+    <Compile Include="Commands\Vehicles\Remove.Driver.From.Vehicle.cs" />
+    <Compile Include="Commands\Vehicles\Remove.Tracker.From.Vehicle.cs" />
+    <Compile Include="Commands\Vehicles\Update.Vehicle.cs" />
+    <Compile Include="Controllers\AlertApiController.cs" />
+    <Compile Include="Controllers\BaseManagementController.cs" />
+    <Compile Include="Controllers\BoundaryApiController.cs" />
+    <Compile Include="Controllers\DriverApiController.cs" />
+    <Compile Include="Controllers\LocationApiController.cs" />
+    <Compile Include="Controllers\TrackerApiController.cs" />
+    <Compile Include="Controllers\VehicleApiController.cs" />
+    <Compile Include="Handlers\Alerts\Archive.Alert.Handler.cs" />
+    <Compile Include="Handlers\Alerts\Create.Alert.Handler.cs" />
+    <Compile Include="Handlers\Alerts\Update.Alert.Handler.cs" />
+    <Compile Include="Handlers\Alerts\Archive.Alert.Validator.cs" />
+    <Compile Include="Handlers\Alerts\Create.Alert.Validator.cs" />
+    <Compile Include="Handlers\Alerts\Update.Alert.Validator.cs" />
+    <Compile Include="Handlers\Boundaries\Archive.Boundary.Handler.cs" />
+    <Compile Include="Handlers\Boundaries\Create.Boundary.Handler.cs" />
+    <Compile Include="Handlers\Boundaries\Update.Boundary.Handler.cs" />
+    <Compile Include="Handlers\Boundaries\Archive.Boundary.Validator.cs" />
+    <Compile Include="Handlers\Boundaries\Create.Boundary.Validator.cs" />
+    <Compile Include="Handlers\Boundaries\Update.Boundary.Validator.cs" />
+    <Compile Include="Handlers\Drivers\Archive.Driver.Handler.cs" />
+    <Compile Include="Handlers\Drivers\Register.Driver.Handler.cs" />
+    <Compile Include="Handlers\Drivers\Update.Driver.Handler.cs" />
+    <Compile Include="Handlers\Drivers\Archive.Driver.Validator.cs" />
+    <Compile Include="Handlers\Drivers\Register.Driver.Validator.cs" />
+    <Compile Include="Handlers\Drivers\Update.Driver.Validator.cs" />
+    <Compile Include="Handlers\Locations\Archive.Location.Handler.cs" />
+    <Compile Include="Handlers\Locations\Register.Location.Handler.cs" />
+    <Compile Include="Handlers\Locations\Update.Location.Handler.cs" />
+    <Compile Include="Handlers\Locations\Archive.Location.Validator.cs" />
+    <Compile Include="Handlers\Locations\Register.Location.Validator.cs" />
+    <Compile Include="Handlers\Locations\Update.Location.Validator.cs" />
+    <Compile Include="Listeners\Organizations\Alerts\Alert.Archived.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Alerts\Alert.Created.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Alerts\Alert.Edited.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Boundaries\Boundary.Archived.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Boundaries\Boundary.Created.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Boundaries\Boundary.Updated.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Drivers\Driver.Archived.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Drivers\Driver.Registered.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Drivers\Driver.Updated.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Locations\Location.Archived.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Locations\Location.Registered.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Locations\Location.Updated.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Organization.Registered.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Vehicles\Vehicle.Archived.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Vehicles\Vehicle.Registered.Listener.cs" />
+    <Compile Include="Listeners\Organizations\Vehicles\Vehicle.Updated.Listener.cs" />
+    <Compile Include="Listeners\Vehicles\Driver.Archived.Listener.cs" />
+    <Compile Include="Listeners\Vehicles\Tracker.Archived.Listener.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Handlers\Trackers\Archive.Tracker.Handler.cs" />
+    <Compile Include="Handlers\Trackers\Register.Tracker.Handler.cs" />
+    <Compile Include="Handlers\Trackers\Archive.Tracker.Validator.cs" />
+    <Compile Include="Handlers\Trackers\Register.Tracker.Validator.cs" />
+    <Compile Include="Handlers\Vehicles\Archive.Vehicle.Handler.cs" />
+    <Compile Include="Handlers\Vehicles\Assign.Driver.To.Vehicle.Handler.cs" />
+    <Compile Include="Handlers\Vehicles\Assign.Tracker.To.Vehicle.Handler.cs" />
+    <Compile Include="Handlers\Vehicles\Register.Vehicle.Handler.cs" />
+    <Compile Include="Handlers\Vehicles\Remove.Driver.From.Vehicle.Handler.cs" />
+    <Compile Include="Handlers\Vehicles\Remove.Tracker.From.Vehicle.Handler.cs" />
+    <Compile Include="Handlers\Vehicles\Update.Vehicle.Handler.cs" />
+    <Compile Include="Handlers\Vehicles\Archive.Vehicle.Validator.cs" />
+    <Compile Include="Handlers\Vehicles\Assign.Driver.To.Vehicle.Validator.cs" />
+    <Compile Include="Handlers\Vehicles\Assign.Tracker.To.Vehicle.Validator.cs" />
+    <Compile Include="Handlers\Vehicles\Register.Vehicle.Validator.cs" />
+    <Compile Include="Handlers\Vehicles\Remove.Driver.From.Vehicle.Validator.cs" />
+    <Compile Include="Handlers\Vehicles\Remove.Tracker.From.Vehicle.Validator.cs" />
+    <Compile Include="Handlers\Vehicles\Update.Vehicle.Validator.cs" />
+    <Compile Include="Queries\Alerts\Find.By.Id.cs" />
+    <Compile Include="Queries\Alerts\Find.By.Search.Criteria.cs" />
+    <Compile Include="Queries\Boundaries\Find.By.Id.cs" />
+    <Compile Include="Queries\Boundaries\Find.By.Search.Criteria.cs" />
+    <Compile Include="Queries\Drivers\Find.By.Id.cs" />
+    <Compile Include="Queries\Drivers\Find.By.Search.Criteria.cs" />
+    <Compile Include="Queries\Locations\Find.By.Id.cs" />
+    <Compile Include="Queries\Locations\Find.By.Search.Criteria.cs" />
+    <Compile Include="Queries\Trackers\Find.By.Id.cs" />
+    <Compile Include="Queries\Trackers\Find.By.Search.Criteria.cs" />
+    <Compile Include="Queries\Vehicles\Find.By.Id.cs" />
+    <Compile Include="Queries\Vehicles\Find.By.Search.Criteria.cs" />
+    <Compile Include="Registry.cs" />
+    <Compile Include="Services\Config.cs" />
+    <Compile Include="Services\PhraseBook.cs" />
+    <Compile Include="_Management_Engine_Assembly_.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AccessControl\AccessControl.Events\AccessControl.Events.csproj">
+      <Project>{AF01AC6E-087A-42E4-8948-425A66927C99}</Project>
+      <Name>AccessControl.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Common\Framework.Common.csproj">
+      <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
+      <Name>Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Events\Framework.Events.csproj">
+      <Project>{3284ba06-fe38-44aa-b2e7-0b6d427897ad}</Project>
+      <Name>Framework.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
+      <Project>{c13c821f-cf91-43d1-bbc3-6d0bb62732b5}</Project>
+      <Name>Framework.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
+      <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
+      <Name>paramore.brighter.commandprocessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Services\Framework.Interfaces.csproj">
+      <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
+      <Name>Framework.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Web\Framework.Web.csproj">
+      <Project>{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}</Project>
+      <Name>Framework.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Management.Models\Management.Models.csproj">
+      <Project>{971EE991-90B0-4D5D-AE18-00BA961DC508}</Project>
+      <Name>Management.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Management.Events\Management.Events.csproj">
+      <Project>{82C698EF-2E0C-4593-ADF5-D02AA5D73DB7}</Project>
+      <Name>Management.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{A11C1439-E356-4D86-82D5-03F4576E3D6E}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="paket.references" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="..\.paket\paket.targets" />
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="FluentValidation">
+          <HintPath>..\packages\FluentValidation\lib\Net45\FluentValidation.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="Geo">
+          <HintPath>..\packages\Geo\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Geo.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="JWT">
+          <HintPath>..\packages\JWT\lib\3.5\JWT.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="log4net">
+          <HintPath>..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="NLog">
+          <HintPath>..\packages\NLog\lib\net45\NLog.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="Polly">
+          <HintPath>..\packages\Polly\lib\net45\Polly.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="Raven.Abstractions">
+          <HintPath>..\packages\RavenDB.Client\lib\net45\Raven.Abstractions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="Raven.Client.Lightweight">
+          <HintPath>..\packages\RavenDB.Client\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="StructureMap.Net4">
+          <HintPath>..\packages\structuremap\lib\net40\StructureMap.Net4.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="StructureMap">
+          <HintPath>..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+</Project>

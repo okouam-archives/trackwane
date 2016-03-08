@@ -1,0 +1,11 @@
+FluentValidation
+Geo
+Newtonsoft.Json
+NLog
+paramore.brighter.commandprocessor
+Polly
+RavenDB.Client
+structuremap
+Trackwane.Framework.Common
+Trackwane.Framework.Events
+Trackwane.Framework.Infrastructure

@@ -1,0 +1,6 @@
+RestSharp
+Newtonsoft.Json
+structuremap
+morelinq 
+SerilogWeb.Owin
+Serilog.Sinks.Seq

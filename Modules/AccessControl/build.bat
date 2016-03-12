@@ -1,6 +1,8 @@
 @echo off
 cls
 
+set startpath=%cd%
+
 cd %~dp0\
 
 .paket\paket.bootstrapper.exe
@@ -14,3 +16,5 @@ if errorlevel 1 (
 )
 
 packages\FAKE\tools\FAKE.exe build.fsx %*
+
+cd %startpath%

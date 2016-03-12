@@ -69,15 +69,15 @@
       <Project>{13094DDF-F239-493D-923E-298AC8397A5F}</Project>
       <Name>Data.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Client\Framework.Client.csproj">
+    <ProjectReference Include="..\..\..\Framework\Client\Framework.Client.csproj">
       <Project>{6ddfede9-27da-4a67-80bd-53afff7d8a7a}</Project>
       <Name>Framework.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
       <Project>{c13c821f-cf91-43d1-bbc3-6d0bb62732b5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
+    <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
       <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
       <Name>paramore.brighter.commandprocessor</Name>
     </ProjectReference>
@@ -90,7 +90,7 @@
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

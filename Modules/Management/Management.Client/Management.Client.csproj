@@ -50,11 +50,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Client\Framework.Client.csproj">
+    <ProjectReference Include="..\..\..\Framework\Client\Framework.Client.csproj">
       <Project>{6DDFEDE9-27DA-4A67-80BD-53AFFF7D8A7A}</Project>
       <Name>Framework.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Common\Framework.Common.csproj">
+    <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
       <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
@@ -68,7 +68,7 @@
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

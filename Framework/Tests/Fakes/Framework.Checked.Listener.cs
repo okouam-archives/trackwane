@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using paramore.brighter.commandprocessor.Logging;
+using Trackwane.Framework.Common;
 using Trackwane.Framework.Events;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
@@ -13,9 +14,9 @@ namespace Trackwane.Framework.Tests.Fakes
         {
         }
 
-        protected override IEnumerable<BusEvent> Handle(FrameworkChecked cmd, IRepository repository)
+        protected override IEnumerable<DomainEvent> Handle(FrameworkChecked cmd, IRepository repository)
         {
-            return Enumerable.Empty<BusEvent>();
+            return Enumerable.Empty<DomainEvent>();
         }
     }
 }

@@ -25,13 +25,13 @@ namespace Trackwane.Framework.Integration
 
             var London = CreateEngineHostWithoutHandlers();
             London.Start();
-            London.ExecutionEngine.MessageReceived += (o, request) => messages.Add(new Tuple<string, IRequest>("LONDON", request));
+            London.ExecutionEngine.MessageProcessed += (o, request) => messages.Add(new Tuple<string, IRequest>("LONDON", request));
 
             logger.Info("===================== Starting Paris Engine =====================");
 
             var Paris = CreateEngineHostWithoutListeners(new Uri("http://localhost:8092"));
             Paris.Start();
-            Paris.ExecutionEngine.MessageReceived += (o, request) => messages.Add(new Tuple<string, IRequest>("PARIS", request));
+            Paris.ExecutionEngine.MessageProcessed += (o, request) => messages.Add(new Tuple<string, IRequest>("PARIS", request));
 
             logger.Info("===================== Registering Organization in London ========");
 
@@ -47,25 +47,21 @@ namespace Trackwane.Framework.Integration
 
         private static EngineHost<IntegrationRegistry> CreateEngineHostWithoutListeners(Uri listenUri)
         {
-            var locationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new DocumentStoreConfig()));
             var locator = new ServiceLocator<IntegrationRegistry>(locationFactory);
-            var commands = typeof (CheckFramework).Assembly;
-            var events = typeof (FrameworkChecked).Assembly;
-            var handlers = typeof (CheckFrameworkHandler).Assembly;
-
-            return new EngineHost<IntegrationRegistry>(locator, new EngineHostConfig(commands, events, handlers, null, listenUri, true));
+            return new EngineHost<IntegrationRegistry>(locator, new EngineHostConfig(commands, events, handlers, null, listenUri));
         }
 
         private static EngineHost<IntegrationRegistry> CreateEngineHostWithoutHandlers()
         {
-            var locationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new DocumentStoreConfig()));
             var locator = new ServiceLocator<IntegrationRegistry>(locationFactory);
-            var events = typeof(FrameworkChecked).Assembly;
-            var listeners = typeof(FrameworkCheckedListener).Assembly;
-
-            return new EngineHost<IntegrationRegistry>(locator, new EngineHostConfig(null, events, null, listeners, null, true));
+            return new EngineHost<IntegrationRegistry>(locator, new EngineHostConfig(null, events, null, listeners, null));
         }
 
+        private static readonly ServiceLocationFactory locationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new DocumentStoreConfig()));
+        private static readonly IEnumerable<Type> commands = typeof(CheckFramework).Assembly.GetCommands();
+        private static readonly IEnumerable<Type> handlers = typeof(CheckFrameworkHandler).Assembly.GetHandlers();
+        private static readonly IEnumerable<Type> events = typeof(FrameworkChecked).Assembly.GetDomainEvents();
+        private static readonly IEnumerable<Type> listeners = typeof(FrameworkCheckedListener).Assembly.GetListeners();
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
     }
 }

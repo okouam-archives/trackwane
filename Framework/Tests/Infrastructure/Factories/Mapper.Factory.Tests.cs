@@ -3,6 +3,7 @@ using System.Reflection;
 using NUnit.Framework;
 using Shouldly;
 using StructureMap;
+using Trackwane.Framework.Infrastructure;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Tests.Fakes;
@@ -11,12 +12,14 @@ namespace Trackwane.Framework.Tests.Infrastructure.Factories
 {
     public class MapperFactory_Tests
     {
+        private readonly Assembly currentAssembly = Assembly.GetExecutingAssembly();
+
         [Test]
         public void Creates_Mappers_For_All_Events()
         {
             var factory = new MapperFactory(new Container());
 
-            var mappers = factory.WithEvents(Assembly.GetExecutingAssembly()).CreateMappers();
+            var mappers = factory.WithEvents(currentAssembly.GetDomainEvents()).CreateMappers();
             mappers.Count().ShouldBe(1);
 
             var mapper = mappers.First();
@@ -29,7 +32,7 @@ namespace Trackwane.Framework.Tests.Infrastructure.Factories
         {
             var factory = new MapperFactory(new Container());
 
-            var mappers = factory.WithEvents(Assembly.GetExecutingAssembly()).CreateMappers();
+            var mappers = factory.WithEvents(currentAssembly.GetDomainEvents()).CreateMappers();
             var mapper = factory.Create(mappers.First().Value);
             mapper.ShouldBeOfType<RequestMapper<FrameworkChecked>>();
         }
@@ -39,7 +42,7 @@ namespace Trackwane.Framework.Tests.Infrastructure.Factories
         {
             var factory = new MapperFactory(new Container());
             
-            var mappers = factory.WithCommands(Assembly.GetExecutingAssembly()).CreateMappers();
+            var mappers = factory.WithCommands(currentAssembly.GetCommands()).CreateMappers();
             mappers.Count().ShouldBe(1);
 
             var mapper = mappers.First();

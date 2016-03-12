@@ -1,8 +1,8 @@
-﻿using Trackwane.Framework.Events;
+﻿using Trackwane.Framework.Common;
 
 namespace Trackwane.Framework.Tests.Fakes
 {
-    public class FrameworkChecked : BusEvent
+    public class FrameworkChecked : DomainEvent
     {
     }
 }

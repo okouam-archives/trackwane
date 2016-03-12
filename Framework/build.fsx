@@ -22,17 +22,9 @@ Target "Compile_Application" (fun _ ->
 )
 
 Target "Compile_Tests" (fun _ ->
-  !! "Tests/Tests.csproj"
+  !! "Tests/Framework.Tests.csproj"
     |> MSBuildDebug testDir "Build"
     |> Log "TestBuild-Output: "
-)
-
-Target "Package_Website" (fun _ ->
-  ExecProcess (fun p ->
-      p.FileName <- "./packages/OctopusTools/tools/octo.exe"
-      p.Arguments <- "pack --id=Trackwane.AccessControl --basePath=" + appDir + "_PublishedWebsites/Web --outFolder=" + buildDir)
-      (System.TimeSpan.FromMinutes 2.0)
-  |> ignore
 )
 
 Target "Run_Tests" (fun _ ->
@@ -44,15 +36,6 @@ Target "Run_Tests" (fun _ ->
       })
 )
 
-Target "Push" (fun _ ->
-  Push (fun p ->
-    {p with
-        ApiKey = "API-KCYS8M508J8YW8UDRX8JZKUNMU"
-        PublishUrl = "http://octopus.wylesight.ws/nuget/packages"
-        WorkingDir = buildDir
-    })
-)
-
 Target "Compile" DoNothing
 
 "Clean"
@@ -61,8 +44,6 @@ Target "Compile" DoNothing
   ==> "Compile"
 
 "Compile"
-  ==> "Package_Website"
-  ==> "Push"
+  ==> "Run_Tests"
 
-// start build
 RunTargetOrDefault "Compile"

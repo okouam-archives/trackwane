@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Raven.Database">
-      <HintPath>..\..\Framework\packages\RavenDB.Database\lib\net45\Raven.Database.dll</HintPath>
+      <HintPath>..\..\..\Framework\packages\RavenDB.Database\lib\net45\Raven.Database.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -167,27 +167,27 @@
       <Project>{AF01AC6E-087A-42E4-8948-425A66927C99}</Project>
       <Name>AccessControl.Events</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Common\Framework.Common.csproj">
+    <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
       <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Events\Framework.Events.csproj">
+    <ProjectReference Include="..\..\..\Framework\Events\Framework.Events.csproj">
       <Project>{3284ba06-fe38-44aa-b2e7-0b6d427897ad}</Project>
       <Name>Framework.Events</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
       <Project>{c13c821f-cf91-43d1-bbc3-6d0bb62732b5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
+    <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
       <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
       <Name>paramore.brighter.commandprocessor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Services\Framework.Interfaces.csproj">
+    <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Web\Framework.Web.csproj">
+    <ProjectReference Include="..\..\..\Framework\Web\Framework.Web.csproj">
       <Project>{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}</Project>
       <Name>Framework.Web</Name>
     </ProjectReference>
@@ -209,7 +209,7 @@
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

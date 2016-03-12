@@ -16,17 +16,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Upstream", "Upstream", "{D6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{062A986E-1285-4F54-9BFE-A24B3FDFF57B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Common", "..\Framework\Common\Framework.Common.csproj", "{70068E07-298E-435C-9623-4141BDEAC4D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Common", "..\..\Framework\Common\Framework.Common.csproj", "{70068E07-298E-435C-9623-4141BDEAC4D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Infrastructure", "..\Framework\Infrastructure\Framework.Infrastructure.csproj", "{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Infrastructure", "..\..\Framework\Infrastructure\Framework.Infrastructure.csproj", "{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Web", "..\Framework\Web\Framework.Web.csproj", "{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Web", "..\..\Framework\Web\Framework.Web.csproj", "{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Events", "..\Framework\Events\Framework.Events.csproj", "{3284BA06-FE38-44AA-B2E7-0B6D427897AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Events", "..\..\Framework\Events\Framework.Events.csproj", "{3284BA06-FE38-44AA-B2E7-0B6D427897AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Interfaces", "..\Framework\Services\Framework.Interfaces.csproj", "{4545AA51-B436-4D91-BCDE-19AFCB294F5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Interfaces", "..\..\Framework\Services\Framework.Interfaces.csproj", "{4545AA51-B436-4D91-BCDE-19AFCB294F5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Client", "..\Framework\Client\Framework.Client.csproj", "{6DDFEDE9-27DA-4A67-80BD-53AFFF7D8A7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Client", "..\..\Framework\Client\Framework.Client.csproj", "{6DDFEDE9-27DA-4A67-80BD-53AFFF7D8A7A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccessControl", "AccessControl", "{AE0A35F2-D486-4EEB-92E6-43521DD3BE42}"
 EndProject
@@ -34,13 +34,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Events", "Manage
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Paramore", "Paramore", "{7687DFAC-66BF-4D8F-A286-DF42A1D47031}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.commandprocessor", "..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj", "{2ACB382A-38FA-49A6-A9CD-212881D3CD37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.commandprocessor", "..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj", "{2ACB382A-38FA-49A6-A9CD-212881D3CD37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.commandprocessor.messaginggateway.rmq", "..\Framework\Paramore\paramore.brighter.commandprocessor.messaginggateway.rmq\paramore.brighter.commandprocessor.messaginggateway.rmq.csproj", "{380AF497-D2B5-49B2-AA7A-B0D86991B390}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.commandprocessor.messaginggateway.rmq", "..\..\Framework\Paramore\paramore.brighter.commandprocessor.messaginggateway.rmq\paramore.brighter.commandprocessor.messaginggateway.rmq.csproj", "{380AF497-D2B5-49B2-AA7A-B0D86991B390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.serviceactivator", "..\Framework\Paramore\paramore.brighter.serviceactivator\paramore.brighter.serviceactivator.csproj", "{B9126B00-5A97-4C7D-B395-755456E5FA28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.serviceactivator", "..\..\Framework\Paramore\paramore.brighter.serviceactivator\paramore.brighter.serviceactivator.csproj", "{B9126B00-5A97-4C7D-B395-755456E5FA28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Fixtures", "..\Framework\Fixtures\Framework.Fixtures.csproj", "{B9E602CC-1A71-40B8-82A2-67761B671302}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Fixtures", "..\..\Framework\Fixtures\Framework.Fixtures.csproj", "{B9E602CC-1A71-40B8-82A2-67761B671302}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Models", "Management.Models\Management.Models.csproj", "{971EE991-90B0-4D5D-AE18-00BA961DC508}"
 EndProject

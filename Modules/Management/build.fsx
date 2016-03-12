@@ -53,13 +53,16 @@ Target "Push" (fun _ ->
     })
 )
 
-// Dependencies
+Target "Compile" DoNothing
+
 "Clean"
   ==> "Compile_Tests"
-//  ==> "Run_Tests"
   ==> "Compile_Application"
+  ==> "Compile"
+
+"Compile"
   ==> "Package_Website"
   ==> "Push"
 
 // start build
-RunTargetOrDefault "Push"
+RunTargetOrDefault "Compile"

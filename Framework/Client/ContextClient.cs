@@ -5,27 +5,30 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using Trackwane.Framework.Common;
+using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Common.Exceptions;
+using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Client
 {
     public abstract class ContextClient<T> where T : class
     {
         private readonly string baseUrl;
+        private readonly IPlatformConfig config;
         protected RestClient client;
 
-        protected ContextClient(string baseUrl)
+        protected ContextClient(string baseUrl, IPlatformConfig config)
         {
             this.baseUrl = baseUrl;
+            this.config = config;
         }
 
         public T Use(UserClaims userClaims)
         {
             if (userClaims != null)
             {
-                var secretKey = ConfigurationManager.AppSettings["platform:secretKey"];
                 client = new RestClient(baseUrl);
-                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(secretKey)}");
+                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.SecretKey)}");
             }
 
             return this as T;

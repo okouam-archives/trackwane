@@ -2,7 +2,7 @@
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Newtonsoft.Json;
-using NLog;
+using Serilog;
 
 namespace Trackwane.Framework.Web.Filters
 {
@@ -12,15 +12,15 @@ namespace Trackwane.Framework.Web.Filters
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            logger.Debug($"Received HTTP request <{GetUrl(actionContext.Request)} with: ");
-            logger.Debug(Format(actionContext.Request));
+            Log.Debug($"Received HTTP request <{GetUrl(actionContext.Request)} with: ");
+            Log.Debug(Format(actionContext.Request));
             base.OnActionExecuting(actionContext);
         }
 
         public override void OnActionExecuted(HttpActionExecutedContext actionContext)
         {
-            logger.Debug($"Replying to HTTP request <{GetUrl(actionContext.Request)} with: ");
-            logger.Debug(Format(actionContext.Response));
+            Log.Debug($"Replying to HTTP request <{GetUrl(actionContext.Request)} with: ");
+            Log.Debug(Format(actionContext.Response));
             base.OnActionExecuted(actionContext);
         }
 
@@ -45,7 +45,5 @@ namespace Trackwane.Framework.Web.Filters
                 request.Content,
                 request.Headers,
             }, Formatting.Indented);
-        
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
     }
 }

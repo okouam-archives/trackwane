@@ -11,3 +11,4 @@ Raven.Studio.Html5.zip
 .fake/
 paket.exe
 TestResult.xml
+.local/

@@ -3,6 +3,7 @@ using System.IO;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Embedded;
+using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure.Storage
@@ -32,7 +33,8 @@ namespace Trackwane.Framework.Infrastructure.Storage
                 store = new DocumentStore
                 {
                     DefaultDatabase = config.Name,
-                    Url = config.Url
+                    Url = config.Url,
+                    ApiKey = config.ApiKey
                 };
             }
 

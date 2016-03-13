@@ -47,6 +47,10 @@
       <Project>{6DDFEDE9-27DA-4A67-80BD-53AFFF7D8A7A}</Project>
       <Name>Framework.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
+      <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
+      <Name>Framework.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AccessControl.Models\AccessControl.Models.csproj">
       <Project>{CBDD38A7-97D7-45C6-8676-BB43B4FD209B}</Project>
       <Name>AccessControl.Models</Name>
@@ -179,17 +183,6 @@
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
           <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="NLog">
-          <HintPath>..\packages\NLog\lib\net45\NLog.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

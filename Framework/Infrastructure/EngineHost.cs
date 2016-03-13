@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http.SelfHost;
-using NLog;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using paramore.brighter.serviceactivator;
+using Serilog;
 using StructureMap;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Interfaces;
@@ -33,21 +33,21 @@ namespace Trackwane.Framework.Infrastructure
         {
             if (Configuration.Events == null)
             {
-                logger.Warn("The engine will not listen for events given no event definitions have been provided");
+                Log.Warning("The engine will not listen for events given no event definitions have been provided");
 
                 if (Configuration.Listeners == null)
                 {
-                    logger.Warn("The engine will not listen for events given no event listeners have been provided");
+                    Log.Warning("The engine will not listen for events given no event listeners have been provided");
                 }
             }
 
             if (Configuration.Handlers == null)
             {
-                logger.Warn("The engine will not listen for commands given no handlers have been provided for the API");
+                Log.Warning("The engine will not listen for commands given no handlers have been provided for the API");
 
                 if (Configuration.ListenUri == null)
                 {
-                    logger.Warn("The engine will not listen for commands given no URI has been provided for the API");
+                    Log.Warning("The engine will not listen for commands given no URI has been provided for the API");
                 }
             }
 
@@ -142,7 +142,5 @@ namespace Trackwane.Framework.Infrastructure
             web.CloseAsync().Wait();
             web = null;
         }
-
-        private readonly Logger logger = LogManager.GetCurrentClassLogger();
     }
 }

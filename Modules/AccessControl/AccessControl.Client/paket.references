@@ -5,7 +5,6 @@ Geo
 JWT
 Microsoft.AspNet.WebApi
 Microsoft.AspNet.WebApi.SelfHost
-NLog
 Polly
 RabbitMQ.Client
 RavenDB.Database

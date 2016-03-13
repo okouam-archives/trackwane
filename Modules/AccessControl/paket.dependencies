@@ -21,15 +21,11 @@ nuget Faker
 nuget FluentValidation
 nuget Geo
 nuget JWT
-nuget log4net
 nuget Microsoft.AspNet.Identity.Core
 nuget Microsoft.AspNet.WebApi
 nuget Microsoft.AspNet.WebApi.SelfHost
 nuget Microsoft.AspNet.WebPages
 nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform
-nuget NLog
-nuget NLog.Schema
-nuget NLog.Targets.Syslog
 nuget NUnit
 nuget NUnit.Console
 nuget OctoPack
@@ -38,7 +34,9 @@ nuget Polly 3.0.0
 nuget RabbitMQ.Client
 nuget RavenDB.Database
 nuget RestSharp
+nuget Serilog.Sinks.Seq
 nuget Shouldly
 nuget structuremap
+nuget Swashbuckle.Core
 nuget Topshelf
 nuget WebActivatorEx

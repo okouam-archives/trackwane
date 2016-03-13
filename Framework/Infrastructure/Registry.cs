@@ -1,4 +1,6 @@
 ﻿using paramore.brighter.commandprocessor.Logging;
+using Trackwane.Framework.Common.Configuration;
+using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Storage;
 using Trackwane.Framework.Interfaces;

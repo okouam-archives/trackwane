@@ -4,6 +4,7 @@ using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Processors.Handlers.Users;
 using Trackwane.AccessControl.Engine.Processors.Listeners;
 using Trackwane.AccessControl.Events;
+using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Storage;

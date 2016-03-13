@@ -37,7 +37,6 @@
       <Link>Properties\Version.cs</Link>
     </Compile>
     <Compile Include="IDocumentStoreBuilder.cs" />
-    <Compile Include="IDocumentStoreConfig.cs" />
     <Compile Include="IEngineHost.cs" />
     <Compile Include="IEngineHostConfig.cs" />
     <Compile Include="IExecutionEngine.cs" />

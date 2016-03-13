@@ -10,7 +10,7 @@ namespace Trackwane.AccessControl.Client
             private const string RESOURCE_URL = "/organizations/{0}/users/{1}";
             private const string COLLECTION_URL = "/organizations/{0}/users";
             private const string FIND_BY_KEY_URL = "/users/{0}";
-            private const string FIND_BY_CREDENTIALS_URL = "/users?username={0}&password={1}";
+            private const string GET_ACCESS_TOKEN_URL = "/token?username={0}&password={1}";
             private const string CREATE_ROOT_USER_URL = "/root";
 
             private readonly RestClient restClient;
@@ -26,8 +26,8 @@ namespace Trackwane.AccessControl.Client
             public void RegisterUser(string organizationKey, RegisterUserModel model) =>
                 POST(restClient, Expand(COLLECTION_URL, organizationKey), model);
  
-            public UserDetails FindByCredentials(string username, string password) =>
-                GET<UserDetails>(restClient, Expand(FIND_BY_CREDENTIALS_URL, username, password));
+            public UserDetails GetAccessToken(string username, string password) =>
+                GET<UserDetails>(restClient, Expand(GET_ACCESS_TOKEN_URL, username, password));
 
             public void ArchiveUser(string organizationKey, string userKey) =>
                 DELETE(restClient, Expand(RESOURCE_URL, organizationKey, userKey));

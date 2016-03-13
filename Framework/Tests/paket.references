@@ -1,5 +1,4 @@
 FluentValidation
-NLog
 NSubstitute
 NUnit
 NUnit.Console
@@ -9,4 +8,3 @@ Shouldly
 structuremap
 RestSharp
 Microsoft.AspNet.WebApi.Core
-NLog.Targets.Syslog

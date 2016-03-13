@@ -1,4 +1,5 @@
 ﻿using Trackwane.Framework.Client;
+using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.AccessControl.Client
 {
@@ -8,7 +9,7 @@ namespace Trackwane.AccessControl.Client
 
         public UserCommandsAndQueries Users => new UserCommandsAndQueries(client);
 
-        public AccessControlContext(string baseUrl) : base(baseUrl)
+        public AccessControlContext(string baseUrl, IPlatformConfig config) : base(baseUrl, config)
         {
             
         }

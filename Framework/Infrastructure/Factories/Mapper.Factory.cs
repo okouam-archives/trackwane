@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
 using paramore.brighter.commandprocessor;
+using Serilog;
 using StructureMap;
 using Trackwane.Framework.Infrastructure.Requests;
 
@@ -44,12 +44,12 @@ namespace Trackwane.Framework.Infrastructure.Factories
                 {
                     var target = typeof (RequestMapper<>).MakeGenericType(cmd);
                     registry.Add(cmd, target);
-                    logger.Debug($"Added a message mapper for <{cmd.Name}>");
+                    Log.Debug($"Added a message mapper for <{cmd.Name}>");
                 }
             }
             else
             {
-                logger.Warn("No assembly was provided to register message mappers for commands");
+                Log.Warning("No assembly was provided to register message mappers for commands");
             }
 
             if (events != null && events.Any())
@@ -58,12 +58,12 @@ namespace Trackwane.Framework.Infrastructure.Factories
                 {
                     var target = typeof (RequestMapper<>).MakeGenericType(evt);
                     registry.Add(evt, target);
-                    logger.Debug($"Added a message mapper for <{evt.Name}>");
+                    Log.Debug($"Added a message mapper for <{evt.Name}>");
                 }
             }
             else
             {
-                logger.Warn("No assembly was provided to register message mappers for events");
+                Log.Warning("No assembly was provided to register message mappers for events");
             }
 
             return registry;
@@ -71,6 +71,5 @@ namespace Trackwane.Framework.Infrastructure.Factories
 
         private IEnumerable<Type> commands;
         private IEnumerable<Type> events;
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
     }
 }

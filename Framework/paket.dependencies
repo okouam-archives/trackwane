@@ -17,8 +17,6 @@ nuget Microsoft.AspNet.WebApi.SelfHost
 nuget Microsoft.Web.Infrastructure
 nuget Microsoft.WindowsAzure.ConfigurationManager
 nuget Newtonsoft.Json
-nuget NLog
-nuget NLog.Targets.Syslog
 nuget NSubstitute
 nuget NUnit
 nuget NUnit.Console
@@ -27,6 +25,8 @@ nuget RabbitMQ.Client
 nuget RavenDB.Client
 nuget RavenDB.Database
 nuget RestSharp
+nuget Serilog.Sinks.Seq
 nuget Shouldly
 nuget structuremap
+nuget Swashbuckle.Core
 nuget WindowsAzure.ServiceBus

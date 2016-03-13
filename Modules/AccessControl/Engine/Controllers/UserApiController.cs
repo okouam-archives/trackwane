@@ -18,9 +18,9 @@ namespace Trackwane.AccessControl.Engine.Controllers
             this.executionEngine = executionEngine;
         }
     
-        [HttpGet, Route("users")]
-        public UserDetails FindByCredentials(string email, string password) =>
-            executionEngine.Query<FindByCredentials>().Execute(email, password);
+        [HttpGet, Route("token")]
+        public string GetAccessToken(string email, string password) =>
+            executionEngine.Query<GetAccessToken>().Execute(email, password);
         
         [HttpPost, Route("root")]
         public string CreateRootUser(RegisterUserModel model)

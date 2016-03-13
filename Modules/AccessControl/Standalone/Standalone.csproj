@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{70068E07-298E-435C-9623-4141BDEAC4D0}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{0398C247-E7DC-43D8-9129-B68127A916AC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trackwane.Framework.Common</RootNamespace>
-    <AssemblyName>Trackwane.Framework.Common</AssemblyName>
+    <RootNamespace>Trackwane.AccessControl.Standalone</RootNamespace>
+    <AssemblyName>Trackwane.AccessControl.Standalone</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,48 +33,46 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Version.cs">
-      <Link>Properties\Version.cs</Link>
-    </Compile>
-    <Compile Include="AggregateRoot.cs" />
-    <Compile Include="Configuration\ConfigUtils.cs" />
-    <Compile Include="Configuration\DocumentStoreConfig.cs" />
-    <Compile Include="Configuration\PlatformConfig.cs" />
-    <Compile Include="Interfaces\IDocumentStoreConfig.cs" />
-    <Compile Include="DomainEvent.cs" />
-    <Compile Include="Exceptions\BusinessRuleException.cs" />
-    <Compile Include="Exceptions\InvalidConfigurationException.cs" />
-    <Compile Include="Exceptions\ValidationException.cs" />
-    <Compile Include="Exceptions\NotFoundException.cs" />
-    <Compile Include="Exceptions\UnauthorizedException.cs" />
-    <Compile Include="Interfaces\IHave.Name.cs" />
-    <Compile Include="Interfaces\ILoggingConfig.cs" />
-    <Compile Include="Interfaces\IModuleConfig.cs" />
-    <Compile Include="Interfaces\IPlatformConfig.cs" />
-    <Compile Include="Interfaces\IResource.cs" />
-    <Compile Include="Interfaces\IScopedQuery.cs" />
-    <Compile Include="Interfaces\IUnscopedQuery.cs" />
-    <Compile Include="Configuration\LoggingConfig.cs" />
-    <Compile Include="Configuration\ModuleConfig.cs" />
-    <Compile Include="PhraseBook.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Request.cs" />
-    <Compile Include="Response.Page.cs" />
-    <Compile Include="ScopedAggregateRoot.cs" />
-    <Compile Include="UserClaims.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
-      <Project>{2ACB382A-38FA-49A6-A9CD-212881D3CD37}</Project>
-      <Name>paramore.brighter.commandprocessor</Name>
+    <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
+      <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
+      <Name>Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
+      <Project>{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}</Project>
+      <Name>Framework.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
+      <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
+      <Name>Framework.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AccessControl.Events\AccessControl.Events.csproj">
+      <Project>{AF01AC6E-087A-42E4-8948-425A66927C99}</Project>
+      <Name>AccessControl.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engine\Engine.csproj">
+      <Project>{d82a16d0-b813-4a71-93a9-0752a549e197}</Project>
+      <Name>Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -82,12 +83,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="FluentValidation">
-          <HintPath>..\packages\FluentValidation\lib\Net45\FluentValidation.dll</HintPath>
+        <Reference Include="System.Net.Http.Formatting">
+          <HintPath>..\packages\Microsoft.AspNet.WebApi.Client\lib\net45\System.Net.Http.Formatting.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -97,8 +97,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="JWT">
-          <HintPath>..\packages\JWT\lib\3.5\JWT.dll</HintPath>
+        <Reference Include="System.Web.Http">
+          <HintPath>..\packages\Microsoft.AspNet.WebApi.Core\lib\net45\System.Web.Http.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -119,8 +119,13 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="Polly">
-          <HintPath>..\packages\Polly\lib\net45\Polly.dll</HintPath>
+        <Reference Include="Serilog.FullNetFx">
+          <HintPath>..\packages\Serilog\lib\net45\Serilog.FullNetFx.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="Serilog">
+          <HintPath>..\packages\Serilog\lib\net45\Serilog.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -130,17 +135,23 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="Raven.Abstractions">
-          <HintPath>..\packages\RavenDB.Client\lib\net45\Raven.Abstractions.dll</HintPath>
+        <Reference Include="Serilog.Sinks.Seq">
+          <HintPath>..\packages\Serilog.Sinks.Seq\lib\net45\Serilog.Sinks.Seq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
-        <Reference Include="Raven.Client.Lightweight">
-          <HintPath>..\packages\RavenDB.Client\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'" />
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="Topshelf">
+          <HintPath>..\packages\Topshelf\lib\net40-full\Topshelf.dll</HintPath>
           <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="System.ComponentModel.Composition">
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace Trackwane.Framework.Interfaces
+﻿namespace Trackwane.Framework.Common.Interfaces
 {
     public interface IDocumentStoreConfig
     {
@@ -7,5 +7,8 @@
         string Name { get; }
 
         string Url { get; }
+
+        string ApiKey { get; }
     }
 }
+

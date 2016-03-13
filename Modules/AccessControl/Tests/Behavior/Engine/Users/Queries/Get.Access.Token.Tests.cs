@@ -6,7 +6,7 @@ using Trackwane.Framework.Fixtures;
 
 namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Queries
 {
-    internal class Find_By_Credentials_Tests : Scenario
+    internal class Get_Access_Token_Tests : Scenario
     {
         private string USER_KEY;
         private string ORGANIZATION_KEY;
@@ -26,21 +26,21 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Queries
         }
 
         [Test]
-        public void Finds_User_By_Credentials_When_User_Exists()
+        public void Gets_Access_Token_When_User_Exists()
         {
-            EngineHost.ExecutionEngine.Query<FindByCredentials>().Execute(EMAIL, PASSWORD).ShouldNotBeNull();
+            EngineHost.ExecutionEngine.Query<GetAccessToken>().Execute(EMAIL, PASSWORD).ShouldNotBeNull();
         }
 
         [Test]
         public void Finds_Nothing_When_User_With_Correct_Email_But_Different_Password_Exists()
         {
-            EngineHost.ExecutionEngine.Query<FindByCredentials>().Execute(EMAIL, Guid.NewGuid().ToString()).ShouldBeNull();
+            EngineHost.ExecutionEngine.Query<GetAccessToken>().Execute(EMAIL, Guid.NewGuid().ToString()).ShouldBeNull();
         }
 
         [Test]
         public void Finds_Nothing_When_User_With_Correct_Password_But_Different_Email_Exists()
         {
-            EngineHost.ExecutionEngine.Query<FindByCredentials>().Execute(Guid.NewGuid().ToString(), PASSWORD).ShouldBeNull();
+            EngineHost.ExecutionEngine.Query<GetAccessToken>().Execute(Guid.NewGuid().ToString(), PASSWORD).ShouldBeNull();
         }
     }
 }

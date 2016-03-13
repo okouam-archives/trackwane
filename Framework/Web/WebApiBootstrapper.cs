@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.SelfHost;
 using StructureMap;
+using Swashbuckle.Application;
 using Trackwane.Framework.Web.DependencyResolution;
 using Trackwane.Framework.Web.Filters;
 
@@ -16,6 +17,13 @@ namespace Trackwane.Framework.Web
             {
                 HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.Exact
             };
+
+            configuration
+                .EnableSwagger(c =>
+                {
+                    c.SingleApiVersion("v1", "Trackwane API");
+                })
+                .EnableSwaggerUi();
 
             ResolveDependencies(configuration, container);
             RegisterRoutes(configuration);

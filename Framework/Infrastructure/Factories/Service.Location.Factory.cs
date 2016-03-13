@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
 using paramore.brighter.commandprocessor;
 using Raven.Client;
+using Serilog;
 using StructureMap;
 using Trackwane.Framework.Interfaces;
 
@@ -54,7 +54,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
 
                 foreach (var candidate in listenerCollection)
                 {
-                    logger.Debug($"Found the candidate listener <{candidate.Name}> while registering listeners");
+                    Log.Debug($"Found the candidate listener <{candidate.Name}> while registering listeners");
                 }
 
                 foreach (var evt in events)
@@ -74,13 +74,13 @@ namespace Trackwane.Framework.Infrastructure.Factories
         {
             if (handlers == null)
             {
-                logger.Warn("No assembly containing handler implementations was provided to register handlers");
+                Log.Warning("No assembly containing handler implementations was provided to register handlers");
                 return;
             }
 
             if (commands == null)
             {
-                logger.Warn("No assembly containing commands was provided to register handlers");
+                Log.Warning("No assembly containing commands was provided to register handlers");
                 return;
             }
 
@@ -100,7 +100,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
 
             foreach (var command in commandCollection)
             {
-                logger.Debug($"Found the command <{command.Name}> while registering handlers");
+                Log.Debug($"Found the command <{command.Name}> while registering handlers");
 
                 var target = typeof(RequestHandler<>).MakeGenericType(command);
 
@@ -122,7 +122,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
 
                     if (baseType == target)
                     {
-                        logger.Debug($"Added <{candidate.Name}> for <{request.Name}>");
+                        Log.Debug($"Added <{candidate.Name}> for <{request.Name}>");
                         subscribers.Add(request, candidate);
                         break;
                     }
@@ -133,7 +133,6 @@ namespace Trackwane.Framework.Infrastructure.Factories
         }
 
         private readonly IDocumentStoreBuilder builder;
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private readonly SubscriberRegistry subscribers = new SubscriberRegistry();
     }
 }

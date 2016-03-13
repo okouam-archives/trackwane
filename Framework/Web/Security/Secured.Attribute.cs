@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Filters;
 using System.Web.Http.Results;
 using Trackwane.Framework.Common;
+using Trackwane.Framework.Common.Configuration;
 
 namespace Trackwane.Framework.Web.Security
 {
@@ -45,9 +45,7 @@ namespace Trackwane.Framework.Web.Security
         {
             var req = context.Request;
 
-            var secretKey = GetApplicationSecretKey();
-
-            var userClaims = GetClaimsFromToken(req, secretKey);
+            var userClaims = GetClaimsFromToken(req, new PlatformConfig().SecretKey);
 
             context.Principal = new ClaimsPrincipal(new[] {new ClaimsIdentity(userClaims.Claims, "JWT")});
         }
@@ -75,18 +73,6 @@ namespace Trackwane.Framework.Web.Security
                 throw new Exception("No token provided");
             }
             return originalToken;
-        }
-
-        private static string GetApplicationSecretKey()
-        {
-            var secretKey = ConfigurationManager.AppSettings["platform:secretKey"];
-
-            if (secretKey == null)
-            {
-                throw new Exception(
-                    "The application setting <platform:secretKey> is not available. Please check your web.config and try again.");
-            }
-            return secretKey;
         }
     }
 }

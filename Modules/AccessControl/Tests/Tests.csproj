@@ -48,7 +48,7 @@
     <Compile Include="Behavior\Engine\Organizations\Queries\Count.Tests.cs" />
     <Compile Include="Behavior\Engine\Organizations\Queries\Find.By.Key.Tests.cs" />
     <Compile Include="Behavior\Engine\Users\Queries\Count.Tests.cs" />
-    <Compile Include="Behavior\Engine\Users\Queries\Find.By.Credentials.Tests.cs" />
+    <Compile Include="Behavior\Engine\Users\Queries\Get.Access.Token.Tests.cs" />
     <Compile Include="Behavior\Engine\Users\Queries\Find.By.Key.Tests.cs" />
     <Compile Include="Behavior\Engine\Organizations\Commands\Grant.View.Permission.Tests.cs" />
     <Compile Include="Behavior\Engine\Organizations\Commands\Grant.Manage.Permission.Tests.cs" />
@@ -196,15 +196,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="log4net">
-          <HintPath>..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'" />
   </Choose>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
@@ -273,26 +265,10 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="NLog">
-          <HintPath>..\packages\NLog\lib\net45\NLog.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'" />
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="NLog.Targets.Syslog">
-          <HintPath>..\packages\NLog.Targets.Syslog\lib\net45\NLog.Targets.Syslog.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'" />
   </Choose>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">

@@ -1,9 +1,9 @@
 ﻿using System.Configuration;
 using Trackwane.Framework.Common.Exceptions;
-using Trackwane.Framework.Interfaces;
+using Trackwane.Framework.Common.Interfaces;
 using static System.String;
 
-namespace Trackwane.Framework.Infrastructure.Storage
+namespace Trackwane.Framework.Common.Configuration
 {
     public class DocumentStoreConfig : IDocumentStoreConfig
     {
@@ -18,26 +18,17 @@ namespace Trackwane.Framework.Infrastructure.Storage
             }
         }
 
-        public bool UseEmbedded => bool.Parse(GetApplicationSetting(USE_EMBEDDED_DOCUMENT_STORE));
+        public bool UseEmbedded => ConfigUtils.GetBoolean(USE_EMBEDDED_DOCUMENT_STORE);
 
-        public string Name => GetApplicationSetting(DOCUMENT_STORE_DATABASE_NAME);
+        public string Name => ConfigUtils.Get(DOCUMENT_STORE_DATABASE_NAME);
 
-        public string Url => GetApplicationSetting(DOCUMENT_STORE_URL);
+        public string Url => ConfigUtils.Get(DOCUMENT_STORE_URL);
+
+        public string ApiKey => ConfigUtils.Get(API_KEY);
 
         /* Private */
-
-        private static string GetApplicationSetting(string name)
-        {
-            var value = ConfigurationManager.AppSettings[name];
-
-            if (IsNullOrEmpty(value))
-            {
-                throw new InvalidConfigurationException($"The application setting key <{name}> could not be found in the configuration file");
-            }
-
-            return value;
-        }
-
+        
+        private const string API_KEY = "document-store:api-key";
         private const string USE_EMBEDDED_DOCUMENT_STORE = "document-store:use-embedded";
         private const string DOCUMENT_STORE_URL = "document-store:url";
         private const string DOCUMENT_STORE_DATABASE_NAME = "document-store:name";

@@ -44,6 +44,7 @@
     <Compile Include="..\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
+    <Compile Include="AddAuthorizationHeaderParameterOperationFilter.cs" />
     <Compile Include="Filters\LoggingFilter.cs" />
     <Compile Include="WebApiBootstrapper.cs" />
     <Compile Include="DependencyResolution\WebApiDependencyResolver.cs" />

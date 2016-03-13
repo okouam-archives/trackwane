@@ -1,7 +1,10 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
+using HashidsNet;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.AccessControl.Models.Users;
+using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
 
@@ -12,12 +15,14 @@ namespace Trackwane.AccessControl.Engine.Controllers
         private const string RESOURCE_URL = "organizations/{organizationKey}/users/{userKey}";
         private const string COLLECTION_URL = "organizations/{organizationKey}/users";
         private readonly IExecutionEngine executionEngine;
+        private readonly IPlatformConfig platformConfig;
 
-        public UserApiController(IExecutionEngine executionEngine)
+        public UserApiController(IExecutionEngine executionEngine, IPlatformConfig platformConfig)
         {
             this.executionEngine = executionEngine;
+            this.platformConfig = platformConfig;
         }
-    
+
         [HttpGet, Route("token")]
         public string GetAccessToken(string email, string password) =>
             executionEngine.Query<GetAccessToken>().Execute(email, password);
@@ -29,7 +34,8 @@ namespace Trackwane.AccessControl.Engine.Controllers
             {
                 Email = model.Email,
                 DisplayName = model.DisplayName,
-                Password = model.Password
+                Password = model.Password,
+                UserKey = new Hashids(platformConfig.SecretKey).EncodeLong(DateTime.Now.Ticks)
             };
 
             executionEngine.Send(cmd);
@@ -51,10 +57,14 @@ namespace Trackwane.AccessControl.Engine.Controllers
             {
                 DisplayName = model.DisplayName, Email = model.Email, Password = model.Password
             });
-        
+
         [Secured, Administrators, HttpPost, Route(COLLECTION_URL)]
-        public void RegisterUser(string organizationKey, RegisterUserModel model) =>
-            executionEngine.Send(new RegisterUser(CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password));
-        
+        public string RegisterUser(string organizationKey, RegisterUserModel model)
+        {
+            var cmd = new RegisterUser(CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
+            cmd.UserKey = cmd.UserKey ?? new Hashids(platformConfig.SecretKey).EncodeLong(DateTime.Now.Ticks);
+            executionEngine.Send(cmd);
+            return cmd.UserKey;
+        }
     }
 }

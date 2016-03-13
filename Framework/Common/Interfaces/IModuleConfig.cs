@@ -2,6 +2,6 @@
 {
     public interface IModuleConfig
     {
-         
+        string Uri { get; }
     }
 }

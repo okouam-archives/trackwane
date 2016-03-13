@@ -19,6 +19,12 @@ namespace Trackwane.Framework.Infrastructure
 
             For<IDocumentStoreConfig>().Use<DocumentStoreConfig>().Singleton();
 
+            For<ILoggingConfig>().Use<LoggingConfig>().Singleton();
+
+            For<IModuleConfig>().Use<ModuleConfig>().Singleton();
+
+            For<IPlatformConfig>().Use<PlatformConfig>().Singleton();
+
             For<IDocumentStoreBuilder>().Use<DocumentStoreBuilder>().Singleton();
 
             For<IServiceLocationFactory>().Use<ServiceLocationFactory>().Singleton();

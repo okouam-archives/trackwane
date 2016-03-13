@@ -5,6 +5,7 @@ content: none
 redirects: on
 
 nuget FAKE
+nuget Hashids.net
 nuget OctopusTools
 nuget Microsoft.AspNet.Mvc 5.2.3 framework: >= net461
 nuget Microsoft.AspNet.Razor 3.2.3 framework: >= net461

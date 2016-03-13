@@ -59,7 +59,6 @@
     <Compile Include="EngineHostConfig.cs" />
     <Compile Include="Factories\Connection.Factory.cs" />
     <Compile Include="Logging\LoggingConfig.cs" />
-    <Compile Include="ModuleConfig.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="Factories\Mapper.Factory.cs" />
     <Compile Include="Requests\Request.Mapper_T.cs" />

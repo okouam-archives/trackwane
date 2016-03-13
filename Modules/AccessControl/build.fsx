@@ -23,15 +23,14 @@ Target "Compile" (fun _ ->
     |> ignore
 )
 
-(*
-Target "Run_Tests" (fun _ ->
-  !! (testDir + "/Trackwane.AccessControl.Tests.dll")
+Target "Test" (fun _ ->
+  !! (buildDir + "/Trackwane.AccessControl.Tests.dll")
     |> NUnit3 (fun p ->
       {p with
         ToolPath = "./packages/NUnit.Console/tools/nunit3-console.exe"
       })
 )
-*)
+
 Target "Stop_Local_Service" (fun _ ->
   if checkServiceExists(serviceName) then
     StopService serviceName
@@ -39,9 +38,10 @@ Target "Stop_Local_Service" (fun _ ->
 )
 
 
-Target "Uninstall_Local_Service" (fun _ ->
+Target "Uninstall" (fun _ ->
   let fileExists = TestFile(executable)
   if fileExists then Shell.Exec(executable, "uninstall") |> ignore
+  rm_rf installationDir
 )
 
 Target "Copy_To_Local_Service" (fun _ ->
@@ -64,13 +64,12 @@ Target "Install" DoNothing
 "Clean"
   ==> "Compile"
 
-(*
+
 "Compile"
-  ==> "Run_Tests"
-*)
+  ==> "Test"
 
 "Stop_Local_Service"
-  ==> "Uninstall_Local_Service"
+  ==> "Uninstall"
   ==> "Compile"
   ==> "Copy_To_Local_Service"
   ==> "Install_Local_Service"

@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{377CCB33-AA61-471C-B50E-046C579DAB5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{A7234B51-B93A-4423-AD17-4106336CCA95}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Upstream", "Upstream", "{DE0D9B2C-EAEE-4516-A0AD-8F09E9760FEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B7D608E0-E92D-473E-A13E-35AFA88331F2}"
@@ -18,21 +16,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Paramore", "Paramore", "{80CE60D9-73A7-4045-8D9E-A3288B35A9C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.commandprocessor.messaginggateway.rmq", "..\Framework\Paramore\paramore.brighter.commandprocessor.messaginggateway.rmq\paramore.brighter.commandprocessor.messaginggateway.rmq.csproj", "{380AF497-D2B5-49B2-AA7A-B0D86991B390}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.commandprocessor.messaginggateway.rmq", "..\..\Framework\Paramore\paramore.brighter.commandprocessor.messaginggateway.rmq\paramore.brighter.commandprocessor.messaginggateway.rmq.csproj", "{380AF497-D2B5-49B2-AA7A-B0D86991B390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.commandprocessor", "..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj", "{2ACB382A-38FA-49A6-A9CD-212881D3CD37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.commandprocessor", "..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj", "{2ACB382A-38FA-49A6-A9CD-212881D3CD37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.serviceactivator", "..\Framework\Paramore\paramore.brighter.serviceactivator\paramore.brighter.serviceactivator.csproj", "{B9126B00-5A97-4C7D-B395-755456E5FA28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paramore.brighter.serviceactivator", "..\..\Framework\Paramore\paramore.brighter.serviceactivator\paramore.brighter.serviceactivator.csproj", "{B9126B00-5A97-4C7D-B395-755456E5FA28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Infrastructure", "..\Framework\Infrastructure\Framework.Infrastructure.csproj", "{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Infrastructure", "..\..\Framework\Infrastructure\Framework.Infrastructure.csproj", "{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Interfaces", "..\Framework\Services\Framework.Interfaces.csproj", "{4545AA51-B436-4D91-BCDE-19AFCB294F5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Interfaces", "..\..\Framework\Services\Framework.Interfaces.csproj", "{4545AA51-B436-4D91-BCDE-19AFCB294F5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Common", "..\Framework\Common\Framework.Common.csproj", "{70068E07-298E-435C-9623-4141BDEAC4D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Common", "..\..\Framework\Common\Framework.Common.csproj", "{70068E07-298E-435C-9623-4141BDEAC4D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Client", "..\Framework\Client\Framework.Client.csproj", "{6DDFEDE9-27DA-4A67-80BD-53AFFF7D8A7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Client", "..\..\Framework\Client\Framework.Client.csproj", "{6DDFEDE9-27DA-4A67-80BD-53AFFF7D8A7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Fixtures", "..\Framework\Fixtures\Framework.Fixtures.csproj", "{B9E602CC-1A71-40B8-82A2-67761B671302}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Fixtures", "..\..\Framework\Fixtures\Framework.Fixtures.csproj", "{B9E602CC-1A71-40B8-82A2-67761B671302}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Events", "Data.Events\Data.Events.csproj", "{6B2512CC-50CB-43FD-8E6C-F9B514D537BD}"
 EndProject
@@ -42,9 +40,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Models", "Data.Models\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Events", "..\Management\Management.Events\Management.Events.csproj", "{82C698EF-2E0C-4593-ADF5-D02AA5D73DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Web", "..\Framework\Web\Framework.Web.csproj", "{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Web", "..\..\Framework\Web\Framework.Web.csproj", "{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Events", "..\Framework\Events\Framework.Events.csproj", "{3284BA06-FE38-44AA-B2E7-0B6D427897AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Events", "..\..\Framework\Events\Framework.Events.csproj", "{3284BA06-FE38-44AA-B2E7-0B6D427897AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{561ED4B1-AB29-47E9-9A27-FED89A0EC079}"
 EndProject
@@ -56,16 +54,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Models", "..\Management\Management.Models\Management.Models.csproj", "{971EE991-90B0-4D5D-AE18-00BA961DC508}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{75B81AF2-D512-4F2D-A00D-C877F23835A7}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Standalone", "Standalone\Standalone.csproj", "{131A2915-8940-4630-8804-178EBEC1EE0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A7234B51-B93A-4423-AD17-4106336CCA95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7234B51-B93A-4423-AD17-4106336CCA95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7234B51-B93A-4423-AD17-4106336CCA95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7234B51-B93A-4423-AD17-4106336CCA95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{380AF497-D2B5-49B2-AA7A-B0D86991B390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{380AF497-D2B5-49B2-AA7A-B0D86991B390}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{380AF497-D2B5-49B2-AA7A-B0D86991B390}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -142,6 +143,10 @@ Global
 		{971EE991-90B0-4D5D-AE18-00BA961DC508}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{971EE991-90B0-4D5D-AE18-00BA961DC508}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{971EE991-90B0-4D5D-AE18-00BA961DC508}.Release|Any CPU.Build.0 = Release|Any CPU
+		{131A2915-8940-4630-8804-178EBEC1EE0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131A2915-8940-4630-8804-178EBEC1EE0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131A2915-8940-4630-8804-178EBEC1EE0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131A2915-8940-4630-8804-178EBEC1EE0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,5 +172,6 @@ Global
 		{8A8B8472-101D-41D7-B7EC-48DCBAA778BF} = {377CCB33-AA61-471C-B50E-046C579DAB5C}
 		{3A27FADC-2F1B-4BA2-9031-47208FF541DB} = {377CCB33-AA61-471C-B50E-046C579DAB5C}
 		{971EE991-90B0-4D5D-AE18-00BA961DC508} = {DE0D9B2C-EAEE-4516-A0AD-8F09E9760FEB}
+		{131A2915-8940-4630-8804-178EBEC1EE0C} = {377CCB33-AA61-471C-B50E-046C579DAB5C}
 	EndGlobalSection
 EndGlobal

@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
+using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Client;
 
@@ -24,7 +25,7 @@ namespace Trackwane.Management.Tests.Helpers
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new ManagementContext(Setup.EngineHost.Configuration.ListenUri.ToString());
+            Client = new ManagementContext(Setup.EngineHost.Configuration.ListenUri.ToString(), new PlatformConfig());
 
             EngineHost.ExecutionEngine.MessageProcessed += (o, request) => Processed.Add(request); 
 

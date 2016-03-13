@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Globalization;
 using Geo.Geometries;
-using Trackwane.Data.Domain;
-using Trackwane.Data.Engine.Commands;
 using Trackwane.Data.Models;
 
 namespace Trackwane.Data.Tests.Helpers
 {
     internal partial class Scenario
     {
-        public class _RawData
+        public class _SaveSensorReading
         {
             public static void With(string id, string hardwareId, Point coordinates = null, int? speed = null,
                 decimal? distance = null, int? petrol = null, int? batteryLevel = null, int? orientation = null,

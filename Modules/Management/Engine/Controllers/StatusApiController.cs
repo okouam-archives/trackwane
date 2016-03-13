@@ -1,9 +1,7 @@
-﻿using System.Text;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Trackwane.Framework.Common.Interfaces;
-using static System.String;
 
-namespace Trackwane.AccessControl.Engine.Controllers
+namespace Trackwane.Management.Engine.Controllers
 {
     public class StatusApiController : ApiController
     {
@@ -25,9 +23,9 @@ namespace Trackwane.AccessControl.Engine.Controllers
         {
             return new
             {
-                name = "Trackwane.AccessControl",
+                name = moduleConfig.ServiceName,
                 loggingUri = loggingConfig.Uri,
-                isPlatformKeyConfigured = !IsNullOrWhiteSpace(platformConfig.SecretKey),
+                isPlatformKeyConfigured = !string.IsNullOrWhiteSpace(platformConfig.SecretKey),
                 documentStore = documentStoreConfig.UseEmbedded ? "embedded" : documentStoreConfig.Name + "@" + documentStoreConfig.Url
             };
         }

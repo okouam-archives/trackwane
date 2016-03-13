@@ -17,9 +17,6 @@ Microsoft.Owin.Host.HttpListener
 Microsoft.Owin.Hosting
 Microsoft.Web.Infrastructure
 Newtonsoft.Json
-NLog
-NLog.Config
-NLog.Schema
 NUnit
 NUnit.Console
 Owin
@@ -29,4 +26,3 @@ RestSharp
 Shouldly
 structuremap
 WebActivatorEx
-NLog.Targets.Syslog

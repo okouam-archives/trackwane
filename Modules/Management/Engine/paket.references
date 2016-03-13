@@ -1,9 +1,8 @@
 FluentValidation
 Geo
 JWT
-log4net
 Newtonsoft.Json
-NLog
 Polly
 RavenDB.Client
 structuremap
+Serilog.Sinks.Seq

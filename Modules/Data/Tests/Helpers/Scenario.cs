@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
 using Trackwane.Data.Client;
+using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Data.Tests.Helpers
@@ -27,7 +25,7 @@ namespace Trackwane.Data.Tests.Helpers
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new DataContext(Setup.EngineHost.Configuration.ListenUri.ToString());
+            Client = new DataContext(Setup.EngineHost.Configuration.ListenUri.ToString(), new PlatformConfig());
 
             EngineHost.ExecutionEngine.MessageProcessed += (o, request) => Processed.Add(request); ;
 

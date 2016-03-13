@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Trackwane.AccessControl.Events;
+using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Storage;

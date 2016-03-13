@@ -33,6 +33,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\AccessControl\packages\Microsoft.AspNet.WebApi.Core\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
@@ -41,9 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Save.Sensor.Reading.cs" />
+    <Compile Include="Controller\DataController.cs" />
     <Compile Include="Handlers\Save.Sensor.Reading.Handler.cs" />
     <Compile Include="Handlers\Save.Sensor.Reading.Validator.cs" />
-    <Compile Include="Listeners\RawData.Saved.Listenercs.cs" />
+    <Compile Include="Listeners\Sensor.Reading.Saved.Listenercs.cs" />
     <Compile Include="Listeners\Tracker.Archived.Listener.cs" />
     <Compile Include="Listeners\Tracker.Registered.Listener.cs" />
     <Compile Include="Listeners\Tracker.Updated.Listener.cs" />
@@ -56,15 +61,19 @@
     <Compile Include="_Data_Engine_Assembly_.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Common\Framework.Common.csproj">
+    <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
       <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
       <Project>{c13c821f-cf91-43d1-bbc3-6d0bb62732b5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Services\Framework.Interfaces.csproj">
+    <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
+      <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
+      <Name>paramore.brighter.commandprocessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
       <Project>{4545aa51-b436-4d91-bcde-19afcb294f5c}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
@@ -75,6 +84,10 @@
     <ProjectReference Include="..\Data.Events\Data.Events.csproj">
       <Project>{6b2512cc-50cb-43fd-8e6c-f9b514d537bd}</Project>
       <Name>Data.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.Models\Data.Models.csproj">
+      <Project>{13094DDF-F239-493D-923E-298AC8397A5F}</Project>
+      <Name>Data.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{561ED4B1-AB29-47E9-9A27-FED89A0EC079}</Project>
@@ -120,41 +133,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="log4net">
-          <HintPath>..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
         <Reference Include="Newtonsoft.Json">
           <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="NLog">
-          <HintPath>..\packages\NLog\lib\net45\NLog.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="paramore.brighter.commandprocessor">
-          <HintPath>..\packages\Paramore.Brighter.CommandProcessor\lib\net45\paramore.brighter.commandprocessor.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -225,14 +205,5 @@
         </Reference>
       </ItemGroup>
     </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'" />
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'" />
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'" />
   </Choose>
 </Project>

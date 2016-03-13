@@ -8,42 +8,35 @@ nuget CommonServiceLocator 1.3
 nuget Faker 1.2
 nuget FluentValidation 6.1.0.0
 nuget Geo 0.14.0
-nuget log4net 2.0.5
 nuget FAKE
+nuget TopShelf
+nuget JWT
 nuget OctopusTools
-nuget Microsoft.AspNet.Mvc 5.2.3
-nuget Microsoft.AspNet.Razor 3.2.3
-nuget Microsoft.AspNet.WebApi 5.2.3
-nuget Microsoft.AspNet.WebApi.Client 5.2.3
-nuget Microsoft.AspNet.WebApi.Core 5.2.3
+nuget Microsoft.AspNet.WebApi
+nuget Microsoft.AspNet.WebApi.Client 
+nuget Microsoft.AspNet.WebApi.Core
 nuget Microsoft.AspNet.WebApi.HelpPage 5.2.3
 nuget Microsoft.AspNet.WebApi.Owin 5.2.3
+nuget RavenDB.Database
 nuget Microsoft.AspNet.WebApi.WebHost 5.2.3
 nuget Microsoft.AspNet.WebPages 3.2.3
+nuget Microsoft.AspNet.WebApi.SelfHost
 nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform 1.0.1
 nuget Microsoft.Net.Compilers 1.1.1
 nuget Microsoft.Owin 3.0.1
 nuget Microsoft.Owin.Host.SystemWeb 3.0.1
 nuget Microsoft.Web.Infrastructure 1.0.0.0
 nuget Newtonsoft.Json 8.0.2
-nuget NLog 4.2.3
+nuget Swashbuckle.Core
 nuget NUnit 3.0.1
 nuget NUnit.Console 3.0.1
 nuget Owin 1.0
-nuget paramore.brighter.commandprocessor 5.0.323
 nuget Polly 3.0.0
 nuget PusherServer 2.1.1.0
 nuget RavenDB.Client 3.0.30037
 nuget RestSharp 105.2.3
 nuget Shouldly 2.6.0
+nuget RabbitMQ.Client
 nuget structuremap 4.0.1.318
-nuget StructureMap.MVC5 3.0.4.125
-nuget structuremap.web 3.0.0.108
-nuget StructureMap.WebApi2 3.0.4.125
-nuget Trackwane.Framework.Common 1.0.0.45
-nuget Trackwane.Framework.Dependencies 1.0.0.45
-nuget Trackwane.Framework.Events 1.0.0.45
-nuget Trackwane.Framework.Fixtures 1.0.0.45
-nuget Trackwane.Framework.Infrastructure 1.0.0.45
-nuget Trackwane.Framework.Web 1.0.0.45
 nuget WebActivatorEx 2.1.0
+nuget Serilog.Sinks.Seq

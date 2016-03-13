@@ -1,4 +1,5 @@
 ﻿using Trackwane.Framework.Client;
+using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Management.Client
 {
@@ -23,7 +24,7 @@ namespace Trackwane.Management.Client
 
         public TrackerCommandsAndQueries Trackers => trackers ?? (trackers = new TrackerCommandsAndQueries(client));
 
-        public ManagementContext(string baseUrl) : base(baseUrl)
+        public ManagementContext(string baseUrl, IPlatformConfig platformConfig) : base(baseUrl, platformConfig)
         {
         }
     }

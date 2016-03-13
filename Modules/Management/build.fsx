@@ -1,68 +1,79 @@
-// include Fake lib
 #r "packages/FAKE/tools/FakeLib.dll"
 open Fake
 open Fake.OctoTools
 open Fake.Testing
+open System
 open Fake.Paket
+open Fake.FileUtils
 
-// Properties
 let buildDir = "./.build/"
-let appDir = buildDir + "app/"
-let testDir  = buildDir + "tests/"
+let installationDir  = "./.local/"
+let serviceName = "Trackwane.Management"
+let executable = installationDir + "/" + serviceName + ".Standalone.exe"
 
-// Targets
+MSBuildDefaults <- { MSBuildDefaults with Verbosity = Some MSBuildVerbosity.Quiet }
+
 Target "Clean" (fun _ ->
   CleanDir buildDir
 )
 
-Target "Compile_Application" (fun _ ->
+Target "Compile" (fun _ ->
   !! "**/*.csproj"
-    |> MSBuildDebug appDir "Build"
-    |> Log "Compile-Output: "
+    |> MSBuildDebug buildDir "Build"
+    |> ignore
 )
 
-Target "Compile_Tests" (fun _ ->
-  !! "Tests/Tests.csproj"
-    |> MSBuildDebug testDir "Build"
-    |> Log "TestBuild-Output: "
-)
-
-Target "Package_Website" (fun _ ->
-  ExecProcess (fun p ->
-      p.FileName <- "./packages/OctopusTools/tools/octo.exe"
-      p.Arguments <- "pack --id=Trackwane.Management --basePath=" + appDir + "_PublishedWebsites/Web --outFolder=" + buildDir)
-      (System.TimeSpan.FromMinutes 2.0)
-  |> ignore
-)
-
-Target "Run_Tests" (fun _ ->
-  !! (testDir + "/*.Tests.dll")
+Target "Test" (fun _ ->
+  !! (buildDir + "/" + serviceName + ".Tests.dll")
     |> NUnit3 (fun p ->
       {p with
         ToolPath = "./packages/NUnit.Console/tools/nunit3-console.exe"
-        OutputDir = testDir
       })
 )
 
-Target "Push" (fun _ ->
-  Push (fun p ->
-    {p with
-        ApiKey = "API-KCYS8M508J8YW8UDRX8JZKUNMU"
-        PublishUrl = "http://octopus.wylesight.ws/nuget/packages"
-        WorkingDir = buildDir
-    })
+Target "Stop_Local_Service" (fun _ ->
+  if checkServiceExists(serviceName) then
+    StopService serviceName
+    ensureServiceHasStopped serviceName (TimeSpan.FromMinutes 1.0)
 )
 
-Target "Compile" DoNothing
+
+Target "Uninstall" (fun _ ->
+  let fileExists = TestFile(executable)
+  if fileExists then Shell.Exec(executable, "uninstall") |> ignore
+  rm_rf installationDir
+)
+
+Target "Copy_To_Local_Service" (fun _ ->
+  cp_r buildDir installationDir
+)
+
+Target "Install_Local_Service" (fun _ ->
+  Shell.Exec(executable, "install") |> ignore
+)
+
+Target "Start_Local_Service" (fun _ ->
+  startService serviceName
+  ensureServiceHasStarted serviceName (TimeSpan.FromMinutes 1.0) |> ignore
+)
+
+Target "Deploy" DoNothing
+
+Target "Install" DoNothing
 
 "Clean"
-  ==> "Compile_Tests"
-  ==> "Compile_Application"
   ==> "Compile"
 
-"Compile"
-  ==> "Package_Website"
-  ==> "Push"
 
-// start build
+"Compile"
+  ==> "Test"
+
+"Stop_Local_Service"
+  ==> "Uninstall"
+  ==> "Compile"
+  ==> "Copy_To_Local_Service"
+  ==> "Install_Local_Service"
+  ==> "Start_Local_Service"
+  ==> "Install"
+
 RunTargetOrDefault "Compile"

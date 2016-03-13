@@ -1,18 +1,18 @@
-﻿using System;
-using Trackwane.Data.Models;
+﻿using Trackwane.Data.Models;
 using Trackwane.Framework.Client;
+using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Data.Client
 {
     public class DataContext : ContextClient<DataContext>
     {
-        public DataContext(string baseUrl) : base(baseUrl)
+        public DataContext(string baseUrl, IPlatformConfig platformConfig) : base(baseUrl, platformConfig)
         {
         }
 
-        public void SaveSensorReading(SaveSensorReadingModel registerSensorReading)
+        public void SaveSensorReading(SaveSensorReadingModel model)
         {
-            throw new NotImplementedException();
+            POST(client, Expand("data"), model);
         }
     }
 }

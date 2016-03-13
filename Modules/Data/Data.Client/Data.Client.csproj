@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,9 +45,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Client\Framework.Client.csproj">
+    <ProjectReference Include="..\..\..\Framework\Client\Framework.Client.csproj">
       <Project>{6DDFEDE9-27DA-4A67-80BD-53AFFF7D8A7A}</Project>
       <Name>Framework.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
+      <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
+      <Name>Framework.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data.Models\Data.Models.csproj">
       <Project>{13094DDF-F239-493D-923E-298AC8397A5F}</Project>

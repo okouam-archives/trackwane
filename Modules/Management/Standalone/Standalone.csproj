@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{561ED4B1-AB29-47E9-9A27-FED89A0EC079}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{AB8A1A6C-1531-44C7-8ED7-8361E8B584EC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trackwane.Data.Domain</RootNamespace>
-    <AssemblyName>Trackwane.Data.Domain</AssemblyName>
+    <RootNamespace>Trackwane.Management.Standalone</RootNamespace>
+    <AssemblyName>Trackwane.Management.Standalone</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,8 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\..\Framework\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,41 +46,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Version.cs">
-      <Link>Properties\Version.cs</Link>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SensorReading.cs" />
-    <Compile Include="Tracker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
-      <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
+      <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Management\Management.Events\Management.Events.csproj">
-      <Project>{82c698ef-2e0c-4593-adf5-d02aa5d73db7}</Project>
+    <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
+      <Project>{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}</Project>
+      <Name>Framework.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
+      <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
+      <Name>Framework.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AccessControl\AccessControl.Events\AccessControl.Events.csproj">
+      <Project>{AF01AC6E-087A-42E4-8948-425A66927C99}</Project>
+      <Name>AccessControl.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engine\Engine.csproj">
+      <Project>{ac82fe86-a127-4131-9270-4b43618276eb}</Project>
+      <Name>Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Management.Events\Management.Events.csproj">
+      <Project>{82C698EF-2E0C-4593-ADF5-D02AA5D73DB7}</Project>
       <Name>Management.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="FluentValidation">
-          <HintPath>..\packages\FluentValidation\lib\Net45\FluentValidation.dll</HintPath>
+        <Reference Include="Serilog.FullNetFx">
+          <HintPath>..\packages\Serilog\lib\net45\Serilog.FullNetFx.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="Serilog">
+          <HintPath>..\packages\Serilog\lib\net45\Serilog.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -85,8 +106,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="Geo">
-          <HintPath>..\packages\Geo\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Geo.dll</HintPath>
+        <Reference Include="Serilog.Sinks.Seq">
+          <HintPath>..\packages\Serilog.Sinks.Seq\lib\net45\Serilog.Sinks.Seq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -96,51 +117,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="Newtonsoft.Json">
-          <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="Polly">
-          <HintPath>..\packages\Polly\lib\net45\Polly.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="Raven.Abstractions">
-          <HintPath>..\packages\RavenDB.Client\lib\net45\Raven.Abstractions.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="Raven.Client.Lightweight">
-          <HintPath>..\packages\RavenDB.Client\lib\net45\Raven.Client.Lightweight.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="StructureMap.Net4">
-          <HintPath>..\packages\structuremap\lib\net40\StructureMap.Net4.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="StructureMap">
-          <HintPath>..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
+        <Reference Include="Topshelf">
+          <HintPath>..\packages\Topshelf\lib\net40-full\Topshelf.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

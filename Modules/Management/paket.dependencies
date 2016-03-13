@@ -11,7 +11,6 @@ nuget Geo
 nuget JWT
 nuget FAKE
 nuget OctopusTools
-nuget log4net 2.0.5
 nuget Microsoft.AspNet.Mvc
 nuget Microsoft.AspNet.Razor
 nuget Microsoft.AspNet.WebApi
@@ -29,15 +28,12 @@ nuget Microsoft.Owin.Host.SystemWeb
 nuget Microsoft.Owin.Hosting
 nuget Microsoft.Web.Infrastructure
 nuget Newtonsoft.Json
-nuget NLog
-nuget NLog.Config 4.2.3
-nuget NLog.Schema 4.2.3
-nuget NLog.Targets.Syslog
 nuget NUnit
+nuget TopShelf
 nuget NUnit.Console
 nuget OctoPack
 nuget Owin
-nuget Polly
+nuget Polly 3.0.0
 nuget RavenDB.Client
 nuget RavenDB.Database
 nuget RestSharp
@@ -45,3 +41,5 @@ nuget Shouldly
 nuget structuremap
 nuget WebActivatorEx
 nuget RabbitMQ.Client
+nuget Serilog.Sinks.Seq
+nuget Swashbuckle.Core

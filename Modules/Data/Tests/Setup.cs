@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Trackwane.Data.Engine;
 using Trackwane.Data.Events;
+using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Storage;

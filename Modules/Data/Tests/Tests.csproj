@@ -47,19 +47,23 @@
     <Compile Include="Setup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Client\Framework.Client.csproj">
+    <ProjectReference Include="..\..\..\Framework\Client\Framework.Client.csproj">
       <Project>{6ddfede9-27da-4a67-80bd-53afff7d8a7a}</Project>
       <Name>Framework.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Common\Framework.Common.csproj">
+    <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
       <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
       <Project>{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Services\Framework.Interfaces.csproj">
+    <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
+      <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
+      <Name>paramore.brighter.commandprocessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
@@ -86,12 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
@@ -142,17 +140,6 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="log4net">
-          <HintPath>..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
         <Reference Include="Newtonsoft.Json">
           <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
@@ -164,30 +151,8 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>
-        <Reference Include="NLog">
-          <HintPath>..\packages\NLog\lib\net45\NLog.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
         <Reference Include="nunit.framework">
           <HintPath>..\packages\NUnit\lib\net45\nunit.framework.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
-      <ItemGroup>
-        <Reference Include="paramore.brighter.commandprocessor">
-          <HintPath>..\packages\Paramore.Brighter.CommandProcessor\lib\net45\paramore.brighter.commandprocessor.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

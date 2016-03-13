@@ -44,6 +44,8 @@ namespace Trackwane.Simulator.Engine.Handlers
                         Longitude = evt.Longitude,
                         Orientation = evt.Orientation,
                         Speed = evt.Speed,
+                        Distance = evt.Distance,
+                        Heading = evt.Heading,
                         HardwareId = evt.HardwareId,
                         Petrol = evt.Petrol,
                         Timestamp = evt.Timestamp

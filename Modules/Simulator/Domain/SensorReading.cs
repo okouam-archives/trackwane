@@ -4,9 +4,9 @@ namespace Trackwane.Simulator.Domain
 {
     public class SensorReading
     {
-        public decimal Latitude { get; set; }
+        public double Latitude { get; set; }
 
-        public decimal Longitude { get; set; }
+        public double Longitude { get; set; }
         
         public int Orientation { get; set; }
 
@@ -17,6 +17,10 @@ namespace Trackwane.Simulator.Domain
         public DateTime Timestamp { get; set; }
 
         public string HardwareId { get; set; }
+
+        public int Heading { get; set; }
+
+        public int Distance { get; set; }
 
         public override string ToString()
         {

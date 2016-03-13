@@ -34,6 +34,12 @@ namespace Trackwane.Framework.Client
             return this as T;
         }
 
+        public T UseWithoutAuthentication()
+        {
+            client = new RestClient(baseUrl);
+            return this as T;
+        }
+
         protected static string Expand(string url, params object[] values)
         {
             return string.Format(url, values);

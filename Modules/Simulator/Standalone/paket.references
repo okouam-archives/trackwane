@@ -1,0 +1,10 @@
+Serilog.Sinks.Seq
+TopShelf
+Hangfire 
+Hangfire.Core 
+Hangfire.Raven
+Hangfire.StructureMap3 
+Microsoft.Owin.SelfHost
+Microsoft.Owin.Hosting
+Microsoft.Owin.Host.HttpListener
+Microsoft.Owin.Diagnostics

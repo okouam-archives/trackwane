@@ -1,5 +1,4 @@
-﻿using log4net.Config;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Trackwane.Simulator.Tests
 {
@@ -9,7 +8,7 @@ namespace Trackwane.Simulator.Tests
         [OneTimeSetUp]
         public void BeforeAll()
         {
-            XmlConfigurator.Configure();
+   
         }
     }
 }

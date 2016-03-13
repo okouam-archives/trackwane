@@ -54,8 +54,10 @@ namespace Trackwane.Simulator.Engine.Queries
                 HardwareId = "CTA-BUS-" + x.Id,
                 Speed = rand.Next(0, 130),
                 Latitude = x.Latitude,
+                Heading = x.Heading,
                 Longitude = x.Longitude,
-                Orientation = x.Heading,
+                Distance = rand.Next(0, 10000),
+                Orientation = rand.Next(0, 360),
                 Petrol = rand.Next(0, 100),
                 Timestamp = x.Timestamp
             });

@@ -12,8 +12,8 @@ namespace Trackwane.Simulator.Tests.Behaviors.Engine.Queries
         public void When_Vehicles_Exist_Finds_Their_Positions()
         {
             var query = new GetVehicleReadings(new ReadingProvider(new Config()), new FindVehicles(new ReadingProvider(new Config()), new GetRoutes(new Config())));
-            var positions = query.Execute(1002);
-            positions.Count().ShouldBe(1);
+            var positions = query.Execute(1004, 1006, 1009);
+            positions.Count().ShouldBe(3);
         }
     }
 }

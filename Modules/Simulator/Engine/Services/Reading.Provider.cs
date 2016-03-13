@@ -27,7 +27,9 @@ namespace Trackwane.Simulator.Engine.Services
 
             var result = new HttpClient().GetAsync(url).Result;
 
-            return ParsePositions(result);
+            var positions = ParsePositions(result).ToList();
+
+            return positions;
         }
 
         private static IEnumerable<Position> ParsePositions(HttpResponseMessage result)
@@ -37,8 +39,8 @@ namespace Trackwane.Simulator.Engine.Services
             return from v in doc.Descendants("vehicle")
                    select new Position(
                         int.Parse(v.Element("vid").Value),
-                        decimal.Parse(v.Element("lat").Value),
-                        decimal.Parse(v.Element("lon").Value),
+                        double.Parse(v.Element("lat").Value),
+                        double.Parse(v.Element("lon").Value),
                         int.Parse(v.Element("hdg").Value),
                         ParseTimestamp(v.Element("tmstmp").Value));
         }

@@ -6,15 +6,15 @@ namespace Trackwane.Simulator.Domain
     {
         public int Id { get; set; }
 
-        public decimal Latitude { get; set; }
+        public double Latitude { get; set; }
 
-        public decimal Longitude { get; set; }
+        public double Longitude { get; set; }
 
         public int Heading { get; set; }
 
         public DateTime Timestamp { get; set; }
         
-        public Position(int id, decimal latitude, decimal longitude, int heading, DateTime timestamp)
+        public Position(int id, double latitude, double longitude, int heading, DateTime timestamp)
         {
             Id = id;
             Latitude = latitude;

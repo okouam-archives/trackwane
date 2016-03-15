@@ -1,0 +1,6 @@
+type file
+id Trackwane.Simulator
+description The Windows Service engine for Trackwane.Simulator
+authors The Wylesight Team
+projectUrl http://www.trackwane.com
+files Standalone/bin/Debug/**/* ==> tools

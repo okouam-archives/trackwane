@@ -12,3 +12,4 @@ Raven.Studio.Html5.zip
 paket.exe
 TestResult.xml
 .local/
+.dist/

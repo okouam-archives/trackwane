@@ -5,11 +5,16 @@ open Fake.Testing
 open System
 open Fake.Paket
 open Fake.FileUtils
+open Fake.PaketTemplate
 
 let buildDir = "./.build/"
 let installationDir  = "./.local/"
-let serviceName = "Trackwane.Access.Control"
-let executable = installationDir + "/Trackwane.AccessControl.Standalone.exe"
+let distDir  = "./.dist/"
+let serviceName = "Trackwane.AccessControl"
+let executable = installationDir + "/" + serviceName + ".Standalone.exe"
+let nugetApiKey = "a2f90577-f739-430b-9ccf-456adf5db7b2"
+let nugetPublishUrl = "http://packages.wylesight.ws"
+let nugetEndpoint = "api/packages"
 
 MSBuildDefaults <- { MSBuildDefaults with Verbosity = Some MSBuildVerbosity.Quiet }
 
@@ -24,7 +29,7 @@ Target "Compile" (fun _ ->
 )
 
 Target "Test" (fun _ ->
-  !! (buildDir + "/Trackwane.AccessControl.Tests.dll")
+  !! (buildDir + "/" + serviceName + ".Tests.dll")
     |> NUnit3 (fun p ->
       {p with
         ToolPath = "./packages/NUnit.Console/tools/nunit3-console.exe"
@@ -36,7 +41,6 @@ Target "Stop_Local_Service" (fun _ ->
     StopService serviceName
     ensureServiceHasStopped serviceName (TimeSpan.FromMinutes 1.0)
 )
-
 
 Target "Uninstall" (fun _ ->
   let fileExists = TestFile(executable)
@@ -57,13 +61,25 @@ Target "Start_Local_Service" (fun _ ->
   ensureServiceHasStarted serviceName (TimeSpan.FromMinutes 1.0) |> ignore
 )
 
-Target "Deploy" DoNothing
+Target "Package" (fun _ ->
+  MSBuildDebug null "Build" ["Standalone/Standalone.csproj"]
+    |> ignore
+  rm_rf distDir
+  Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version 3.0.0") |> ignore
+)
+
+Target "Deploy" (fun _ ->
+  Fake.Paket.Push (fun p ->
+    {p with ApiKey = nugetApiKey; PublishUrl = nugetPublishUrl; EndPoint = nugetEndpoint; WorkingDir = distDir})
+)
 
 Target "Install" DoNothing
 
+"Package"
+  ==> "Deploy"
+
 "Clean"
   ==> "Compile"
-
 
 "Compile"
   ==> "Test"

@@ -1,0 +1,6 @@
+type file
+id Trackwane.AccessControl
+description The Windows Service engine for Trackwane.AccessControl
+authors The Wylesight Team
+projectUrl http://www.trackwane.com
+files Standalone/bin/Debug/**/* ==> tools

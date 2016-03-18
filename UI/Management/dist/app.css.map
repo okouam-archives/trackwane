@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.styl"],"names":[],"mappings":"AAAA;EACE,kBAAkB,KAAlB","file":"dist/app.css","sourceRoot":"/source/","sourcesContent":["body\r\n  background-color: red\r\n"]}

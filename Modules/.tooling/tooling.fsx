@@ -34,10 +34,6 @@ let moduleVersion = getBuildParam "version"
 let serviceName = "Trackwane." + moduleName
 let executable = installationDir + "/" + serviceName + ".Standalone.exe"
 
-printfn "====================================================================="
-printfn "Running FAKE tools for %s (%s)" serviceName moduleVersion
-printfn "====================================================================="
-
 MSBuildDefaults <- { MSBuildDefaults with Verbosity = Some MSBuildVerbosity.Quiet }
 
 Target "Clean" (fun _ ->

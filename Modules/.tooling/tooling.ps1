@@ -5,11 +5,20 @@ function Bootstrap() {
 }
 
 function Check-Module-Name($module) {
-  Clear-Host
-  if (-Not (Test-Path $module)) {
-    Write-Host "ERROR: The Trackwane module <$module> cannot be located. Please check the module name." -foregroundcolor "red"
+  $moduleName = $module
+  if ([string]::IsNullOrEmpty($module)) {
+    $availableModules = Get-ChildItem . | ?{ $_.PSIsContainer } | Where {!$_.Name.StartsWith(".")}
+    Write-Host "Available modules"  -foregroundcolor "Green"
+    Foreach($availableModule in $availableModules) {
+      Write-Host ">" $availableModule.Name
+    }
+    $moduleName = Read-Host '>'
+  }
+  if (-Not (Test-Path $moduleName)) {
+    Write-Host "ERROR: The Trackwane module <$moduleName> cannot be located. Please check the module name." -foregroundcolor "red"
     exit
   }
+  $moduleName
 }
 
 function Clean-Module-Name($module) {
@@ -17,12 +26,19 @@ function Clean-Module-Name($module) {
 }
 
 function Run-Target($target, $module) {
+  Clear-Host
+  Write-Host "=====================================================================" -foregroundcolor Blue
+  Write-Host "Running FAKE target :: $target" -foregroundcolor Blue
+  Write-Host "=====================================================================" -foregroundcolor Blue
   $moduleName = Clean-Module-Name $module
-  Check-Module-Name $moduleName
-  cd $moduleName
+  $selectedModule = Check-Module-Name $moduleName
+  cd $selectedModule
   Bootstrap
   $moduleVersion = Get-Module-Version
-  ..\.tooling\packages\FAKE\tools\FAKE.exe ../.tooling/tooling.fsx $target module="$moduleName" version="$moduleVersion"
+  Write-Host "=====================================================================" -foregroundcolor Blue
+  Write-Host "Bootstrapping complete for $selectedModule ($moduleVersion)" -foregroundcolor Blue
+  Write-Host "=====================================================================" -foregroundcolor Blue
+  ..\.tooling\packages\FAKE\tools\FAKE.exe ../.tooling/tooling.fsx $target module="$selectedModule" version="$moduleVersion"
   cd ..
 }
 

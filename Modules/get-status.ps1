@@ -30,5 +30,7 @@ Connect-OctoServer http://octopus.wylesight.ws API-MCZZVTPXAJ6XV2VSHYUMPCLOGN8
 #  }
 #}
 # Get installed modules with their status
-# Get latest NuGet package for each module
+
+Write-Host "================ TRACKWANE NUGET PACKAGES =======================" -foregroundcolor Blue
+
 # Get deployed version for each module

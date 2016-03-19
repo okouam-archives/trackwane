@@ -8,6 +8,7 @@ open Fake.Paket
 open Fake.FileUtils
 open Fake.PaketTemplate
 open Fake.AssemblyInfoFile
+open Fake.Git
 
 let buildDir = "./.build/"
 let installationDir  = "./.local/"
@@ -81,13 +82,24 @@ Target "Package" (fun _ ->
   Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version " + version.Value) |> ignore
 )
 
+Target "UndoVersioning" DoNothing
+
+Target "Build" DoNothing
+
+Target "Version" (fun _ ->
+  trace (describe ".")
+)
+
 Target "Install" DoNothing
 
 "Package"
   ==> "Deploy"
 
 "Clean"
+  ==> "UndoVersioning"
   ==> "Compile"
+  ==> "Version"
+  ==> "Build"
 
 "Compile"
   ==> "Test"
@@ -100,4 +112,4 @@ Target "Install" DoNothing
   ==> "Start_Local_Service"
   ==> "Install"
 
-RunTargetOrDefault "Compile"
+RunTargetOrDefault "Build"

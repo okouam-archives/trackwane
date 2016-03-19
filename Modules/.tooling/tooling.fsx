@@ -82,12 +82,16 @@ Target "Package" (fun _ ->
   Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version " + version.Value) |> ignore
 )
 
-Target "UndoVersioning" DoNothing
+Target "UndoVersion" (fun _ ->
+  UpdateAttributes "Version.cs" [Attribute.Version "0.0.0.0"]
+)
 
 Target "Build" DoNothing
 
 Target "Version" (fun _ ->
-  trace (describe ".")
+  let longVersion = (describe ".")
+  trace longVersion
+  UpdateAttributes "Version.cs" [Attribute.Version longVersion]
 )
 
 Target "Install" DoNothing
@@ -96,9 +100,9 @@ Target "Install" DoNothing
   ==> "Deploy"
 
 "Clean"
-  ==> "UndoVersioning"
-  ==> "Compile"
   ==> "Version"
+  ==> "Compile"
+  ==> "UndoVersion"
   ==> "Build"
 
 "Compile"

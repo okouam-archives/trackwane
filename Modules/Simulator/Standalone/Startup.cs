@@ -2,6 +2,7 @@
 using Hangfire;
 using HangFire.Raven.Storage;
 using Microsoft.Owin;
+using Microsoft.Owin.Diagnostics;
 using Owin;
 using Trackwane.Data.Client;
 using Trackwane.Framework.Common.Configuration;
@@ -19,7 +20,17 @@ namespace Trackwane.Simulator.Standalone
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseErrorPage();
+            app.UseErrorPage(new ErrorPageOptions
+            {
+                ShowCookies = true,
+                ShowSourceCode = true,
+                ShowHeaders = true, 
+                ShowExceptionDetails = true,
+                SourceCodeLineCount = 10,
+                ShowEnvironment = true,
+                ShowQuery = true
+            });
+
             app.UseWelcomePage("/");
 
             var documentStoreConfig = new DocumentStoreConfig();

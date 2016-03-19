@@ -65,7 +65,7 @@ Target "Package" (fun _ ->
   MSBuildDebug null "Build" ["Standalone/Standalone.csproj"]
     |> ignore
   rm_rf distDir
-  Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version 3.0.0") |> ignore
+  Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version 3.0.2") |> ignore
 )
 
 Target "Deploy" (fun _ ->

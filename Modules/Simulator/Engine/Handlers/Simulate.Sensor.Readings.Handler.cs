@@ -30,10 +30,15 @@ namespace Trackwane.Simulator.Engine.Handlers
 
             var events = query.Execute(command.Buses).ToList();
 
-            Log.Information("{PositionNum} bus positions were retrieved", events.Count);
-
-            var successes = 0;
-
+            if (events.Count > 0)
+            {
+                Log.Information("{PositionNum} bus positions were retrieved", events.Count);
+            }
+            else
+            {
+                Log.Error("No bus positions could be retrieved");
+            }
+            
             foreach (var evt in events)
             {
                 try
@@ -50,19 +55,11 @@ namespace Trackwane.Simulator.Engine.Handlers
                         Petrol = evt.Petrol,
                         Timestamp = evt.Timestamp
                     });
-
-                    successes++;
                 }
                 catch (Exception e)
                 {
                     Log.Error(e, "Unable to save sensor reading for {ID}", evt.HardwareId);
                 }
-            }
-
-            if (successes < 1)
-            {
-                Log.Error("Unable to save any save readings for buses {Buses} - check the Data Module is up and running", GetBuseIds(command));
-                throw new Exception("Unable to save any sensor readings - check the Data Module is up and running");
             }
 
             return base.Handle(command);

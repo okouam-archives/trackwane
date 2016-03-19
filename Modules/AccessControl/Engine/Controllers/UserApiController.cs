@@ -25,7 +25,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
 
         [HttpGet, Route("token")]
         public string GetAccessToken(string email, string password) =>
-            executionEngine.Query<GetAccessToken>().Execute(email, password);
+            "Bearer " + executionEngine.Query<GetAccessToken>().Execute(email, password);
         
         [HttpPost, Route("root")]
         public string CreateRootUser(RegisterUserModel model)

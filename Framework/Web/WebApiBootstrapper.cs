@@ -13,10 +13,7 @@ namespace Trackwane.Framework.Web
 
         public static HttpSelfHostServer CreateServer(IContainer container, string url)
         {
-            var configuration = new HttpSelfHostConfiguration(url)
-            {
-                HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.Exact
-            };
+            var configuration = new HttpSelfHostConfiguration(url);
 
             configuration
                 .EnableSwagger(c =>

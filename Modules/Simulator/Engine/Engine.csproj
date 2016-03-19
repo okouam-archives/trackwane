@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Commands\Simulate.Sensor.Readings.cs" />
     <Compile Include="Handlers\Simulate.Sensor.Readings.Handler.cs" />
+    <Compile Include="LoggingHandler.cs" />
     <Compile Include="Queries\Get.Routes.cs" />
     <Compile Include="Queries\Get.Vehicle.Readings.cs" />
     <Compile Include="Queries\Find.Vehicles.cs" />

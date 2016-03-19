@@ -12,6 +12,6 @@ cd $module
 
 .paket\paket.exe restore
 
-packages\FAKE\tools\FAKE.exe ../tooling.fsx Compile
+packages\FAKE\tools\FAKE.exe ../.tooling/tooling.fsx Deploy module="$module"
 
 cd ..

@@ -10,18 +10,32 @@ open Fake.PaketTemplate
 open Fake.AssemblyInfoFile
 open Fake.Git
 
+// The output directory for building the module projects
 let buildDir = "./.build/"
+
+// The directory where the module Windows Service will be placed
 let installationDir  = "./.local/"
+
+// The directory where the NuGet package for the module Windows Service will be placed
 let distDir  = "./.dist/"
+
+// The API key for accessing Octopus Deploy
 let nugetApiKey = "API-MCZZVTPXAJ6XV2VSHYUMPCLOGN8"
+
+// The location of the Octopus Deploy server
 let nugetPublishUrl = "http://octopus.wylesight.ws"
+
+// The endpoint for pushing up packages to the Octopus Deploy server
 let nugetEndpoint = "nuget/packages"
+
+// Miscellaneous variables
 let moduleName = getBuildParam "module"
+let moduleVersion = getBuildParam "version"
 let serviceName = "Trackwane." + moduleName
 let executable = installationDir + "/" + serviceName + ".Standalone.exe"
 
 printfn "====================================================================="
-printfn "Running FAKE tools for %s" serviceName
+printfn "Running FAKE tools for %s (%s)" serviceName moduleVersion
 printfn "====================================================================="
 
 MSBuildDefaults <- { MSBuildDefaults with Verbosity = Some MSBuildVerbosity.Quiet }
@@ -83,15 +97,20 @@ Target "Package" (fun _ ->
 )
 
 Target "UndoVersion" (fun _ ->
-  UpdateAttributes "Version.cs" [Attribute.Version "0.0.0.0"]
+  let description = GetAttributeValue "AssemblyDescription" "./Standalone/Properties/AssemblyInfo.cs"
+  CreateCSharpAssemblyInfo "./Standalone/Properties/AssemblyInfo.cs" [Attribute.Description description.Value.Replace("\"", "")]
 )
 
 Target "Build" DoNothing
 
 Target "Version" (fun _ ->
-  let longVersion = (describe ".")
-  trace longVersion
-  UpdateAttributes "Version.cs" [Attribute.Version longVersion]
+  let description = GetAttributeValue "AssemblyDescription" "./Standalone/Properties/AssemblyInfo.cs"
+  CreateCSharpAssemblyInfo "./Standalone/Properties/AssemblyInfo.cs"
+    [Attribute.Title serviceName;
+     Attribute.Description description.Value.Replace("\"", "");
+  	 Attribute.Product serviceName;
+  	 Attribute.Version moduleVersion;
+  	 Attribute.FileVersion moduleVersion]
 )
 
 Target "Install" DoNothing

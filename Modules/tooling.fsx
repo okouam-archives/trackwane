@@ -1,4 +1,5 @@
-#r "packages/FAKE/tools/FakeLib.dll"
+#r "FAKE/tools/FakeLib.dll"
+
 open Fake
 open Fake.OctoTools
 open Fake.Testing
@@ -6,17 +7,19 @@ open System
 open Fake.Paket
 open Fake.FileUtils
 open Fake.PaketTemplate
+open Fake.AssemblyInfoFile
 
 let buildDir = "./.build/"
 let installationDir  = "./.local/"
 let distDir  = "./.dist/"
-let serviceName = "Trackwane.Simulator"
-let executable = installationDir + "/" + serviceName + ".Standalone.exe"
-let nugetApiKey = "a2f90577-f739-430b-9ccf-456adf5db7b2"
-let nugetPublishUrl = "http://packages.wylesight.ws"
-let nugetEndpoint = "api/packages"
+let nugetApiKey = "API-MCZZVTPXAJ6XV2VSHYUMPCLOGN8"
+let nugetPublishUrl = "http://octopus.wylesight.ws"
+let nugetEndpoint = "nuget/packages"
 
 MSBuildDefaults <- { MSBuildDefaults with Verbosity = Some MSBuildVerbosity.Quiet }
+
+let serviceName = "Trackwane.Simulator"
+let executable = installationDir + "/" + serviceName + ".Standalone.exe"
 
 Target "Clean" (fun _ ->
   CleanDir buildDir
@@ -26,6 +29,11 @@ Target "Compile" (fun _ ->
   !! "**/*.csproj"
     |> MSBuildDebug buildDir "Build"
     |> ignore
+)
+
+Target "Deploy" (fun _ ->
+  Fake.Paket.Push (fun p ->
+    {p with ApiKey = nugetApiKey; PublishUrl = nugetPublishUrl; EndPoint = nugetEndpoint; WorkingDir = distDir})
 )
 
 Target "Test" (fun _ ->
@@ -65,12 +73,8 @@ Target "Package" (fun _ ->
   MSBuildDebug null "Build" ["Standalone/Standalone.csproj"]
     |> ignore
   rm_rf distDir
-  Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version 3.0.0") |> ignore
-)
-
-Target "Deploy" (fun _ ->
-  Fake.Paket.Push (fun p ->
-    {p with ApiKey = nugetApiKey; PublishUrl = nugetPublishUrl; EndPoint = nugetEndpoint; WorkingDir = distDir})
+  let version = GetAttributeValue "AssemblyVersion" "Version.cs"
+  Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version " + version.Value) |> ignore
 )
 
 Target "Install" DoNothing

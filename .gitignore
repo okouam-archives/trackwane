@@ -13,3 +13,4 @@ paket.exe
 TestResult.xml
 .local/
 .dist/
+FAKE/

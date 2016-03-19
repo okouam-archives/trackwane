@@ -92,8 +92,7 @@ Target "Package" (fun _ ->
   MSBuildDebug null "Build" ["Standalone/Standalone.csproj"]
     |> ignore
   rm_rf distDir
-  let version = GetAttributeValue "AssemblyVersion" "Version.cs"
-  Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version " + version.Value) |> ignore
+  Shell.Exec(".paket\paket.exe", "pack output " + distDir + " templatefile paket.template version " + moduleVersion) |> ignore
 )
 
 Target "UndoVersion" (fun _ ->

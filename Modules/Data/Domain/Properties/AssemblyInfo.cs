@@ -1,3 +1,3 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("Trackwane.Data.Domain")]
+[assembly: AssemblyDescription("Trackwane.Data.Domain")]

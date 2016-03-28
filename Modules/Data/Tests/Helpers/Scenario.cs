@@ -2,7 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
-using Trackwane.Data.Client;
+using Trackwane.Data.Cient;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Interfaces;
 

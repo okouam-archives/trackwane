@@ -1,8 +1,8 @@
 ﻿using Raven.Client;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Locations;
 
 namespace Trackwane.Management.Engine.Queries.Locations
 {
@@ -16,12 +16,7 @@ namespace Trackwane.Management.Engine.Queries.Locations
 
                 if (location == null) return null;
 
-                return new LocationDetails
-                {
-                    Name = location.Name,
-                    IsArchived = location.IsArchived,
-                    Coordinates = location.Coordinates
-                };
+                return new LocationDetails(location.Name, location.IsArchived, location.Coordinates);
             });
         }
 

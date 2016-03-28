@@ -2,9 +2,9 @@
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Engine.Commands.Vehicles;
 using Trackwane.Management.Engine.Queries.Vehicles;
-using Trackwane.Management.Models.Vehicles;
 
 namespace Trackwane.Management.Engine.Controllers
 {
@@ -27,11 +27,8 @@ namespace Trackwane.Management.Engine.Controllers
             dispatcher.Query<FindById>(organizationKey).Execute(key);
         
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
-        public ResponsePage<VehicleSummary> FindBySearchCriteria(string organizationKey, SearchCriteriaModel model) =>
-            dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(new FindBySearchCriteria.Criteria
-            {
-                Identifier = model.Identifier
-            });
+        public ResponsePage<VehicleSummary> FindBySearchCriteria(string organizationKey, SearchVehiclesModel model) =>
+            dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(new SearchVehiclesModel(model.Identifier));
         
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveBoundary(string organizationKey, string key) =>

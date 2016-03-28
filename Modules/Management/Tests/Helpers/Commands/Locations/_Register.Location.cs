@@ -1,7 +1,7 @@
 ﻿using System;
 using Geo.Geometries;
 using Trackwane.Framework.Common;
-using Trackwane.Management.Models.Locations;
+using Trackwane.Management.Contracts.Models;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -19,12 +19,8 @@ namespace Trackwane.Management.Tests.Helpers
                 With(persona, organizationKey, key, name, new Point(0, 0));
 
             public static void With(UserClaims persona, string organizationKey, string key, string name, Point coordinates) =>
-                Client.Use(persona).Locations.Register(organizationKey, new RegisterLocationModel
-                {
-                    Coordinates = coordinates != null ? new Geo.IO.GeoJson.GeoJsonWriter().Write(coordinates) : null,
-                    Name = name,
-                    Key = key
-                });
+                Client.Use(persona).RegisterLocation(organizationKey, new RegisterLocationModel(key, name, coordinates != null ? new Geo.IO.GeoJson.GeoJsonWriter().Write(coordinates) : null
+                ));
         }
     }
 }

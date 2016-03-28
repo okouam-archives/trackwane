@@ -1,6 +1,6 @@
 ﻿using System;
 using Trackwane.Framework.Common;
-using Trackwane.Management.Models.Alerts;
+using Trackwane.Management.Contracts.Models;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -10,11 +10,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationKey, string key, string name)
             {
-                Client.Use(claims).Alerts.Create(organizationKey, name, new CreateAlertModel
-                {
-                    Key = key,
-                    Name = name
-                });
+                Client.Use(claims).CreateAlert(organizationKey, name, new CreateAlertModel(key, name));
             }
 
             public static void With(UserClaims claims, string organizationKey, string key)

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using Geo.Geometries;
+using Trackwane.Data.Contracts.Models;
 using Trackwane.Data.Engine.Commands;
 using Trackwane.Data.Engine.Queries;
-using Trackwane.Data.Models;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Interfaces;
 
@@ -37,7 +37,7 @@ namespace Trackwane.Data.Engine.Controller
                 Distance = model.Distance,
                 Heading = model.Heading,
                 Orientation = model.Orientation,
-                Coordinates = new Point(model.Latitude, model.Longitude)
+                Coordinates = new Point(model.Latitude.Value, model.Longitude.Value)
             });
         }
     }

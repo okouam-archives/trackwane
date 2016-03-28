@@ -1,5 +1,5 @@
 ﻿using Trackwane.Framework.Common;
-using Trackwane.Management.Models.Drivers;
+using Trackwane.Management.Contracts.Models;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -9,10 +9,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationId, string driverId, string name)
             {
-                Client.Use(claims).Drivers.Update(organizationId, driverId, new UpdateDriverModel
-                {
-                    Name = name
-                });
+                Client.Use(claims).UpdateDriver(organizationId, driverId, new UpdateDriverModel(name));
             }
         }
     }

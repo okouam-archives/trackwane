@@ -4,8 +4,8 @@ using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
+using Trackwane.Management.Contracts.Events;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Events;
 using Message = Trackwane.Management.Engine.Services.Message;
 
 namespace Trackwane.Management.Engine.Listeners.Organizations.Drivers

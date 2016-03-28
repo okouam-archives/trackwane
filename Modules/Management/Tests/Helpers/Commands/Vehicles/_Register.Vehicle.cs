@@ -1,6 +1,6 @@
 ﻿using System;
 using Trackwane.Framework.Common;
-using Trackwane.Management.Models.Vehicles;
+using Trackwane.Management.Contracts.Models;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -9,11 +9,7 @@ namespace Trackwane.Management.Tests.Helpers
         protected class _Register_Vehicle
         {
             public static void With(UserClaims claims, string organizationKey, string key) =>
-                Client.Use(claims).Vehicles.Register(organizationKey, new RegisterVehicleModel
-                {
-                    Identifier = Guid.NewGuid().ToString(),
-                    Key = key
-                });
+                Client.Use(claims).RegisterVehicle(organizationKey, new RegisterVehicleModel(key, Guid.NewGuid().ToString()));
 
         }
     }

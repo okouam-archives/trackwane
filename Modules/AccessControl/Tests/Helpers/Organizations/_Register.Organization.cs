@@ -1,5 +1,5 @@
 ﻿using System;
-using Trackwane.AccessControl.Models.Oganizations;
+using Trackwane.AccessControl.Models;
 using Trackwane.Framework.Common;
 
 namespace Trackwane.AccessControl.Tests
@@ -15,7 +15,7 @@ namespace Trackwane.AccessControl.Tests
                 With(persona, organizationKey, $"{Faker.CompanyFaker.Name()} [{organizationKey}]");
 
             public static void With(UserClaims persona, string organizationKey, string name) =>
-                Client.Use(persona).Organizations.RegisterOrganization(new RegisterOrganizationModel
+                Client.Use(persona).RegisterOrganization(new RegisterOrganizationModel
                 {
                     OrganizationKey = organizationKey,
                     Name = name

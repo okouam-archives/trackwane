@@ -54,17 +54,13 @@
       <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Framework\Events\Framework.Events.csproj">
-      <Project>{3284BA06-FE38-44AA-B2E7-0B6D427897AD}</Project>
-      <Name>Framework.Events</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
       <Project>{2ACB382A-38FA-49A6-A9CD-212881D3CD37}</Project>
       <Name>paramore.brighter.commandprocessor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Management.Events\Management.Events.csproj">
-      <Project>{82C698EF-2E0C-4593-ADF5-D02AA5D73DB7}</Project>
-      <Name>Management.Events</Name>
+    <ProjectReference Include="..\Interfaces\Management.Contracts.fsproj">
+      <Project>{d5139033-62a3-4978-b203-aba6443c1e22}</Project>
+      <Name>Management.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +75,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\.paket\paket.targets" />
+  <Import Project="..\..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>

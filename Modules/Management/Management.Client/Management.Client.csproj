@@ -40,13 +40,6 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context.Locations.cs" />
-    <Compile Include="Context.Drivers.cs" />
-    <Compile Include="Context.Vehicles.cs" />
-    <Compile Include="Context.Trackers.cs" />
-    <Compile Include="Context.Boundaries.cs" />
-    <Compile Include="Context.Alerts.cs" />
-    <Compile Include="ManagementContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,7 +68,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\.paket\paket.targets" />
+  <Import Project="..\..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>

@@ -3,9 +3,9 @@ using Geo.Geometries;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Engine.Commands.Locations;
 using Trackwane.Management.Engine.Queries.Locations;
-using Trackwane.Management.Models.Locations;
 
 namespace Trackwane.Management.Engine.Controllers
 {
@@ -28,7 +28,7 @@ namespace Trackwane.Management.Engine.Controllers
             dispatcher.Query<FindById>(organizationKey).Execute(key);
         
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
-        public ResponsePage<LocationSummary> FindBySearchCriteria(string organizationKey, SearchCriteriaModel model) =>
+        public ResponsePage<LocationSummary> FindBySearchCriteria(string organizationKey, SearchLocationsModel model) =>
             dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute();
         
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]

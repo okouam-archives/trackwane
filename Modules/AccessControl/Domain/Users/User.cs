@@ -37,21 +37,7 @@ namespace Trackwane.AccessControl.Domain.Users
 
         public void Update(string displayName)
         {
-            Causes(new UserUpdated
-            {
-                UserKey = Key,
-                Previous = new UserUpdated.State
-                {
-                      DisplayName = DisplayName,
-                      Email = Email,
-                },
-                Current = new UserUpdated.State
-                {
-                    DisplayName = displayName,
-                    Email = Email
-                }
-              
-            });
+            Causes(new UserUpdated(Key, new UserUpdatedState(Email, DisplayName), new UserUpdatedState(displayName, Email)));
         }
 
         public User()

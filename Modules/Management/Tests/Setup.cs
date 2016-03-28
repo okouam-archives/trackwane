@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using Trackwane.AccessControl.Events;
+using Trackwane.AccessControl.Contracts;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Storage;
 using Trackwane.Framework.Interfaces;
+using Trackwane.Management.Contracts;
 using Trackwane.Management.Engine;
-using Trackwane.Management.Events;
 using Registry = Trackwane.Management.Engine.Registry;
 
 namespace Trackwane.Management.Tests
@@ -28,8 +28,8 @@ namespace Trackwane.Management.Tests
             {
                 ListenUri = new Uri("http://localhost:8343"),
 
-                Events = typeof(_Access_Control_Events_Assembly_).Assembly.GetDomainEvents()
-                            .Union(typeof(_Management_Events_Assembly_).Assembly.GetDomainEvents()),
+                Events = typeof(_Access_Control_Contracts_Assembly_).Assembly.GetDomainEvents()
+                            .Union(typeof(_Management_Contracts_Assembly_).Assembly.GetDomainEvents()),
 
                 Handlers = typeof(_Management_Engine_Assembly_).Assembly.GetHandlers(),
 

@@ -2,8 +2,6 @@
 {
     public enum AlertType
     {
-        Speed,
-        Petrol,
-        Battery
+ 
     }
 }

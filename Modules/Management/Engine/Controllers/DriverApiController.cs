@@ -3,9 +3,9 @@ using System.Web.Http;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Engine.Commands.Drivers;
 using Trackwane.Management.Engine.Queries.Drivers;
-using Trackwane.Management.Models.Drivers;
 
 namespace Trackwane.Management.Engine.Controllers
 {

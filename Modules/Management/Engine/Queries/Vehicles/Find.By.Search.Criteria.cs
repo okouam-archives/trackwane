@@ -4,19 +4,14 @@ using Raven.Client.Linq;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Vehicles;
 
 namespace Trackwane.Management.Engine.Queries.Vehicles
 {
     public class FindBySearchCriteria : Query<ResponsePage<VehicleSummary>>, IScopedQuery
     {
-        public struct Criteria
-        {
-            public string Identifier { get; set; }
-        }
-
-        public ResponsePage<VehicleSummary> Execute(Criteria criteria)
+        public ResponsePage<VehicleSummary> Execute(SearchVehiclesModel criteria)
         {
             return Execute(repository =>
             {
@@ -32,7 +27,7 @@ namespace Trackwane.Management.Engine.Queries.Vehicles
 
                 return new ResponsePage<VehicleSummary>
                 {
-                    Items = trackers.Select(x => new VehicleSummary()).ToList(),
+                    Items = trackers.Select(x => new VehicleSummary(x.IsArchived, x.OrganizationKey, x.Identifier)).ToList(),
                     Total = trackers.Count
                 };
             });

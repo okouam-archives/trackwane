@@ -40,12 +40,12 @@ namespace Trackwane.Framework.Client
             return this as T;
         }
 
-        protected static string Expand(string url, params object[] values)
+        protected string Expand(string url, params object[] values)
         {
             return string.Format(url, values);
         }
 
-        protected static void POST(RestClient client, string url, object model = null)
+        protected void POST(string url, object model = null)
         {
             var request = new RestRequest(url)
             {
@@ -61,7 +61,7 @@ namespace Trackwane.Framework.Client
             Execute(() => client.Execute(request));
         }
 
-        protected static TModel POST<TModel>(RestClient client, string url, object model = null) where TModel : new()
+        protected TModel POST<TModel>(string url, object model = null) where TModel : new()
         {
             var request = new RestRequest(url)
             {
@@ -86,12 +86,12 @@ namespace Trackwane.Framework.Client
             return data;
         }
 
-        protected static void DELETE(RestClient client, string url)
+        protected void DELETE(string url)
         {
             Execute(() => client.Execute(new RestRequest(url, Method.DELETE)));
         }
 
-        protected static TModel GET<TModel>(RestClient client, string url, object model = null) where TModel : new()
+        protected TModel GET<TModel>(string url, object model = null) where TModel : new()
         {
             var data = default(TModel);
             

@@ -19,18 +19,7 @@ namespace Trackwane.AccessControl.Domain.Organizations
 
         public void Update(string name)
         {
-            Causes(new OrganizationUpdated
-            {
-                OrganizationKey = Key,
-                Previous = new OrganizationUpdated.State
-                {
-                    Name = Name
-                },
-                Current = new OrganizationUpdated.State
-                {
-                    Name = name
-                }
-            });
+            Causes(new OrganizationUpdated(Key, new OrganizationUpdatedState(Name), new OrganizationUpdatedState(name)));
         }
 
         public Organization()
@@ -39,19 +28,12 @@ namespace Trackwane.AccessControl.Domain.Organizations
 
         public Organization(string id, string name)
         {
-            Causes(new OrganizationRegistered
-            {
-                Name = name,
-                OrganizationKey = id
-            });
+            Causes(new OrganizationRegistered(name, id));
         }
 
         public void Archive()
         {
-            Causes(new OrganizationArchived
-            {
-                OrganizationKey = Key
-            });
+            Causes(new OrganizationArchived(Key));
         }
 
         public bool CanAdministrate(User user)

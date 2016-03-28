@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Shouldly;
 using Trackwane.Framework.Fixtures;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Engine.Queries.Vehicles;
 using Trackwane.Management.Tests.Helpers;
 
@@ -25,7 +26,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Vehicles
         {
             _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_ID);
 
-            var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute(new FindBySearchCriteria.Criteria());
+            var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute(new SearchVehiclesModel());
 
             responsePage.Total.ShouldBe(1);
         }

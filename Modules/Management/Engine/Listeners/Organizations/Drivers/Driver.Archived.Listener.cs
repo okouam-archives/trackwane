@@ -5,9 +5,9 @@ using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
+using Trackwane.Management.Contracts.Events;
 using Trackwane.Management.Domain;
 using Trackwane.Management.Engine.Services;
-using Trackwane.Management.Events;
 
 namespace Trackwane.Management.Engine.Listeners.Organizations.Drivers
 {

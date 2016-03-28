@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Trackwane.Data.Client;
+using Trackwane.Data.Cient;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Simulator.Engine.Commands;
 using Trackwane.Simulator.Engine.Handlers;

@@ -4,7 +4,7 @@ using NUnit.Framework;
 using paramore.brighter.commandprocessor;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Interfaces;
-using Trackwane.Management.Client;
+using Trackwane.Management.Contracts.Client;
 
 namespace Trackwane.Management.Tests.Helpers
 {

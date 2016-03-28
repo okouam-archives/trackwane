@@ -43,24 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alert.Archived.cs" />
-    <Compile Include="Alert.Created.cs" />
     <Compile Include="Alert.Edited.cs" />
-    <Compile Include="AlertType.cs" />
-    <Compile Include="Boundary.Archived.cs" />
-    <Compile Include="Boundary.Created.cs" />
     <Compile Include="Boundary.Updated.cs" />
-    <Compile Include="Driver.Archived.cs" />
-    <Compile Include="Driver.Registered.cs" />
     <Compile Include="Driver.Updated.cs" />
-    <Compile Include="Location.Archived.cs" />
     <Compile Include="Location.Registered.cs" />
     <Compile Include="Location.Updated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tracker.Archived.cs" />
     <Compile Include="Tracker.Registered.cs" />
     <Compile Include="Tracker.Updated.cs" />
-    <Compile Include="Vehicle.Archived.cs" />
     <Compile Include="Vehicle.Assigned.Driver.cs" />
     <Compile Include="Vehicle.Assigned.Tracker.cs" />
     <Compile Include="Vehicle.Registered.cs" />

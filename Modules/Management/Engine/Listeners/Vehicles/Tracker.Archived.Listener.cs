@@ -4,8 +4,8 @@ using Raven.Client.Linq;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
+using Trackwane.Management.Contracts.Events;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Events;
 
 namespace Trackwane.Management.Engine.Listeners.Vehicles
 {

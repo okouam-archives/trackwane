@@ -1,8 +1,8 @@
 ﻿using Raven.Client;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Trackers;
 
 namespace Trackwane.Management.Engine.Queries.Trackers
 {
@@ -16,13 +16,7 @@ namespace Trackwane.Management.Engine.Queries.Trackers
 
                 if (tracker == null) return null;
 
-                return new TrackerDetails
-                {
-                    Id = tracker.Key,
-                    HardwareId = tracker.HardwareId,
-                    IsArchived = tracker.IsArchived,
-                    Model = tracker.Model
-                };
+                return new TrackerDetails(tracker.Model, tracker.IsArchived, tracker.HardwareId, tracker.Key);
             });
         }
 

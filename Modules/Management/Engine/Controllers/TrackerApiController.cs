@@ -2,9 +2,9 @@
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Engine.Commands.Trackers;
 using Trackwane.Management.Engine.Queries.Trackers;
-using Trackwane.Management.Models.Trackers;
 
 namespace Trackwane.Management.Engine.Controllers
 {

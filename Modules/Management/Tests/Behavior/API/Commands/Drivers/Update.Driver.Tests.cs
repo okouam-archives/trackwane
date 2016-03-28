@@ -2,8 +2,8 @@
 using NUnit.Framework;
 using Shouldly;
 using Trackwane.Framework.Fixtures;
+using Trackwane.Management.Contracts.Events;
 using Trackwane.Management.Engine.Queries.Drivers;
-using Trackwane.Management.Events;
 using Trackwane.Management.Tests.Helpers;
 
 namespace Trackwane.Management.Tests.Behavior.API.Commands.Drivers

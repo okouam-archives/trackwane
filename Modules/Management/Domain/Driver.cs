@@ -1,7 +1,7 @@
 ﻿using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Common.Interfaces;
-using Trackwane.Management.Events;
+using Trackwane.Management.Contracts.Events;
 
 namespace Trackwane.Management.Domain
 {
@@ -26,14 +26,8 @@ namespace Trackwane.Management.Domain
             {
                 OrganizationKey = OrganizationKey,
                 DriverKey = Key,
-                Previous = new DriverUpdated.State
-                {
-                    Name = Name
-                },
-                Current = new DriverUpdated.State
-                {
-                    Name = name
-                }
+                Previous = new DriverUpdatedState(Name),
+                Current = new DriverUpdatedState(name)
             });
         }
 

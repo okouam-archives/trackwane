@@ -4,8 +4,8 @@ using Raven.Client.Linq;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Trackers;
 
 namespace Trackwane.Management.Engine.Queries.Trackers
 {
@@ -32,7 +32,7 @@ namespace Trackwane.Management.Engine.Queries.Trackers
 
                 return new ResponsePage<TrackerSummary>
                 {
-                    Items = trackers.Select(x => new TrackerSummary()).ToList(),
+                    Items = trackers.Select(x => new TrackerSummary(x.Key)).ToList(),
                     Total = trackers.Count
                 };
             });

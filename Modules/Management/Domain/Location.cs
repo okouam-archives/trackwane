@@ -2,7 +2,7 @@
 using Geo.Geometries;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
-using Trackwane.Management.Events;
+using Trackwane.Management.Contracts.Events;
 
 namespace Trackwane.Management.Domain
 {
@@ -37,16 +37,8 @@ namespace Trackwane.Management.Domain
             {
                 LocationKey = Key,
                 OrganizationKey = OrganizationKey,
-                Previous = new LocationUpdated.State
-                {
-                    Name = Name,
-                    Coordinates = Coordinates
-                },
-                Current = new LocationUpdated.State
-                {
-                    Name = newName,
-                    Coordinates = Coordinates
-                }
+                Previous = new LocationUpdatedState(Name, Coordinates),
+                Current = new LocationUpdatedState(newName, Coordinates)
             });
         }
 
@@ -56,16 +48,8 @@ namespace Trackwane.Management.Domain
             {
                 LocationKey = Key,
                 OrganizationKey = OrganizationKey,
-                Previous = new LocationUpdated.State
-                {
-                    Coordinates = Coordinates,
-                    Name = Name
-                },
-                Current = new LocationUpdated.State
-                {
-                    Coordinates = newCoordinates,
-                    Name = Name
-                }
+                Previous = new LocationUpdatedState(Name, Coordinates),
+                Current = new LocationUpdatedState(Name, newCoordinates)
             });
         }
 

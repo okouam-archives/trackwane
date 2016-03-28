@@ -68,8 +68,8 @@
       <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Events\Framework.Events.csproj">
-      <Project>{3284BA06-FE38-44AA-B2E7-0B6D427897AD}</Project>
+    <ProjectReference Include="..\Core\Events\Framework.Events.fsproj">
+      <Project>{d9af4913-abb5-4e66-b2fd-eb0e925e098e}</Project>
       <Name>Framework.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Framework.Infrastructure.csproj">

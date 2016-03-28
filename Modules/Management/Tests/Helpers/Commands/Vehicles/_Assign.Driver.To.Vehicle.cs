@@ -8,7 +8,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationId, string vehicleId, string driverId)
             {
-                Client.Use(claims).Vehicles.AssignDriverToVehicle(organizationId, vehicleId, driverId);
+                Client.Use(claims).AssignDriverToVehicle(organizationId, vehicleId, driverId);
             }
         }
     }

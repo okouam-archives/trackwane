@@ -9,11 +9,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(string organizationKey)
             {
-                EngineHost.ExecutionEngine.Publish(new OrganizationRegistered
-                {
-                    OrganizationKey = organizationKey,
-                    Name = Guid.NewGuid().ToString()
-                });
+                EngineHost.ExecutionEngine.Publish(new OrganizationRegistered(organizationKey, Guid.NewGuid().ToString()));
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
+using Trackwane.Data.Contracts;
 using Trackwane.Data.Engine;
-using Trackwane.Data.Events;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
 using Trackwane.Framework.Infrastructure.Factories;
@@ -25,7 +25,7 @@ namespace Trackwane.Data.Tests
             EngineHost = new EngineHost<Registry>(new ServiceLocator<Registry>(serviceLocationFactory), new EngineHostConfig
             {
                 ListenUri = new Uri("http://localhost:8343"),
-                Events = typeof(_Data_Events_Assembly_).Assembly.GetDomainEvents(),
+                Events = typeof(_Data_Contracts_Assembly_).Assembly.GetDomainEvents(),
                 Handlers = typeof(_Data_Engine_Assembly_).Assembly.GetHandlers(),
                 Commands = typeof(_Data_Engine_Assembly_).Assembly.GetCommands(),
                 Listeners = typeof(_Data_Engine_Assembly_).Assembly.GetListeners()

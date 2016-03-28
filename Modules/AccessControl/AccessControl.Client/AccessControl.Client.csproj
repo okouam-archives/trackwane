@@ -34,9 +34,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessControlContext.cs" />
-    <Compile Include="Context.Organizations.cs" />
-    <Compile Include="Context.Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +48,9 @@
       <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AccessControl.Models\AccessControl.Models.csproj">
-      <Project>{CBDD38A7-97D7-45C6-8676-BB43B4FD209B}</Project>
-      <Name>AccessControl.Models</Name>
+    <ProjectReference Include="..\Events\AccessControl.Interfaces.fsproj">
+      <Project>{7b154357-2f9b-437c-90b3-c1e6c6fd36dd}</Project>
+      <Name>AccessControl.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -64,7 +61,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\.paket\paket.targets" />
+  <Import Project="..\..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>

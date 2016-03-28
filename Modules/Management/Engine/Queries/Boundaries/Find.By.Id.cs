@@ -1,8 +1,8 @@
 ﻿using Raven.Client;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Boundaries;
 
 namespace Trackwane.Management.Engine.Queries.Boundaries
 {
@@ -16,13 +16,7 @@ namespace Trackwane.Management.Engine.Queries.Boundaries
 
                 if (boundary == null) return null;
 
-                return new BoundaryDetails
-                {
-                    Name = boundary.Name,
-                    IsArchived = boundary.IsArchived,
-                    Coordinates = boundary.Coordinates,
-                    Type = boundary.Type.ToString()
-                };
+                return new BoundaryDetails(boundary.Coordinates, boundary.IsArchived, boundary.Name, boundary.Type.ToString());
             });
         }
 

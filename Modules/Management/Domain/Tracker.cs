@@ -1,6 +1,6 @@
 ﻿using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
-using Trackwane.Management.Events;
+using Trackwane.Management.Contracts.Events;
 
 namespace Trackwane.Management.Domain
 {

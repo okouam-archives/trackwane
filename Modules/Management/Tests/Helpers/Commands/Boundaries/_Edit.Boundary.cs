@@ -1,7 +1,7 @@
 ﻿using System;
 using Geo.Geometries;
 using Trackwane.Framework.Common;
-using Trackwane.Management.Models.Boundaries;
+using Trackwane.Management.Contracts.Models;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -21,11 +21,7 @@ namespace Trackwane.Management.Tests.Helpers
 
             public static void With(UserClaims claims, string organizationKey, string key, string name, Polygon coordinates)
             {
-                Client.Use(claims).Boundaries.Update(organizationKey, key, new UpdateBoundaryModel
-                {
-                    Coordinates = coordinates,
-                    Name = name
-                });
+                Client.Use(claims).UpdateBoundary(organizationKey, key, new UpdateBoundaryModel(name, coordinates));
             }
         }
     }

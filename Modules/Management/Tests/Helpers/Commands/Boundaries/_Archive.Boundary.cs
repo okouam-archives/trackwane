@@ -8,7 +8,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationKey, string key)
             {
-                Client.Use(claims).Boundaries.Archive(organizationKey, key);
+                Client.Use(claims).ArchiveBoundary(organizationKey, key);
             }
         }
     }

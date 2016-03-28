@@ -1,8 +1,8 @@
 ﻿using System;
 using Geo.Geometries;
 using Trackwane.Framework.Common;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Engine.Commands.Boundaries;
-using Trackwane.Management.Models.Boundaries;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -11,13 +11,7 @@ namespace Trackwane.Management.Tests.Helpers
         protected class _Create_Boundary
         {
             public static void With(UserClaims claims, string key, string name, string organizationKey, Polygon coordinates) =>
-                Client.Use(claims).Boundaries.Create(organizationKey, new CreateBoundaryModel
-                {
-                    Coordinates = coordinates,
-                    Name = name,
-                    Key = key,
-                    Type = BoundaryType.ExclusionZone.ToString()
-                });
+                Client.Use(claims).CreateBoundary(organizationKey, new CreateBoundaryModel(key, name, coordinates, BoundaryType.ExclusionZone.ToString()));
 
             public static void With(UserClaims claims, string organizationKey, string key, string name) =>
                 With(claims, key, name, organizationKey, new Polygon());

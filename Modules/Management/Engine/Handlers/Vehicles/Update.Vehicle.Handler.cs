@@ -6,9 +6,9 @@ using Trackwane.Framework.Infrastructure.Logging;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Infrastructure.Validation;
 using Trackwane.Framework.Interfaces;
+using Trackwane.Management.Contracts.Events;
 using Trackwane.Management.Domain;
 using Trackwane.Management.Engine.Commands.Vehicles;
-using Trackwane.Management.Events;
 using Message = Trackwane.Management.Engine.Services.Message;
 
 namespace Trackwane.Management.Engine.Handlers.Vehicles
@@ -46,14 +46,8 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
                 {
                     VehicleKey = cmd.VehicleKey,
                     OrganizationKey = cmd.OrganizationKey,
-                    Previous = new VehicleUpdated.State
-                    {
-                      Identifier  = oldIdentifier
-                    },
-                    Current = new VehicleUpdated.State
-                    {
-                        Identifier = cmd.Identifier
-                    }
+                    Previous = new VehicleUpdatedState(oldIdentifier),
+                    Current = new VehicleUpdatedState(cmd.Identifier)
                 });
         
                 uow.Commit();

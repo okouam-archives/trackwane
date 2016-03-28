@@ -67,10 +67,6 @@
       <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Events\Framework.Events.csproj">
-      <Project>{3284ba06-fe38-44aa-b2e7-0b6d427897ad}</Project>
-      <Name>Framework.Events</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Fixtures\Framework.Fixtures.csproj">
       <Project>{B9E602CC-1A71-40B8-82A2-67761B671302}</Project>
       <Name>Framework.Fixtures</Name>
@@ -130,6 +126,22 @@
       <ItemGroup>
         <Reference Include="Serilog.Sinks.Seq">
           <HintPath>..\..\packages\Serilog.Sinks.Seq\lib\net45\Serilog.Sinks.Seq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
+      <ItemGroup>
+        <Reference Include="StructureMap.Net4">
+          <HintPath>..\..\packages\structuremap\lib\net40\StructureMap.Net4.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="StructureMap">
+          <HintPath>..\..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

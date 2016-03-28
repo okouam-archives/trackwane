@@ -40,32 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alerts\Alert.Details.cs" />
-    <Compile Include="Alerts\Alert.Summary.cs" />
-    <Compile Include="Alerts\Create.Alert.Model.cs" />
-    <Compile Include="Alerts\Search.Criteria.Model.cs" />
-    <Compile Include="Alerts\Update.Alert.Model.cs" />
-    <Compile Include="Boundaries\Boundary.Details.cs" />
-    <Compile Include="Boundaries\Boundary.Summary.cs" />
-    <Compile Include="Boundaries\Create.Boundary.Model.cs" />
-    <Compile Include="Boundaries\Search.Criteria.Model.cs" />
-    <Compile Include="Boundaries\Update.Boundary.Model.cs" />
-    <Compile Include="Drivers\Create.Driver.Model.cs" />
-    <Compile Include="Drivers\Driver.Details.cs" />
-    <Compile Include="Drivers\Driver.Summary.cs" />
-    <Compile Include="Drivers\Search.Criteria.Model.cs" />
-    <Compile Include="Drivers\Update.Driver.Model.cs" />
-    <Compile Include="Locations\Create.Location.Model.cs" />
-    <Compile Include="Locations\Location.Details.cs" />
-    <Compile Include="Locations\Location.Summary.cs" />
-    <Compile Include="Locations\Search.Criteria.Model.cs" />
-    <Compile Include="Locations\Update.Location.Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Trackers\Create.Tracker.Model.cs" />
-    <Compile Include="Trackers\Search.Criteria.Model.cs" />
-    <Compile Include="Trackers\Tracker.Details.cs" />
-    <Compile Include="Trackers\Tracker.Summary.cs" />
-    <Compile Include="Trackers\Update.Tracker.Model.cs" />
     <Compile Include="Vehicles\Register.Vehicle.Model.cs" />
     <Compile Include="Vehicles\Search.Criteria.Model.cs" />
     <Compile Include="Vehicles\Update.Vehicle.Model.cs" />

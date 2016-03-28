@@ -2,7 +2,7 @@
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Common.Interfaces;
-using Trackwane.Management.Events;
+using Trackwane.Management.Contracts.Events;
 
 namespace Trackwane.Management.Domain
 {
@@ -88,14 +88,8 @@ namespace Trackwane.Management.Domain
                 {
                     VehicleKey = Key,
                     OrganizationKey = OrganizationKey,
-                    Previous = new VehicleUpdated.State
-                    {
-                       Identifier = Identifier
-                    },
-                    Current = new VehicleUpdated.State
-                    {
-                        Identifier = newIdentifier
-                    }
+                    Previous = new VehicleUpdatedState(Identifier),
+                    Current = new VehicleUpdatedState(newIdentifier)
                 });
             }
         }

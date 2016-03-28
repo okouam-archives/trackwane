@@ -3,7 +3,7 @@ using System.Web.Http;
 using HashidsNet;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Queries.Users;
-using Trackwane.AccessControl.Models.Users;
+using Trackwane.AccessControl.Models;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;

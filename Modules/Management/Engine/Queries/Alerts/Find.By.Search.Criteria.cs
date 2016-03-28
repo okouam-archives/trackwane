@@ -4,8 +4,8 @@ using Raven.Client.Linq;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Alerts;
 
 namespace Trackwane.Management.Engine.Queries.Alerts
 {
@@ -27,7 +27,7 @@ namespace Trackwane.Management.Engine.Queries.Alerts
                 
                 return new ResponsePage<AlertSummary>
                 {
-                    Items = alerts.Select(x => new AlertSummary()).ToList(),
+                    Items = alerts.Select(x => new AlertSummary(x.Key)).ToList(),
                     Total = alerts.Count
                 };
             });

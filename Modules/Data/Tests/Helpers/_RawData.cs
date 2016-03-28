@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Geo.Geometries;
-using Trackwane.Data.Models;
+using Trackwane.Data.Contracts.Models;
 
 namespace Trackwane.Data.Tests.Helpers
 {

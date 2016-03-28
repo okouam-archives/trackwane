@@ -4,8 +4,8 @@ using Raven.Client.Linq;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Locations;
 
 namespace Trackwane.Management.Engine.Queries.Locations
 {
@@ -21,7 +21,7 @@ namespace Trackwane.Management.Engine.Queries.Locations
 
                 return new ResponsePage<LocationSummary>
                 {
-                    Items = locations.Select(x => new LocationSummary()).ToList(),
+                    Items = locations.Select(x => new LocationSummary(x.Key)).ToList(),
                     Total = locations.Count
                 };
             });

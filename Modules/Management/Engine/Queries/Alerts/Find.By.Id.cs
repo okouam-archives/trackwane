@@ -1,8 +1,8 @@
 ﻿using Raven.Client;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Alerts;
 
 namespace Trackwane.Management.Engine.Queries.Alerts
 {
@@ -16,13 +16,7 @@ namespace Trackwane.Management.Engine.Queries.Alerts
 
                 if (alert == null) return null;
 
-                return new AlertDetails
-                {
-                    Name = alert.Name,
-                    IsArchived = alert.IsArchived,
-                    Threshold = alert.Threshold,
-                    Type = alert.Type.ToString()
-                };
+                return new AlertDetails(alert.IsArchived, alert.Name, alert.Threshold, alert.Type.ToString());
             });
         }
 

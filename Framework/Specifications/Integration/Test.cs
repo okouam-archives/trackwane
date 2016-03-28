@@ -6,6 +6,7 @@ using Integration;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
 using Serilog;
+using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Fixtures;
 using Trackwane.Framework.Infrastructure;
 using Trackwane.Framework.Infrastructure.Factories;

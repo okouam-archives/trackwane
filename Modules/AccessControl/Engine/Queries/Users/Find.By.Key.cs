@@ -4,7 +4,7 @@ using System.Linq;
 using Raven.Client;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Domain.Users;
-using Trackwane.AccessControl.Models.Users;
+using Trackwane.AccessControl.Models;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
 using Trackwane.Framework.Interfaces;

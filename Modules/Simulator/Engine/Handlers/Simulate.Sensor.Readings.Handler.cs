@@ -2,8 +2,8 @@
 using System.Linq;
 using paramore.brighter.commandprocessor;
 using Serilog;
-using Trackwane.Data.Client;
-using Trackwane.Data.Models;
+using Trackwane.Data.Cient;
+using Trackwane.Data.Contracts.Models;
 using Trackwane.Simulator.Engine.Commands;
 using Trackwane.Simulator.Engine.Queries;
 

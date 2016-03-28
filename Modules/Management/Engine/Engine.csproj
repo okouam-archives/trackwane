@@ -164,17 +164,9 @@
     <Compile Include="_Management_Engine_Assembly_.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AccessControl\AccessControl.Events\AccessControl.Events.csproj">
-      <Project>{AF01AC6E-087A-42E4-8948-425A66927C99}</Project>
-      <Name>AccessControl.Events</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
       <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
       <Name>Framework.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Framework\Events\Framework.Events.csproj">
-      <Project>{3284ba06-fe38-44aa-b2e7-0b6d427897ad}</Project>
-      <Name>Framework.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
       <Project>{c13c821f-cf91-43d1-bbc3-6d0bb62732b5}</Project>
@@ -192,13 +184,13 @@
       <Project>{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}</Project>
       <Name>Framework.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Management.Models\Management.Models.csproj">
-      <Project>{971EE991-90B0-4D5D-AE18-00BA961DC508}</Project>
-      <Name>Management.Models</Name>
+    <ProjectReference Include="..\..\AccessControl\Events\AccessControl.Contracts.fsproj">
+      <Project>{7b154357-2f9b-437c-90b3-c1e6c6fd36dd}</Project>
+      <Name>AccessControl.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Management.Events\Management.Events.csproj">
-      <Project>{82C698EF-2E0C-4593-ADF5-D02AA5D73DB7}</Project>
-      <Name>Management.Events</Name>
+    <ProjectReference Include="..\Interfaces\Management.Contracts.fsproj">
+      <Project>{d5139033-62a3-4978-b203-aba6443c1e22}</Project>
+      <Name>Management.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{A11C1439-E356-4D86-82D5-03F4576E3D6E}</Project>
@@ -217,7 +209,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\.paket\paket.targets" />
+  <Import Project="..\..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>

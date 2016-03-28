@@ -77,21 +77,17 @@
       <Project>{4545aa51-b436-4d91-bcde-19afcb294f5c}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Management\Management.Events\Management.Events.csproj">
-      <Project>{82c698ef-2e0c-4593-adf5-d02aa5d73db7}</Project>
-      <Name>Management.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Data.Events\Data.Events.csproj">
-      <Project>{6b2512cc-50cb-43fd-8e6c-f9b514d537bd}</Project>
-      <Name>Data.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Data.Models\Data.Models.csproj">
-      <Project>{13094DDF-F239-493D-923E-298AC8397A5F}</Project>
-      <Name>Data.Models</Name>
+    <ProjectReference Include="..\..\Management\Interfaces\Management.Contracts.fsproj">
+      <Project>{d5139033-62a3-4978-b203-aba6443c1e22}</Project>
+      <Name>Management.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{561ED4B1-AB29-47E9-9A27-FED89A0EC079}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Events\Data.Contracts.fsproj">
+      <Project>{adcb6e3e-7d3a-448a-bfc3-ead0e4dbebf5}</Project>
+      <Name>Data.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +103,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\.paket\paket.targets" />
+  <Import Project="..\..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>

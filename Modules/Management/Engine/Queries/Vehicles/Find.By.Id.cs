@@ -1,8 +1,8 @@
 ﻿using Raven.Client;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Vehicles;
 
 namespace Trackwane.Management.Engine.Queries.Vehicles
 {
@@ -40,15 +40,7 @@ namespace Trackwane.Management.Engine.Queries.Vehicles
                     }
                 }
 
-                return new VehicleDetails
-                {
-                    Identifier = vehicle.Identifier,
-                    IsArchived = vehicle.IsArchived,
-                    TrackerId = vehicle.TrackerId,
-                    DriverId = vehicle.DriverId,
-                    DriverName = driverName,
-                    TrackerHardwareId = trackerHardwareId
-                };
+                return new VehicleDetails(vehicle.IsArchived, vehicle.OrganizationKey, vehicle.DriverId, vehicle.TrackerId, trackerHardwareId, vehicle.Identifier, driverName);
             });
         }
 

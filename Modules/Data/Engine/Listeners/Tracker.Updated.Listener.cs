@@ -6,7 +6,7 @@ using Trackwane.Data.Engine.Services;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
-using Trackwane.Management.Events;
+using Trackwane.Management.Contracts.Events;
 using IProvideTransactions = Trackwane.Framework.Interfaces.IProvideTransactions;
 using IRepository = Trackwane.Framework.Interfaces.IRepository;
 

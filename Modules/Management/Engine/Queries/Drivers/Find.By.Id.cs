@@ -3,8 +3,8 @@ using Raven.Client;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
+using Trackwane.Management.Contracts.Models;
 using Trackwane.Management.Domain;
-using Trackwane.Management.Models.Drivers;
 
 namespace Trackwane.Management.Engine.Queries.Drivers
 {
@@ -26,12 +26,7 @@ namespace Trackwane.Management.Engine.Queries.Drivers
                     throw new BusinessRuleException("Unknown driver ID");
                 }
 
-                return new DriverDetails
-                {
-                    Name = driver.Name,
-                    IsArchived = driver.IsArchived,
-                    Id = driver.Key
-                };
+                return new DriverDetails(driver.Name, driver.IsArchived, driver.Key);
             });
         }
 

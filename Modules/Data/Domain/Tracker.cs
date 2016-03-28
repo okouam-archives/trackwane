@@ -1,6 +1,6 @@
 ﻿using Geo.Geometries;
 using Trackwane.Framework.Common;
-using Trackwane.Management.Events;
+using Trackwane.Management.Contracts.Events;
 
 namespace Trackwane.Data.Domain
 {
@@ -45,25 +45,9 @@ namespace Trackwane.Data.Domain
 
                 TrackerKey = Key,
 
-                Current = new TrackerUpdated.State
-                {
-                    BatteryLevel = batteryLevel,
-                    Orientation = orientation,
-                    Speed = speed,
-                    Distance = distance,
-                    Coordinates = coordinates,
-                    Heading = heading
-                },
+                Current = new TrackerUpdatedState(coordinates, distance, batteryLevel, null, heading, speed, orientation),
 
-                Previous = new TrackerUpdated.State
-                {
-                    BatteryLevel = BatteryLevel,
-                    Orientation = Orientation,
-                    Speed = Speed,
-                    Distance = Distance,
-                    Coordinates = Coordinates,
-                    Heading = Heading
-                }
+                Previous = new TrackerUpdatedState(Coordinates, Distance, BatteryLevel, null, Heading, Speed, Orientation)
             });
         }
 

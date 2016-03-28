@@ -3,7 +3,7 @@ using Geo.Geometries;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Common.Interfaces;
-using Trackwane.Management.Events;
+using Trackwane.Management.Contracts.Events;
 
 namespace Trackwane.Management.Domain
 {
@@ -73,16 +73,8 @@ namespace Trackwane.Management.Domain
             {
                 OrganizationKey = OrganizationKey,
                 BoundaryKey = Key,
-                Previous = new BoundaryUpdated.State
-                {
-                  Coordinates  = Coordinates,
-                  Name = Name
-                },
-                Current = new BoundaryUpdated.State
-                {
-                    Coordinates = newCoordinates,
-                    Name = Name
-                }
+                Previous = new BoundaryUpdatedState(Name, Coordinates),
+                Current = new BoundaryUpdatedState(Name, newCoordinates)
             });
         }
 
@@ -97,16 +89,8 @@ namespace Trackwane.Management.Domain
             {
                 BoundaryKey = Key,
                 OrganizationKey = OrganizationKey,
-                Previous = new BoundaryUpdated.State
-                {
-                    Name = Name,
-                    Coordinates = Coordinates
-                },
-                Current = new BoundaryUpdated.State
-                {
-                    Coordinates = Coordinates,
-                    Name = newName
-                }
+                Previous = new BoundaryUpdatedState(Name, Coordinates),
+                Current = new BoundaryUpdatedState(newName, Coordinates),
             });
         }
 

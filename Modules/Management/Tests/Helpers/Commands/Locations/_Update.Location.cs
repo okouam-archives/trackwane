@@ -1,6 +1,6 @@
 ﻿using Geo.Geometries;
 using Trackwane.Framework.Common;
-using Trackwane.Management.Models.Locations;
+using Trackwane.Management.Contracts.Models;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -12,11 +12,7 @@ namespace Trackwane.Management.Tests.Helpers
                 With(claims, organizationId, locationId, name, null);
 
             public static void With(UserClaims claims, string organizationId, string locationId, string name, Point coordinates) =>
-                Client.Use(claims).Locations.Update(organizationId, locationId, new UpdateLocationModel
-                {
-                    Name = name,
-                    Coordinates = coordinates
-                });
+                Client.Use(claims).UpdateLocation(organizationId, locationId, new UpdateLocationModel(name, coordinates));
         }
     }
 }

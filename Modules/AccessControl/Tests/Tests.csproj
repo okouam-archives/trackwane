@@ -101,18 +101,6 @@
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AccessControl.Client\AccessControl.Client.csproj">
-      <Project>{D0730619-8F9E-4675-BEC2-18E137A4BE8F}</Project>
-      <Name>AccessControl.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AccessControl.Events\AccessControl.Events.csproj">
-      <Project>{AF01AC6E-087A-42E4-8948-425A66927C99}</Project>
-      <Name>AccessControl.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AccessControl.Models\AccessControl.Models.csproj">
-      <Project>{CBDD38A7-97D7-45C6-8676-BB43B4FD209B}</Project>
-      <Name>AccessControl.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{53B04BB7-734F-4A79-A73A-579F75082A67}</Project>
       <Name>Domain</Name>
@@ -120,6 +108,10 @@
     <ProjectReference Include="..\Engine\Engine.csproj">
       <Project>{D82A16D0-B813-4A71-93A9-0752A549E197}</Project>
       <Name>Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Events\AccessControl.Contracts.fsproj">
+      <Project>{7b154357-2f9b-437c-90b3-c1e6c6fd36dd}</Project>
+      <Name>AccessControl.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +131,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\.paket\paket.targets" />
+  <Import Project="..\..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.1'">
       <ItemGroup>

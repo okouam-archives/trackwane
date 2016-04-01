@@ -1,0 +1,27 @@
+<style type="text/css">
+	.data.page-content {display: flex; align-items: stretch; flex: 1}
+	.data--left-navigation--component {width: 130px; background-color: #303030; color: white; font-size: 12px}
+	.data--tracker-list--component {
+		width: 250px;
+		border-left: 1px solid #666;
+		background-color: #343434; color: white;
+		border-right: 2px solid #666
+	}
+	.data.realtime-map {display: flex; flex: 1; align-items: stretch}
+	.angular-google-map, .angular-google-map-container {
+		flex: 1;
+		display: flex;
+	}
+</style>
+
+<div ng-include="'/components/data/left-navigation/main.html'"
+	 class="data--left-navigation--component"
+	 ng-controller="data.left-navigation.main.controller"></div>
+
+<div ng-include="'/components/data/tracker-list/main.html'"
+	 class="data--tracker-list--component"
+	 ng-controller="data.tracker-list.main.controller"></div>
+
+<div class="data realtime-map" ng-controller="data.realtime-map.main.controller">
+	<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+</div>

@@ -84,7 +84,7 @@ type SearchCriteriaModel = {Name: string}
 type TrackerDetails = {Model: string; IsArchived: bool; HardwareId: string; Key: string}
 
 [<CLIMutable>]
-type TrackerSummary = {Key: string}
+type TrackerSummary = {Key: string; IsArchived: bool; HardwareId: string; Model: string}
 
 [<CLIMutable>]
 type UpdateTrackerModel = {Model: string}

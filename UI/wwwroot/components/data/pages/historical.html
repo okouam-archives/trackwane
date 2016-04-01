@@ -1,0 +1,25 @@
+<style type="text/css">
+	.data.page-content {display: flex; align-items: stretch; flex: 1}
+	.data.left-navigation {width: 180px; background-color: #303030; color: white; font-size: 12px}
+	.data.tracker-list {width: 250px; border: 1px solid #888; border-bottom-width: 0}
+	.data.realtime-map {display: flex; flex: 1; align-items: stretch}
+</style>
+
+<div ng-include="'/components/data/left-navigation/main.html'"
+	 class="data left-navigation"
+	 ng-controller="data.left-navigation.main.controller"></div>
+
+<div ng-include="'/components/data/tracker-list/main.html'"
+	 class="data tracker-list"
+	 ng-controller="data.tracker-list.main.controller"></div>
+
+<div class="data realtime-map" ng-controller="data.realtime-map.main.controller">
+	<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+</div>
+
+<style type="text/css">
+	.angular-google-map, .angular-google-map-container {
+		flex: 1;
+		display: flex;
+	}
+</style>

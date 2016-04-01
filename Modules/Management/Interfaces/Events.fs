@@ -214,7 +214,9 @@ type TrackerRegistered() =
     member val TrackerKey: string = null with get, set
 
     member val OrganizationKey: string = null with get, set
-
+    
+    member val Identifier: string = null with get, set
+    
     member val Model: string = null with get, set
 
     member val HardwareId: string = null with get, set

@@ -11,8 +11,7 @@ var paths = {
     webroot: "./wwwroot/"
 };
 
-paths.js = paths.webroot + "js/**/*.js";
-paths.minJs = paths.webroot + "js/**/*.min.js";
+paths.js = paths.webroot + "components/**/*.js";
 paths.css = paths.webroot + "css/**/*.css";
 paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/site.min.js";
@@ -29,7 +28,7 @@ gulp.task("clean:css", function (cb) {
 gulp.task("clean", ["clean:js", "clean:css"]);
 
 gulp.task("min:js", function () {
-    return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
+    return gulp.src([paths.js], { base: "." })
         .pipe(concat(paths.concatJsDest))
         .pipe(uglify())
         .pipe(gulp.dest("."));
@@ -40,6 +39,10 @@ gulp.task("min:css", function () {
         .pipe(concat(paths.concatCssDest))
         .pipe(cssmin())
         .pipe(gulp.dest("."));
+});
+
+gulp.task('watch', function() {
+    gulp.watch(paths.js, ['min:js']);
 });
 
 gulp.task("min", ["min:js", "min:css"]);

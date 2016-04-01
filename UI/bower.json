@@ -5,6 +5,7 @@
     "jquery": "*",
     "angular": "1.4.6",
     "angular-mocks": "1.4.6",
-    "angular-resource": "1.4.6"
+    "angular-resource": "1.4.6",
+    "angular-google-maps": "2.2.1"
   }
 }

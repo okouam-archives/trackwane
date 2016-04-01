@@ -2,48 +2,4 @@
     ViewData["Title"] = "Trackwane - Historical";
 }
 
-<div>
-    <div id="application-menu" ng-controller="ApplicationMenuCtrl">
-        <ul>
-            <li>Dashboard</li>
-            <li>Realtime Map</li>
-            <li>Historical Map</li>
-        </ul>
-    </div>
-    <div id="sensor-list" ng-controller="SensorListCtrl">
-        <ul>
-            <li>
-                Car ASC3234 393X
-                Emmanuel Smith
-            </li>
-            <li>
-                Car ASK33 323X
-                John Doe
-            </li>
-        </ul>
-    </div>
-    <div id="map"></div>
-</div>
-
-@section scripts
-{
-   <script type="text/javascript">
-
-        var app = angular.module("trackwane", []);
-
-        angular.module("trackwane").controller("ApplicationMenuCtl", function () {
-
-        });
-
-        angular.module("trackwane").controller("RealtimeMapCtl", function() {
-
-        });
-
-        angular.module("trackwane").controller("SensorListCtl", function () {
-
-        });
-
-    </script> 
-}
-
-
+<div class="data page-content" ng-include="'/components/data/_pages/historical.html'"></div>

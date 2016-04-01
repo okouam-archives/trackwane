@@ -13,20 +13,23 @@ namespace Trackwane.Management.Domain
         public string Model { get; internal set; }
 
         public string HardwareId { get; internal set; }
+
+        public string Identifier { get; set; }
         
         public Tracker()
         {
 
         }
 
-        public Tracker(string id, string OrganizationKey, string hardwareId, string model)
+        public Tracker(string id, string organizationKey, string hardwareId, string model, string identifier)
         {
             Causes(new TrackerRegistered
             {
                 TrackerKey = id,
                 HardwareId = hardwareId,
                 Model = model,
-                OrganizationKey = OrganizationKey
+                OrganizationKey = organizationKey,
+                Identifier = identifier
             });
         }
         

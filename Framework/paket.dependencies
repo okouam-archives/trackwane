@@ -4,6 +4,7 @@ framework: net461
 content: none
 
 nuget CommonServiceLocator
+nuget etcetera
 nuget Faker
 nuget FluentValidation
 nuget Geo

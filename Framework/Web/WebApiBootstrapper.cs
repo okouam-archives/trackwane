@@ -14,20 +14,28 @@ namespace Trackwane.Framework.Web
         public static HttpSelfHostServer CreateServer(IContainer container, string url)
         {
             var configuration = new HttpSelfHostConfiguration(url);
+            ApplyConfiguration(container, configuration);
+            return new HttpSelfHostServer(configuration);
+        }
 
-            configuration
-                .EnableSwagger(c =>
-                {
-                    c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
-                    c.SingleApiVersion("v1", "Trackwane API");
-                    c.UseFullTypeNameInSchemaIds();
-                })
-                .EnableSwaggerUi();
+        public static HttpConfiguration CreateServer(IContainer container)
+        {
+            var configuration = new HttpConfiguration();
+            ApplyConfiguration(container, configuration);
+            return configuration;
+        }
+
+        private static void ApplyConfiguration(IContainer container, HttpConfiguration configuration)
+        {
+            configuration.EnableSwagger(c =>
+            {
+                c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
+                c.SingleApiVersion("v1", "Trackwane API");
+                c.UseFullTypeNameInSchemaIds();
+            }).EnableSwaggerUi();
 
             ResolveDependencies(configuration, container);
             RegisterRoutes(configuration);
-
-            return new HttpSelfHostServer(configuration);
         }
 
         /* Private */

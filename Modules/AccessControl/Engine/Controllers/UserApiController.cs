@@ -4,6 +4,7 @@ using HashidsNet;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.AccessControl.Models;
+using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
@@ -35,7 +36,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
                 Email = model.Email,
                 DisplayName = model.DisplayName,
                 Password = model.Password,
-                UserKey = new Hashids(platformConfig.SecretKey).EncodeLong(DateTime.Now.Ticks)
+                UserKey = new Hashids(platformConfig.Get(PlatformConfigKeys.SecretKey)).EncodeLong(DateTime.Now.Ticks)
             };
 
             executionEngine.Send(cmd);
@@ -62,7 +63,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         public string RegisterUser(string organizationKey, RegisterUserModel model)
         {
             var cmd = new RegisterUser(CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
-            cmd.UserKey = cmd.UserKey ?? new Hashids(platformConfig.SecretKey).EncodeLong(DateTime.Now.Ticks);
+            cmd.UserKey = cmd.UserKey ?? new Hashids(platformConfig.Get(PlatformConfigKeys.SecretKey)).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Send(cmd);
             return cmd.UserKey;
         }

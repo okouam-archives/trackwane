@@ -1,5 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../gulpfile.js" />
+/// <reference path="components/data/history-map/actions.js" />
+/// <reference path="components/data/history-map/store.js" />
 /// <reference path="components/data/left-navigation/store.js" />
 /// <reference path="components/data/realtime-map/actions.js" />
 /// <reference path="components/data/realtime-map/store.js" />

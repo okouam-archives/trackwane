@@ -5,6 +5,7 @@ using HashidsNet;
 using Trackwane.AccessControl.Engine.Commands.Organizations;
 using Trackwane.AccessControl.Engine.Queries.Organizations;
 using Trackwane.AccessControl.Models;
+using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
@@ -68,7 +69,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         public string RegisterOrganization(RegisterOrganizationModel model)
         {
             var cmd = new RegisterOrganization(CurrentClaims.UserId, model.OrganizationKey, model.Name);
-            cmd.OrganizationKey = cmd.OrganizationKey ?? new Hashids(platformConfig.SecretKey).EncodeLong(DateTime.Now.Ticks);
+            cmd.OrganizationKey = cmd.OrganizationKey ?? new Hashids(platformConfig.Get(PlatformConfigKeys.SecretKey)).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Send(cmd);
             return cmd.OrganizationKey;
         }

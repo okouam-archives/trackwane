@@ -28,7 +28,7 @@ namespace Trackwane.Framework.Client
             if (userClaims != null)
             {
                 client = new RestClient(baseUrl);
-                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.SecretKey)}");
+                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.Get(PlatformConfigKeys.SecretKey))}");
             }
 
             return this as T;

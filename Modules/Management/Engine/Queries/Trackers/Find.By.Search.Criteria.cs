@@ -32,7 +32,7 @@ namespace Trackwane.Management.Engine.Queries.Trackers
 
                 return new ResponsePage<TrackerSummary>
                 {
-                    Items = trackers.Select(x => new TrackerSummary(x.Key)).ToList(),
+                    Items = trackers.Select(x => new TrackerSummary(x.Key, x.IsArchived, x.HardwareId, x.Model)).ToList(),
                     Total = trackers.Count
                 };
             });

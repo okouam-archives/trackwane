@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Assembly.Extensions.cs" />
     <Compile Include="Base.Validator.cs" />
+    <Compile Include="ClusterHost.cs" />
     <Compile Include="EngineHost.cs" />
     <Compile Include="EngineHostConfig.cs" />
     <Compile Include="Factories\Connection.Factory.cs" />

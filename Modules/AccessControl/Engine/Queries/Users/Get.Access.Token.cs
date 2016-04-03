@@ -37,7 +37,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
                         View = userDetails.View.Select(x => x.Item1).ToList()
                     };
 
-                    return userClaims.GenerateToken(platformConfig.SecretKey);
+                    return userClaims.GenerateToken(platformConfig.Get(PlatformConfigKeys.SecretKey));
                 }
 
                 return null;

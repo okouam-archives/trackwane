@@ -2,6 +2,8 @@
 {
     public interface IPlatformConfig
     {
-        string SecretKey { get; }
+        string Get(string key);
+
+        void Set(string key, string value);
     }
 }

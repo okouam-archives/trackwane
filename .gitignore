@@ -14,3 +14,5 @@ TestResult.xml
 .local/
 .dist/
 FAKE/
+artifacts/
+TestResults/

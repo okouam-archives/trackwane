@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Web.Http;
+using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using static System.String;
 
@@ -27,7 +28,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
             {
                 name = "Trackwane.AccessControl",
                 loggingUri = loggingConfig.Uri,
-                isPlatformKeyConfigured = !IsNullOrWhiteSpace(platformConfig.SecretKey),
+                isPlatformKeyConfigured = !IsNullOrWhiteSpace(platformConfig.Get(PlatformConfigKeys.SecretKey)),
                 documentStore = documentStoreConfig.UseEmbedded ? "embedded" : documentStoreConfig.Name + "@" + documentStoreConfig.Url
             };
         }

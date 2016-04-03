@@ -4,5 +4,4 @@ Newtonsoft.Json
 Polly
 PusherServer
 RavenDB.Client
-RestSharp
 structuremap

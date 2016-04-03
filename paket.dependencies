@@ -1,1 +1,30 @@
 source https://www.nuget.org/api/v2
+
+nuget CommonServiceLocator
+nuget Faker
+nuget FluentValidation
+nuget Geo
+nuget Hashids.net
+nuget JWT
+nuget Microsoft.AspNet.WebApi
+nuget Microsoft.AspNet.WebApi.SelfHost
+nuget NUnit
+nuget NUnit.Console
+nuget Polly
+nuget RabbitMQ.Client
+nuget RavenDB.Database content: none
+nuget Shouldly
+nuget structuremap
+nuget WebActivatorEx
+nuget etcetera
+nuget Serilog.Sinks.Seq
+nuget Swashbuckle.Core
+nuget NSubstitute
+nuget Microsoft.AspNet.Mvc
+nuget FAKE
+nuget PusherServer
+nuget Microsoft.AspNet.WebApi.Owin
+nuget TopShelf
+nuget Microsoft.Owin.Host.HttpListener
+nuget morelinq
+nuget Microsoft.Owin.Hosting

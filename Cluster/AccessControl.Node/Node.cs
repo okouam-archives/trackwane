@@ -2,8 +2,9 @@
 using System.Fabric;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
+using Trackwane.Framework.Cluster;
 
-namespace Trackwane.AccessControl.Node
+namespace Trackwane.AccessControl.Service
 {
     internal sealed class Node : StatelessService
     {

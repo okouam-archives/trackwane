@@ -27,7 +27,7 @@ namespace Trackwane.Management.Tests.Helpers
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new ManagementContext(Setup.EngineHost.Configuration.ListenUri.ToString(), new PlatformConfig());
+            Client = new ManagementContext(Setup.EngineHost.Configuration.ListenUri.ToString(), new Config());
 
             EngineHost.ExecutionEngine.MessageProcessed += (o, request) => Processed.Add(request); 
 

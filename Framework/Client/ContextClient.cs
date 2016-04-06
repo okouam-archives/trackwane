@@ -14,10 +14,10 @@ namespace Trackwane.Framework.Client
     public abstract class ContextClient<T> where T : class
     {
         private readonly string baseUrl;
-        private readonly IPlatformConfig config;
+        private readonly IConfig config;
         protected RestClient client;
 
-        protected ContextClient(string baseUrl, IPlatformConfig config)
+        protected ContextClient(string baseUrl, IConfig config)
         {
             this.baseUrl = baseUrl;
             this.config = config;
@@ -28,7 +28,7 @@ namespace Trackwane.Framework.Client
             if (userClaims != null)
             {
                 client = new RestClient(baseUrl);
-                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.Get(PlatformConfigKeys.SecretKey))}");
+                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.GetPlatformKey("secret-key"))}");
             }
 
             return this as T;

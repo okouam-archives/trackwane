@@ -82,7 +82,6 @@
     <Compile Include="Controllers\BoundaryApiController.cs" />
     <Compile Include="Controllers\DriverApiController.cs" />
     <Compile Include="Controllers\LocationApiController.cs" />
-    <Compile Include="Controllers\StatusApiController.cs" />
     <Compile Include="Controllers\TrackerApiController.cs" />
     <Compile Include="Controllers\VehicleApiController.cs" />
     <Compile Include="Handlers\Alerts\Archive.Alert.Handler.cs" />

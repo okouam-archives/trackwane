@@ -40,9 +40,7 @@
     </Compile>
     <Compile Include="AggregateRoot.cs" />
     <Compile Include="Configuration\ConfigUtils.cs" />
-    <Compile Include="Configuration\DocumentStoreConfig.cs" />
-    <Compile Include="Configuration\PlatformConfig.cs" />
-    <Compile Include="Interfaces\IDocumentStoreConfig.cs" />
+    <Compile Include="Configuration\Config.cs" />
     <Compile Include="DomainEvent.cs" />
     <Compile Include="Exceptions\BusinessRuleException.cs" />
     <Compile Include="Exceptions\InvalidConfigurationException.cs" />
@@ -50,16 +48,11 @@
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Interfaces\IHave.Name.cs" />
-    <Compile Include="Interfaces\ILoggingConfig.cs" />
-    <Compile Include="Interfaces\IModuleConfig.cs" />
-    <Compile Include="Interfaces\IPlatformConfig.cs" />
+    <Compile Include="Interfaces\IConfig.cs" />
     <Compile Include="Interfaces\IResource.cs" />
     <Compile Include="Interfaces\IScopedQuery.cs" />
     <Compile Include="Interfaces\IUnscopedQuery.cs" />
-    <Compile Include="Configuration\LoggingConfig.cs" />
-    <Compile Include="Configuration\ModuleConfig.cs" />
     <Compile Include="PhraseBook.cs" />
-    <Compile Include="PlatformConfigKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="Response.Page.cs" />

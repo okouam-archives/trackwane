@@ -58,7 +58,7 @@ namespace Trackwane.Framework.Integration
             return new EngineHost<IntegrationRegistry>(locator, new EngineHostConfig(null, events, null, listeners, null));
         }
 
-        private static readonly ServiceLocationFactory locationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new DocumentStoreConfig()));
+        private static readonly ServiceLocationFactory locationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new Config()));
         private static readonly IEnumerable<Type> commands = typeof(CheckFramework).Assembly.GetCommands();
         private static readonly IEnumerable<Type> handlers = typeof(CheckFrameworkHandler).Assembly.GetHandlers();
         private static readonly IEnumerable<Type> events = typeof(FrameworkChecked).Assembly.GetDomainEvents();

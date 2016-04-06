@@ -4,7 +4,7 @@ open Trackwane.Framework.Common.Interfaces
 open Trackwane.Framework.Client
 open Trackwane.AccessControl.Models
 
-type AccessControlContext(baseUrl, config : IPlatformConfig) = 
+type AccessControlContext(baseUrl, config : IConfig) = 
     inherit ContextClient<AccessControlContext>(baseUrl, config)   
       
     let USER_RESOURCE_URL = "/organizations/{0}/users/{1}"

@@ -15,12 +15,12 @@ namespace Trackwane.AccessControl.Engine.Controllers
     public class OrganizationApiController : BaseApiController
     {
         private readonly IExecutionEngine executionEngine;
-        private readonly IPlatformConfig platformConfig;
+        private readonly IConfig config;
 
-        public OrganizationApiController(IExecutionEngine executionEngine, IPlatformConfig platformConfig)
+        public OrganizationApiController(IExecutionEngine executionEngine, IConfig config)
         {
             this.executionEngine = executionEngine;
-            this.platformConfig = platformConfig;
+            this.config = config;
         }
 
         [Secured, Administrators, HttpGet, Route("organizations/{organizationKey}")]
@@ -69,7 +69,8 @@ namespace Trackwane.AccessControl.Engine.Controllers
         public string RegisterOrganization(RegisterOrganizationModel model)
         {
             var cmd = new RegisterOrganization(CurrentClaims.UserId, model.OrganizationKey, model.Name);
-            cmd.OrganizationKey = cmd.OrganizationKey ?? new Hashids(platformConfig.Get(PlatformConfigKeys.SecretKey)).EncodeLong(DateTime.Now.Ticks);
+            
+            cmd.OrganizationKey = cmd.OrganizationKey ?? new Hashids(config.GetPlatformKey("secret-key")).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Send(cmd);
             return cmd.OrganizationKey;
         }

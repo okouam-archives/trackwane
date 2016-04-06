@@ -43,25 +43,16 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
                 var availableOrganizations = GetAvailableOrganizations(repository);
 
                 var canView = availableOrganizations.Where(x => x.GetViewers().Contains(user.Key)).ToList();
-
-                if (canView.Any())
-                {
-                    details.View = IncludeOrganizations(canView);
-                }
+                
+                details.View = canView.Any() ? IncludeOrganizations(canView) : new List<Tuple<string, string>>();
                 
                 var canManage = availableOrganizations.Where(x => x.GetManagers().Contains(user.Key)).ToList();
 
-                if (canManage.Any())
-                {
-                    details.Manage = IncludeOrganizations(canManage);
-                }
+                details.Manage = canManage.Any() ? IncludeOrganizations(canManage) : new List<Tuple<string, string>>();
 
                 var canAdministrate = availableOrganizations.Where(x => x.GetAdministrators().Contains(user.Key)).ToList();
 
-                if (canAdministrate.Any())
-                {
-                    details.Administrate = IncludeOrganizations(canAdministrate);
-                }
+                details.Administrate = canAdministrate.Any() ? IncludeOrganizations(canAdministrate) : new List<Tuple<string, string>>();
 
                 return details;
             });

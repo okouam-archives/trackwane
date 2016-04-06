@@ -57,7 +57,6 @@
     <Compile Include="Commands\Users\Register.User.cs" />
     <Compile Include="Commands\Users\Role.cs" />
     <Compile Include="Commands\Users\Update.User.cs" />
-    <Compile Include="Controllers\StatusApiController.cs" />
     <Compile Include="Processors\Handlers\Organizations\Archive.Organization.Handler.cs" />
     <Compile Include="Processors\Handlers\Organizations\Archive.Organization.Validator.cs" />
     <Compile Include="Processors\Handlers\Organizations\Grant.View.Permission.Handler.cs" />

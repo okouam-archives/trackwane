@@ -22,7 +22,7 @@ namespace Trackwane.Management.Tests
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
-            var serviceLocationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new DocumentStoreConfig()));
+            var serviceLocationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new Config()));
 
             EngineHost = new EngineHost<Registry>(new ServiceLocator<Registry>(serviceLocationFactory), new EngineHostConfig
             {

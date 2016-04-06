@@ -14,7 +14,7 @@
   <CodePackage Name="Code" Version="1.0.0">
     <EntryPoint>
       <ExeHost>
-        <Program>Management.Node.exe</Program>
+        <Program>Management.Service.exe</Program>
       </ExeHost>
     </EntryPoint>
   </CodePackage>

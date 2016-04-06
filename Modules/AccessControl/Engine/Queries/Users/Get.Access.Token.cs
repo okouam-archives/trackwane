@@ -10,11 +10,11 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
 {
     public class GetAccessToken : Query<string>, IUnscopedQuery
     {
-        private readonly IPlatformConfig platformConfig;
+        private readonly IConfig config;
 
-        public GetAccessToken(IDocumentStore documentStore, IPlatformConfig platformConfig) : base(documentStore)
+        public GetAccessToken(IDocumentStore documentStore, IConfig config) : base(documentStore)
         {
-            this.platformConfig = platformConfig;
+            this.config = config;
         }
 
         public string Execute(string email, string password)
@@ -37,7 +37,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
                         View = userDetails.View.Select(x => x.Item1).ToList()
                     };
 
-                    return userClaims.GenerateToken(platformConfig.Get(PlatformConfigKeys.SecretKey));
+                    return userClaims.GenerateToken(config.GetPlatformKey("secret-key"));
                 }
 
                 return null;

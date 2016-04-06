@@ -14,13 +14,13 @@ using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web;
 using Registry = Trackwane.AccessControl.Engine.Registry;
 
-namespace Trackwane.AccessControl.Node
+namespace Trackwane.AccessControl.Service
 {
     public static class Startup
     {
         public static void ConfigureApp(IAppBuilder appBuilder)
         {
-            var locator = new ServiceLocator<Registry>(new ServiceLocationFactory(new DocumentStoreBuilder(new DocumentStoreConfig())));
+            var locator = new ServiceLocator<Registry>(new ServiceLocationFactory(new DocumentStoreBuilder(new Config())));
             var container = WireUpDependencies(locator, typeof(ArchiveUser).Assembly.GetCommands().ToList(), typeof(ArchiveUserHandler).Assembly.GetHandlers().ToList());
             var config = WebApiBootstrapper.CreateServer(container);
             appBuilder.UseWebApi(config);

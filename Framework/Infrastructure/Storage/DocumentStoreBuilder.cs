@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Embedded;
+using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 
@@ -10,9 +12,9 @@ namespace Trackwane.Framework.Infrastructure.Storage
 {
     public class DocumentStoreBuilder : IDocumentStoreBuilder
     {
-        private readonly IDocumentStoreConfig config;
+        private readonly IConfig config;
 
-        public DocumentStoreBuilder(IDocumentStoreConfig config)
+        public DocumentStoreBuilder(IConfig config)
         {
             this.config = config;
         }
@@ -21,7 +23,7 @@ namespace Trackwane.Framework.Infrastructure.Storage
         {
             IDocumentStore store;
 
-            if (config.UseEmbedded)
+            if (bool.Parse(config.GetModuleKey("document-store/use-embedded")))
             {
                 store = new EmbeddableDocumentStore
                 {
@@ -32,9 +34,9 @@ namespace Trackwane.Framework.Infrastructure.Storage
             {
                 store = new DocumentStore
                 {
-                    DefaultDatabase = config.Name,
-                    Url = config.Url,
-                    ApiKey = config.ApiKey
+                    DefaultDatabase = config.GetModuleKey("document-store/name"),
+                    Url = config.GetModuleKey("document-store/url"),
+                    ApiKey = config.GetModuleKey("document-store/api-key")
                 };
             }
 

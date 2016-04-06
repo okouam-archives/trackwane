@@ -13,7 +13,7 @@
   <CodePackage Name="Code" Version="1.0.0">
     <EntryPoint>
       <ExeHost>
-        <Program>Trackwane.AccessControl.Node.exe</Program>
+        <Program>Trackwane.AccessControl.Service.exe</Program>
       </ExeHost>
     </EntryPoint>
   </CodePackage>

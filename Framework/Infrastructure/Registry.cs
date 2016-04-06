@@ -17,13 +17,7 @@ namespace Trackwane.Framework.Infrastructure
 
             For<ILog>().Use(LogProvider.GetCurrentClassLogger());
 
-            For<IDocumentStoreConfig>().Use<DocumentStoreConfig>().Singleton();
-
-            For<ILoggingConfig>().Use<LoggingConfig>().Singleton();
-
-            For<IModuleConfig>().Use<ModuleConfig>().Singleton();
-
-            For<IPlatformConfig>().Use<PlatformConfig>().Singleton();
+            For<IConfig>().Use<Config>().Singleton();
 
             For<IDocumentStoreBuilder>().Use<DocumentStoreBuilder>().Singleton();
 

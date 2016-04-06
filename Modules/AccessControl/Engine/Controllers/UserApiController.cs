@@ -16,12 +16,12 @@ namespace Trackwane.AccessControl.Engine.Controllers
         private const string RESOURCE_URL = "organizations/{organizationKey}/users/{userKey}";
         private const string COLLECTION_URL = "organizations/{organizationKey}/users";
         private readonly IExecutionEngine executionEngine;
-        private readonly IPlatformConfig platformConfig;
+        private readonly IConfig config;
 
-        public UserApiController(IExecutionEngine executionEngine, IPlatformConfig platformConfig)
+        public UserApiController(IExecutionEngine executionEngine, IConfig config)
         {
             this.executionEngine = executionEngine;
-            this.platformConfig = platformConfig;
+            this.config = config;
         }
 
         [HttpGet, Route("token")]
@@ -36,7 +36,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
                 Email = model.Email,
                 DisplayName = model.DisplayName,
                 Password = model.Password,
-                UserKey = new Hashids(platformConfig.Get(PlatformConfigKeys.SecretKey)).EncodeLong(DateTime.Now.Ticks)
+                UserKey = new Hashids(config.GetPlatformKey("secret-key")).EncodeLong(DateTime.Now.Ticks)
             };
 
             executionEngine.Send(cmd);
@@ -63,7 +63,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         public string RegisterUser(string organizationKey, RegisterUserModel model)
         {
             var cmd = new RegisterUser(CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
-            cmd.UserKey = cmd.UserKey ?? new Hashids(platformConfig.Get(PlatformConfigKeys.SecretKey)).EncodeLong(DateTime.Now.Ticks);
+            cmd.UserKey = cmd.UserKey ?? new Hashids(config.GetPlatformKey("secret-key")).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Send(cmd);
             return cmd.UserKey;
         }

@@ -5,7 +5,7 @@ open Trackwane.Framework.Common.Interfaces
 open Trackwane.Framework.Client
 open Trackwane.Management.Contracts.Models
 
-type ManagementContext(baseUrl, config : IPlatformConfig) = 
+type ManagementContext(baseUrl, config : IConfig) = 
     inherit ContextClient<ManagementContext>(baseUrl, config)   
     
     let BOUNDARY_COLLECTION_URL = "/organizations/{0}/boundaries"

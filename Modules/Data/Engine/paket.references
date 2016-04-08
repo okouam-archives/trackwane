@@ -5,3 +5,5 @@ Polly
 PusherServer
 RavenDB.Client
 structuremap
+Microsoft.AspNet.WebApi.Core
+Microsoft.AspNet.WebApi.Cors

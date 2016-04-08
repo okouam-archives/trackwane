@@ -59,7 +59,7 @@
       <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Events\AccessControl.Contracts.fsproj">
+    <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Contracts.fsproj">
       <Project>{7b154357-2f9b-437c-90b3-c1e6c6fd36dd}</Project>
       <Name>AccessControl.Contracts</Name>
     </ProjectReference>

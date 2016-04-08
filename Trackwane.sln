@@ -86,11 +86,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Modules\Data\Engi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Modules\Data\Tests\Tests.csproj", "{3A27FADC-2F1B-4BA2-9031-47208FF541DB}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Data.Contracts", "Modules\Data\Events\Data.Contracts.fsproj", "{ADCB6E3E-7D3A-448A-BFC3-EAD0E4DBEBF5}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Data.Contracts", "Modules\Data\Data.Contracts\Data.Contracts.fsproj", "{ADCB6E3E-7D3A-448A-BFC3-EAD0E4DBEBF5}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AccessControl.Contracts", "Modules\AccessControl\Events\AccessControl.Contracts.fsproj", "{7B154357-2F9B-437C-90B3-C1E6C6FD36DD}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AccessControl.Contracts", "Modules\AccessControl\AccessControl.Contracts\AccessControl.Contracts.fsproj", "{7B154357-2F9B-437C-90B3-C1E6C6FD36DD}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Management.Contracts", "Modules\Management\Interfaces\Management.Contracts.fsproj", "{D5139033-62A3-4978-B203-ABA6443C1E22}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Management.Contracts", "Modules\Management\Management.Contracts\Management.Contracts.fsproj", "{D5139033-62A3-4978-B203-ABA6443C1E22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessControl.Service", "Modules\AccessControl\AccessControl.Service\AccessControl.Service.csproj", "{4E79103C-04EA-4296-B20B-8ECE0FFBC49A}"
 EndProject

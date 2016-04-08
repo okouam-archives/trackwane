@@ -1,5 +1,6 @@
 RestSharp
 Newtonsoft.Json
 structuremap
-morelinq 
+morelinq
 Serilog.Sinks.Seq
+log4net

@@ -6,3 +6,5 @@ Polly
 RavenDB.Client
 structuremap
 Serilog.Sinks.Seq
+Microsoft.AspNet.WebApi.Core
+Microsoft.AspNet.WebApi.Cors

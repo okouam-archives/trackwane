@@ -7,12 +7,15 @@ nuget Geo
 nuget Hashids.net
 nuget JWT
 nuget Microsoft.AspNet.WebApi
+nuget Microsoft.AspNet.WebApi.Core
+nuget Microsoft.AspNet.WebApi.Cors
 nuget Microsoft.AspNet.WebApi.SelfHost
 nuget NUnit
 nuget NUnit.Console
 nuget Polly
 nuget RabbitMQ.Client
 nuget RavenDB.Database content: none
+nuget RestSharp
 nuget Shouldly
 nuget structuremap
 nuget WebActivatorEx

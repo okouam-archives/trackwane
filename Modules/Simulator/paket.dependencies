@@ -4,6 +4,7 @@ framework: net461
 content: none
 redirects: on
 
+nuget log4net
 nuget RabbitMQ.Client
 nuget RavenDB.Client
 nuget RavenDB.Database

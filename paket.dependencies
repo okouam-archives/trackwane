@@ -6,6 +6,7 @@ nuget FluentValidation
 nuget Geo
 nuget Hashids.net
 nuget JWT
+nuget log4net
 nuget Microsoft.AspNet.WebApi
 nuget Microsoft.AspNet.WebApi.Core
 nuget Microsoft.AspNet.WebApi.Cors

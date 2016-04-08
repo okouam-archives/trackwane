@@ -2,7 +2,7 @@
 using System.Linq;
 using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Data.Domain;
-using Trackwane.Data.Events;
+using Trackwane.Data.Shared.Events;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;

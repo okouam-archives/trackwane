@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
-using Trackwane.Data.Cient;
+using Trackwane.Data.Shared.Client;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Interfaces;
 

@@ -78,8 +78,8 @@
       <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
       <Name>paramore.brighter.commandprocessor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Data\Data.Contracts\Data.Contracts.fsproj">
-      <Project>{adcb6e3e-7d3a-448a-bfc3-ead0e4dbebf5}</Project>
+    <ProjectReference Include="..\..\Data\Data.Shared\Data.Contracts.csproj">
+      <Project>{599629CF-B009-43F0-A44E-CF2C20150BBA}</Project>
       <Name>Data.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">

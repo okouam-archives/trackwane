@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using Geo.Geometries;
-using Trackwane.Data.Contracts.Models;
 using Trackwane.Data.Engine.Commands;
 using Trackwane.Data.Engine.Queries;
+using Trackwane.Data.Shared.Models;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Interfaces;
 

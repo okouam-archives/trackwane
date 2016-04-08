@@ -12,7 +12,7 @@ namespace Trackwane.Framework.Common.Configuration
 
             if (IsNullOrEmpty(value))
             {
-                throw new InvalidConfigurationException($"The application setting key <{name}> could not be found in the configuration file");
+                throw new InvalidConfigurationException("The application setting key <" + name + "> could not be found in the configuration file");
             }
 
             return value;

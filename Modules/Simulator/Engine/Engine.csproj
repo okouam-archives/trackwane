@@ -38,7 +38,7 @@
       <HintPath>..\..\..\packages\morelinq\lib\net35\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\packages\RestSharp\lib\net46\RestSharp.dll</HintPath>
+      <HintPath>..\..\..\packages\RestSharp\lib\net45\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Serilog">
       <HintPath>..\..\..\packages\Serilog\lib\net45\Serilog.dll</HintPath>

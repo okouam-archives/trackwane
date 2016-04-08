@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Trackwane.Data.Domain</RootNamespace>
     <AssemblyName>Trackwane.Data.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="paramore.brighter.commandprocessor, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Management\Interfaces\bin\Debug\paramore.brighter.commandprocessor.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -57,6 +54,10 @@
     <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
       <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
       <Name>Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
+      <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
+      <Name>paramore.brighter.commandprocessor</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Management\Management.Contracts\Management.Contracts.fsproj">
       <Project>{d5139033-62a3-4978-b203-aba6443c1e22}</Project>

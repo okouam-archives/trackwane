@@ -38,7 +38,7 @@
       <HintPath>..\..\..\packages\NUnit\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\..\packages\RestSharp\lib\net46\RestSharp.dll</HintPath>
+      <HintPath>..\..\..\packages\RestSharp\lib\net45\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Shouldly">
       <HintPath>..\..\..\packages\Shouldly\lib\net40\Shouldly.dll</HintPath>

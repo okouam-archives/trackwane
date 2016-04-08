@@ -1,6 +1,6 @@
 source http://packages.wylesight.ws/api/odata
 source https://api.nuget.org/v3/index.json
-framework: net461
+framework: net45
 content: none
 
 nuget CommonServiceLocator

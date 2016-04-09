@@ -4,9 +4,9 @@ namespace Trackwane.Management.Engine.Commands.Trackers
 {
     public class ArchiveTracker : UserCommand
     {
-        public string TrackerId { get; }
+        public string TrackerId { get; private set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
         public ArchiveTracker(string requesterId, string organizationId, string trackerId) : base(requesterId)
         {

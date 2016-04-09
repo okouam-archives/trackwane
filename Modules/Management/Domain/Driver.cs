@@ -26,8 +26,8 @@ namespace Trackwane.Management.Domain
             {
                 OrganizationKey = OrganizationKey,
                 DriverKey = Key,
-                Previous = new DriverUpdatedState(Name),
-                Current = new DriverUpdatedState(name)
+                Previous = new DriverUpdated.State {Name = Name},
+                Current = new DriverUpdated.State {Name = name}
             });
         }
 

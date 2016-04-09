@@ -20,8 +20,9 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            var newName = $"new name {ORGANIZATION_KEY}";
-            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, $"original name {ORGANIZATION_KEY}");
+            var newName = String.Format("new name {0}", ORGANIZATION_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY,
+                String.Format("original name {0}", ORGANIZATION_KEY));
             Update_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, newName);
 
             EngineHost.ExecutionEngine.Query<FindByKey>(ORGANIZATION_KEY).Execute().Name.ShouldBe(newName);
@@ -32,8 +33,9 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.NotThrow(() =>
             {
-                var newName = $"new name {ORGANIZATION_KEY}";
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, $"original name {ORGANIZATION_KEY}");
+                var newName = String.Format("new name {0}", ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY,
+                    String.Format("original name {0}", ORGANIZATION_KEY));
                 Update_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, newName);
             });
         }
@@ -43,8 +45,9 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.NotThrow(() =>
             {
-                var newName = $"new name {ORGANIZATION_KEY}";
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, $"original name {ORGANIZATION_KEY}");
+                var newName = String.Format("new name {0}", ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY,
+                    String.Format("original name {0}", ORGANIZATION_KEY));
                 Update_Organization.With(Persona.Administrator(ORGANIZATION_KEY), ORGANIZATION_KEY, newName);
             });
         }
@@ -54,8 +57,9 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                var newName = $"new name {ORGANIZATION_KEY}";
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, $"original name {ORGANIZATION_KEY}");
+                var newName = String.Format("new name {0}", ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY,
+                    String.Format("original name {0}", ORGANIZATION_KEY));
                 Update_Organization.With(Persona.Administrator(Guid.NewGuid().ToString()), ORGANIZATION_KEY, newName);
             });
         }
@@ -65,8 +69,9 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                var newName = $"new name {ORGANIZATION_KEY}";
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, $"original name {ORGANIZATION_KEY}");
+                var newName = String.Format("new name {0}", ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY,
+                    String.Format("original name {0}", ORGANIZATION_KEY));
                 Update_Organization.With(Persona.Manager(ORGANIZATION_KEY), ORGANIZATION_KEY, newName);
             });
         }
@@ -76,8 +81,9 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                var newName = $"new name {ORGANIZATION_KEY}";
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, $"original name {ORGANIZATION_KEY}");
+                var newName = String.Format("new name {0}", ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY,
+                    String.Format("original name {0}", ORGANIZATION_KEY));
                 Update_Organization.With(Persona.Viewer(ORGANIZATION_KEY), ORGANIZATION_KEY, newName);
             });
         }

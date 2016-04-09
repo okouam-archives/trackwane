@@ -16,7 +16,7 @@ namespace Trackwane.Management.Engine.Queries.Alerts
 
                 if (alert == null) return null;
 
-                return new AlertDetails(alert.IsArchived, alert.Name, alert.Threshold, alert.Type.ToString());
+                return new AlertDetails {IsArchived =  alert.IsArchived, Name = alert.Name, Threshold = alert.Threshold, Type = alert.Type.ToString()};
             });
         }
 

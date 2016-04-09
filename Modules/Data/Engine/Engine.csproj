@@ -74,8 +74,8 @@
       <Project>{4545aa51-b436-4d91-bcde-19afcb294f5c}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Management\Management.Contracts\Management.Contracts.fsproj">
-      <Project>{d5139033-62a3-4978-b203-aba6443c1e22}</Project>
+    <ProjectReference Include="..\..\Management\Management.Shared\Management.Contracts.csproj">
+      <Project>{A3065B16-FE4D-4B25-B9F7-2AB2A89D5DAD}</Project>
       <Name>Management.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data.Shared\Data.Contracts.csproj">

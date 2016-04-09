@@ -5,11 +5,11 @@ namespace Trackwane.Management.Engine.Commands.Locations
 {
     public class UpdateLocation : UserCommand
     {
-        public string LocationId { get; }
+        public string LocationId { get; private set; }
 
         public string Name { get; set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
         public Point Coordinates { get; set; }
 

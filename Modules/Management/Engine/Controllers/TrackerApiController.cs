@@ -19,19 +19,28 @@ namespace Trackwane.Management.Engine.Controllers
         }
 
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
-        public TrackerDetails FindByKey(string organizationKey, string key) =>
-            dispatcher.Query<FindById>(organizationKey).Execute(key);
+        public TrackerDetails FindByKey(string organizationKey, string key)
+        {
+            return dispatcher.Query<FindById>(organizationKey).Execute(key);
+        }
 
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
-        public ResponsePage<TrackerSummary> FindBySearchCriteria(string organizationKey, string name) =>
-            dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(name);
-        
+        public ResponsePage<TrackerSummary> FindBySearchCriteria(string organizationKey, string name)
+        {
+            return dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(name);
+        }
+
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
-        public void ArchiveTracker(string organizationKey, string key) =>
+        public void ArchiveTracker(string organizationKey, string key)
+        {
             dispatcher.Send(new ArchiveTracker(CurrentClaims.UserId, organizationKey, key));
-        
+        }
+
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
-        public void RegisterTracker(string organizationKey, RegisterTrackerModel model) =>
-            dispatcher.Send(new RegisterTracker(CurrentClaims.UserId, organizationKey, model.HardwareId, model.Model, model.Key));
+        public void RegisterTracker(string organizationKey, RegisterTrackerModel model)
+        {
+            dispatcher.Send(new RegisterTracker(CurrentClaims.UserId, organizationKey, model.HardwareId, model.Model,
+                model.Key));
+        }
     }
 }

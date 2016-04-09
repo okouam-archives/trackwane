@@ -18,8 +18,9 @@ namespace Trackwane.Framework.Infrastructure.Factories
             this.builder = builder;
         }
 
-        public Container GetContainer(params StructureMap.Registry[] registries) =>
-            new Container(x =>
+        public Container GetContainer(params StructureMap.Registry[] registries)
+        {
+            return new Container(x =>
             {
                 foreach (var registry in registries)
                 {
@@ -28,6 +29,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
 
                 x.For<IDocumentStore>().Use(builder.CreateDocumentStore());
             });
+        }
 
         public IServiceLocationFactory WithListeners(IEnumerable<Type> listeners, IEnumerable<Type> events)
         {
@@ -41,9 +43,11 @@ namespace Trackwane.Framework.Infrastructure.Factories
             return this;
         }
 
-        public SubscriberRegistry AsSubscriberRegistry() =>
-            subscribers;
-        
+        public SubscriberRegistry AsSubscriberRegistry()
+        {
+            return subscribers;
+        }
+
         /* Private */
 
         private void RegisterListeners(IEnumerable<Type> listeners, IEnumerable<Type> events)
@@ -54,7 +58,8 @@ namespace Trackwane.Framework.Infrastructure.Factories
 
                 foreach (var candidate in listenerCollection)
                 {
-                    Log.Debug($"Found the candidate listener <{candidate.Name}> while registering listeners");
+                    Log.Debug(String.Format("Found the candidate listener <{0}> while registering listeners",
+                        candidate.Name));
                 }
 
                 foreach (var evt in events)
@@ -100,7 +105,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
 
             foreach (var command in commandCollection)
             {
-                Log.Debug($"Found the command <{command.Name}> while registering handlers");
+                Log.Debug(String.Format("Found the command <{0}> while registering handlers", command.Name));
 
                 var target = typeof(RequestHandler<>).MakeGenericType(command);
 
@@ -122,7 +127,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
 
                     if (baseType == target)
                     {
-                        Log.Debug($"Added <{candidate.Name}> for <{request.Name}>");
+                        Log.Debug(String.Format("Added <{0}> for <{1}>", candidate.Name, request.Name));
                         subscribers.Add(request, candidate);
                         break;
                     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Xml.Linq;
@@ -18,7 +19,7 @@ namespace Trackwane.Simulator.Engine.Queries
 
         public IEnumerable<string> Execute()
         {
-            var url = $"{config.ConsumerUri}/getroutes?key={config.ApiKey}";
+            var url = String.Format("{0}/getroutes?key={1}", config.ConsumerUri, config.ApiKey);
 
             log.Debug(url);
 

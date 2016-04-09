@@ -27,7 +27,7 @@ namespace Trackwane.Management.Engine.Queries.Boundaries
 
                 return new ResponsePage<BoundarySummary>
                 {
-                    Items = boundaries.Select(x => new BoundarySummary(x.OrganizationKey)).ToList(),
+                    Items = boundaries.Select(x => new BoundarySummary {OrganizationKey = x.OrganizationKey}).ToList(),
                     Total = boundaries.Count
                 };
             });

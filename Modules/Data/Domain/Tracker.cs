@@ -45,9 +45,25 @@ namespace Trackwane.Data.Domain
 
                 TrackerKey = Key,
 
-                Current = new TrackerUpdatedState(coordinates, distance, batteryLevel, null, heading, speed, orientation),
+                Current = new TrackerUpdated.State
+                {
+                    Coordinates = coordinates,
+                    Distance = distance,
+                    BatteryLevel = batteryLevel,
+                    Heading = heading,
+                    Speed = speed,
+                    Orientation = orientation
+                },
 
-                Previous = new TrackerUpdatedState(Coordinates, Distance, BatteryLevel, null, Heading, Speed, Orientation)
+                Previous = new TrackerUpdated.State
+                {
+                    BatteryLevel = BatteryLevel,
+                    Coordinates = Coordinates,
+                    Distance = Distance,
+                    Heading = Heading,
+                    Speed = Speed,
+                    Orientation = Orientation
+                }
             });
         }
 

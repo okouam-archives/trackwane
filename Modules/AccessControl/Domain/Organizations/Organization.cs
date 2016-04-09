@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.AccessControl.Domain.Users;
-using Trackwane.AccessControl.Events;
 using Trackwane.Framework.Common;
-using AdministratePermissionGranted = Trackwane.AccessControl.Events.AdministratePermissionGranted;
-using AdministratePermissionRevoked = Trackwane.AccessControl.Events.AdministratePermissionRevoked;
-using ManagePermissionGranted = Trackwane.AccessControl.Events.ManagePermissionGranted;
-using ManagePermissionRevoked = Trackwane.AccessControl.Events.ManagePermissionRevoked;
+using AdministratePermissionGranted = Trackwane.AccessControl.Contracts.Events.AdministratePermissionGranted;
+using AdministratePermissionRevoked = Trackwane.AccessControl.Contracts.Events.AdministratePermissionRevoked;
+using ManagePermissionGranted = Trackwane.AccessControl.Contracts.Events.ManagePermissionGranted;
+using ManagePermissionRevoked = Trackwane.AccessControl.Contracts.Events.ManagePermissionRevoked;
 
 namespace Trackwane.AccessControl.Domain.Organizations
 {
@@ -19,21 +19,27 @@ namespace Trackwane.AccessControl.Domain.Organizations
 
         public void Update(string name)
         {
-            Causes(new OrganizationUpdated(Key, new OrganizationUpdatedState(Name), new OrganizationUpdatedState(name)));
+            Causes(new OrganizationUpdated {OrganizationKey = Key, Previous = new OrganizationUpdated.State {Name = Name}, Current = new OrganizationUpdated.State {Name = name}});
         }
 
         public Organization()
         {
+            Viewers = new List<string>();
+            Managers = new List<string>();
+            Administrators = new List<string>();
         }
 
         public Organization(string id, string name)
         {
-            Causes(new OrganizationRegistered(name, id));
+            Viewers = new List<string>();
+            Managers = new List<string>();
+            Administrators = new List<string>();
+            Causes(new OrganizationRegistered {Name = name, OrganizationKey = id});
         }
 
         public void Archive()
         {
-            Causes(new OrganizationArchived(Key));
+            Causes(new OrganizationArchived {OrganizationKey = Key});
         }
 
         public bool CanAdministrate(User user)
@@ -150,11 +156,11 @@ namespace Trackwane.AccessControl.Domain.Organizations
 
         /* Private */
 
-        private IList<string> Managers { get; } = new List<string>();
+        private IList<string> Managers { get; set; }
 
-        private IList<string> Viewers { get; } = new List<string>();
+        private IList<string> Viewers { get; set; }
 
-        private IList<string> Administrators { get; } = new List<string>();
+        private IList<string> Administrators { get; set; }
 
         private void When(OrganizationRegistered evt)
         {

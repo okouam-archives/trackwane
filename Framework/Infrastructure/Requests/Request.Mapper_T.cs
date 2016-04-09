@@ -6,8 +6,10 @@ namespace Trackwane.Framework.Infrastructure.Requests
 {
     public class RequestMapper<T> : IAmAMessageMapper<T> where T : Common.Request
     {
-        private static MessageType GetMessageType(Type t) =>
-            t.IsSubclassOf(typeof (SystemCommand)) ? MessageType.MT_COMMAND : MessageType.MT_EVENT;     
+        private static MessageType GetMessageType(Type t)
+        {
+            return t.IsSubclassOf(typeof (SystemCommand)) ? MessageType.MT_COMMAND : MessageType.MT_EVENT;
+        }
 
         public Message MapToMessage(T request)
         {
@@ -16,7 +18,9 @@ namespace Trackwane.Framework.Infrastructure.Requests
             return new Message(header, body);
         }
 
-        public T MapToRequest(Message message) =>
-            JsonConvert.DeserializeObject<T>(message.Body.Value);
+        public T MapToRequest(Message message)
+        {
+            return JsonConvert.DeserializeObject<T>(message.Body.Value);
+        }
     }
 }

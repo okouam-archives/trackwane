@@ -6,8 +6,10 @@ namespace Trackwane.AccessControl.Tests
     {
         protected class Grant_View_Permission
         {
-            public static void With(UserClaims persona, string organizationKey, string userKey) =>
+            public static void With(UserClaims persona, string organizationKey, string userKey)
+            {
                 Client.Use(persona).GrantViewPermission(organizationKey, userKey);
+            }
         }
     }
 }

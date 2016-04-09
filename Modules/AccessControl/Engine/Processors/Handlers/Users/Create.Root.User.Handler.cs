@@ -24,7 +24,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 
         protected override IEnumerable<DomainEvent> Handle(CreateRootUser cmd, IRepository repository)
         {
-            if (repository.Query<User>().Customize(x => x.WaitForNonStaleResults()).Any())
+            if (repository.Query<User>().Any())
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.ROOT_ATTEMPT_WHEN_EXISTING_USERS));
             }

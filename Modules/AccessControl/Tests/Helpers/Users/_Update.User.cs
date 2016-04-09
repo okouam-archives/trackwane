@@ -1,4 +1,4 @@
-﻿using Trackwane.AccessControl.Models;
+﻿using Trackwane.AccessControl.Contracts.Models;
 using Trackwane.Framework.Common;
 
 namespace Trackwane.AccessControl.Tests

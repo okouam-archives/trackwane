@@ -4,9 +4,9 @@ namespace Trackwane.Management.Engine.Commands.Alerts
 {
     public class UpdateAlert : UserCommand
     {
-        public string AlertId { get; }
+        public string AlertId { get; private set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
         public string Name { get; set; }
 

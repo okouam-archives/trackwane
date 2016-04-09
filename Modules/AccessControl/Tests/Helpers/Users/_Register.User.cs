@@ -1,5 +1,5 @@
 ﻿using System;
-using Trackwane.AccessControl.Models;
+using Trackwane.AccessControl.Contracts.Models;
 using Trackwane.Framework.Common;
 
 namespace Trackwane.AccessControl.Tests
@@ -10,12 +10,13 @@ namespace Trackwane.AccessControl.Tests
         {
             public static void With(UserClaims persona, string organizationKey, string userKey)
             {
-                With(persona, organizationKey, userKey, $"{Faker.NameFaker.Name()} [{userKey}");
+                With(persona, organizationKey, userKey, String.Format("{0} [{1}", Faker.NameFaker.Name(), userKey));
             }
 
             public static void With(UserClaims persona, string organizationKey, string userKey, string displayName)
             {
-                With(persona, organizationKey, userKey, displayName, $"{Faker.InternetFaker.Email()} [{userKey}]",
+                With(persona, organizationKey, userKey, displayName,
+                    String.Format("{0} [{1}]", Faker.InternetFaker.Email(), userKey),
                     Guid.NewGuid().ToString());
             }
 

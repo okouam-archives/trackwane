@@ -13,7 +13,7 @@ namespace Trackwane.Management.Engine.Services
 
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new Exception($"The application setting key <{DB_NAME}> could not be found in the configuration file");
+                    throw new Exception("The application setting key <" + DB_NAME+ "> could not be found in the configuration file");
                 }
 
                 return value;
@@ -29,7 +29,7 @@ namespace Trackwane.Management.Engine.Services
 
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new Exception($"The application setting key <{DB_URL}> could not be found in the configuration file");
+                    throw new Exception("The application setting key <" + DB_URL + "> could not be found in the configuration file");
                 }
 
                 return value;

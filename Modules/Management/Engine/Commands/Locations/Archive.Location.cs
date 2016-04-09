@@ -4,7 +4,7 @@ namespace Trackwane.Management.Engine.Commands.Locations
 {
     public class ArchiveLocation: UserCommand
     {
-        public string LocationId { get; }
+        public string LocationId { get; private set; }
 
         public ArchiveLocation(string requesterId, string organizationId, string locationId) : base(requesterId)
         {
@@ -12,6 +12,6 @@ namespace Trackwane.Management.Engine.Commands.Locations
             OrganizationId = organizationId;
         }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
     }
 }

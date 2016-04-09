@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using Raven.Client;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.Framework.Common;

@@ -15,13 +15,14 @@ namespace Trackwane.AccessControl.Domain.Users
         {
             Salt = salt;
             Password = password;
+            ApiToken = Guid.NewGuid().ToString();
         }
 
         public string Password { get; set; }
 
         public byte[] Salt { get; set; }
 
-        public string ApiToken { get; set; } = Guid.NewGuid().ToString();
+        public string ApiToken { get; set; }
 
         public bool IsValid(string password)
         {
@@ -49,9 +50,9 @@ namespace Trackwane.AccessControl.Domain.Users
 
         private struct PasswordHash
         {
-            public byte[] Salt { get; }
+            public byte[] Salt { get; private set; }
 
-            public string Value { get; }
+            public string Value { get; private set; }
 
             public PasswordHash(byte[] salt, string value)
             {

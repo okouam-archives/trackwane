@@ -14,9 +14,12 @@ namespace Trackwane.Management.Engine.Queries.Locations
             {
                 var location = repository.Load<Location>(locationId);
 
-                if (location == null) return null;
-
-                return new LocationDetails(location.Name, location.IsArchived, location.Coordinates);
+                return location == null ? null : new LocationDetails
+                {
+                    Name = location.Name,
+                    IsArchived = location.IsArchived,
+                    Coordinates = location.Coordinates
+                };
             });
         }
 

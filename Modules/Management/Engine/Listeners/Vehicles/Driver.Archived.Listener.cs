@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using paramore.brighter.commandprocessor.Logging;
-using Raven.Client.Linq;
 using Trackwane.Framework.Common;
+using Raven.Client.Linq;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Contracts.Events;
@@ -23,7 +23,6 @@ namespace Trackwane.Management.Engine.Listeners.Vehicles
             var driver = repository.Load<Driver>(evt.DriverKey);
 
             var vehicles = repository.Query<Vehicle>()
-                .Customize(x => x.WaitForNonStaleResults())
                 .Where(x => x.DriverId == evt.DriverKey);
 
             foreach (var vehicle in vehicles)

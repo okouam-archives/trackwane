@@ -1,5 +1,5 @@
 ﻿using System;
-using Trackwane.AccessControl.Events;
+using Trackwane.AccessControl.Contracts.Events;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -9,7 +9,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(string organizationKey)
             {
-                EngineHost.ExecutionEngine.Publish(new OrganizationRegistered(organizationKey, Guid.NewGuid().ToString()));
+                EngineHost.ExecutionEngine.Publish(new OrganizationRegistered {OrganizationKey = organizationKey, Id = Guid.NewGuid()});
             }
         }
     }

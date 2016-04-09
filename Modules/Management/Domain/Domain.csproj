@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,8 +60,8 @@
       <Project>{2ACB382A-38FA-49A6-A9CD-212881D3CD37}</Project>
       <Name>paramore.brighter.commandprocessor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Management.Contracts\Management.Contracts.fsproj">
-      <Project>{d5139033-62a3-4978-b203-aba6443c1e22}</Project>
+    <ProjectReference Include="..\Management.Shared\Management.Contracts.csproj">
+      <Project>{A3065B16-FE4D-4B25-B9F7-2AB2A89D5DAD}</Project>
       <Name>Management.Contracts</Name>
     </ProjectReference>
   </ItemGroup>

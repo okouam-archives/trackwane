@@ -21,7 +21,7 @@ namespace Trackwane.Management.Tests.Helpers
 
             public static void With(UserClaims claims, string organizationKey, string key, string name, Polygon coordinates)
             {
-                Client.Use(claims).UpdateBoundary(organizationKey, key, new UpdateBoundaryModel(name, coordinates));
+                Client.Use(claims).UpdateBoundary(organizationKey, key, new UpdateBoundaryModel {Name = name, Coordinates = coordinates});
             }
         }
     }

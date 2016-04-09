@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using paramore.brighter.commandprocessor.Logging;
+using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.AccessControl.Domain.Organizations;
-using Trackwane.AccessControl.Events;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;

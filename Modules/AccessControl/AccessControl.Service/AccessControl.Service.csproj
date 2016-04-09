@@ -74,10 +74,6 @@
       <Project>{d82a16d0-b813-4a71-93a9-0752a549e197}</Project>
       <Name>Engine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Contracts.fsproj">
-      <Project>{7b154357-2f9b-437c-90b3-c1e6c6fd36dd}</Project>
-      <Name>AccessControl.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,5 @@
 ﻿using System;
-using Trackwane.AccessControl.Events;
+using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.Framework.Common;
 
 namespace Trackwane.AccessControl.Domain.Users
@@ -37,7 +37,11 @@ namespace Trackwane.AccessControl.Domain.Users
 
         public void Update(string displayName)
         {
-            Causes(new UserUpdated(Key, new UserUpdatedState(Email, DisplayName), new UserUpdatedState(displayName, Email)));
+            Causes(new UserUpdated {
+                UserKey = Key,
+                Previous = new UserUpdated.State {Email = Email, DisplayName = DisplayName},
+                Current = new UserUpdated.State { Email = Email, DisplayName = displayName }
+            });
         }
 
         public User()

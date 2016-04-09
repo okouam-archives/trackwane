@@ -4,9 +4,9 @@ namespace Trackwane.Management.Engine.Commands.Vehicles
 {
     public class ArchiveVehicle : UserCommand
     {
-        public string VehicleId { get; }
+        public string VehicleId { get; private set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
         public ArchiveVehicle(string requesterId, string organizationId, string vehicleId) : base(requesterId)
         {

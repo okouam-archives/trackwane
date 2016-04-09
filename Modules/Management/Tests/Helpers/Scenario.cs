@@ -1,26 +1,35 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
-using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Interfaces;
-using Trackwane.Management.Contracts.Client;
+using Trackwane.Management.Contracts;
 
 namespace Trackwane.Management.Tests.Helpers
 {
     internal partial class Scenario
     {
-        protected IList<IRequest> Processed { get; set; } = new List<IRequest>();
+        public Scenario()
+        {
+            Sent = new List<IRequest>();
+            Processed = new List<IRequest>();
+            Published = new List<IRequest>();
+            Posted = new List<IRequest>();
+        }
 
-        protected IList<IRequest> Published { get; set; } = new List<IRequest>();
+        protected IList<IRequest> Processed { get; set; }
 
-        protected IList<IRequest> Posted { get; set; } = new List<IRequest>();
+        protected IList<IRequest> Published { get; set; }
 
-        protected IList<IRequest> Sent { get; set; } = new List<IRequest>();
+        protected IList<IRequest> Posted { get; set; }
 
-        protected static IEngineHost EngineHost => Setup.EngineHost;
+        protected IList<IRequest> Sent { get; set; }
+
+        protected static IEngineHost EngineHost
+        {
+            get { return Setup.EngineHost; }
+        }
 
         protected static ManagementContext Client { get; set; }
 

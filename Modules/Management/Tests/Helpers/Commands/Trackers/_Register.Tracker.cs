@@ -11,7 +11,7 @@ namespace Trackwane.Management.Tests.Helpers
             public static void With(UserClaims claims, string trackerId, string trackerHardwareId, string model,
                 string organizationKey)
             {
-                Client.Use(claims).CreateTracker(organizationKey, new RegisterTrackerModel(trackerId, trackerHardwareId, model));
+                Client.Use(claims).CreateTracker(organizationKey, new RegisterTrackerModel {Key = trackerId, HardwareId = trackerHardwareId, Model = model});
             }
 
             public static void With(UserClaims claims, string trackerId, string organizationId)

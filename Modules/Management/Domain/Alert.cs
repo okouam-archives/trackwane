@@ -27,7 +27,10 @@ namespace Trackwane.Management.Domain
 
         public void Archive()
         {
-            Causes(new AlertArchived(Key, OrganizationKey));
+            Causes(new AlertArchived {
+                AlertKey = Key,
+                OrganizationKey = OrganizationKey
+            });
         }
 
         /* Internal */
@@ -73,8 +76,18 @@ namespace Trackwane.Management.Domain
             {
                 OrganizationKey = OrganizationKey,
                 AlertKey = Id,
-                Previous = new AlertEditedState(Threshold, (Contracts.Models.AlertType)(int)Type, Name),
-                Current = new AlertEditedState(Threshold, (Contracts.Models.AlertType)(int)Type, name)
+                Previous = new AlertEdited.State
+                {
+                    Threshold = Threshold,
+                    Type = (Contracts.Events.AlertType) (int) Type,
+                    Name = Name
+                },
+                Current = new AlertEdited.State
+                {
+                    Threshold = Threshold,
+                    Type = (Contracts.Events.AlertType)(int)Type,
+                    Name = name
+                }
             });
         }
     }

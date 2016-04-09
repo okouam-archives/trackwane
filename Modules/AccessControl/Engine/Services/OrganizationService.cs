@@ -8,9 +8,7 @@ namespace Trackwane.AccessControl.Engine.Services
     {
         public bool IsExistingOrganizationName(string name, IRepository repository)
         {
-            return repository.Query<Organization>()
-             .Customize(x => x.WaitForNonStaleResults())
-             .Any(x => x.Name == name);
+            return repository.Query<Organization>().Any(x => x.Name == name);
         }
 
         public bool IsExistingOrganization(string organizationKey, IRepository repository)

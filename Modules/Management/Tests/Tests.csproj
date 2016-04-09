@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -129,8 +130,8 @@
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\AccessControl\AccessControl.Contracts\AccessControl.Contracts.fsproj">
-      <Project>{7b154357-2f9b-437c-90b3-c1e6c6fd36dd}</Project>
+    <ProjectReference Include="..\..\AccessControl\AccessControl.Contracts\AccessControl.Contracts.csproj">
+      <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>
       <Name>AccessControl.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
@@ -141,8 +142,8 @@
       <Project>{AC82FE86-A127-4131-9270-4B43618276EB}</Project>
       <Name>Engine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Management.Contracts\Management.Contracts.fsproj">
-      <Project>{d5139033-62a3-4978-b203-aba6443c1e22}</Project>
+    <ProjectReference Include="..\Management.Shared\Management.Contracts.csproj">
+      <Project>{a3065b16-fe4d-4b25-b9f7-2ab2a89d5dad}</Project>
       <Name>Management.Contracts</Name>
     </ProjectReference>
   </ItemGroup>

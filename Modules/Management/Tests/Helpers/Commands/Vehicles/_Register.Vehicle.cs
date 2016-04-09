@@ -8,9 +8,12 @@ namespace Trackwane.Management.Tests.Helpers
     {
         protected class _Register_Vehicle
         {
-            public static void With(UserClaims claims, string organizationKey, string key) =>
-                Client.Use(claims).RegisterVehicle(organizationKey, new RegisterVehicleModel(key, Guid.NewGuid().ToString()));
-
+            public static void With(UserClaims claims, string organizationKey, string key)
+            {
+                Client.Use(claims)
+                    .RegisterVehicle(organizationKey,
+                        new RegisterVehicleModel {Key = key, Identifier = Guid.NewGuid().ToString()});
+            }
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
 using Shouldly;
+using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.AccessControl.Engine.Queries.Organizations;
-using Trackwane.AccessControl.Events;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Fixtures;
 

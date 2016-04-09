@@ -5,15 +5,15 @@ namespace Trackwane.Management.Engine.Commands.Boundaries
 {
     public class CreateBoundary : UserCommand
     {
-        public BoundaryType Type { get; }
+        public BoundaryType Type { get; private set; }
 
         public string BoundaryId { get; set;  }
 
-        public Polygon Coordinates { get; }
+        public Polygon Coordinates { get; private set; }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
         public CreateBoundary(string requesterId, string organizationId, string name, Polygon coordinates, BoundaryType type, string boundaryId) : base(requesterId)
         {

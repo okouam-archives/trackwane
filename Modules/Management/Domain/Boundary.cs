@@ -73,8 +73,8 @@ namespace Trackwane.Management.Domain
             {
                 OrganizationKey = OrganizationKey,
                 BoundaryKey = Key,
-                Previous = new BoundaryUpdatedState(Name, Coordinates),
-                Current = new BoundaryUpdatedState(Name, newCoordinates)
+                Previous = new BoundaryUpdated.State {Name = Name, Coordinates = Coordinates},
+                Current = new BoundaryUpdated.State {Name = Name, Coordinates = newCoordinates},
             });
         }
 
@@ -89,8 +89,8 @@ namespace Trackwane.Management.Domain
             {
                 BoundaryKey = Key,
                 OrganizationKey = OrganizationKey,
-                Previous = new BoundaryUpdatedState(Name, Coordinates),
-                Current = new BoundaryUpdatedState(newName, Coordinates),
+                Previous = new BoundaryUpdated.State { Name = Name, Coordinates = Coordinates },
+                Current = new BoundaryUpdated.State { Name = newName, Coordinates = Coordinates },
             });
         }
 

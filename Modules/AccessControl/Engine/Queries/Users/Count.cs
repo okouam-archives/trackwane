@@ -16,7 +16,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
         {
             return Execute(repository =>
             {
-                var query = repository.Query<User>().Customize(x => x.WaitForNonStaleResults());
+                var query = repository.Query<User>();
                 return organizationKey == null ? query.Count() : query.Count(x => x.ParentOrganizationKey == organizationKey);
             });
         }

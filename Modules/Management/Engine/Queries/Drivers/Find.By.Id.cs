@@ -26,7 +26,11 @@ namespace Trackwane.Management.Engine.Queries.Drivers
                     throw new BusinessRuleException("Unknown driver ID");
                 }
 
-                return new DriverDetails(driver.Name, driver.IsArchived, driver.Key);
+                return new DriverDetails {
+                    Name = driver.Name,
+                    IsArchived = driver.IsArchived,
+                    Id = driver.Key
+                };
             });
         }
 

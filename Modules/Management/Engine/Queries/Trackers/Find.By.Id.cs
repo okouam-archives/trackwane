@@ -14,9 +14,13 @@ namespace Trackwane.Management.Engine.Queries.Trackers
             {
                 var tracker = repository.Load<Tracker>(trackerId);
 
-                if (tracker == null) return null;
-
-                return new TrackerDetails(tracker.Model, tracker.IsArchived, tracker.HardwareId, tracker.Key);
+                return tracker == null ? null : new TrackerDetails
+                {
+                    Model = tracker.Model,
+                    IsArchived = tracker.IsArchived,
+                    HardwareId = tracker.HardwareId,
+                    Id = tracker.Key
+                };
             });
         }
 

@@ -23,7 +23,6 @@ namespace Trackwane.Management.Engine.Listeners.Vehicles
             var tracker = repository.Load<Tracker>(evt.TrackerKey);
 
             var vehicles = repository.Query<Vehicle>()
-                .Customize(x => x.WaitForNonStaleResults())
                 .Where(x => x.DriverId == evt.TrackerKey);
 
             foreach (var vehicle in vehicles)

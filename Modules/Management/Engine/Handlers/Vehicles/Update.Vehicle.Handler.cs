@@ -46,8 +46,8 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
                 {
                     VehicleKey = cmd.VehicleKey,
                     OrganizationKey = cmd.OrganizationKey,
-                    Previous = new VehicleUpdatedState(oldIdentifier),
-                    Current = new VehicleUpdatedState(cmd.Identifier)
+                    Previous = new VehicleUpdated.State {Identifier = oldIdentifier},
+                    Current = new VehicleUpdated.State { Identifier = cmd.Identifier}
                 });
         
                 uow.Commit();

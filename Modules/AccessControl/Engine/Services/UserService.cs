@@ -20,10 +20,7 @@ namespace Trackwane.AccessControl.Engine.Services
 
         public bool IsExistingEmail(string email, IRepository repository)
         {
-            return repository
-                .Query<User>()
-                .Customize(x => x.WaitForNonStaleResults())
-                .Any(x => x.Email == email);
+            return repository.Query<User>().Any(x => x.Email == email);
         }
     }
 }

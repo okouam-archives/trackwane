@@ -6,8 +6,10 @@ namespace Trackwane.Management.Tests.Helpers
     {
         protected class _ArchiveDriver
         {
-            public static void With(UserClaims claims, string organizationKey, string key) =>
+            public static void With(UserClaims claims, string organizationKey, string key)
+            {
                 Client.Use(claims).ArchiveDriver(organizationKey, key);
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using paramore.brighter.commandprocessor;
@@ -25,7 +26,7 @@ namespace Trackwane.Framework.Infrastructure.Requests
 
         protected void Publish(DomainEvent evt)
         {
-            Logger.Debug($"Posting the event <{evt.GetType().Name}>: \r\n" + JsonConvert.SerializeObject(evt, Formatting.Indented));
+            Logger.Debug(String.Format("Posting the event <{0}>: \r\n", evt.GetType().Name) + JsonConvert.SerializeObject(evt, Formatting.Indented));
 
             typeof(IExecutionEngine)
                 .GetMethod("Post")

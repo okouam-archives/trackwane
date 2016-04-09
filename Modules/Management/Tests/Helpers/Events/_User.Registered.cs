@@ -1,4 +1,4 @@
-﻿using Trackwane.AccessControl.Events;
+﻿using Trackwane.AccessControl.Contracts.Events;
 
 namespace Trackwane.Management.Tests.Helpers
 {

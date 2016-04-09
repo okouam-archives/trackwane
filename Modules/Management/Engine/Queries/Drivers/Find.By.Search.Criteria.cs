@@ -27,7 +27,7 @@ namespace Trackwane.Management.Engine.Queries.Drivers
 
                 return new ResponsePage<DriverSummary>
                 {
-                    Items = drivers.Select(x => new DriverSummary(x.Key)).ToList(),
+                    Items = drivers.Select(x => new DriverSummary {Key = x.Key }).ToList(),
                     Total = drivers.Count
                 };
             });

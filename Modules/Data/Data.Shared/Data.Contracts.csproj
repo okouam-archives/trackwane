@@ -43,11 +43,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Trackwane.Data.Contracts">
-      <HintPath>..\Data.Contracts\bin\Debug\Trackwane.Data.Contracts.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="_Data_Contracts_Assembly.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Models.cs" />

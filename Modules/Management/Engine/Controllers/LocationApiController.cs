@@ -20,27 +20,41 @@ namespace Trackwane.Management.Engine.Controllers
         }
 
         [Secured, Managers, HttpPost, Route(RESOURCE_URL)]
-        public void UpdateLocation(string organizationKey, string key, UpdateLocationModel model) =>
-            dispatcher.Send(new UpdateLocation(CurrentClaims.UserId, organizationKey, key) {Coordinates = model.Coordinates, Name = model.Name});
-        
+        public void UpdateLocation(string organizationKey, string key, UpdateLocationModel model)
+        {
+            dispatcher.Send(new UpdateLocation(CurrentClaims.UserId, organizationKey, key)
+            {
+                Coordinates = model.Coordinates,
+                Name = model.Name
+            });
+        }
+
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
-        public LocationDetails FindByKey(string organizationKey, string key) =>
-            dispatcher.Query<FindById>(organizationKey).Execute(key);
-        
+        public LocationDetails FindByKey(string organizationKey, string key)
+        {
+            return dispatcher.Query<FindById>(organizationKey).Execute(key);
+        }
+
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
-        public ResponsePage<LocationSummary> FindBySearchCriteria(string organizationKey, SearchLocationsModel model) =>
-            dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute();
-        
+        public ResponsePage<LocationSummary> FindBySearchCriteria(string organizationKey, SearchLocationsModel model)
+        {
+            return dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute();
+        }
+
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
-        public void ArchiveBoundary(string organizationKey, string key) =>
+        public void ArchiveBoundary(string organizationKey, string key)
+        {
             dispatcher.Send(new ArchiveLocation(CurrentClaims.UserId, organizationKey, key));
-        
+        }
+
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
-        public void RegisterLocation(string organizationKey, RegisterLocationModel model) =>
-            dispatcher.Send(new RegisterLocation(CurrentClaims.UserId, organizationKey, 
-                model.Name, 
-                model.Coordinates != null ? new Geo.IO.GeoJson.GeoJsonReader().Read(model.Coordinates) as Point : null, 
+        public void RegisterLocation(string organizationKey, RegisterLocationModel model)
+        {
+            dispatcher.Send(new RegisterLocation(CurrentClaims.UserId, organizationKey,
+                model.Name,
+                model.Coordinates != null ? new Geo.IO.GeoJson.GeoJsonReader().Read(model.Coordinates) as Point : null,
                 model.Key)
-            );
+                );
+        }
     }
 }

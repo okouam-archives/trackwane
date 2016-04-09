@@ -7,11 +7,11 @@ namespace Trackwane.Management.Engine.Commands.Boundaries
     {
         /* Public */
 
-        public string BoundaryId { get; }
+        public string BoundaryId { get; private set; }
 
         public Polygon Coordinates { get; set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
         public string Name { get; set;  }
 

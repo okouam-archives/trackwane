@@ -4,11 +4,11 @@ namespace Trackwane.Management.Engine.Commands.Vehicles
 {
     public class AssignDriverToVehicle : UserCommand
     {
-        public string VehicleId { get; }
+        public string VehicleId { get; private set; }
 
-        public string DriverId { get; }
+        public string DriverId { get; private set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
         public AssignDriverToVehicle(string requesterId, string organizationId, string vehicleId, string driverId) : base(requesterId)
         {

@@ -27,7 +27,7 @@ namespace Trackwane.Management.Engine.Queries.Vehicles
 
                 return new ResponsePage<VehicleSummary>
                 {
-                    Items = trackers.Select(x => new VehicleSummary(x.IsArchived, x.OrganizationKey, x.Identifier)).ToList(),
+                    Items = trackers.Select(x => new VehicleSummary {IsArchived = x.IsArchived, OrganizationId = x.OrganizationKey, Identifier = x.Identifier}).ToList(),
                     Total = trackers.Count
                 };
             });

@@ -6,6 +6,9 @@ namespace Trackwane.Framework.Web.Security
 {
     public class BaseApiController : ApiController
     {
-        protected UserClaims CurrentClaims => new UserClaims((User as ClaimsPrincipal).Claims);
+        protected UserClaims CurrentClaims
+        {
+            get { return new UserClaims((User as ClaimsPrincipal).Claims); }
+        }
     }
 }

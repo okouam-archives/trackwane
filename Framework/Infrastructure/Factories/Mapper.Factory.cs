@@ -44,7 +44,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
                 {
                     var target = typeof (RequestMapper<>).MakeGenericType(cmd);
                     registry.Add(cmd, target);
-                    Log.Debug($"Added a message mapper for <{cmd.Name}>");
+                    Log.Debug(String.Format("Added a message mapper for <{0}>", cmd.Name));
                 }
             }
             else
@@ -58,7 +58,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
                 {
                     var target = typeof (RequestMapper<>).MakeGenericType(evt);
                     registry.Add(evt, target);
-                    Log.Debug($"Added a message mapper for <{evt.Name}>");
+                    Log.Debug(String.Format("Added a message mapper for <{0}>", evt.Name));
                 }
             }
             else

@@ -8,11 +8,19 @@ namespace Trackwane.Management.Tests.Helpers
     {
         protected class _Update_Location
         {
-            public static void With(UserClaims claims, string organizationId, string locationId, string name) =>
+            public static void With(UserClaims claims, string organizationId, string locationId, string name)
+            {
                 With(claims, organizationId, locationId, name, null);
+            }
 
-            public static void With(UserClaims claims, string organizationId, string locationId, string name, Point coordinates) =>
-                Client.Use(claims).UpdateLocation(organizationId, locationId, new UpdateLocationModel(name, coordinates));
+            public static void With(UserClaims claims, string organizationId, string locationId, string name, Point coordinates)
+            {
+                Client.Use(claims).UpdateLocation(organizationId, locationId, new UpdateLocationModel
+                {
+                    Name = name,
+                    Coordinates = coordinates
+                });
+            }
         }
     }
 }

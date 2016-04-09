@@ -27,7 +27,7 @@ namespace Trackwane.Management.Engine.Queries.Alerts
                 
                 return new ResponsePage<AlertSummary>
                 {
-                    Items = alerts.Select(x => new AlertSummary(x.Key)).ToList(),
+                    Items = alerts.Select(x => new AlertSummary {Key = x.Key}).ToList(),
                     Total = alerts.Count
                 };
             });

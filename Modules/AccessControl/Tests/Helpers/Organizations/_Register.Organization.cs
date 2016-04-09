@@ -1,5 +1,5 @@
 ﻿using System;
-using Trackwane.AccessControl.Models;
+using Trackwane.AccessControl.Contracts.Models;
 using Trackwane.Framework.Common;
 
 namespace Trackwane.AccessControl.Tests
@@ -8,18 +8,24 @@ namespace Trackwane.AccessControl.Tests
     {
         protected class Register_Organization
         {
-            public static void With(UserClaims persona) =>
+            public static void With(UserClaims persona)
+            {
                 With(persona, Guid.NewGuid().ToString());
+            }
 
-            public static void With(UserClaims persona, string organizationKey) =>
-                With(persona, organizationKey, $"{Faker.CompanyFaker.Name()} [{organizationKey}]");
+            public static void With(UserClaims persona, string organizationKey)
+            {
+                With(persona, organizationKey, String.Format(@"{0} [{1}]", Faker.CompanyFaker.Name(), organizationKey));
+            }
 
-            public static void With(UserClaims persona, string organizationKey, string name) =>
+            public static void With(UserClaims persona, string organizationKey, string name)
+            {
                 Client.Use(persona).RegisterOrganization(new RegisterOrganizationModel
                 {
                     OrganizationKey = organizationKey,
                     Name = name
                 });
+            }
         }
     }
 }

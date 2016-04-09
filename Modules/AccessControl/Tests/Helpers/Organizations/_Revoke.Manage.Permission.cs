@@ -6,8 +6,10 @@ namespace Trackwane.AccessControl.Tests
     {
         protected class Revoke_Manage_Permission
         {
-            public static void With(UserClaims persona, string organizationKey, string key) =>
+            public static void With(UserClaims persona, string organizationKey, string key)
+            {
                 Client.Use(persona).RevokeManagePermission(organizationKey, key);
+            }
         }
     }
 }

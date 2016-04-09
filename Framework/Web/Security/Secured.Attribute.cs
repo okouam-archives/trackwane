@@ -14,7 +14,10 @@ namespace Trackwane.Framework.Web.Security
 {
     public class SecuredAttribute : Attribute, IAuthenticationFilter
     {
-        public bool AllowMultiple { get; } = false;
+        public bool AllowMultiple
+        {
+            get { return false; }
+        }
 
         public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
@@ -39,7 +42,7 @@ namespace Trackwane.Framework.Web.Security
 
         private static bool UsesTokenAuthentication(HttpRequestMessage req)
         {
-            return req.Headers?.Authorization != null && req.Headers.Authorization.Scheme.Equals("Bearer", StringComparison.OrdinalIgnoreCase);
+            return req.Headers != null && req.Headers.Authorization != null && req.Headers.Authorization.Scheme.Equals("Bearer", StringComparison.OrdinalIgnoreCase);
         }
 
         private static void SetClaimsPrincipalFromToken(HttpAuthenticationContext context)
@@ -59,7 +62,7 @@ namespace Trackwane.Framework.Web.Security
             }
             catch (Exception e)
             {
-                throw new Exception($"Unable to process the token {originalToken}", e);
+                throw new Exception(String.Format("Unable to process the token {0}", originalToken), e);
             }
         }
 

@@ -40,7 +40,10 @@ namespace Trackwane.Framework.Web.Security
             throw new Exception(msg);
         }
 
-        public override bool AllowMultiple { get; } = false;
+        public override bool AllowMultiple
+        {
+            get { return false; }
+        }
 
         /* Protected */
 

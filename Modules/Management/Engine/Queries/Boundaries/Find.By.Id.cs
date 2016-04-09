@@ -16,7 +16,13 @@ namespace Trackwane.Management.Engine.Queries.Boundaries
 
                 if (boundary == null) return null;
 
-                return new BoundaryDetails(boundary.Coordinates, boundary.IsArchived, boundary.Name, boundary.Type.ToString());
+                return new BoundaryDetails
+                {
+                    Coordinates = boundary.Coordinates,
+                    IsArchived = boundary.IsArchived,
+                    Name = boundary.Name,
+                    Type = boundary.Type.ToString()
+                };
             });
         }
 

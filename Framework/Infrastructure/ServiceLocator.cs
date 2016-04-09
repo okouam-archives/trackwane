@@ -13,7 +13,7 @@ namespace Trackwane.Framework.Infrastructure
 
         public ServiceLocator(IServiceLocationFactory serviceFactory)
         {
-            if (serviceFactory == null) throw new ArgumentNullException(nameof(serviceFactory));
+            if (serviceFactory == null) throw new ArgumentNullException("serviceFactory");
 
             this.serviceFactory = serviceFactory;
         }
@@ -29,7 +29,9 @@ namespace Trackwane.Framework.Infrastructure
              .AsSubscriberRegistry();
         }
 
-        public IContainer GetContainer() =>
-            serviceFactory.GetContainer(new T(), new Registry());
+        public IContainer GetContainer()
+        {
+            return serviceFactory.GetContainer(new T(), new Registry());
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace Trackwane.AccessControl.Engine.Commands.Organizations
 {
     public class UpdateOrganization : UserCommand
     {
-        public string OrganizationKey { get; }
+        public string OrganizationKey { get; private set; }
 
         public string Name { get; set; }
         

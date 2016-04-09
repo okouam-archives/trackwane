@@ -88,8 +88,8 @@ namespace Trackwane.Management.Domain
                 {
                     VehicleKey = Key,
                     OrganizationKey = OrganizationKey,
-                    Previous = new VehicleUpdatedState(Identifier),
-                    Current = new VehicleUpdatedState(newIdentifier)
+                    Previous = new VehicleUpdated.State {Identifier = Identifier},
+                    Current = new VehicleUpdated.State { Identifier = newIdentifier}
                 });
             }
         }

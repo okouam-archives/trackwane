@@ -7,11 +7,11 @@ namespace Trackwane.Management.Engine.Commands.Locations
     {
         public string LocationId { get; set;  }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
-        public Point Coordinates { get; }
+        public Point Coordinates { get; private set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
         public RegisterLocation(string requesterId, string organizationId, string name, Point coordinates, string locationId) : base(requesterId)
         {

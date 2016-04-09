@@ -21,17 +21,29 @@ namespace Trackwane.Framework.Fixtures
 
         public static UserClaims Viewer(params string[] organizations)
         {
-            return new UserClaims { UserId = Guid.NewGuid().ToString(), View = organizations?.ToList() ?? new List<string>() };
+            return new UserClaims
+            {
+                UserId = Guid.NewGuid().ToString(),
+                View = organizations != null ? organizations.ToList() : new List<string>()
+            };
         }
 
         public static UserClaims Administrator(params string[] organizations)
         {
-            return new UserClaims { UserId = Guid.NewGuid().ToString(), Administrate = organizations?.ToList() ?? new List<string>() };
+            return new UserClaims
+            {
+                UserId = Guid.NewGuid().ToString(),
+                Administrate = organizations != null ? organizations.ToList() : new List<string>()
+            };
         }
 
         public static UserClaims Manager(params string[] organizations)
         {
-            return new UserClaims { UserId = Guid.NewGuid().ToString(), Manage = organizations?.ToList() ?? new List<string>() };
+            return new UserClaims
+            {
+                UserId = Guid.NewGuid().ToString(),
+                Manage = organizations != null ? organizations.ToList() : new List<string>()
+            };
         }
     }
 }

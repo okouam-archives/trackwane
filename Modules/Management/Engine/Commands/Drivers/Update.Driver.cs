@@ -4,7 +4,7 @@ namespace Trackwane.Management.Engine.Commands.Drivers
 {
     public class UpdateDriver : UserCommand
     {
-        public string DriverId { get; }
+        public string DriverId { get; private set; }
 
         public string Name { get; set; }
 
@@ -14,6 +14,6 @@ namespace Trackwane.Management.Engine.Commands.Drivers
             OrganizationId = organizationId;
         }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
     }
 }

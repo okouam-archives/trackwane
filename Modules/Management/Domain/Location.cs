@@ -37,8 +37,8 @@ namespace Trackwane.Management.Domain
             {
                 LocationKey = Key,
                 OrganizationKey = OrganizationKey,
-                Previous = new LocationUpdatedState(Name, Coordinates),
-                Current = new LocationUpdatedState(newName, Coordinates)
+                Previous = new LocationUpdated.State { Name = Name, Coordinates = Coordinates },
+                Current = new LocationUpdated.State { Name = newName, Coordinates = Coordinates },
             });
         }
 
@@ -48,8 +48,8 @@ namespace Trackwane.Management.Domain
             {
                 LocationKey = Key,
                 OrganizationKey = OrganizationKey,
-                Previous = new LocationUpdatedState(Name, Coordinates),
-                Current = new LocationUpdatedState(Name, newCoordinates)
+                Previous = new LocationUpdated.State {Name = Name, Coordinates = Coordinates},
+                Current = new LocationUpdated.State { Name = Name, Coordinates = newCoordinates },
             });
         }
 

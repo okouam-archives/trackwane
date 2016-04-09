@@ -21,7 +21,7 @@ namespace Trackwane.Management.Engine.Queries.Locations
 
                 return new ResponsePage<LocationSummary>
                 {
-                    Items = locations.Select(x => new LocationSummary(x.Key)).ToList(),
+                    Items = locations.Select(x => new LocationSummary {Key = x.Key}).ToList(),
                     Total = locations.Count
                 };
             });

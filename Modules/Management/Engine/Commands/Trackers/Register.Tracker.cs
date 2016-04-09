@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Trackwane.Framework.Infrastructure.Requests;
+﻿using Trackwane.Framework.Infrastructure.Requests;
 
 namespace Trackwane.Management.Engine.Commands.Trackers
 {
@@ -7,14 +6,14 @@ namespace Trackwane.Management.Engine.Commands.Trackers
     {
         public string TrackerId { get; set;  }
 
-        public string HardwareId { get; }
+        public string HardwareId { get; private set; }
 
-        public string Model { get; }
+        public string Model { get; private set; }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
 
-        public string Identifier { get; }
-        
+        public string Identifier { get; private set; }
+
         public RegisterTracker(string requesterId, string organizationId, string hardwareId, string model, string identifier, string trackerId = null) : base(requesterId)
         {
             TrackerId = trackerId;

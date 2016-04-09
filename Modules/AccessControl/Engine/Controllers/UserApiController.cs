@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using HashidsNet;
+using Trackwane.AccessControl.Contracts.Models;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Queries.Users;
-using Trackwane.AccessControl.Models;
-using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
@@ -25,8 +24,10 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [HttpGet, Route("token")]
-        public string GetAccessToken(string email, string password) =>
-            "Bearer " + executionEngine.Query<GetAccessToken>().Execute(email, password);
+        public string GetAccessToken(string email, string password)
+        {
+           return "Bearer " + executionEngine.Query<GetAccessToken>().Execute(email, password);
+        }
         
         [HttpPost, Route("root")]
         public string CreateRootUser(RegisterUserModel model)
@@ -45,19 +46,27 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, HttpGet, Route("users/{userKey}")]
-        public UserDetails FindById(string userKey) =>
-            executionEngine.Query<FindByKey>().Execute(userKey);
-        
+        public UserDetails FindById(string userKey)
+        {
+            return executionEngine.Query<FindByKey>().Execute(userKey);;
+        }
+
         [Secured, Administrators, HttpDelete, Route(RESOURCE_URL)]
-        public void ArchiveUser(string organizationKey, string userKey) =>
+        public void ArchiveUser(string organizationKey, string userKey)
+        {
             executionEngine.Send(new ArchiveUser(CurrentClaims.UserId, organizationKey, userKey));
-        
+        }
+
         [Secured, AdministratorsOrUser, HttpPost, Route(RESOURCE_URL)]
-        public void UpdateUser(string organizationKey, string userKey, UpdateUserModel model) =>
+        public void UpdateUser(string organizationKey, string userKey, UpdateUserModel model)
+        {
             executionEngine.Send(new UpdateUser(CurrentClaims.UserId, organizationKey, userKey)
             {
-                DisplayName = model.DisplayName, Email = model.Email, Password = model.Password
+                DisplayName = model.DisplayName,
+                Email = model.Email,
+                Password = model.Password
             });
+        }
 
         [Secured, Administrators, HttpPost, Route(COLLECTION_URL)]
         public string RegisterUser(string organizationKey, RegisterUserModel model)

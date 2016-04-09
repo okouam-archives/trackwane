@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -123,13 +124,13 @@
       <Project>{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}</Project>
       <Name>Framework.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Contracts.csproj">
+      <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>
+      <Name>AccessControl.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{53b04bb7-734f-4a79-a73a-579f75082a67}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Contracts.fsproj">
-      <Project>{7b154357-2f9b-437c-90b3-c1e6c6fd36dd}</Project>
-      <Name>AccessControl.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -549,11 +550,6 @@
       <ItemGroup>
         <Reference Include="Raven.Abstractions">
           <HintPath>..\..\..\packages\RavenDB.Database\lib\net45\Raven.Abstractions.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="Raven.Database">
-          <HintPath>..\..\..\packages\RavenDB.Database\lib\net45\Raven.Database.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

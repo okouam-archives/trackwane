@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using HashidsNet;
+using Trackwane.AccessControl.Contracts.Models;
 using Trackwane.AccessControl.Engine.Commands.Organizations;
 using Trackwane.AccessControl.Engine.Queries.Organizations;
-using Trackwane.AccessControl.Models;
-using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Web.Security;
@@ -24,24 +23,34 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, Administrators, HttpGet, Route("organizations/{organizationKey}")]
-        public OrganizationDetails FindById(string organizationKey) =>
-            executionEngine.Query<FindByKey>(organizationKey).Execute();
+        public OrganizationDetails FindById(string organizationKey)
+        {
+            return executionEngine.Query<FindByKey>(organizationKey).Execute();
+        }
 
         [Secured, SystemManagers, HttpGet, Route("organizations")]
-        public List<OrganizationDetails> Find() =>
-            executionEngine.Query<Find>().Execute();
+        public List<OrganizationDetails> Find()
+        {
+            return executionEngine.Query<Find>().Execute();
+        }
 
         [Secured, Administrators, HttpGet, Route("organizations/count")]
-        public int Count() =>
-            executionEngine.Query<Count>().Execute();
-        
+        public int Count()
+        {
+            return executionEngine.Query<Count>().Execute();
+        }
+
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}/users/{userKey}/view")]
-        public void GrantViewPermission(string organizationKey, string userKey) =>
+        public void GrantViewPermission(string organizationKey, string userKey)
+        {
             executionEngine.Send(new GrantViewPermission(CurrentClaims.UserId, organizationKey, userKey));
-        
+        }
+           
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}/users/{userKey}/manage")]
-        public void GrantManagePermission(string organizationKey, string userKey) =>
+        public void GrantManagePermission(string organizationKey, string userKey)
+        {
             executionEngine.Send(new GrantManagePermission(CurrentClaims.UserId, organizationKey, userKey));
+        }
         
         [Secured, Administrators, HttpDelete, Route("organizations/{organizationKey}/users/{userKey}/view")]
         public void RevokeViewPermission(string organizationKey, string userKey)
@@ -62,8 +71,10 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, SystemManagers, HttpDelete, Route("organizations/{organizationKey}")]
-        public void ArchiveOrganization(string organizationKey) =>
+        public void ArchiveOrganization(string organizationKey)
+        {
             executionEngine.Send(new ArchiveOrganization(CurrentClaims.UserId, organizationKey));
+        }
 
         [Secured, SystemManagers, HttpPost, Route("organizations")]
         public string RegisterOrganization(RegisterOrganizationModel model)
@@ -75,7 +86,6 @@ namespace Trackwane.AccessControl.Engine.Controllers
             return cmd.OrganizationKey;
         }
       
-        
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}")]
         public void UpdateOrganization(string organizationKey, UpdateOrganizationModel model)
         {

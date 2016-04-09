@@ -12,7 +12,7 @@ namespace Trackwane.Framework.Web.DependencyResolution
 
         public WebApiDependencyResolver(IContainer container, bool isNestedResolver)
         {
-            if (container == null) throw new ArgumentNullException(nameof(container));
+            if (container == null) throw new ArgumentNullException("container");
 
             this.container = container;
             this.isNestedResolver = isNestedResolver;
@@ -22,7 +22,7 @@ namespace Trackwane.Framework.Web.DependencyResolution
         {
             if (disposed) throw new ObjectDisposedException("WebApiDependencyResolver");
 
-            if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
+            if (serviceType == null) throw new ArgumentNullException("serviceType");
 
             if (serviceType.IsAbstract || serviceType.IsInterface)
             {

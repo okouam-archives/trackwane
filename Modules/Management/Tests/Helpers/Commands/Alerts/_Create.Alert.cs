@@ -10,7 +10,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationKey, string key, string name)
             {
-                Client.Use(claims).CreateAlert(organizationKey, name, new CreateAlertModel(key, name));
+                Client.Use(claims).CreateAlert(organizationKey, name, new CreateAlertModel {Key = key, Name = name});
             }
 
             public static void With(UserClaims claims, string organizationKey, string key)

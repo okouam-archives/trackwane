@@ -4,7 +4,7 @@ namespace Trackwane.Management.Engine.Commands.Boundaries
 {
     public class ArchiveBoundary : UserCommand
     {
-        public string BoundaryId { get; }
+        public string BoundaryId { get; private set; }
 
         public ArchiveBoundary(string requesterId, string organizationId, string boundaryId) : base(requesterId)
         {
@@ -12,6 +12,6 @@ namespace Trackwane.Management.Engine.Commands.Boundaries
             OrganizationId = organizationId;
         }
 
-        public string OrganizationId { get; }
+        public string OrganizationId { get; private set; }
     }
 }

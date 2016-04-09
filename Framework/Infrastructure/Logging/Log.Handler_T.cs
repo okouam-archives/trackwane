@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Framework.Common;
@@ -18,11 +19,11 @@ namespace Trackwane.Framework.Infrastructure.Logging
         {
             if (msg is SystemCommand)
             {
-                Logger.Debug($"Received <{msg.GetType().Name}> command: \r\n" + JsonConvert.SerializeObject(msg, Formatting.Indented));
+                Logger.Debug(string.Format("{0}{1}", String.Format("Received <{0}> command: \r\n", msg.GetType().Name), JsonConvert.SerializeObject(msg, Formatting.Indented)));
             }
             else if (msg is DomainEvent)
             {
-                Logger.Debug($"Received <{msg.GetType().Name}> event: \r\n" + JsonConvert.SerializeObject(msg, Formatting.Indented));
+                Logger.Debug(String.Format("Received <{0}> event: \r\n", msg.GetType().Name) + JsonConvert.SerializeObject(msg, Formatting.Indented));
             }
 
             var result = base.Handle(msg);

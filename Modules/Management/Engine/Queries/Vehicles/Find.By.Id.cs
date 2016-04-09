@@ -40,7 +40,15 @@ namespace Trackwane.Management.Engine.Queries.Vehicles
                     }
                 }
 
-                return new VehicleDetails(vehicle.IsArchived, vehicle.OrganizationKey, vehicle.DriverId, vehicle.TrackerId, trackerHardwareId, vehicle.Identifier, driverName);
+                return new VehicleDetails {
+                    IsArchived = vehicle.IsArchived,
+                    OrganizationId = vehicle.OrganizationKey,
+                    DriverId = vehicle.DriverId,
+                    TrackerId = vehicle.TrackerId,
+                    TrackerHardwareId = trackerHardwareId,
+                    Identifier = vehicle.Identifier,
+                    DriverName = driverName
+                };
             });
         }
 

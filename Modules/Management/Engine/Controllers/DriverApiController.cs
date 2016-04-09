@@ -33,19 +33,27 @@ namespace Trackwane.Management.Engine.Controllers
         }
 
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
-        public DriverDetails FindById(string organizationKey, string key) =>
-            dispatcher.Query<FindById>(organizationKey).Execute(key);
+        public DriverDetails FindById(string organizationKey, string key)
+        {
+            return dispatcher.Query<FindById>(organizationKey).Execute(key);
+        }
 
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
-        public ResponsePage<DriverSummary> FindBySearchCriteria(string organizationKey, string name) =>
-            dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(name);
+        public ResponsePage<DriverSummary> FindBySearchCriteria(string organizationKey, string name)
+        {
+            return dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(name);
+        }
 
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
-        public void ArchiveDriver(string organizationKey, string key) =>
+        public void ArchiveDriver(string organizationKey, string key)
+        {
             dispatcher.Send(new ArchiveDriver(CurrentClaims.UserId, organizationKey, key));
+        }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
-        public void CreateDriver(string organizationKey, CreateDriverModel model) =>
+        public void CreateDriver(string organizationKey, CreateDriverModel model)
+        {
             dispatcher.Send(new RegisterDriver(CurrentClaims.UserId, organizationKey, model.Name, model.Key));
+        }
     }
 }

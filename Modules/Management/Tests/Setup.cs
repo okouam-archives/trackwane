@@ -42,7 +42,10 @@ namespace Trackwane.Management.Tests
         }
 
         [OneTimeTearDown]
-        public void RunAfterAllTests() => EngineHost.Stop();
+        public void RunAfterAllTests()
+        {
+            EngineHost.Stop();
+        }
     }
 }
 

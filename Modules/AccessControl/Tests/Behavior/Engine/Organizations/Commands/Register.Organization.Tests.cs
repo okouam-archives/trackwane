@@ -1,8 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
 using Shouldly;
+using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.AccessControl.Engine.Queries.Organizations;
-using Trackwane.AccessControl.Events;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Fixtures;
 
@@ -69,8 +69,10 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
 
             Assert.Throws<BusinessRuleException>(() =>
             {
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY_A, $"Test Org {ORGANIZATION_KEY_A}");
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY_B, $"Test Org {ORGANIZATION_KEY_A}");
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY_A,
+                    String.Format("Test Org {0}", ORGANIZATION_KEY_A));
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY_B,
+                    String.Format("Test Org {0}", ORGANIZATION_KEY_A));
             });
         }
     }

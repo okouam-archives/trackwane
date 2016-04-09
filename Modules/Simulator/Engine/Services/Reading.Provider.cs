@@ -21,7 +21,8 @@ namespace Trackwane.Simulator.Engine.Services
         {
             if (items.Length > 10) throw new Exception("No more than 10 items can be requested at any time");
 
-            var url = $"{config.ConsumerUri}/getvehicles?key={config.ApiKey}&{type}={string.Join(",", items)}";
+            var url = String.Format("{0}/getvehicles?key={1}&{2}={3}", config.ConsumerUri, config.ApiKey, type,
+                string.Join(",", items));
 
             log.Debug(url);
 

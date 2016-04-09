@@ -6,9 +6,9 @@ namespace Trackwane.Management.Engine.Commands.Drivers
     {
         public string DriverKey { get; set;  }
 
-        public string OrganizationKey { get; }
+        public string OrganizationKey { get; private set; }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
         public RegisterDriver(string requesterId, string organizationKey, string name, string driverKey) : base(requesterId)
         {

@@ -4,11 +4,11 @@ namespace Trackwane.Management.Engine.Commands.Vehicles
 {
     public class UpdateVehicle : UserCommand
     {
-        public string VehicleKey { get; }
+        public string VehicleKey { get; private set; }
 
-        public string Identifier { get; }
+        public string Identifier { get; private set; }
 
-        public string OrganizationKey { get; }
+        public string OrganizationKey { get; private set; }
 
         public UpdateVehicle(string requesterId, string organizationKey, string vehicleKey, string identifier) : base(requesterId)
         {

@@ -6,8 +6,10 @@ namespace Trackwane.Management.Tests.Helpers
     {
         protected class _Archive_Vehicle
         {
-            public static void With(UserClaims claims, string organizationId, string vehicleId) =>
+            public static void With(UserClaims claims, string organizationId, string vehicleId)
+            {
                 Client.Use(claims).ArchiveVehicle(organizationId, vehicleId);
+            }
         }
     }
 }

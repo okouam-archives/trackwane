@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Trackwane.Data.Contracts;
 using Trackwane.Data.Engine;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
@@ -34,7 +35,10 @@ namespace Trackwane.Data.Tests
         }
 
         [OneTimeTearDown]
-        public void RunAfterAllTests() => EngineHost.Stop();
+        public void RunAfterAllTests()
+        {
+            EngineHost.Stop();
+        }
     }
 }
 

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Embedded;
-using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
 

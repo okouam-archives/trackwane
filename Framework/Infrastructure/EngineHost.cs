@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http.SelfHost;
+using log4net;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using paramore.brighter.serviceactivator;
-using Serilog;
 using StructureMap;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Interfaces;
@@ -16,10 +16,11 @@ namespace Trackwane.Framework.Infrastructure
         private readonly IServiceLocator<T> locator;
         private HttpSelfHostServer web;
         private Dispatcher dispatcher;
+        private readonly ILog log = LogManager.GetLogger(typeof(EngineHost<T>));
 
         /* Public */
 
-       public IExecutionEngine ExecutionEngine { get; set; }
+        public IExecutionEngine ExecutionEngine { get; set; }
 
         public IEngineHostConfig Configuration { get; set; }
 
@@ -33,21 +34,21 @@ namespace Trackwane.Framework.Infrastructure
         {
             if (Configuration.Events == null)
             {
-                Log.Warning("The engine will not listen for events given no event definitions have been provided");
+                log.Warn("The engine will not listen for events given no event definitions have been provided");
 
                 if (Configuration.Listeners == null)
                 {
-                    Log.Warning("The engine will not listen for events given no event listeners have been provided");
+                    log.Warn("The engine will not listen for events given no event listeners have been provided");
                 }
             }
 
             if (Configuration.Handlers == null)
             {
-                Log.Warning("The engine will not listen for commands given no handlers have been provided for the API");
+                log.Warn("The engine will not listen for commands given no handlers have been provided for the API");
 
                 if (Configuration.ListenUri == null)
                 {
-                    Log.Warning("The engine will not listen for commands given no URI has been provided for the API");
+                    log.Warn("The engine will not listen for commands given no URI has been provided for the API");
                 }
             }
 
@@ -99,6 +100,8 @@ namespace Trackwane.Framework.Infrastructure
 
         private void StartDispatcher(IContainer container, MapperFactory mapperFactory)
         {
+            log.Info("Starting the Command Dispatcher");
+
             var commandProcessor = container.GetInstance<IAmACommandProcessor>();
             
             var inputChannelFactory = new InputChannelFactory(new RmqMessageConsumerFactory(), new RmqMessageProducerFactory());
@@ -123,12 +126,16 @@ namespace Trackwane.Framework.Infrastructure
                     .Build();
 
             dispatcher.Receive();
+
+            log.Info("The Command Dispatcher has been started");
         }
 
         private void StartWebApi(IContainer container)
         {
+            log.Info("Starting the Web API");
             web = WebApiBootstrapper.CreateServer(container, Configuration.ListenUri.OriginalString);
             web.OpenAsync().Wait();
+            log.Info("The Web API is start and waiting for connections");
         }
 
         private void StopDispatcher()

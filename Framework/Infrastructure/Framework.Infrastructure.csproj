@@ -35,6 +35,9 @@
     <Reference Include="FluentValidation">
       <HintPath>..\..\packages\FluentValidation\lib\Net45\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -47,9 +50,6 @@
     </Reference>
     <Reference Include="Raven.Database">
       <HintPath>..\..\packages\RavenDB.Database\lib\net45\Raven.Database.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog">
-      <HintPath>..\..\packages\Serilog\lib\net45\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
@@ -201,25 +201,9 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
-      <ItemGroup>
-        <Reference Include="Serilog.FullNetFx">
-          <HintPath>..\..\packages\Serilog\lib\net45\Serilog.FullNetFx.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'" />
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
-      <ItemGroup>
-        <Reference Include="Serilog.Sinks.Seq">
-          <HintPath>..\..\packages\Serilog.Sinks.Seq\lib\net45\Serilog.Sinks.Seq.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'" />
   </Choose>
 </Project>

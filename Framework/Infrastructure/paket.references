@@ -6,5 +6,4 @@ RabbitMQ.Client
 RavenDB.Client
 RavenDB.Database content: none
 structuremap
-Serilog.Sinks.Seq
 Microsoft.AspNet.WebApi.Core

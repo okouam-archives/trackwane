@@ -36,6 +36,6 @@ namespace Trackwane.AccessControl.Service
             host.Stop();
         }
 
-        static ILog log = LogManager.GetLogger("Trackwane.AccessControl");
+        static readonly ILog log = LogManager.GetLogger("Trackwane.AccessControl");
     }
 }

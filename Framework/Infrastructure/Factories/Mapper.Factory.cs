@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 using paramore.brighter.commandprocessor;
-using Serilog;
 using StructureMap;
 using Trackwane.Framework.Infrastructure.Requests;
 
@@ -11,6 +11,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
     public class MapperFactory : IAmAMessageMapperFactory
     {
         private readonly IContainer container;
+        private readonly ILog log = LogManager.GetLogger(typeof(MapperFactory));
 
         public MapperFactory(IContainer container)
         {
@@ -44,12 +45,12 @@ namespace Trackwane.Framework.Infrastructure.Factories
                 {
                     var target = typeof (RequestMapper<>).MakeGenericType(cmd);
                     registry.Add(cmd, target);
-                    Log.Debug(String.Format("Added a message mapper for <{0}>", cmd.Name));
+                    log.Debug(String.Format("Added a message mapper for <{0}>", cmd.Name));
                 }
             }
             else
             {
-                Log.Warning("No assembly was provided to register message mappers for commands");
+                log.Warn("No assembly was provided to register message mappers for commands");
             }
 
             if (events != null && events.Any())
@@ -58,12 +59,12 @@ namespace Trackwane.Framework.Infrastructure.Factories
                 {
                     var target = typeof (RequestMapper<>).MakeGenericType(evt);
                     registry.Add(evt, target);
-                    Log.Debug(String.Format("Added a message mapper for <{0}>", evt.Name));
+                    log.Debug(String.Format("Added a message mapper for <{0}>", evt.Name));
                 }
             }
             else
             {
-                Log.Warning("No assembly was provided to register message mappers for events");
+                log.Warn("No assembly was provided to register message mappers for events");
             }
 
             return registry;

@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+ 
+  nginx: 
+    image: nginx
+
+  postgres:
+    image: postgres
+
+  rabbitmq:
+    image: rabbitmq
+      

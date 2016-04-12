@@ -104,7 +104,9 @@ namespace Trackwane.Framework.Infrastructure
 
             var commandProcessor = container.GetInstance<IAmACommandProcessor>();
             
-            var inputChannelFactory = new InputChannelFactory(new RmqMessageConsumerFactory(), new RmqMessageProducerFactory());
+            var consumerFactory = new RmqMessageConsumerFactory();
+            var producerFactory = new RmqMessageProducerFactory();
+            var inputChannelFactory = new InputChannelFactory(consumerFactory, producerFactory);
 
             var connections = new List<Connection>();
 
@@ -140,14 +142,20 @@ namespace Trackwane.Framework.Infrastructure
 
         private void StopDispatcher()
         {
-            dispatcher.End().Wait();
-            dispatcher = null;
+            if (dispatcher != null)
+            {
+                dispatcher.End().Wait();
+                dispatcher = null;
+            }
         }
 
         private void StopWebApi()
         {
-            web.CloseAsync().Wait();
-            web = null;
+            if (web != null)
+            {
+                web.CloseAsync().Wait();
+                web = null;
+            }
         }
     }
 }

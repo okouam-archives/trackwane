@@ -11,7 +11,7 @@ namespace Trackwane.Management.Contracts
 {
     public class ManagementContext : ContextClient<ManagementContext>
     {
-        public ManagementContext(string baseUrl, IConfig config) : base(baseUrl, config)
+        public ManagementContext(string baseUrl, IPlatformConfig config) : base(baseUrl, config)
         {
         }
 

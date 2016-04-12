@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
 using Trackwane.AccessControl.Contracts;
+using Trackwane.AccessControl.Engine;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Interfaces;
 
@@ -36,7 +37,7 @@ namespace Trackwane.AccessControl.Tests
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new AccessControlContext(Setup.EngineHost.Configuration.ListenUri.ToString(), new Config());
+            Client = new AccessControlContext(Setup.EngineHost.Configuration.ListenUri.ToString(), new PlatformConfig());
 
             EngineHost.ExecutionEngine.MessageProcessed += (o, request) => Processed.Add(request);
 

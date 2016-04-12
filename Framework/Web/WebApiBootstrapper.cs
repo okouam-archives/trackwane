@@ -29,7 +29,7 @@ namespace Trackwane.Framework.Web
         {
             configuration.EnableSwagger(c =>
             {
-                c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
+                //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
                 c.SingleApiVersion("v1", "Trackwane API");
                 c.UseFullTypeNameInSchemaIds();
             }).EnableSwaggerUi();

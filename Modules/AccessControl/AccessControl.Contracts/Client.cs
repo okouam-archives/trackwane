@@ -6,7 +6,7 @@ namespace Trackwane.AccessControl.Contracts
 {
     public class AccessControlContext : ContextClient<AccessControlContext>
     {
-        public AccessControlContext(string baseUrl, IConfig config) : base(baseUrl, config)
+        public AccessControlContext(string baseUrl, IPlatformConfig config) : base(baseUrl, config)
         {
 
         }

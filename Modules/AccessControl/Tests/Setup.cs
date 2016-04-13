@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
+using Trackwane.AccessControl.Contracts;
 using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.AccessControl.Engine;
 using Trackwane.AccessControl.Engine.Commands.Users;
@@ -23,16 +25,11 @@ namespace Trackwane.AccessControl.Tests
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
-            var serviceLocationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new ModuleConfig(typeof(_Access_Control_Engine_Assembly_).Assembly)));
+            var engine = typeof (_Access_Control_Engine_Assembly_).Assembly;
 
-            EngineHost = new EngineHost<Registry>(new ServiceLocator<Registry>(serviceLocationFactory), new EngineHostConfig
-            {
-                ListenUri = new Uri("http://localhost:8343"),
-                Events = typeof(UserArchived).Assembly.GetDomainEvents(),
-                Handlers = typeof(ArchiveUserHandler).Assembly.GetHandlers(),
-                Commands = typeof(ArchiveUser).Assembly.GetCommands(),
-                Listeners = typeof(UserArchivedListener).Assembly.GetListeners()
-            });
+            var module = new ModuleConfig(engine);
+
+            EngineHost = new EngineHost<Registry>(module, engine, typeof(_Access_Control_Contracts_Assembly_).Assembly.GetDomainEvents().ToArray());
 
             EngineHost.Start();
         }

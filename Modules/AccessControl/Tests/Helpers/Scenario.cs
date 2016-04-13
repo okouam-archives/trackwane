@@ -36,7 +36,7 @@ namespace Trackwane.AccessControl.Tests
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new AccessControlContext(Setup.EngineHost.Configuration.ListenUri.ToString(), new PlatformConfig());
+            Client = new AccessControlContext(Setup.EngineHost.Configuration.Get("uri"), new PlatformConfig());
 
             EngineHost.ExecutionEngine.MessageProcessed += (o, request) => Processed.Add(request);
 

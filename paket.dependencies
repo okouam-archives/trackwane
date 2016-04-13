@@ -8,6 +8,7 @@ nuget Geo
 nuget Hashids.net
 nuget JWT
 nuget log4net
+nuget Marten
 nuget Microsoft.AspNet.WebApi
 nuget Microsoft.AspNet.WebApi.Core
 nuget Microsoft.AspNet.WebApi.Cors
@@ -16,6 +17,7 @@ nuget Microsoft.Net.Http
 nuget NUnit
 nuget NUnit.Console
 nuget Polly
+nuget prometheus-net
 nuget RabbitMQ.Client
 nuget RavenDB.Database content: none
 nuget RestSharp

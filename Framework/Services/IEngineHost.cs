@@ -1,8 +1,10 @@
+using Trackwane.Framework.Common.Interfaces;
+
 namespace Trackwane.Framework.Interfaces
 {
     public interface IEngineHost
     {
-        IEngineHostConfig Configuration { get; }
+        IModuleConfig Configuration { get; }
 
         IExecutionEngine ExecutionEngine { get; }
 

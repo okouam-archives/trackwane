@@ -8,3 +8,5 @@ RavenDB.Database content: none
 structuremap
 Microsoft.AspNet.WebApi.Core
 Swashbuckle
+prometheus-net
+Marten

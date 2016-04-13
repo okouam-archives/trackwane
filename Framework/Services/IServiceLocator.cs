@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using paramore.brighter.commandprocessor;
 using StructureMap;
 
@@ -7,7 +8,7 @@ namespace Trackwane.Framework.Interfaces
 {
     public interface IServiceLocator<T> where T : Registry, new()
     {
-        SubscriberRegistry GetSubscribers(IEnumerable<Type> listeners, IEnumerable<Type> handlers, IEnumerable<Type> events, IEnumerable<Type> commands);
+        SubscriberRegistry GetSubscribers(Assembly engine, IEnumerable<Type> events);
 
         IContainer GetContainer();
     }

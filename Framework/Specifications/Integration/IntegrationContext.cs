@@ -5,7 +5,7 @@ namespace Trackwane.Framework.Integration
 {
     internal class IntegrationContext : ContextClient<IntegrationContext>
     {
-        public IntegrationContext(string baseUrl) : base(baseUrl, new Config())
+        public IntegrationContext(string baseUrl) : base(baseUrl, new PlatformConfig())
         {
         }
 

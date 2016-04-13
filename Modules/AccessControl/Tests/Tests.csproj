@@ -42,7 +42,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +101,10 @@
     <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Web\Framework.Web.csproj">
+      <Project>{a0bd1aed-a6f4-4ee0-b77b-5c0c0e5fe61b}</Project>
+      <Name>Framework.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Contracts.csproj">
       <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>
@@ -195,6 +198,9 @@
         <Reference Include="System.Net.Http.Formatting">
           <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client\lib\net45\System.Net.Http.Formatting.dll</HintPath>
           <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Net.Http">
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>

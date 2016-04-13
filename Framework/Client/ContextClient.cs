@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Configuration;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using Trackwane.Framework.Common;
-using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Common.Interfaces;
 
@@ -14,10 +12,10 @@ namespace Trackwane.Framework.Client
     public abstract class ContextClient<T> where T : class
     {
         private readonly string baseUrl;
-        private readonly IConfig config;
+        private readonly IPlatformConfig config;
         protected RestClient client;
 
-        protected ContextClient(string baseUrl, IConfig config)
+        protected ContextClient(string baseUrl, IPlatformConfig config)
         {
             this.baseUrl = baseUrl;
             this.config = config;
@@ -28,7 +26,7 @@ namespace Trackwane.Framework.Client
             if (userClaims != null)
             {
                 client = new RestClient(baseUrl);
-                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.GetPlatformKey("secret-key"))}");
+                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.Get("secret-key"))}");
             }
 
             return this as T;

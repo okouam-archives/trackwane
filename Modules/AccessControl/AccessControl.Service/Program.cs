@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using log4net;
 using log4net.Config;
 using Trackwane.AccessControl.Engine;
@@ -15,19 +16,25 @@ namespace Trackwane.AccessControl.Service
         {
             BasicConfigurator.Configure();
 
-            var assembly = typeof (_Access_Control_Engine_Assembly_).Assembly;
-
-            var config = new EngineHostConfig(assembly.GetCommands(), assembly.GetDomainEvents(), assembly.GetHandlers(), assembly.GetListeners(), new Uri("http://localhost:8373"));
-
-            var locator = new ServiceLocator<Engine.Registry>(new ServiceLocationFactory(new DocumentStoreBuilder(new Config())));
-
-            var host = new EngineHost<Engine.Registry>(locator, config);
-
             log.Info("Starting Trackwane.AccessControl");
 
+            var assembly = typeof(_Access_Control_Engine_Assembly_).Assembly;
+
+            var moduleConfig = new ModuleConfig(assembly);
+            
+            log.Info("Running the service for module <" + moduleConfig.ModuleName + ">");
+
+            log.Info("Using the etcd instance located at <" + moduleConfig.Etcd + ">");
+
+            var config = new EngineHostConfig(assembly.GetCommands(), assembly.GetDomainEvents(), assembly.GetHandlers(), assembly.GetListeners(), new Uri(moduleConfig.Get("uri")));
+
+            var locator = new ServiceLocator<Engine.Registry>(new ServiceLocationFactory(new DocumentStoreBuilder(moduleConfig)));
+
+            var host = new EngineHost<Engine.Registry>(locator, config);
+            
             host.Start();
 
-            log.Info("Trackwane.AccessControl is running and waiting for connections");
+            log.Info("Listening for connections at <" + moduleConfig.Get("uri") + ">");
 
             Console.ReadLine();
 

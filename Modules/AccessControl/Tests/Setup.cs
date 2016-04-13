@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Trackwane.AccessControl.Contracts.Events;
+using Trackwane.AccessControl.Engine;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Processors.Handlers.Users;
 using Trackwane.AccessControl.Engine.Processors.Listeners;
@@ -22,7 +23,7 @@ namespace Trackwane.AccessControl.Tests
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
-            var serviceLocationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new Config()));
+            var serviceLocationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new ModuleConfig(typeof(_Access_Control_Engine_Assembly_).Assembly)));
 
             EngineHost = new EngineHost<Registry>(new ServiceLocator<Registry>(serviceLocationFactory), new EngineHostConfig
             {

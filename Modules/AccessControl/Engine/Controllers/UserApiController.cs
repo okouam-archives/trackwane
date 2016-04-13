@@ -15,9 +15,9 @@ namespace Trackwane.AccessControl.Engine.Controllers
         private const string RESOURCE_URL = "organizations/{organizationKey}/users/{userKey}";
         private const string COLLECTION_URL = "organizations/{organizationKey}/users";
         private readonly IExecutionEngine executionEngine;
-        private readonly IConfig config;
+        private readonly IPlatformConfig config;
 
-        public UserApiController(IExecutionEngine executionEngine, IConfig config)
+        public UserApiController(IExecutionEngine executionEngine, IPlatformConfig config)
         {
             this.executionEngine = executionEngine;
             this.config = config;
@@ -37,7 +37,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
                 Email = model.Email,
                 DisplayName = model.DisplayName,
                 Password = model.Password,
-                UserKey = new Hashids(config.GetPlatformKey("secret-key")).EncodeLong(DateTime.Now.Ticks)
+                UserKey = new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks)
             };
 
             executionEngine.Send(cmd);
@@ -48,7 +48,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, HttpGet, Route("users/{userKey}")]
         public UserDetails FindById(string userKey)
         {
-            return executionEngine.Query<FindByKey>().Execute(userKey);;
+            return executionEngine.Query<FindByKey>().Execute(userKey);
         }
 
         [Secured, Administrators, HttpDelete, Route(RESOURCE_URL)]
@@ -72,7 +72,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         public string RegisterUser(string organizationKey, RegisterUserModel model)
         {
             var cmd = new RegisterUser(CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
-            cmd.UserKey = cmd.UserKey ?? new Hashids(config.GetPlatformKey("secret-key")).EncodeLong(DateTime.Now.Ticks);
+            cmd.UserKey = cmd.UserKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Send(cmd);
             return cmd.UserKey;
         }

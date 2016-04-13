@@ -1,38 +1,30 @@
 ﻿using System;
-using System.Configuration;
 using etcetera;
-using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Common.Configuration
 {
-    public class Config : IConfig
+    public abstract class Config
     {
-        private readonly EtcdClient client;
-        private readonly string env;
-        private readonly string module;
+        protected readonly EtcdClient client;
 
-        public Config()
+        protected Config()
         {
-            client = new EtcdClient(new Uri(ConfigurationManager.AppSettings["etcd"]));
-            module = ConfigurationManager.AppSettings["module"];
-            env = ConfigurationManager.AppSettings["env"];
+            client = new EtcdClient(new Uri(Etcd));
         }
 
-        public string GetModuleKey(string key)
+        public string Etcd
         {
-            var response = client.Get("trackwane/" + env + "/modules/" + module + "/" + key);
-            return response.Node.Value;
-        }
+            get
+            {
+                var uri = Environment.GetEnvironmentVariable("TRACKWANE_ETCD");
 
-        public void SetModuleKey(string key, string value)
-        {
-            client.Set("trackwane/" + env + "/modules/" + module + "/" + key, value);
-        }
+                if (string.IsNullOrWhiteSpace(uri))
+                {
+                    throw new Exception("The environment variable TRACKWANE_ETCD needs to be available and point to a etcd instance");
+                }
 
-        public string GetPlatformKey(string key)
-        {
-            var response = client.Get("trackwane/" + env + "/platform/" + key);
-            return response.Node.Value;
+                return uri;
+            }
         }
     }
 }

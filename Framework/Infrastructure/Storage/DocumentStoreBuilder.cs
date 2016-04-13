@@ -10,9 +10,9 @@ namespace Trackwane.Framework.Infrastructure.Storage
 {
     public class DocumentStoreBuilder : IDocumentStoreBuilder
     {
-        private readonly IConfig config;
+        private readonly IModuleConfig config;
 
-        public DocumentStoreBuilder(IConfig config)
+        public DocumentStoreBuilder(IModuleConfig config)
         {
             this.config = config;
         }
@@ -21,7 +21,7 @@ namespace Trackwane.Framework.Infrastructure.Storage
         {
             IDocumentStore store;
 
-            if (bool.Parse(config.GetModuleKey("document-store/use-embedded")))
+            if (bool.Parse(config.Get("document-store/use-embedded")))
             {
                 store = new EmbeddableDocumentStore
                 {
@@ -32,9 +32,9 @@ namespace Trackwane.Framework.Infrastructure.Storage
             {
                 store = new DocumentStore
                 {
-                    DefaultDatabase = config.GetModuleKey("document-store/name"),
-                    Url = config.GetModuleKey("document-store/url"),
-                    ApiKey = config.GetModuleKey("document-store/api-key")
+                    DefaultDatabase = config.Get("document-store/name"),
+                    Url = config.Get("document-store/url"),
+                    ApiKey = config.Get("document-store/api-key")
                 };
             }
 

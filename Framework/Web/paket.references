@@ -9,3 +9,4 @@ Newtonsoft.Json
 structuremap
 Serilog.Sinks.Seq
 Swashbuckle.Core
+Microsoft.Net.Http

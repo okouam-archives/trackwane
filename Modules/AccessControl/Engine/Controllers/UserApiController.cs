@@ -48,7 +48,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, HttpGet, Route("users/{userKey}")]
         public UserDetails FindById(string userKey)
         {
-            return executionEngine.Query<FindByKey>().Execute(userKey);;
+            return executionEngine.Query<FindByKey>().Execute(userKey);
         }
 
         [Secured, Administrators, HttpDelete, Route(RESOURCE_URL)]

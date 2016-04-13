@@ -7,3 +7,4 @@ RavenDB.Client
 RavenDB.Database content: none
 structuremap
 Microsoft.AspNet.WebApi.Core
+Swashbuckle

@@ -177,10 +177,6 @@
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Framework\Web\Framework.Web.csproj">
-      <Project>{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}</Project>
-      <Name>Framework.Web</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\AccessControl\AccessControl.Contracts\AccessControl.Contracts.csproj">
       <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>
       <Name>AccessControl.Contracts</Name>

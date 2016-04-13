@@ -21,6 +21,7 @@ nuget RavenDB.Database content: none
 nuget RestSharp
 nuget Shouldly
 nuget structuremap
+nuget Swashbuckle
 nuget WebActivatorEx
 nuget etcetera
 nuget Serilog.Sinks.Seq

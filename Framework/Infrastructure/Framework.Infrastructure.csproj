@@ -78,7 +78,6 @@
     </Compile>
     <Compile Include="Assembly.Extensions.cs" />
     <Compile Include="Base.Validator.cs" />
-    <Compile Include="ClusterHost.cs" />
     <Compile Include="EngineHost.cs" />
     <Compile Include="EngineHostConfig.cs" />
     <Compile Include="Factories\Connection.Factory.cs" />
@@ -108,6 +107,18 @@
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Validation\Validate.Attribute.cs" />
     <Compile Include="Validation\Validate.Handler.cs" />
+    <Compile Include="Web\AddAuthorizationHeaderParameterOperationFilter.cs" />
+    <Compile Include="Web\DependencyResolution\WebApiDependencyResolver.cs" />
+    <Compile Include="Web\Filters\BusinessRuleExceptionFilter.cs" />
+    <Compile Include="Web\Filters\LoggingFilter.cs" />
+    <Compile Include="Web\Filters\ValidationExceptionFilter.cs" />
+    <Compile Include="Web\Security\Administrators.Attribute.cs" />
+    <Compile Include="Web\Security\BaseApiController.cs" />
+    <Compile Include="Web\Security\Managers.Attribute.cs" />
+    <Compile Include="Web\Security\Platform.Authorization.Filter.Attribute.cs" />
+    <Compile Include="Web\Security\Secured.Attribute.cs" />
+    <Compile Include="Web\Security\System.Managers.Attribute.cs" />
+    <Compile Include="Web\Security\Viewers.Attribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
@@ -132,10 +143,6 @@
     <ProjectReference Include="..\Services\Framework.Interfaces.csproj">
       <Project>{4545aa51-b436-4d91-bcde-19afcb294f5c}</Project>
       <Name>Framework.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Web\Framework.Web.csproj">
-      <Project>{a0bd1aed-a6f4-4ee0-b77b-5c0c0e5fe61b}</Project>
-      <Name>Framework.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -172,6 +179,28 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
+        <Reference Include="System.Web.Http.WebHost">
+          <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.Web.Infrastructure">
+          <HintPath>..\..\packages\Microsoft.Web.Infrastructure\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
         <Reference Include="Polly">
           <HintPath>..\..\packages\Polly\lib\net45\Polly.dll</HintPath>
           <Private>True</Private>
@@ -195,6 +224,28 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
         <Reference Include="System.ComponentModel.Composition">
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="Swashbuckle.Core">
+          <HintPath>..\..\packages\Swashbuckle.Core\lib\net40\Swashbuckle.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="WebActivatorEx">
+          <HintPath>..\..\packages\WebActivatorEx\lib\net40\WebActivatorEx.dll</HintPath>
+          <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>

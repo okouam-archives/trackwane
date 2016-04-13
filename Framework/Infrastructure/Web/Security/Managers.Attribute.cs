@@ -1,9 +1,9 @@
-﻿using System.Web.Http.Controllers;
+using System.Web.Http.Controllers;
 using Trackwane.Framework.Common;
 
-namespace Trackwane.Framework.Web.Security
+namespace Trackwane.Framework.Infrastructure.Web.Security
 {
-    public class AdministratorsAttribute : PlatformAuthorizationFilterAttribute
+    public class ManagersAttribute : PlatformAuthorizationFilterAttribute
     {
         protected override bool Check(UserClaims userClaims, HttpActionContext actionContext)
         {
@@ -11,7 +11,7 @@ namespace Trackwane.Framework.Web.Security
 
             var organizationKey = GetOrganizationFromRouteData(actionContext);
 
-            return userClaims.CanAdministrate(organizationKey);
+            return userClaims.CanManage(organizationKey);
         }
     }
 }

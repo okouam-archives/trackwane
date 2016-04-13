@@ -8,6 +8,13 @@ namespace Trackwane.AccessControl.Contracts.Models
 {
     public class UserDetails
     {
+        public UserDetails()
+        {
+            View = new List<Tuple<string, string>>();
+            Manage = new List<Tuple<string, string>>();
+            Administrate = new List<Tuple<string, string>>();
+        }
+
         public string Key { get; set; }
 
         public string DisplayName { get; set; }
@@ -18,11 +25,11 @@ namespace Trackwane.AccessControl.Contracts.Models
 
         public string Role { get; set; }
 
-        public IList<Tuple<string, string>> View { get; set; } = new List<Tuple<string, string>>();
+        public IList<Tuple<string, string>> View { get; set; }
 
-        public IList<Tuple<string, string>> Manage { get; set; } = new List<Tuple<string, string>>();
+        public IList<Tuple<string, string>> Manage { get; set; }
 
-        public IList<Tuple<string, string>> Administrate { get; set; } = new List<Tuple<string, string>>();
+        public IList<Tuple<string, string>> Administrate { get; set; }
 
         public string ParentOrganizationKey { get; set; }
     }
@@ -70,17 +77,26 @@ namespace Trackwane.AccessControl.Contracts.Models
 
     public class OrganizationDetails
     {
+        public OrganizationDetails()
+        {
+            Viewers = new List<UserSummary>();
+
+            Managers = new List<UserSummary>();
+
+            Administrators = new List<UserSummary>();
+        }
+
         public string Key { get; set; }
 
         public string Name { get; set; }
 
         public bool IsArchived { get; set; }
 
-        public IList<UserSummary> Viewers { get; set; } = new List<UserSummary>();
+        public IList<UserSummary> Viewers { get; set; }
 
-        public IList<UserSummary> Managers { get; set; } = new List<UserSummary>();
+        public IList<UserSummary> Managers { get; set; }
 
-        public IList<UserSummary> Administrators { get; set; } = new List<UserSummary>();
+        public IList<UserSummary> Administrators { get; set; }
     }
 
     public class RegisterOrganizationModel

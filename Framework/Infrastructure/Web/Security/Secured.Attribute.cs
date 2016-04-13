@@ -9,7 +9,7 @@ using System.Web.Http.Results;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Configuration;
 
-namespace Trackwane.Framework.Web.Security
+namespace Trackwane.Framework.Infrastructure.Web.Security
 {
     public class SecuredAttribute : Attribute, IAuthenticationFilter
     {

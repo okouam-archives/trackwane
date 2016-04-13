@@ -2,11 +2,10 @@
 using System.Text;
 using System.Web.Http.Filters;
 using Newtonsoft.Json;
-using Trackwane.Framework.Common.Exceptions;
 
-namespace Trackwane.Framework.Web.Filters
+namespace Trackwane.Framework.Infrastructure.Web.Filters
 {
-    public class BusinessRuleExceptionFilter : ExceptionFilterAttribute
+    public class ValidationExceptionFilter : ExceptionFilterAttribute
     {
         /* Public */
 
@@ -14,7 +13,7 @@ namespace Trackwane.Framework.Web.Filters
         {
             var exception = actionExecutedContext.Exception;
 
-            if (exception is BusinessRuleException)
+            if (exception is FluentValidation.ValidationException)
             {
                 var responseContent = JsonConvert.SerializeObject(new
                 {

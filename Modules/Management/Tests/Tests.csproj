@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Web.config.install.xdt">
+      <Paket>True</Paket>
+    </Content>
+    <Content Include="Web.config.uninstall.xdt">
+      <Paket>True</Paket>
+    </Content>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
@@ -106,10 +112,6 @@
     <ProjectReference Include="..\..\..\Framework\Common\Framework.Common.csproj">
       <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Framework\Fixtures\Framework.Fixtures.csproj">
-      <Project>{B9E602CC-1A71-40B8-82A2-67761B671302}</Project>
-      <Name>Framework.Fixtures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
       <Project>{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}</Project>

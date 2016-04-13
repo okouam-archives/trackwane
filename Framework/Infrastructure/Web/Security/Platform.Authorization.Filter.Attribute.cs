@@ -6,7 +6,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Trackwane.Framework.Common;
 
-namespace Trackwane.Framework.Web.Security
+namespace Trackwane.Framework.Infrastructure.Web.Security
 {
     public abstract class PlatformAuthorizationFilterAttribute : AuthorizationFilterAttribute
     {

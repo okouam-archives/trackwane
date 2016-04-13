@@ -81,10 +81,6 @@
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Web\Framework.Web.csproj">
-      <Project>{A0BD1AED-A6F4-4EE0-B77B-5C0C0E5FE61B}</Project>
-      <Name>Framework.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

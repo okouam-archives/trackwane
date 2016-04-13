@@ -1,7 +1,7 @@
 ﻿using System.Web.Http.Controllers;
 using Trackwane.Framework.Common;
 
-namespace Trackwane.Framework.Web.Security
+namespace Trackwane.Framework.Infrastructure.Web.Security
 {
     public class SystemManagersAttribute : PlatformAuthorizationFilterAttribute
     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Http.SelfHost;
 using log4net;
 using paramore.brighter.commandprocessor;
@@ -6,8 +7,9 @@ using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using paramore.brighter.serviceactivator;
 using StructureMap;
 using Trackwane.Framework.Infrastructure.Factories;
+using Trackwane.Framework.Infrastructure.Web.DependencyResolution;
+using Trackwane.Framework.Infrastructure.Web.Filters;
 using Trackwane.Framework.Interfaces;
-using Trackwane.Framework.Web;
 
 namespace Trackwane.Framework.Infrastructure
 {
@@ -70,16 +72,21 @@ namespace Trackwane.Framework.Infrastructure
 
             container.AssertConfigurationIsValid();
 
+            if (Configuration.Handlers != null && Configuration.ListenUri != null)
+            {
+                log.Info("Starting the Web API");
+                web = CreateStandaloneServer(container, Configuration.ListenUri.OriginalString);
+                web.OpenAsync().Wait();
+                log.Info("The Web API is start and waiting for connections");
+            }
+
+
             if (Configuration.Listeners != null && Configuration.Events != null)
             {
                 StartDispatcher(container, mapperFactory);
             }
 
-            if (Configuration.Handlers != null && Configuration.ListenUri != null)
-            {
-                StartWebApi(container);
-            }
-
+     
             ExecutionEngine = container.GetInstance<IExecutionEngine>();
         }
 
@@ -131,15 +138,7 @@ namespace Trackwane.Framework.Infrastructure
 
             log.Info("The Command Dispatcher has been started");
         }
-
-        private void StartWebApi(IContainer container)
-        {
-            log.Info("Starting the Web API");
-            web = WebApiBootstrapper.CreateServer(container, Configuration.ListenUri.OriginalString);
-            web.OpenAsync().Wait();
-            log.Info("The Web API is start and waiting for connections");
-        }
-
+        
         private void StopDispatcher()
         {
             if (dispatcher != null)
@@ -156,6 +155,41 @@ namespace Trackwane.Framework.Infrastructure
                 web.CloseAsync().Wait();
                 web = null;
             }
+        }
+        
+        /* Private */
+
+        private static HttpSelfHostServer CreateStandaloneServer(IContainer container, string url)
+        {
+            var configuration = new HttpSelfHostConfiguration(url);
+            ApplyConfiguration(container, configuration);
+            return new HttpSelfHostServer(configuration);
+        }
+
+        private static void ApplyConfiguration(IContainer container, HttpConfiguration configuration)
+        {
+            //configuration.EnableSwagger(c =>
+            //{
+            //    //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
+            //    c.SingleApiVersion("v1", "Trackwane API");
+            //    c.UseFullTypeNameInSchemaIds();
+            //}).EnableSwaggerUi();
+
+            ResolveDependencies(configuration, container);
+            RegisterRoutes(configuration);
+        }
+        
+        private static void RegisterRoutes(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+            config.Filters.Add(new BusinessRuleExceptionFilter());
+            config.Filters.Add(new ValidationExceptionFilter());
+        }
+
+        private static void ResolveDependencies(HttpConfiguration configuration, IContainer container)
+        {
+            container.AssertConfigurationIsValid();
+            configuration.DependencyResolver = new WebApiDependencyResolver(container, false);
         }
     }
 }

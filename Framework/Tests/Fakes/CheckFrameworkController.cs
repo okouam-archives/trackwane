@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
+using Trackwane.Framework.Infrastructure.Web.Security;
 using Trackwane.Framework.Interfaces;
-using Trackwane.Framework.Web.Security;
 
 namespace Trackwane.Framework.Tests.Fakes
 {

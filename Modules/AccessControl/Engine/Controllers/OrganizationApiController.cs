@@ -6,8 +6,8 @@ using Trackwane.AccessControl.Contracts.Models;
 using Trackwane.AccessControl.Engine.Commands.Organizations;
 using Trackwane.AccessControl.Engine.Queries.Organizations;
 using Trackwane.Framework.Common.Interfaces;
+using Trackwane.Framework.Infrastructure.Web.Security;
 using Trackwane.Framework.Interfaces;
-using Trackwane.Framework.Web.Security;
 
 namespace Trackwane.AccessControl.Engine.Controllers
 {

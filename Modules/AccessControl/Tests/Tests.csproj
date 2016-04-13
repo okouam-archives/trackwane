@@ -86,12 +86,8 @@
       <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Framework\Fixtures\Framework.Fixtures.csproj">
-      <Project>{B9E602CC-1A71-40B8-82A2-67761B671302}</Project>
-      <Name>Framework.Fixtures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Infrastructure\Framework.Infrastructure.csproj">
-      <Project>{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}</Project>
+      <Project>{c13c821f-cf91-43d1-bbc3-6d0bb62732b5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
@@ -101,10 +97,6 @@
     <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Framework\Web\Framework.Web.csproj">
-      <Project>{a0bd1aed-a6f4-4ee0-b77b-5c0c0e5fe61b}</Project>
-      <Name>Framework.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Contracts.csproj">
       <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>

@@ -5,7 +5,7 @@ using System.Web.Http.Description;
 using System.Web.Http.Filters;
 using Swashbuckle.Swagger;
 
-namespace Trackwane.Framework.Web
+namespace Trackwane.Framework.Infrastructure.Web
 {
     //public class AddAuthorizationHeaderParameterOperationFilter : IOperationFilter
     //{

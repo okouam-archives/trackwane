@@ -9,7 +9,7 @@ using System.Web.Http.Filters;
 using NUnit.Framework;
 using Shouldly;
 using Trackwane.Framework.Common;
-using Trackwane.Framework.Web.Security;
+using Trackwane.Framework.Infrastructure.Web.Security;
 
 namespace Trackwane.Framework.Tests.Web
 {

@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using Trackwane.Framework.Common;
-using Trackwane.Framework.Web.Security;
+using Trackwane.Framework.Infrastructure.Web.Security;
 
 namespace Trackwane.AccessControl.Engine.Controllers
 {

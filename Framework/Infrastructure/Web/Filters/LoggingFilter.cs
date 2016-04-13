@@ -2,10 +2,10 @@
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using log4net;
 using Newtonsoft.Json;
-using Serilog;
 
-namespace Trackwane.Framework.Web.Filters
+namespace Trackwane.Framework.Infrastructure.Web.Filters
 {
     public class LoggingFilter : ActionFilterAttribute
     {
@@ -52,5 +52,7 @@ namespace Trackwane.Framework.Web.Filters
                 request.Headers,
             }, Formatting.Indented);
         }
+
+        private static readonly ILog Log = LogManager.GetLogger(typeof (LoggingFilter));
     }
 }

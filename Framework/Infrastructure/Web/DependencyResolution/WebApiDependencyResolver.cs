@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Http.Dependencies;
 using StructureMap;
 
-namespace Trackwane.Framework.Web.DependencyResolution
+namespace Trackwane.Framework.Infrastructure.Web.DependencyResolution
 {
     public class WebApiDependencyResolver : IDependencyResolver
     {

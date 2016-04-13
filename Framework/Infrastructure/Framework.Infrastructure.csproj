@@ -76,8 +76,8 @@
     <Compile Include="..\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
-    <Compile Include="Assembly.Extensions.cs" />
-    <Compile Include="Base.Validator.cs" />
+    <Compile Include="Extensions\Assembly.Extensions.cs" />
+    <Compile Include="Validation\Base.Validator.cs" />
     <Compile Include="EngineHost.cs" />
     <Compile Include="EngineHostConfig.cs" />
     <Compile Include="Factories\Connection.Factory.cs" />
@@ -103,7 +103,7 @@
     <Compile Include="Requests\Transactional.Listener_T.cs" />
     <Compile Include="Factories\Handler.Factory.cs" />
     <Compile Include="Transaction.Provider.cs" />
-    <Compile Include="Type.Extensions.cs" />
+    <Compile Include="Extensions\Type.Extensions.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Validation\Validate.Attribute.cs" />
     <Compile Include="Validation\Validate.Handler.cs" />

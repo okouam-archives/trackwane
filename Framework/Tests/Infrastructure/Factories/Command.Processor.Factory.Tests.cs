@@ -20,7 +20,7 @@ namespace Trackwane.Framework.Tests.Infrastructure.Factories
 
             Should.NotThrow(() =>
             {
-                CommandProcessorFactory.Build(
+                CommandProcessorFactory.Build(null,
                     new SubscriberRegistry(), container, 
                     new MapperFactory(new Container()));
             });

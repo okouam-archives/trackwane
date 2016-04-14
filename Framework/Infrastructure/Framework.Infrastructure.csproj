@@ -77,10 +77,12 @@
       <Link>Properties\Version.cs</Link>
     </Compile>
     <Compile Include="Extensions\Assembly.Extensions.cs" />
+    <Compile Include="Requests\Metrics\Metrics.Attribute.cs" />
+    <Compile Include="Requests\Metrics\Metrics.Handler_T.cs" />
+    <Compile Include="Requests\Metrics\Metrics.Provider.cs" />
     <Compile Include="Validation\Base.Validator.cs" />
     <Compile Include="EngineHost.cs" />
     <Compile Include="Factories\Connection.Factory.cs" />
-    <Compile Include="Logging\LoggingConfig.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="Factories\Mapper.Factory.cs" />
     <Compile Include="Requests\Request.Mapper_T.cs" />
@@ -96,8 +98,8 @@
     <Compile Include="Requests\Transactional.Handler_T.cs" />
     <Compile Include="Requests\Runtime.Request.Handler_T.cs" />
     <Compile Include="Requests\UserCommand.cs" />
-    <Compile Include="Logging\Log.Attribute.cs" />
-    <Compile Include="Logging\Log.Handler_T.cs" />
+    <Compile Include="Requests\Logging\Log.Attribute.cs" />
+    <Compile Include="Requests\Logging\Log.Handler_T.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\Transactional.Listener_T.cs" />
     <Compile Include="Factories\Handler.Factory.cs" />

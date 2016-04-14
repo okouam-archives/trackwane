@@ -1,7 +1,7 @@
 ﻿using System;
 using paramore.brighter.commandprocessor;
 
-namespace Trackwane.Framework.Infrastructure.Logging
+namespace Trackwane.Framework.Infrastructure.Requests.Logging
 {
     public class Log : RequestHandlerAttribute
     {

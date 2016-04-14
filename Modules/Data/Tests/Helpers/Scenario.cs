@@ -13,19 +13,10 @@ namespace Trackwane.Data.Tests.Helpers
     {
         public Scenario()
         {
-            Published = new List<IRequest>();
-            Processed = new List<IRequest>();
             Posted = new List<IRequest>();
-            Sent = new List<IRequest>();
         }
 
-        protected IList<IRequest> Processed { get; set; }
-
-        protected IList<IRequest> Published { get; set; }
-
         protected IList<IRequest> Posted { get; set; }
-
-        protected IList<IRequest> Sent { get; set; }
 
         protected IEngineHost EngineHost
         {
@@ -38,12 +29,6 @@ namespace Trackwane.Data.Tests.Helpers
         public void BeforeEachTest()
         {
             Client = new DataContext(Setup.EngineHost.Configuration.Get("uri"), new PlatformConfig());
-
-            EngineHost.ExecutionEngine.MessageProcessed += (o, request) => Processed.Add(request); ;
-
-            EngineHost.ExecutionEngine.MessagePublished += (o, request) => Published.Add(request); ;
-
-            EngineHost.ExecutionEngine.MessageSent += (o, request) => Sent.Add(request); ;
 
             EngineHost.ExecutionEngine.MessagePosted += (o, request) => Posted.Add(request); ;
         }

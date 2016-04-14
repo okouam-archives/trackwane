@@ -2,13 +2,15 @@
 using paramore.brighter.commandprocessor.Logging;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using StructureMap;
+using Trackwane.Framework.Infrastructure.Requests.Metrics;
 using Trackwane.Framework.Infrastructure.Storage;
+using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure.Factories
 {
     public class CommandProcessorFactory
     {
-        public static IAmACommandProcessor Build(SubscriberRegistry subscribers, IContainer container, MapperFactory mapperFactory)
+        public static IExecutionEngine Build(IMetricsProvider metricsProvider, SubscriberRegistry subscribers, IContainer container, MapperFactory mapperFactory)
         {
             var logger = LogProvider.GetCurrentClassLogger();
 
@@ -26,7 +28,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
     
             var ctxFactory = new InMemoryRequestContextFactory();
 
-            return new ExecutionEngine(container, context.RequestContextFactory(ctxFactory).Build());
+            return new ExecutionEngine(container, context.RequestContextFactory(ctxFactory).Build(), metricsProvider);
         }
     }
 

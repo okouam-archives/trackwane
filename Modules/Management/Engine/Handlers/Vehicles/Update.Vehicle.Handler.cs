@@ -2,8 +2,8 @@
 using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
-using Trackwane.Framework.Infrastructure.Logging;
 using Trackwane.Framework.Infrastructure.Requests;
+using Trackwane.Framework.Infrastructure.Requests.Logging;
 using Trackwane.Framework.Infrastructure.Validation;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Contracts.Events;

@@ -255,6 +255,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Schema\SQL\mt_apply_aggregation.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Schema\SQL\mt_transforms.js" />
+  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
@@ -273,9 +276,6 @@
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll">
       <Paket>True</Paket>
     </Analyzer>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Schema\SQL\mt_transforms.js" />
   </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">

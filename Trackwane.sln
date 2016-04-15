@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Service", "Modules\Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Service", "Modules\Management\Management.Service\Management.Service.csproj", "{72F1E65D-7B11-4799-A998-7C202F5C8246}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marten", "Framework\Marten\Marten.csproj", "{3D44A648-636E-4D4E-B943-361D103F1FA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -301,6 +303,14 @@ Global
 		{72F1E65D-7B11-4799-A998-7C202F5C8246}.Release|Any CPU.Build.0 = Release|Any CPU
 		{72F1E65D-7B11-4799-A998-7C202F5C8246}.Release|x64.ActiveCfg = Release|Any CPU
 		{72F1E65D-7B11-4799-A998-7C202F5C8246}.Release|x64.Build.0 = Release|Any CPU
+		{3D44A648-636E-4D4E-B943-361D103F1FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D44A648-636E-4D4E-B943-361D103F1FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D44A648-636E-4D4E-B943-361D103F1FA2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3D44A648-636E-4D4E-B943-361D103F1FA2}.Debug|x64.Build.0 = Debug|Any CPU
+		{3D44A648-636E-4D4E-B943-361D103F1FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D44A648-636E-4D4E-B943-361D103F1FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D44A648-636E-4D4E-B943-361D103F1FA2}.Release|x64.ActiveCfg = Release|Any CPU
+		{3D44A648-636E-4D4E-B943-361D103F1FA2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -340,5 +350,6 @@ Global
 		{55876580-B0E0-4508-B1EF-E30F5C6E0106} = {91B8D37F-DB67-47B8-8DC9-CA2B4071132A}
 		{47955809-3D0F-467C-AFF4-9FC6C07DEC09} = {B98250ED-8F98-42A7-983C-95CC4C28B25A}
 		{72F1E65D-7B11-4799-A998-7C202F5C8246} = {9BD895A1-3DF2-447F-9086-6F85F72ACB7B}
+		{3D44A648-636E-4D4E-B943-361D103F1FA2} = {79E13728-28B8-46E6-9AEE-874AE9C32D44}
 	EndGlobalSection
 EndGlobal

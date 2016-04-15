@@ -37,3 +37,7 @@ nuget TopShelf
 nuget Microsoft.Owin.Host.HttpListener
 nuget morelinq
 nuget Microsoft.Owin.Hosting
+nuget Npgsql
+nuget Remotion.Linq
+nuget Microsoft.CodeAnalysis.CSharp
+nuget Baseline

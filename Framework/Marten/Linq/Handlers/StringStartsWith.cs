@@ -1,0 +1,32 @@
+using System;
+using System.Linq.Expressions;
+using System.Reflection;
+using Baseline.Reflection;
+
+namespace Marten.Linq.Handlers
+{
+    public class StringStartsWith : StringComparisonParser
+    {
+        public StringStartsWith() : base(
+            ReflectionHelper.GetMethod<string>(s => s.StartsWith(null)),
+            ReflectionHelper.GetMethod<string>(s => s.StartsWith(null, StringComparison.CurrentCulture)),
+            ReflectionHelper.GetMethod<string>(s => s.StartsWith(null, true, null)))
+        {
+        }
+
+        protected override string FormatValue(MethodInfo method, string value)
+        {
+            return value + "%";
+        }
+
+        protected override bool IsCaseInsensitiveComparison(MethodCallExpression expression)
+        {
+            if (AreMethodsEqual(expression.Method, ReflectionHelper.GetMethod<string>(s => s.StartsWith(null, true, null))))
+            {
+                var constant = expression.Arguments[1] as ConstantExpression;
+                if (constant != null && constant.Value is bool) return (bool) constant.Value;
+            }
+            return base.IsCaseInsensitiveComparison(expression);
+        }
+    }
+}

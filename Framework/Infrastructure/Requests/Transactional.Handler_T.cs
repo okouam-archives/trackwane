@@ -2,7 +2,8 @@
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Framework.Common;
-using Trackwane.Framework.Infrastructure.Logging;
+using Trackwane.Framework.Infrastructure.Requests.Logging;
+using Trackwane.Framework.Infrastructure.Requests.Metrics;
 using Trackwane.Framework.Infrastructure.Validation;
 using Trackwane.Framework.Interfaces;
 
@@ -14,8 +15,9 @@ namespace Trackwane.Framework.Infrastructure.Requests
         {
         }
 
-        [Log(1, HandlerTiming.Before)]
-        [Validate(4, HandlerTiming.Before)]
+        [Metrics(1, HandlerTiming.Before)]
+        [Log(2, HandlerTiming.Before)]
+        [Validate(3, HandlerTiming.Before)]
         public override T Handle(T cmd)
         {
             using (var uow = transaction.Begin())

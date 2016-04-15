@@ -1,9 +1,10 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Framework.Common;
+using Trackwane.Framework.Infrastructure.Requests.Metrics;
 using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure.Requests
@@ -18,20 +19,31 @@ namespace Trackwane.Framework.Infrastructure.Requests
 
         protected void Publish(IEnumerable<DomainEvent> changes)
         {
-            foreach (var evt in changes)
-            {
-                Publish(evt);
-            }
+            Publish(changes.ToArray());
         }
 
-        protected void Publish(DomainEvent evt)
+        protected void Publish(params DomainEvent[] changes)
         {
-            Logger.Debug(String.Format("Posting the event <{0}>: \r\n", evt.GetType().Name) + JsonConvert.SerializeObject(evt, Formatting.Indented));
+            if (changes != null && changes.Any())
+            {
+                foreach (var evt in changes)
+                {
+                    PublishEvent(evt);
+                }
+            }
+        }
+        
+        private void PublishEvent(DomainEvent evt)
+        {
+            Logger.Debug(string.Format("Posting the event <{0}>: \r\n", evt.GetType().Name) + JsonConvert.SerializeObject(evt, Formatting.Indented));
 
-            typeof(IExecutionEngine)
-                .GetMethod("Post")
-                .MakeGenericMethod(evt.GetType())
-                .Invoke(engine, new object[] {evt});
+            var executionEngineType = typeof(IAmACommandProcessor);
+
+            var method =    executionEngineType .GetMethod("Post");
+
+            var genericMethod = method.MakeGenericMethod(evt.GetType());
+
+            genericMethod.Invoke(engine, new object[] {evt});
         }
 
         protected readonly IProvideTransactions transaction;

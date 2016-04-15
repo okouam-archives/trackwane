@@ -22,21 +22,14 @@ namespace Trackwane.Management.Tests
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
-            var serviceLocationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new ModuleConfig(typeof(_Management_Engine_Assembly_).Assembly)));
+            var engine = typeof (_Management_Engine_Assembly_).Assembly;
 
-            EngineHost = new EngineHost<Registry>(new ServiceLocator<Registry>(serviceLocationFactory), new EngineHostConfig
-            {
-                ListenUri = new Uri("http://localhost:8343"),
+            var events = typeof (_Access_Control_Contracts_Assembly_).Assembly.GetDomainEvents()
+                .Union(typeof (_Management_Contracts_Assembly_).Assembly.GetDomainEvents()).ToArray();
 
-                Events = typeof(_Access_Control_Contracts_Assembly_).Assembly.GetDomainEvents()
-                            .Union(typeof(_Management_Contracts_Assembly_).Assembly.GetDomainEvents()),
+            var config = new ModuleConfig(engine);
 
-                Handlers = typeof(_Management_Engine_Assembly_).Assembly.GetHandlers(),
-
-                Commands = typeof(_Management_Engine_Assembly_).Assembly.GetCommands(),
-
-                Listeners = typeof(_Management_Engine_Assembly_).Assembly.GetListeners()
-            });
+            EngineHost = new EngineHost<Registry>(config, engine,  events);
 
             EngineHost.Start();
         }

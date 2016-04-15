@@ -1,12 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
 using log4net;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using paramore.brighter.serviceactivator;
+using Prometheus;
 using StructureMap;
+using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Factories;
+using Trackwane.Framework.Infrastructure.Requests.Metrics;
+using Trackwane.Framework.Infrastructure.Storage;
 using Trackwane.Framework.Infrastructure.Web.DependencyResolution;
 using Trackwane.Framework.Infrastructure.Web.Filters;
 using Trackwane.Framework.Interfaces;
@@ -15,8 +22,11 @@ namespace Trackwane.Framework.Infrastructure
 {
     public class EngineHost<T> : IEngineHost where T : StructureMap.Registry, new()
     {
+        private readonly Assembly engine;
+        private readonly Type[] events;
         private readonly IServiceLocator<T> locator;
-        private HttpSelfHostServer web;
+        private HttpSelfHostServer webApi;
+        private MetricServer metricsCollection;
         private Dispatcher dispatcher;
         private readonly ILog log = LogManager.GetLogger(typeof(EngineHost<T>));
 
@@ -24,31 +34,33 @@ namespace Trackwane.Framework.Infrastructure
 
         public IExecutionEngine ExecutionEngine { get; set; }
 
-        public IEngineHostConfig Configuration { get; set; }
+        public IModuleConfig Configuration { get; set; }
 
-        public EngineHost(IServiceLocator<T> locator, IEngineHostConfig config)
+        public EngineHost(IModuleConfig moduleConfig, Assembly engine, params Type[] events)
         {
-            this.locator = locator;
-            Configuration = config;
+            this.engine = engine;
+            this.events = events;
+            locator = new ServiceLocator<T>(new ServiceLocationFactory(new DocumentStoreBuilder(moduleConfig))); ;
+            Configuration = moduleConfig;
         }
 
         public void Start()
         {
-            if (Configuration.Events == null)
+            if (!events.Any())
             {
                 log.Warn("The engine will not listen for events given no event definitions have been provided");
 
-                if (Configuration.Listeners == null)
+                if (!engine.GetListeners().Any())
                 {
                     log.Warn("The engine will not listen for events given no event listeners have been provided");
                 }
             }
 
-            if (Configuration.Handlers == null)
+            if (!engine.GetHandlers().Any())
             {
                 log.Warn("The engine will not listen for commands given no handlers have been provided for the API");
 
-                if (Configuration.ListenUri == null)
+                if (Configuration.Get("uri") == null)
                 {
                     log.Warn("The engine will not listen for commands given no URI has been provided for the API");
                 }
@@ -57,50 +69,51 @@ namespace Trackwane.Framework.Infrastructure
             var container = locator.GetContainer();
             
             var mapperFactory = new MapperFactory(container)
-                .WithCommands(Configuration.Commands)
-                .WithEvents(Configuration.Events);
+                .WithCommands(engine.GetCommands())
+                .WithEvents(events);
 
             container.Configure(x =>
             {
-                var subscribers = locator.GetSubscribers(Configuration.Listeners, Configuration.Handlers, Configuration.Events, Configuration.Commands);
-                var commandProcessor = CommandProcessorFactory.Build(subscribers, container, mapperFactory);
+                var subscribers = locator.GetSubscribers(engine, events);
 
+                var metricsProvider = new MetricsProvider(Configuration.ModuleName);
+
+                x.For<IMetricsProvider>().Singleton().Use(metricsProvider);
+
+                var commandProcessor = CommandProcessorFactory.Build(metricsProvider, subscribers, container, mapperFactory);
+   
                 x.For<IAmACommandProcessor>().Singleton().Use(commandProcessor);
 
-                x.For<IExecutionEngine>().Use(new ExecutionEngine(container, commandProcessor)).Singleton();
+                x.For<IExecutionEngine>().Singleton().Use(commandProcessor);
             });
 
             container.AssertConfigurationIsValid();
 
-            if (Configuration.Handlers != null && Configuration.ListenUri != null)
-            {
-                log.Info("Starting the Web API");
-                web = CreateStandaloneServer(container, Configuration.ListenUri.OriginalString);
-                web.OpenAsync().Wait();
-                log.Info("The Web API is start and waiting for connections");
-            }
-
-
-            if (Configuration.Listeners != null && Configuration.Events != null)
+            StartWebApi(container);
+            
+            if (engine.GetListeners() != null && events != null)
             {
                 StartDispatcher(container, mapperFactory);
             }
 
-     
+            StartMetricsCollection();
+
             ExecutionEngine = container.GetInstance<IExecutionEngine>();
         }
-
+        
         public void Stop()
         {
-            if (Configuration.Listeners != null && Configuration.Events != null)
+            if (engine.GetListeners() != null && events != null)
             {
                 StopDispatcher();
             }
 
-            if (Configuration.Handlers != null && Configuration.ListenUri != null)
+            if (engine.GetHandlers() != null && Configuration.Get("uri") != null)
             {
                 StopWebApi();
             }
+
+            StopMetricsCollection();
         }
         
         /* Private */
@@ -117,14 +130,14 @@ namespace Trackwane.Framework.Infrastructure
 
             var connections = new List<Connection>();
 
-            if (Configuration.Events != null)
+            if (events.Any())
             {
-                connections.AddRange(ConnectionFactory.GetDomainEventConnections(inputChannelFactory, Configuration.Events));
+                connections.AddRange(ConnectionFactory.GetDomainEventConnections(inputChannelFactory, events));
             }
 
-            if (Configuration.Commands != null)
+            if (engine.GetCommands().Any())
             {
-                connections.AddRange(ConnectionFactory.GetCommandConnections(inputChannelFactory, Configuration.Commands));
+                connections.AddRange(ConnectionFactory.GetCommandConnections(inputChannelFactory, engine.GetCommands()));
             }
        
             dispatcher = DispatchBuilder.With()
@@ -150,14 +163,34 @@ namespace Trackwane.Framework.Infrastructure
 
         private void StopWebApi()
         {
-            if (web != null)
+            if (webApi != null)
             {
-                web.CloseAsync().Wait();
-                web = null;
+                webApi.CloseAsync().Wait();
+                webApi = null;
             }
         }
-        
-        /* Private */
+
+        private void StartMetricsCollection()
+        {
+            metricsCollection = new MetricServer(int.Parse(Configuration.Get("metrics-port")));
+            metricsCollection.Start();
+        }
+
+        private void StopMetricsCollection()
+        {
+            metricsCollection.Stop();
+        }
+
+        private void StartWebApi(IContainer container)
+        {
+            if (engine.GetHandlers().Any() && Configuration.Get("uri") != null)
+            {
+                log.Info("Starting the Web API");
+                webApi = CreateStandaloneServer(container, Configuration.Get("uri"));
+                webApi.OpenAsync().Wait();
+                log.Info("The Web API is start and waiting for connections");
+            }
+        }
 
         private static HttpSelfHostServer CreateStandaloneServer(IContainer container, string url)
         {
@@ -192,4 +225,6 @@ namespace Trackwane.Framework.Infrastructure
             configuration.DependencyResolver = new WebApiDependencyResolver(container, false);
         }
     }
+
+
 }

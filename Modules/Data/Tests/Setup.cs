@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using Trackwane.Data.Contracts;
 using Trackwane.Data.Engine;
@@ -20,16 +21,11 @@ namespace Trackwane.Data.Tests
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
-            var serviceLocationFactory = new ServiceLocationFactory(new DocumentStoreBuilder(new ModuleConfig(typeof(_Data_Engine_Assembly_).Assembly)));
+            var engine = typeof (_Data_Engine_Assembly_).Assembly;
 
-            EngineHost = new EngineHost<Registry>(new ServiceLocator<Registry>(serviceLocationFactory), new EngineHostConfig
-            {
-                ListenUri = new Uri("http://localhost:8343"),
-                Events = typeof(_Data_Contracts_Assembly_).Assembly.GetDomainEvents(),
-                Handlers = typeof(_Data_Engine_Assembly_).Assembly.GetHandlers(),
-                Commands = typeof(_Data_Engine_Assembly_).Assembly.GetCommands(),
-                Listeners = typeof(_Data_Engine_Assembly_).Assembly.GetListeners()
-            });
+            var config = new ModuleConfig(engine);
+
+            EngineHost = new EngineHost<Registry>(config, engine, engine.GetDomainEvents().ToArray());
 
             EngineHost.Start();
         }

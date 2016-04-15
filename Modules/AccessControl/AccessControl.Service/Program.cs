@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using log4net;
 using log4net.Config;
@@ -26,12 +27,8 @@ namespace Trackwane.AccessControl.Service
 
             log.Info("Using the etcd instance located at <" + moduleConfig.Etcd + ">");
 
-            var config = new EngineHostConfig(assembly.GetCommands(), assembly.GetDomainEvents(), assembly.GetHandlers(), assembly.GetListeners(), new Uri(moduleConfig.Get("uri")));
+            var host = new EngineHost<Engine.Registry>(moduleConfig, assembly, assembly.GetDomainEvents().ToArray());
 
-            var locator = new ServiceLocator<Engine.Registry>(new ServiceLocationFactory(new DocumentStoreBuilder(moduleConfig)));
-
-            var host = new EngineHost<Engine.Registry>(locator, config);
-            
             host.Start();
 
             log.Info("Listening for connections at <" + moduleConfig.Get("uri") + ">");

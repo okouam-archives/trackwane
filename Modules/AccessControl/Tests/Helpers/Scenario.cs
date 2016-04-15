@@ -12,19 +12,10 @@ namespace Trackwane.AccessControl.Tests
     {
         public Scenario()
         {
-            Processed = new List<IRequest>();
-            Sent = new List<IRequest>();
-            Published = new List<IRequest>();
             Posted = new List<IRequest>();
         }
 
-        protected IList<IRequest> Processed { get; set; }
-
-        protected IList<IRequest> Published { get; set; }
-
         protected IList<IRequest> Posted { get; set; }
-
-        protected IList<IRequest> Sent { get; set; }
 
         protected IEngineHost EngineHost
         {
@@ -36,13 +27,7 @@ namespace Trackwane.AccessControl.Tests
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new AccessControlContext(Setup.EngineHost.Configuration.ListenUri.ToString(), new PlatformConfig());
-
-            EngineHost.ExecutionEngine.MessageProcessed += (o, request) => Processed.Add(request);
-
-            EngineHost.ExecutionEngine.MessagePublished += (o, request) => Published.Add(request);
-
-            EngineHost.ExecutionEngine.MessageSent += (o, request) => Sent.Add(request);
+            Client = new AccessControlContext(Setup.EngineHost.Configuration.Get("uri"), new PlatformConfig());
 
             EngineHost.ExecutionEngine.MessagePosted += (o, request) => Posted.Add(request);
         }

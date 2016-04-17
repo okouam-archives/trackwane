@@ -16,6 +16,7 @@ nuget Microsoft.AspNet.WebApi.OwinSelfHost
 nuget Microsoft.AspNet.WebApi.SelfHost
 nuget Microsoft.Net.Http
 nuget Microsoft.Owin.SelfHost
+nuget Mono.Posix
 nuget NUnit
 nuget NUnit.Console
 nuget Polly

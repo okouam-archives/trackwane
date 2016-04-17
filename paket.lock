@@ -73,6 +73,7 @@ NUGET
       Microsoft.Owin.Hosting (>= 3.0.1)
       Owin (>= 1.0)
     Microsoft.Web.Infrastructure (1.0)
+    Mono.Posix (4.0)
     morelinq (1.4)
     Newtonsoft.Json (8.0.3)
     Npgsql (3.0.5)

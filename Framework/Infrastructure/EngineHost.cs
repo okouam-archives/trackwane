@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
 using log4net;
+using Marten;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using paramore.brighter.serviceactivator;
@@ -17,6 +18,7 @@ using Trackwane.Framework.Infrastructure.Storage;
 using Trackwane.Framework.Infrastructure.Web.DependencyResolution;
 using Trackwane.Framework.Infrastructure.Web.Filters;
 using Trackwane.Framework.Interfaces;
+using ConnectionFactory = Trackwane.Framework.Infrastructure.Factories.ConnectionFactory;
 
 namespace Trackwane.Framework.Infrastructure
 {
@@ -40,7 +42,7 @@ namespace Trackwane.Framework.Infrastructure
         {
             this.engine = engine;
             this.events = events;
-            locator = new ServiceLocator<T>(new ServiceLocationFactory(new DocumentStoreBuilder(moduleConfig))); ;
+            locator = new ServiceLocator<T>(new ServiceLocationFactory()); 
             Configuration = moduleConfig;
         }
 
@@ -80,7 +82,11 @@ namespace Trackwane.Framework.Infrastructure
 
                 x.For<IMetricsProvider>().Singleton().Use(metricsProvider);
 
-                var commandProcessor = CommandProcessorFactory.Build(metricsProvider, subscribers, container, mapperFactory);
+                var documentStore = DocumentStore.For(Configuration.ConnectionString);
+
+                x.For<IDocumentStore>().Use(documentStore);
+
+                var commandProcessor = CommandProcessorFactory.Build(documentStore,  metricsProvider, subscribers, container, mapperFactory);
    
                 x.For<IAmACommandProcessor>().Singleton().Use(commandProcessor);
 

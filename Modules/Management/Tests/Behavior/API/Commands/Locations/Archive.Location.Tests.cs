@@ -27,8 +27,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Locations
         [Test]
         public void On_Success_Publishes_Location_Archived_Event()
         {
-            _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_ID);
-            _ArchiveLocation.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_ID);
+            _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_ID);
+            _ArchiveLocation.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_ID);
 
             WasPosted<LocationArchived>().ShouldBeTrue();
         }
@@ -38,8 +38,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Locations
         {
             Should.NotThrow(() =>
             {
-                _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_ID);
-                _ArchiveLocation.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_ID);
+                _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_ID);
+                _ArchiveLocation.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_ID);
             });
         }
     }

@@ -1,4 +1,5 @@
-﻿using paramore.brighter.commandprocessor;
+﻿using Marten;
+using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using StructureMap;
@@ -10,11 +11,11 @@ namespace Trackwane.Framework.Infrastructure.Factories
 {
     public class CommandProcessorFactory
     {
-        public static IExecutionEngine Build(IMetricsProvider metricsProvider, SubscriberRegistry subscribers, IContainer container, MapperFactory mapperFactory)
+        public static IExecutionEngine Build(IDocumentStore documentStore, IMetricsProvider metricsProvider, SubscriberRegistry subscribers, IContainer container, MapperFactory mapperFactory)
         {
             var logger = LogProvider.GetCurrentClassLogger();
 
-            var messageStore = container.GetInstance<DocumentMessageStore>();
+            var messageStore = new DocumentMessageStore(documentStore);
 
             var pipeline = CommandProcessorBuilder
                 .With()

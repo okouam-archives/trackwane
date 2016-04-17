@@ -2,7 +2,7 @@
 
 namespace Trackwane.AccessControl.Engine.Commands.Users
 {
-    public class CreateRootUser : SystemCommand
+    public class RegisterApplication : ApplicationCommand
     {
         public string UserKey { get; set; }
 
@@ -11,5 +11,9 @@ namespace Trackwane.AccessControl.Engine.Commands.Users
         public string DisplayName { get; set; }
 
         public string Password { get; set; }
+
+        public RegisterApplication(string applicationKey) : base(applicationKey)
+        {
+        }
     }
 }

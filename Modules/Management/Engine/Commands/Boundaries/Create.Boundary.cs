@@ -15,7 +15,7 @@ namespace Trackwane.Management.Engine.Commands.Boundaries
 
         public string OrganizationId { get; private set; }
 
-        public CreateBoundary(string requesterId, string organizationId, string name, Polygon coordinates, BoundaryType type, string boundaryId) : base(requesterId)
+        public CreateBoundary(string applicationKey, string requesterId, string organizationId, string name, Polygon coordinates, BoundaryType type, string boundaryId) : base(applicationKey, requesterId)
         {
             BoundaryId = boundaryId;
             Coordinates = coordinates;

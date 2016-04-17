@@ -19,23 +19,23 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
             USER_KEY = Guid.NewGuid().ToString();
             ORGANIZATION_KEY = Guid.NewGuid().ToString();
 
-            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
-            Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
-            Grant_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
+            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+            Grant_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
         }
 
         [Test]
         public void When_Successful_Persists_Change()
         {
-            Revoke_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
+            Revoke_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
 
-            EngineHost.ExecutionEngine.Query<FindByKey>(ORGANIZATION_KEY).Execute().Managers.ShouldBeEmpty();
+            EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey, ORGANIZATION_KEY).Execute().Managers.ShouldBeEmpty();
         }
 
         [Test]
         public void When_Successful_Publishes_Event()
         {
-            Revoke_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
+            Revoke_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
 
             WasPosted<ManagePermissionRevoked>().ShouldBeTrue();
         }
@@ -45,7 +45,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Assert.Throws<UnauthorizedException>(() =>
             {
-                Revoke_Manage_Permission.With(Persona.Viewer(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
+                Revoke_Manage_Permission.With(Persona.Viewer(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -54,7 +54,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Assert.Throws<UnauthorizedException>(() =>
             {
-                Revoke_Manage_Permission.With(Persona.Manager(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
+                Revoke_Manage_Permission.With(Persona.Manager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -63,7 +63,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Assert.DoesNotThrow(() =>
             {
-                Revoke_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
+                Revoke_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -72,7 +72,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Assert.DoesNotThrow(() =>
             {
-                Revoke_Manage_Permission.With(Persona.Administrator(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
+                Revoke_Manage_Permission.With(Persona.Administrator(ApplicationKey, ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
             });
         }
     }

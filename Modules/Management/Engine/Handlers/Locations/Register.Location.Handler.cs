@@ -22,7 +22,7 @@ namespace Trackwane.Management.Engine.Handlers.Locations
 
         protected override IEnumerable<DomainEvent> Handle(RegisterLocation cmd, IRepository repository)
         {
-            var organization = repository.Load<Organization>(cmd.OrganizationId);
+            var organization = repository.Find<Organization>(cmd.OrganizationId, cmd.ApplicationKey);
 
             if (organization == null)
             {

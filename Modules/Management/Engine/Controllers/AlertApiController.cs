@@ -40,7 +40,7 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Viewers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveAlert(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveAlert(CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Send(new ArchiveAlert(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]

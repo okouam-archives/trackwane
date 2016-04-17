@@ -22,7 +22,7 @@ namespace Trackwane.Management.Engine.Handlers.Trackers
         
         protected override IEnumerable<DomainEvent> Handle(ArchiveTracker cmd, IRepository repository)
         {
-            var tracker = repository.Load<Tracker>(cmd.TrackerId);
+            var tracker = repository.Find<Tracker>(cmd.TrackerId, cmd.ApplicationKey);
 
             if (tracker == null)
             {

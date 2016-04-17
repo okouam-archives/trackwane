@@ -8,7 +8,7 @@ namespace Trackwane.Management.Engine.Commands.Trackers
 
         public string OrganizationId { get; private set; }
 
-        public ArchiveTracker(string requesterId, string organizationId, string trackerId) : base(requesterId)
+        public ArchiveTracker(string applicationKey, string requesterId, string organizationId, string trackerId) : base(applicationKey, requesterId)
         {
             OrganizationId = organizationId;
             TrackerId = trackerId;

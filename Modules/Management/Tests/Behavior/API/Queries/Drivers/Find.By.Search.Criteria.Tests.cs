@@ -28,9 +28,9 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Drivers
         [Test]
         public void Finds_Drivers_When_Searching_By_Organization()
         {
-            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_KEY, "A NAME");
-            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, ANOTHER_DRIVER_KEY, "ANOTHER NAME");
-            _Register_Driver.With(Persona.SystemManager(), ANOTHER_ORGANIZATION_KEY, DRIVER_KEY, "YET ANOTHER NAME");
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_KEY, "A NAME");
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ANOTHER_DRIVER_KEY, "ANOTHER NAME");
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ANOTHER_ORGANIZATION_KEY, DRIVER_KEY, "YET ANOTHER NAME");
 
             var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute("A NAME");
 

@@ -1,18 +1,15 @@
-﻿using Raven.Abstractions.Data;
-using Raven.Client.Linq;
+﻿using Marten.Linq;
 using Trackwane.Framework.Common;
 
 namespace Trackwane.Framework.Interfaces
 {
     public interface IRepository
     {
-        IRavenQueryable<T> Query<T>();
+        IMartenQueryable<T> Query<T>();
 
-        T Load<T>(string key) where T : AggregateRoot;
+        T Find<T>(string key, string applicationKey) where T : AggregateRoot;
 
-        T Load<T>(string key, string organizationKey) where T : ScopedAggregateRoot;
-
-        JsonDocument Get(string id);
+        T Find<T>(string key, string organizationKey, string applicationKey) where T : ScopedAggregateRoot;
 
         void Persist(object entity);
 

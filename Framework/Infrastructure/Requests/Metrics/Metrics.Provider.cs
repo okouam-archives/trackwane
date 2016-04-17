@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Prometheus;
-using Trackwane.Framework.Common;
 
 namespace Trackwane.Framework.Infrastructure.Requests.Metrics
 {

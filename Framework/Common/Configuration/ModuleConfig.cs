@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Channels;
-using etcetera;
 using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Common.Configuration
@@ -25,7 +22,15 @@ namespace Trackwane.Framework.Common.Configuration
                 .ConstructorArguments[1].Value;
             }
         }
-        
+
+        public string ConnectionString
+        {
+            get
+            {
+                return "Server=127.0.0.1;Port=5432;Database=trackwane;User Id=trackwane;Password = trackwane;"; 
+            }
+        }
+
         public ModuleConfig(Assembly assembly) 
         {
             this.assembly = assembly;
@@ -36,53 +41,20 @@ namespace Trackwane.Framework.Common.Configuration
             get { return Get("uri"); }
         }
 
-        public DocumentStoreConfig DocumentStore
-        {
-            get
-            {
-                return new DocumentStoreConfig(this);
-            }
-        }
-
         public string Get(string key)
         {
-            var response = client.Get("trackwane/modules/" + ModuleName + "/" + key);
+            var identifier = "trackwane/modules/" + ModuleName + "/" + key;
+            var response = client.Get(identifier);
+            if (response.Node == null)
+            {
+                throw new Exception($"The key <{identifier}> was not found");
+            }
             return response.Node.Value;
         }
 
         public void Set(string key, string value)
         {
             client.Set("trackwane/modules/" + ModuleName + "/" + key, value);
-        }
-
-        public class DocumentStoreConfig
-        {
-            private readonly ModuleConfig moduleConfig;
-
-            public DocumentStoreConfig(ModuleConfig moduleConfig)
-            {
-                this.moduleConfig = moduleConfig;
-            }
-
-            public bool UseEmbedded
-            {
-                get { return bool.Parse(moduleConfig.Get("document-store/use-embedded")); }
-            }
-
-            public bool Url
-            {
-                get { return bool.Parse(moduleConfig.Get("document-store/url")); }
-            }
-
-            public bool Name
-            {
-                get { return bool.Parse(moduleConfig.Get("document-store/name")); }
-            }
-
-            public bool ApiKey
-            {
-                get { return bool.Parse(moduleConfig.Get("document-store/api-key")); }
-            }
         }
     }
 }

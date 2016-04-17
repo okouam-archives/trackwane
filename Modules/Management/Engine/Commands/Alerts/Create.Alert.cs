@@ -10,7 +10,7 @@ namespace Trackwane.Management.Engine.Commands.Alerts
 
         public string OrganizationKey { get; private set; }
 
-        public CreateAlert(string requesterId, string organizationKey, string name, string alertKey = null) : base(requesterId)
+        public CreateAlert(string applicationKey, string requesterId, string organizationKey, string name, string alertKey = null) : base(applicationKey, requesterId)
         {
             OrganizationKey = organizationKey;
             Name = name;

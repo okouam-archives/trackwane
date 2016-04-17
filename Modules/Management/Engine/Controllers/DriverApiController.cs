@@ -24,7 +24,7 @@ namespace Trackwane.Management.Engine.Controllers
         {
             var identity = User.Identity as ClaimsIdentity;
 
-            var cmd = new UpdateDriver(identity.Name, organizationKey, key)
+            var cmd = new UpdateDriver(CurrentClaims.ApplicationKey, identity.Name, organizationKey, key)
             {
                 Name = model.Name
             };
@@ -47,13 +47,13 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveDriver(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveDriver(CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Send(new ArchiveDriver(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void CreateDriver(string organizationKey, CreateDriverModel model)
         {
-            dispatcher.Send(new RegisterDriver(CurrentClaims.UserId, organizationKey, model.Name, model.Key));
+            dispatcher.Send(new RegisterDriver(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, model.Name, model.Key));
         }
     }
 }

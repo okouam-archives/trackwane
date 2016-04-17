@@ -1,9 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Data.Common;
-using Marten.Schema;
 using Marten.Services;
-using Marten.Services.BatchQuerying;
 using Npgsql;
 
 namespace Marten.Linq.Results

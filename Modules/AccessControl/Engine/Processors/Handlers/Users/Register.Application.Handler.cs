@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using paramore.brighter.commandprocessor.Logging;
+using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Services;
@@ -12,9 +14,9 @@ using Role = Trackwane.AccessControl.Domain.Users.Role;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 {
-    public class CreateRootUserHandler : TransactionalHandler<CreateRootUser>
+    public class CreateApplicationHandler : TransactionalHandler<RegisterApplication>
     {
-        public CreateRootUserHandler(
+        public CreateApplicationHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, 
             ILog log) : 
@@ -22,14 +24,18 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
         {
         }
 
-        protected override IEnumerable<DomainEvent> Handle(CreateRootUser cmd, IRepository repository)
+        protected override IEnumerable<DomainEvent> Handle(RegisterApplication cmd, IRepository repository)
         {
             if (repository.Query<User>().Any())
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.ROOT_ATTEMPT_WHEN_EXISTING_USERS));
             }
 
-            var user = new User(null, cmd.UserKey, cmd.DisplayName, cmd.Email, Role.SystemManager, cmd.Password);
+            var organization = new Organization(cmd.ApplicationKey, Guid.NewGuid().ToString(), "--INTERNAL--");
+
+            repository.Persist(organization);
+
+            var user = new User(cmd.ApplicationKey, organization.Key, cmd.UserKey, cmd.DisplayName, cmd.Email, Role.SystemManager, cmd.Password);
 
             repository.Persist(user);
 

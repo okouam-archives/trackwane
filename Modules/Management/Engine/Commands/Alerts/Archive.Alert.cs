@@ -8,7 +8,7 @@ namespace Trackwane.Management.Engine.Commands.Alerts
 
         public string OrganizationId { get; private set; }
 
-        public ArchiveAlert(string requesterId, string organizationId, string alertId) : base(requesterId)
+        public ArchiveAlert(string applicationKey, string requesterId, string organizationId, string alertId) : base(applicationKey, requesterId)
         {
             AlertId = alertId;
             OrganizationId = organizationId;

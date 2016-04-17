@@ -1,4 +1,5 @@
-﻿using Trackwane.Framework.Common.Interfaces;
+﻿using System;
+using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Common.Configuration
 {
@@ -6,7 +7,12 @@ namespace Trackwane.Framework.Common.Configuration
     {
         public string Get(string key)
         {
-            var response = client.Get("trackwane/platform/" + key);
+            var node = "trackwane/platform/" + key;
+            var response = client.Get(node);
+            if (response.Node == null)
+            {
+                throw new Exception($"The key <{node}> was not found");
+            }
             return response.Node.Value;
         }
 

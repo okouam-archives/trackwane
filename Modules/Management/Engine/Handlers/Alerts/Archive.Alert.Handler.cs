@@ -22,7 +22,7 @@ namespace Trackwane.Management.Engine.Handlers.Alerts
         
         protected override IEnumerable<DomainEvent> Handle(ArchiveAlert cmd, IRepository repository)
         {
-            var alert = repository.Load<Alert>(cmd.AlertId);
+            var alert = repository.Find<Alert>(cmd.AlertId, cmd.ApplicationKey);
 
             if (alert == null)
             {

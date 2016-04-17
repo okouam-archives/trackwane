@@ -48,10 +48,11 @@ namespace Trackwane.AccessControl.Domain.Users
         {
         }
 
-        public User(string organizationKey, string userKey, string displayName, string email, Role role, string password)
+        public User(string appKey, string organizationKey, string userKey, string displayName, string email, Role role, string password)
         {
             Causes(new UserRegistered
             {
+                ApplicationKey = appKey,
                 ParentOrganizationKey = organizationKey,
                 DisplayName = displayName,
                 UserKey = userKey,
@@ -67,6 +68,7 @@ namespace Trackwane.AccessControl.Domain.Users
         {
             ParentOrganizationKey = evt.ParentOrganizationKey;
             Key = evt.UserKey;
+            ApplicationKey = evt.ApplicationKey;
             DisplayName = evt.DisplayName;
             Email = evt.Email;
             Role = (Role) Enum.Parse(typeof (Role), evt.Role);

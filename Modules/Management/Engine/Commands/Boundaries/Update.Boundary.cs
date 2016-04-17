@@ -15,7 +15,7 @@ namespace Trackwane.Management.Engine.Commands.Boundaries
 
         public string Name { get; set;  }
 
-        public UpdateBoundary(string requesterId, string organizationId, string boundaryId) : base(requesterId)
+        public UpdateBoundary(string applicationKey, string requesterId, string organizationId, string boundaryId) : base(applicationKey, requesterId)
         {
             BoundaryId = boundaryId;
             OrganizationId = organizationId;

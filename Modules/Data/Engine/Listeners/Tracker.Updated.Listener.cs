@@ -27,7 +27,7 @@ namespace Trackwane.Data.Engine.Listeners
         {
             var pusher = new Pusher(config.PusherAppId, config.PusherAppKey, config.PusherAppSecret);
 
-            var tracker = repository.Load<Tracker>(evt.TrackerKey);
+            var tracker = repository.Find<Tracker>(evt.TrackerKey, evt.ApplicationKey);
 
             pusher.Trigger(tracker.OrganizationId, "tracker_updated", new
             {

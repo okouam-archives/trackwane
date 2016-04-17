@@ -1,6 +1,6 @@
 ﻿namespace Trackwane.Framework.Common.Interfaces
 {
-    public interface IScopedQuery
+    public interface IOrganizationQuery : IApplicationQuery
     {
         string OrganizationKey { set; }
     }

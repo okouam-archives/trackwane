@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Raven.Client;
+using Marten;
 using Trackwane.AccessControl.Contracts.Models;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Domain.Users;
@@ -11,7 +11,7 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Queries.Users
 {
-    public class FindByKey : Query<UserDetails>, IUnscopedQuery
+    public class FindByKey : Query<UserDetails>, IApplicationQuery
     {
         public FindByKey(IDocumentStore documentStore) : base(documentStore)
         {
@@ -21,7 +21,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
         {
             return Execute(repository =>
             {
-                var user = repository.Load<User>(userId);
+                var user = repository.Find<User>(userId, ApplicationKey);
 
                 if (user == null) return null;
 
@@ -65,7 +65,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
 
         private static List<Organization> GetAvailableOrganizations(IRepository repository)
         {
-            return repository.Query<Organization>().Customize(x => x.WaitForNonStaleResults()).ToList();
+            return repository.Query<Organization>().ToList();
         }
     }
 }

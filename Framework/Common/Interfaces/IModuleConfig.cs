@@ -7,5 +7,7 @@
         void Set(string key, string value);
 
         string ModuleName { get; }
+
+        string ConnectionString { get; }
     }
 }

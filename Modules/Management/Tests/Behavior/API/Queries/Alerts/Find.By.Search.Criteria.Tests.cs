@@ -23,7 +23,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Alerts
         [Test]
         public void Find_Alerts_By_ORGANIZATION_KEY()
         {
-            _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_ID);
+            _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_ID);
 
             var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute();
 

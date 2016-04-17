@@ -22,14 +22,14 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
 
         protected override IEnumerable<DomainEvent> Handle(AssignDriverToVehicle cmd, IRepository repository)
         {
-            var vehicle = repository.Load<Vehicle>(cmd.VehicleId);
+            var vehicle = repository.Find<Vehicle>(cmd.VehicleId, cmd.ApplicationKey);
 
             if (vehicle == null)
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_VEHICLE, cmd.VehicleId));
             }
 
-            var driver = repository.Load<Driver>(cmd.DriverId);
+            var driver = repository.Find<Driver>(cmd.DriverId, cmd.ApplicationKey);
 
             if (driver == null)
             {

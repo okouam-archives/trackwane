@@ -10,6 +10,11 @@ namespace Trackwane.Management.Tests.Helpers
 {
     internal partial class Scenario
     {
+        protected string ApplicationKey
+        {
+            get { return Setup.ApplicationKey; }
+        }
+
         public Scenario()
         {
             Posted = new List<IRequest>();

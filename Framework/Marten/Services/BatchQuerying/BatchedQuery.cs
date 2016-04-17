@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Baseline;
 using Marten.Linq;
 using Marten.Linq.Results;
 using Marten.Schema;

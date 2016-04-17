@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Raven.Client;
+using Marten;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
@@ -7,7 +7,7 @@ using Trackwane.Framework.Infrastructure.Queries;
 
 namespace Trackwane.AccessControl.Engine.Queries.Users
 {
-    public class GetAccessToken : Query<string>, IUnscopedQuery
+    public class GetAccessToken : Query<string>, IApplicationQuery
     {
         private readonly IPlatformConfig config;
 
@@ -20,7 +20,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
         {
             return Execute(repository =>
             {
-                var user = repository.Query<User>().Customize(x => x.WaitForNonStaleResults()).SingleOrDefault(x => x.Email == email);
+                var user = repository.Query<User>().SingleOrDefault(x => x.Email == email);
 
                 if (user != null && user.Credentials.IsValid(password))
                 {

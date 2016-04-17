@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Raven.Client;
-using Raven.Client.Linq;
+using Marten;
 using Trackwane.Data.Domain;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
@@ -9,7 +8,7 @@ using Trackwane.Framework.Infrastructure.Queries;
 
 namespace Trackwane.Data.Engine.Queries
 {
-    public class FindBySearchCriteria : Query<ResponsePage<SearchResult>>, IUnscopedQuery
+    public class FindBySearchCriteria : Query<ResponsePage<SearchResult>>, IApplicationQuery
     {
         public FindBySearchCriteria(IDocumentStore documentStore) : base(documentStore)
         {
@@ -19,7 +18,7 @@ namespace Trackwane.Data.Engine.Queries
         {
             return Execute(repository =>
             {
-                var query = repository.Query<SensorReading>();
+                var query = repository.Query<SensorReading>() as IQueryable<SensorReading>;
 
                 if (!string.IsNullOrEmpty(hardwareId))
                 {
@@ -36,7 +35,7 @@ namespace Trackwane.Data.Engine.Queries
                     query = query.Where(x => x.Timestamp > to.Value);
                 }
 
-                var results = query.Customize(x => x.WaitForNonStaleResults()).ToList().Select(x => new SearchResult
+                var results = query.ToList().Select(x => new SearchResult
                 {
                     BatteryLevel = x.BatteryLevel,
                     Coordinates = x.Coordinates,

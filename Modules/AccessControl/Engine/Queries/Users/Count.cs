@@ -1,12 +1,12 @@
 ﻿using System.Linq;
-using Raven.Client;
+using Marten;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
 
 namespace Trackwane.AccessControl.Engine.Queries.Users
 {
-    public class Count : Query<int>, IUnscopedQuery
+    public class Count : Query<int>, IApplicationQuery
     {
         public Count(IDocumentStore documentStore) : base(documentStore)
         {

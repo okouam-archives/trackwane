@@ -1,5 +1,5 @@
 ﻿using System;
-using Raven.Client;
+using Marten;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
@@ -8,7 +8,7 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Queries.Drivers
 {
-    public class FindById : Query<DriverDetails>, IScopedQuery
+    public class FindById : Query<DriverDetails>, IOrganizationQuery
     {
         public DriverDetails Execute(string driverId)
         {
@@ -19,7 +19,7 @@ namespace Trackwane.Management.Engine.Queries.Drivers
                     throw new Exception("Invalid driver ID");
                 }
 
-                var driver = repository.Load<Driver>(driverId);
+                var driver = repository.Find<Driver>(driverId, ApplicationKey);
 
                 if (driver == null)
                 {

@@ -6,7 +6,7 @@ namespace Trackwane.AccessControl.Engine.Commands.Organizations
     {
         public string OrganizationKey { get; private set; }
 
-        public ArchiveOrganization(string requesterKey, string organizationKey) : base(requesterKey)
+        public ArchiveOrganization(string applicationKey, string requesterKey, string organizationKey) : base(applicationKey, requesterKey)
         {
             OrganizationKey = organizationKey;
         }

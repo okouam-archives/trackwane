@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using Raven.Client;
-using Raven.Client.Linq;
+using Marten;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
@@ -9,7 +8,7 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Queries.Trackers
 {
-    public class FindBySearchCriteria : Query<ResponsePage<TrackerSummary>>, IScopedQuery
+    public class FindBySearchCriteria : Query<ResponsePage<TrackerSummary>>, IOrganizationQuery
     {
         public  ResponsePage<TrackerSummary> Execute(string model = null, string hardwareId = null)
         {

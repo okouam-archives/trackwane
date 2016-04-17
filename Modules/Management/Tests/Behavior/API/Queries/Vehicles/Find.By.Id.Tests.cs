@@ -24,7 +24,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Vehicles
         [Test]
         public void Finds_Vehicles_By_Id()
         {
-            _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_ID);
+            _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_ID);
 
             var vehicle = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(VEHICLE_ID);
             vehicle.ShouldNotBeNull();

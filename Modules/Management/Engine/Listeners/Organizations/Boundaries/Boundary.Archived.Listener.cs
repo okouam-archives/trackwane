@@ -19,9 +19,9 @@ namespace Trackwane.Management.Engine.Listeners.Organizations.Boundaries
 
         protected override IEnumerable<DomainEvent> Handle(BoundaryArchived evt, IRepository repository)
         {
-            var organization = repository.Load<Organization>(evt.OrganizationKey);
+            var organization = repository.Find<Organization>(evt.OrganizationKey, evt.ApplicationKey);
 
-            var boundary = repository.Load<Boundary>(evt.BoundaryKey);
+            var boundary = repository.Find<Boundary>(evt.BoundaryKey, evt.ApplicationKey);
 
             if (boundary == null)
             {

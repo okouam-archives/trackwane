@@ -1,11 +1,9 @@
 ﻿using System.Linq;
 using System.Reflection;
-using NSubstitute;
 using NUnit.Framework;
 using Shouldly;
 using Trackwane.Framework.Infrastructure;
 using Trackwane.Framework.Infrastructure.Factories;
-using Trackwane.Framework.Interfaces;
 using Trackwane.Framework.Tests.Fakes;
 
 namespace Trackwane.Framework.Tests.Infrastructure.Factories
@@ -17,7 +15,7 @@ namespace Trackwane.Framework.Tests.Infrastructure.Factories
         [Test]
         public void Registers_Listeners()
         {
-            var factory = new ServiceLocationFactory(Substitute.For<IDocumentStoreBuilder>());
+            var factory = new ServiceLocationFactory();
             var subscribers = factory.WithListeners(currentAssembly.GetListeners(), currentAssembly.GetDomainEvents()).AsSubscriberRegistry();
             subscribers.Count().ShouldBe(1);
             subscribers.Get<FrameworkChecked>().ShouldNotBeEmpty();
@@ -26,7 +24,7 @@ namespace Trackwane.Framework.Tests.Infrastructure.Factories
         [Test]
         public void Registers_Handlers()
         {
-            var factory = new ServiceLocationFactory(Substitute.For<IDocumentStoreBuilder>());
+            var factory = new ServiceLocationFactory();
             var subscribers = factory.WithHandlers(currentAssembly.GetHandlers(), currentAssembly.GetCommands()).AsSubscriberRegistry();
             subscribers.Count().ShouldBe(1);
             subscribers.Get<CheckFramework>().ShouldNotBeEmpty();

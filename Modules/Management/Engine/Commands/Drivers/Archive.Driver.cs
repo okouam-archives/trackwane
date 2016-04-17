@@ -9,7 +9,7 @@ namespace Trackwane.Management.Engine.Commands.Drivers
 
         public string OrganizationId { get; private set; }
 
-        public ArchiveDriver(string requesterId, string organizationId, string driverId) : base(requesterId)
+        public ArchiveDriver(string applicationKey, string requesterId, string organizationId, string driverId) : base(applicationKey, requesterId)
         {
             DriverId = driverId;
             OrganizationId = organizationId;

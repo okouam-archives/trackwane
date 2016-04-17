@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Framework.Common;
-using Raven.Client.Linq;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Contracts.Events;
@@ -20,7 +20,7 @@ namespace Trackwane.Management.Engine.Listeners.Vehicles
 
         protected override IEnumerable<DomainEvent> Handle(DriverArchived evt, IRepository repository)
         {
-            var driver = repository.Load<Driver>(evt.DriverKey);
+            var driver = repository.Find<Driver>(evt.DriverKey, evt.ApplicationKey);
 
             var vehicles = repository.Query<Vehicle>()
                 .Where(x => x.DriverId == evt.DriverKey);

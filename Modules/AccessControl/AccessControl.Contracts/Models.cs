@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Trackwane.AccessControl.Contracts.Models
 {
@@ -43,19 +40,22 @@ namespace Trackwane.AccessControl.Contracts.Models
         public string Email { get; set; }
     }
 
-    public class RegisterUserModel
+    public class CreateApplicationModel
     {
-        public RegisterUserModel(string userKey, string email, string displayName, string password)
+        public CreateApplicationModel(string applicationKey, string userKey, string email, string displayName, string password)
         {
             UserKey = userKey;
+            ApplicationKey = applicationKey;
             Email = email;
             DisplayName = displayName;
             Password = password;
         }
 
-        public RegisterUserModel()
+        public CreateApplicationModel()
         {
         }
+
+        public string ApplicationKey { get; set; }
 
         public string Password { get; set; }
 

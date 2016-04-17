@@ -7,8 +7,6 @@ using Marten.Services.Includes;
 using Marten.Util;
 using Npgsql;
 using Remotion.Linq;
-using Remotion.Linq.Clauses;
-using Remotion.Linq.Clauses.Expressions;
 using Remotion.Linq.Clauses.ResultOperators;
 
 namespace Marten.Linq

@@ -31,57 +31,57 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, SystemManagers, HttpGet, Route("organizations")]
         public List<OrganizationDetails> Find()
         {
-            return executionEngine.Query<Find>().Execute();
+            return executionEngine.Query<Find>(CurrentClaims.ApplicationKey).Execute();
         }
 
         [Secured, Administrators, HttpGet, Route("organizations/count")]
         public int Count()
         {
-            return executionEngine.Query<Count>().Execute();
+            return executionEngine.Query<Count>(CurrentClaims.ApplicationKey).Execute();
         }
 
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}/users/{userKey}/view")]
         public void GrantViewPermission(string organizationKey, string userKey)
         {
-            executionEngine.Send(new GrantViewPermission(CurrentClaims.UserId, organizationKey, userKey));
+            executionEngine.Send(new GrantViewPermission(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey));
         }
            
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}/users/{userKey}/manage")]
         public void GrantManagePermission(string organizationKey, string userKey)
         {
-            executionEngine.Send(new GrantManagePermission(CurrentClaims.UserId, organizationKey, userKey));
+            executionEngine.Send(new GrantManagePermission(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey));
         }
         
         [Secured, Administrators, HttpDelete, Route("organizations/{organizationKey}/users/{userKey}/view")]
         public void RevokeViewPermission(string organizationKey, string userKey)
         {
-            executionEngine.Send(new RevokeViewPermission(CurrentClaims.UserId, organizationKey, userKey));
+            executionEngine.Send(new RevokeViewPermission(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey));
         }
 
         [Secured, Administrators, HttpDelete, Route("organizations/{organizationKey}/users/{userKey}/manage")]
         public void RevokeManagePermission(string organizationKey, string userKey)
         {
-            executionEngine.Send(new RevokeManagePermission(CurrentClaims.UserId, organizationKey, userKey));
+            executionEngine.Send(new RevokeManagePermission(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey));
         }
 
         [Secured, Administrators, HttpDelete, Route("organizations/{organizationKey}/users/{userKey}/administrate")]
         public void RevokeAdministratePermission(string organizationKey, string userKey)
         {
-            executionEngine.Send(new RevokeAdministratePermission(CurrentClaims.UserId, organizationKey, userKey));
+            executionEngine.Send(new RevokeAdministratePermission(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey));
         }
 
         [Secured, SystemManagers, HttpDelete, Route("organizations/{organizationKey}")]
         public void ArchiveOrganization(string organizationKey)
         {
-            executionEngine.Send(new ArchiveOrganization(CurrentClaims.UserId, organizationKey));
+            executionEngine.Send(new ArchiveOrganization(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey));
         }
 
         [Secured, SystemManagers, HttpPost, Route("organizations")]
         public string RegisterOrganization(RegisterOrganizationModel model)
         {
-            var cmd = new RegisterOrganization(CurrentClaims.UserId, model.OrganizationKey, model.Name);
+            var cmd = new RegisterOrganization(CurrentClaims.ApplicationKey, CurrentClaims.UserId, model.OrganizationKey, model.Name);
             
-            cmd.OrganizationKey = cmd.OrganizationKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);
+            cmd.OrganizationKey = cmd.OrganizationKey ?? new Hashids(config.SecretKey).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Send(cmd);
             return cmd.OrganizationKey;
         }
@@ -89,7 +89,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}")]
         public void UpdateOrganization(string organizationKey, UpdateOrganizationModel model)
         {
-            executionEngine.Send(new UpdateOrganization(CurrentClaims.UserId, organizationKey, model.Name));
+            executionEngine.Send(new UpdateOrganization(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, model.Name));
         }
     }
 }

@@ -26,13 +26,13 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [HttpGet, Route("token")]
         public string GetAccessToken(string email, string password)
         {
-           return "Bearer " + executionEngine.Query<GetAccessToken>().Execute(email, password);
+           return "Bearer " + executionEngine.Query<GetAccessToken>(CurrentClaims.ApplicationKey).Execute(email, password);
         }
         
         [HttpPost, Route("root")]
-        public string CreateRootUser(RegisterUserModel model)
+        public string CreateRootUser(CreateApplicationModel model)
         {
-            var cmd = new CreateRootUser
+            var cmd = new RegisterApplication(model.ApplicationKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks))
             {
                 Email = model.Email,
                 DisplayName = model.DisplayName,
@@ -48,19 +48,19 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, HttpGet, Route("users/{userKey}")]
         public UserDetails FindById(string userKey)
         {
-            return executionEngine.Query<FindByKey>().Execute(userKey);
+            return executionEngine.Query<FindByKey>(CurrentClaims.ApplicationKey).Execute(userKey);
         }
 
         [Secured, Administrators, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveUser(string organizationKey, string userKey)
         {
-            executionEngine.Send(new ArchiveUser(CurrentClaims.UserId, organizationKey, userKey));
+            executionEngine.Send(new ArchiveUser(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey));
         }
 
         [Secured, AdministratorsOrUser, HttpPost, Route(RESOURCE_URL)]
         public void UpdateUser(string organizationKey, string userKey, UpdateUserModel model)
         {
-            executionEngine.Send(new UpdateUser(CurrentClaims.UserId, organizationKey, userKey)
+            executionEngine.Send(new UpdateUser(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey)
             {
                 DisplayName = model.DisplayName,
                 Email = model.Email,
@@ -69,9 +69,9 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, Administrators, HttpPost, Route(COLLECTION_URL)]
-        public string RegisterUser(string organizationKey, RegisterUserModel model)
+        public string RegisterUser(string organizationKey, CreateApplicationModel model)
         {
-            var cmd = new RegisterUser(CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
+            var cmd = new RegisterUser(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
             cmd.UserKey = cmd.UserKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Send(cmd);
             return cmd.UserKey;

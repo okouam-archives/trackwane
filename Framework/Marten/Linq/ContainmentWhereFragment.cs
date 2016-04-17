@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Baseline;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Npgsql;
-using Remotion.Linq;
-using Remotion.Linq.Clauses.ResultOperators;
 
 namespace Marten.Linq
 {

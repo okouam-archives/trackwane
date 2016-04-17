@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using log4net;
 using paramore.brighter.commandprocessor;
-using Raven.Client;
 using StructureMap;
 using Trackwane.Framework.Interfaces;
 
@@ -13,11 +12,6 @@ namespace Trackwane.Framework.Infrastructure.Factories
     {
         /* Public */
 
-        public ServiceLocationFactory(IDocumentStoreBuilder builder)
-        {
-            this.builder = builder;
-        }
-
         public Container GetContainer(params StructureMap.Registry[] registries)
         {
             return new Container(x =>
@@ -26,8 +20,6 @@ namespace Trackwane.Framework.Infrastructure.Factories
                 {
                     x.IncludeRegistry(registry);
                 }
-
-                x.For<IDocumentStore>().Use(builder.CreateDocumentStore());
             });
         }
 
@@ -137,7 +129,6 @@ namespace Trackwane.Framework.Infrastructure.Factories
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ServiceLocationFactory));
-        private readonly IDocumentStoreBuilder builder;
         private readonly SubscriberRegistry subscribers = new SubscriberRegistry();
     }
 }

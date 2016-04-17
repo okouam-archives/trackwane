@@ -22,14 +22,14 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 
         protected override IEnumerable<DomainEvent> Handle(RevokeManagePermission cmd, IRepository repository)
         {
-            var organization = repository.Load<Organization>(cmd.OrganizationKey);
+            var organization = repository.Find<Organization>(cmd.OrganizationKey, cmd.ApplicationKey);
 
             if (organization == null)
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_ORGANIZATION, cmd.OrganizationKey));
             }
 
-            var user = repository.Load<User>(cmd.UserKey);
+            var user = repository.Find<User>(cmd.UserKey, cmd.ApplicationKey);
 
             if (user == null)
             {
@@ -37,6 +37,8 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
             }
 
             organization.RevokeManagePermission(user.Key);
+
+            repository.Persist(organization);
 
             return organization.GetUncommittedChanges();
         }

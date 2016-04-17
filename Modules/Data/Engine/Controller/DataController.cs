@@ -21,7 +21,7 @@ namespace Trackwane.Data.Engine.Controller
         [HttpGet, Route("data")]
         public ResponsePage<SearchResult> Search(string hardwareId = null, DateTime? from = null, DateTime? to = null)
         {           
-            return executionEngine.Query<FindBySearchCriteria>().Execute(hardwareId, from, to);
+            return executionEngine.Query<FindBySearchCriteria>(null).Execute(hardwareId, from, to);
         }
 
         [HttpPost, Route("data")]

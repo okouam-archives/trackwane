@@ -27,17 +27,17 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 
         protected override IEnumerable<DomainEvent> Handle(RegisterOrganization cmd, IRepository repository)
         {
-            if (organizationService.IsExistingOrganization(cmd.OrganizationKey, repository))
+            if (organizationService.IsExistingOrganization(cmd.ApplicationKey, cmd.OrganizationKey, repository))
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.DUPLICATE_ORGANIZATION_ID, cmd.OrganizationKey));
             }
 
-            if (organizationService.IsExistingOrganizationName(cmd.Name, repository))
+            if (organizationService.IsExistingOrganizationName(cmd.ApplicationKey, cmd.Name, repository))
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.DUPLICATE_ORGANIZATION_NAME, cmd.Name));
             }
 
-            var organization = new Organization(cmd.OrganizationKey, cmd.Name);
+            var organization = new Organization(cmd.ApplicationKey, cmd.OrganizationKey, cmd.Name);
 
             repository.Persist(organization);
 

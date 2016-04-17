@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,8 +61,8 @@
     <Compile Include="Interfaces\IPlatformConfig.cs" />
     <Compile Include="Interfaces\IModuleConfig.cs" />
     <Compile Include="Interfaces\IResource.cs" />
-    <Compile Include="Interfaces\IScopedQuery.cs" />
-    <Compile Include="Interfaces\IUnscopedQuery.cs" />
+    <Compile Include="Interfaces\IOrganizationQuery.cs" />
+    <Compile Include="Interfaces\IApplicationQuery.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="PhraseBook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

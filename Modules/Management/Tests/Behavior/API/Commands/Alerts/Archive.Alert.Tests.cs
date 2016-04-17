@@ -27,8 +27,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         [Test]
         public void When_Successful_Publishes_Alert_Archived_Event()
         {
-            _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_ID);
-            _ArchiveAlert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_ID);
+            _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_ID);
+            _ArchiveAlert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_ID);
 
             WasPosted<AlertArchived>().ShouldBeTrue();
         }
@@ -38,7 +38,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         {
             try
             {
-                _ArchiveAlert.With(Persona.SystemManager(), ORGANIZATION_KEY, null);
+                _ArchiveAlert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, null);
             }
             catch {}
      

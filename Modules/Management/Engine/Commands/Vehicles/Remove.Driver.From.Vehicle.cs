@@ -10,7 +10,7 @@ namespace Trackwane.Management.Engine.Commands.Vehicles
 
         public string VehicleId { get; private set; }
 
-        public RemoveDriverFromVehicle(string requesterId, string organizationId, string driverId, string vehicleId) : base(requesterId)
+        public RemoveDriverFromVehicle(string applicationKey, string requesterId, string organizationId, string driverId, string vehicleId) : base(applicationKey, requesterId)
         {
             OrganizationId = organizationId;
             DriverId = driverId;

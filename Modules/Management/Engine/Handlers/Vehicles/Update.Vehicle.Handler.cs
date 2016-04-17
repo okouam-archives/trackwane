@@ -31,7 +31,7 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
             {
                 var repository = uow.GetRepository();
 
-                var vehicle = repository.Load<Vehicle>(cmd.VehicleKey);
+                var vehicle = repository.Find<Vehicle>(cmd.VehicleKey, cmd.ApplicationKey);
 
                 if (vehicle == null)
                 {

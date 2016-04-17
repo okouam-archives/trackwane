@@ -28,8 +28,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Boundaries
         [Test]
         public void When_Successful_Publishes_Boundary_Archived_Event()
         {
-            _Create_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID);
-            _Archive_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID);
+            _Create_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID);
+            _Archive_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID);
 
             WasPosted<BoundaryArchived>().ShouldBeTrue();
         }
@@ -39,7 +39,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Boundaries
         {
             try
             {
-                _Archive_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, Guid.NewGuid().ToString());
+                _Archive_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, Guid.NewGuid().ToString());
             }
             catch {}
      
@@ -49,8 +49,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Boundaries
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Create_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID);
-            _Archive_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID);
+            _Create_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID);
+            _Archive_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID);
 
             var boundary = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(BOUNDARY_ID);
             boundary.IsArchived.ShouldBeTrue();

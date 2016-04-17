@@ -29,7 +29,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY);
+            _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY);
 
             EngineHost.ExecutionEngine.Query<FindByKey>(ALERT_KEY).ShouldNotBeNull();
         }
@@ -37,7 +37,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         [Test]
         public void When_Successful_Publishes_Alert_Created_Event()
         {
-            _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY);
+            _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY);
 
             WasPosted<AlertCreated>().ShouldBeTrue();
         }
@@ -47,7 +47,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         {
             Assert.Throws<ValidationException>(() =>
             {
-                _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY, string.Empty);
+                _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY, string.Empty);
             });
         }
 
@@ -56,8 +56,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY, "MY NAME");
-                _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "MY NAME");
+                _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY, "MY NAME");
+                _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "MY NAME");
             });
         }
     }

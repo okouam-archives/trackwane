@@ -10,7 +10,7 @@ namespace Trackwane.Management.Engine.Commands.Vehicles
 
         public string OrganizationKey { get; private set; }
 
-        public UpdateVehicle(string requesterId, string organizationKey, string vehicleKey, string identifier) : base(requesterId)
+        public UpdateVehicle(string applicationKey, string requesterId, string organizationKey, string vehicleKey, string identifier) : base(applicationKey, requesterId)
         {
             OrganizationKey = organizationKey;
             VehicleKey = vehicleKey;

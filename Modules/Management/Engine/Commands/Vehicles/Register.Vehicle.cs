@@ -11,7 +11,7 @@ namespace Trackwane.Management.Engine.Commands.Vehicles
 
         public string OrganizationId { get; private set; }
 
-        public RegisterVehicle(string requesterId, string organizationId, string identifier, string vehicleId = null) : base(requesterId)
+        public RegisterVehicle(string applicationKey, string requesterId, string organizationId, string identifier, string vehicleId = null) : base(applicationKey, requesterId)
         {
             VehicleId = vehicleId;
             Identifier = identifier;

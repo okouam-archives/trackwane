@@ -1,7 +1,7 @@
-﻿using NSubstitute;
+﻿using Marten;
+using NSubstitute;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
-using Raven.Client;
 using Shouldly;
 using StructureMap;
 using Trackwane.Framework.Infrastructure.Factories;

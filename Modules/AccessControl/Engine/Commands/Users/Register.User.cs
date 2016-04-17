@@ -16,7 +16,7 @@ namespace Trackwane.AccessControl.Engine.Commands.Users
 
         public string OrganizationKey { get; set; }
 
-        public RegisterUser(string requesterKey, string organizationKey, string userKey, string displayName, string email, string password) : base(requesterKey)
+        public RegisterUser(string applicationKey, string requesterKey, string organizationKey, string userKey, string displayName, string email, string password) : base(applicationKey, requesterKey)
         {
             OrganizationKey = organizationKey;
             DisplayName = displayName;

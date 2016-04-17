@@ -1,11 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-using System.Web.Http.Description;
-using System.Web.Http.Filters;
-using Swashbuckle.Swagger;
-
-namespace Trackwane.Framework.Infrastructure.Web
+﻿namespace Trackwane.Framework.Infrastructure.Web
 {
     //public class AddAuthorizationHeaderParameterOperationFilter : IOperationFilter
     //{

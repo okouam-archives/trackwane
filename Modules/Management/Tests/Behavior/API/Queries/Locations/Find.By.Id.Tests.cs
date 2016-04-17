@@ -24,7 +24,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Locations
         [Test]
         public void Finds_Locations_By_Id()
         {
-            _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_ID);
+            _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_ID);
 
             var location = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(LOCATION_ID);
             location.ShouldNotBeNull();

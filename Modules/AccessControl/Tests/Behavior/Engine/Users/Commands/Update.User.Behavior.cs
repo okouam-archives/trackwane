@@ -18,21 +18,21 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             USER_KEY = Guid.NewGuid().ToString();
             ORGANIZATION_KEY = Guid.NewGuid().ToString();
-            Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, "John Smith");
+            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, "John Smith");
         }
 
         [Test]
         public void When_Successful_Persists_changes()
         {
-            Update_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
+            Update_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
 
-            EngineHost.ExecutionEngine.Query<FindByKey>().Execute(USER_KEY).DisplayName.ShouldBe("Rachel Johnson");
+            EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey).Execute(USER_KEY).DisplayName.ShouldBe("Rachel Johnson");
         }
 
         [Test]
         public void When_Successful_Publishes_Event()
         {
-            Update_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
+            Update_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
 
             WasPosted<UserUpdated>().ShouldBeTrue();
         }
@@ -42,7 +42,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.NotThrow(() =>
             {
-                Update_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
+                Update_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
             });
         }
 
@@ -51,7 +51,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Update_User.With(Persona.Administrator(Guid.NewGuid().ToString()), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
+                Update_User.With(Persona.Administrator(ApplicationKey, Guid.NewGuid().ToString()), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
             });
         }
 
@@ -60,7 +60,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.NotThrow(() =>
             {
-                Update_User.With(Persona.Administrator(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
+                Update_User.With(Persona.Administrator(ApplicationKey, ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
             });
         }
 
@@ -69,7 +69,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Update_User.With(Persona.Viewer(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
+                Update_User.With(Persona.Viewer(ApplicationKey, ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
             });
         }
         
@@ -78,7 +78,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Update_User.With(Persona.Manager(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
+                Update_User.With(Persona.Manager(ApplicationKey, ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
             });
         }
 
@@ -87,7 +87,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.NotThrow(() =>
             {
-                var user = Persona.User();
+                var user = Persona.User(ApplicationKey);
                 user.UserId = USER_KEY;
                 Update_User.With(user, ORGANIZATION_KEY, USER_KEY, "Rachel Johnson");
             });

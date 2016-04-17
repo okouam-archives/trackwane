@@ -14,7 +14,7 @@ namespace Trackwane.AccessControl.Engine.Commands.Users
 
         public string Email { get; set; }
 
-        public UpdateUser(string requesterKey, string organizationKey, string userKey) : base(requesterKey)
+        public UpdateUser(string applicationKey, string requesterKey, string organizationKey, string userKey) : base(applicationKey, requesterKey)
         {
             OrganizationKey = organizationKey;
             UserKey = userKey;

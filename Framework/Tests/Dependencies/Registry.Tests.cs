@@ -1,7 +1,7 @@
-﻿using NSubstitute;
+﻿using Marten;
+using NSubstitute;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
-using Raven.Client;
 using StructureMap;
 using Registry = Trackwane.Framework.Infrastructure.Registry;
 

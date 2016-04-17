@@ -26,7 +26,7 @@ namespace Trackwane.Management.Engine.Handlers.Boundaries
 
         protected override IEnumerable<DomainEvent> Handle(ArchiveBoundary cmd, IRepository repository)
         {
-            var boundary = repository.Load<Boundary>(cmd.BoundaryId);
+            var boundary = repository.Find<Boundary>(cmd.BoundaryId, cmd.ApplicationKey);
 
             if (boundary == null)
             {

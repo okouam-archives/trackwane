@@ -5,7 +5,6 @@ using Trackwane.Simulator.Engine.Commands;
 using Trackwane.Simulator.Engine.Handlers;
 using Trackwane.Simulator.Engine.Queries;
 using Trackwane.Simulator.Engine.Services;
-using ModuleConfig = Trackwane.Framework.Common.Configuration.ModuleConfig;
 
 namespace Trackwane.Simulator.Tests.Behaviors.Engine.Handlers
 {

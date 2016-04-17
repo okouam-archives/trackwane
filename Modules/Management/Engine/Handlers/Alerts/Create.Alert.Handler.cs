@@ -21,7 +21,7 @@ namespace Trackwane.Management.Engine.Handlers.Alerts
 
         protected override IEnumerable<DomainEvent> Handle(CreateAlert cmd, IRepository repository)
         {
-            var organization = repository.Load<Organization>(cmd.OrganizationKey);
+            var organization = repository.Find<Organization>(cmd.OrganizationKey, cmd.ApplicationKey);
 
             if (organization == null)
             {

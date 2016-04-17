@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using paramore.brighter.commandprocessor;
@@ -10,6 +11,8 @@ namespace Trackwane.AccessControl.Tests
 {
     internal partial class Scenario
     {
+        protected string ApplicationKey { get; private set; }
+
         public Scenario()
         {
             Posted = new List<IRequest>();
@@ -27,9 +30,11 @@ namespace Trackwane.AccessControl.Tests
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new AccessControlContext(Setup.EngineHost.Configuration.Get("uri"), new PlatformConfig());
+            Client = new AccessControlContext(Setup.EngineHost.Configuration.Get("uri"), new PlatformConfig(), ApplicationKey);
 
             EngineHost.ExecutionEngine.MessagePosted += (o, request) => Posted.Add(request);
+
+            ApplicationKey = Guid.NewGuid().ToString();
         }
 
         protected bool WasPosted<T>()

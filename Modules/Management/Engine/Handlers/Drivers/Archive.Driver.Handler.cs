@@ -24,7 +24,7 @@ namespace Trackwane.Management.Engine.Handlers.Drivers
 
         protected override IEnumerable<DomainEvent> Handle(ArchiveDriver cmd, IRepository repository)
         {
-            var driver = repository.Load<Driver>(cmd.DriverId);
+            var driver = repository.Find<Driver>(cmd.DriverId, cmd.ApplicationKey);
 
             if (driver == null)
             {

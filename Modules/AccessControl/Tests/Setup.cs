@@ -2,15 +2,9 @@
 using System.Linq;
 using NUnit.Framework;
 using Trackwane.AccessControl.Contracts;
-using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.AccessControl.Engine;
-using Trackwane.AccessControl.Engine.Commands.Users;
-using Trackwane.AccessControl.Engine.Processors.Handlers.Users;
-using Trackwane.AccessControl.Engine.Processors.Listeners;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
-using Trackwane.Framework.Infrastructure.Factories;
-using Trackwane.Framework.Infrastructure.Storage;
 using Trackwane.Framework.Interfaces;
 using Registry = Trackwane.AccessControl.Engine.Registry;
 
@@ -21,7 +15,7 @@ namespace Trackwane.AccessControl.Tests
     public class Setup
     {
         public static IEngineHost EngineHost { get; set; }
-
+        
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
 using Trackwane.AccessControl.Contracts;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
-using Trackwane.Framework.Infrastructure.Factories;
-using Trackwane.Framework.Infrastructure.Storage;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Contracts;
 using Trackwane.Management.Engine;
@@ -17,6 +14,8 @@ namespace Trackwane.Management.Tests
     // ReSharper disable once CheckNamespace
     public class Setup
     {
+        public static string ApplicationKey { get; set; }
+
         public static IEngineHost EngineHost { get; set; }
 
         [OneTimeSetUp]

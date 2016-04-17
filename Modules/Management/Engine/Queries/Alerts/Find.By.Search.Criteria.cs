@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using Raven.Client;
-using Raven.Client.Linq;
+using Marten;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
@@ -9,7 +8,7 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Queries.Alerts
 {
-    public class FindBySearchCriteria : Query<ResponsePage<AlertSummary>>, IScopedQuery
+    public class FindBySearchCriteria : Query<ResponsePage<AlertSummary>>, IOrganizationQuery
     {
         public ResponsePage<AlertSummary> Execute(string name = null)
         {

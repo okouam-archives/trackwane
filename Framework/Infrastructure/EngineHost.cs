@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Http.SelfHost;
 using log4net;
 using Marten;
+using Microsoft.Owin.Hosting;
+using Owin;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using paramore.brighter.serviceactivator;
@@ -27,7 +29,7 @@ namespace Trackwane.Framework.Infrastructure
         private readonly Assembly engine;
         private readonly Type[] events;
         private readonly IServiceLocator<T> locator;
-        private HttpSelfHostServer webApi;
+        private IDisposable webApi;
         private MetricServer metricsCollection;
         private Dispatcher dispatcher;
         private readonly ILog log = LogManager.GetLogger(typeof(EngineHost<T>));
@@ -171,7 +173,7 @@ namespace Trackwane.Framework.Infrastructure
         {
             if (webApi != null)
             {
-                webApi.CloseAsync().Wait();
+                webApi.Dispose();
                 webApi = null;
             }
         }
@@ -193,16 +195,15 @@ namespace Trackwane.Framework.Infrastructure
             {
                 log.Info("Starting the Web API");
                 webApi = CreateStandaloneServer(container, Configuration.Get("uri"));
-                webApi.OpenAsync().Wait();
+                //webApi.OpenAsync().Wait();
                 log.Info("The Web API is start and waiting for connections");
             }
         }
 
-        private static HttpSelfHostServer CreateStandaloneServer(IContainer container, string url)
+        private static IDisposable CreateStandaloneServer(IContainer container, string url)
         {
-            var configuration = new HttpSelfHostConfiguration(url);
-            ApplyConfiguration(container, configuration);
-            return new HttpSelfHostServer(configuration);
+            Startup.Container = container;
+            return WebApp.Start<Startup>(url);
         }
 
         private static void ApplyConfiguration(IContainer container, HttpConfiguration configuration)
@@ -232,5 +233,35 @@ namespace Trackwane.Framework.Infrastructure
         }
     }
 
+    public class Startup
+    {
+        public static IContainer Container { get; set; }
+
+        public void Configuration(IAppBuilder appBuilder)
+        {
+            var config = new HttpConfiguration();
+            ApplyConfiguration(Container, config);
+            appBuilder.UseWebApi(config);
+        }
+
+        private static void ApplyConfiguration(IContainer container, HttpConfiguration configuration)
+        {
+            ResolveDependencies(configuration, container);
+            RegisterRoutes(configuration);
+        }
+
+        private static void RegisterRoutes(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+            config.Filters.Add(new BusinessRuleExceptionFilter());
+            config.Filters.Add(new ValidationExceptionFilter());
+        }
+
+        private static void ResolveDependencies(HttpConfiguration configuration, IContainer container)
+        {
+            container.AssertConfigurationIsValid();
+            configuration.DependencyResolver = new WebApiDependencyResolver(container, false);
+        }
+    }
 
 }

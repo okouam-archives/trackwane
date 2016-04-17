@@ -38,6 +38,9 @@
     <Reference Include="log4net">
       <HintPath>..\..\..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Host.HttpListener\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\..\..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
     </Reference>

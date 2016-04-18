@@ -1,7 +1,4 @@
-﻿using System.Data;
-using System.Linq;
-
-namespace Marten
+﻿namespace Marten
 {
     public interface IDiagnostics
     {

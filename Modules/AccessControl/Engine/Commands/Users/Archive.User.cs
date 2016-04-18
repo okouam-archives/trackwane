@@ -8,7 +8,7 @@ namespace Trackwane.AccessControl.Engine.Commands.Users
 
         public string UserKey { get; set; }
 
-        public ArchiveUser(string requesterKey, string organizationKey, string userKey) : base(requesterKey)
+        public ArchiveUser(string applicationKey, string requesterKey, string organizationKey, string userKey) : base(applicationKey, requesterKey)
         {
             OrganizationKey = organizationKey;
             UserKey = userKey;

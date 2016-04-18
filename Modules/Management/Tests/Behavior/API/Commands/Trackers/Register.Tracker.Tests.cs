@@ -27,7 +27,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Trackers
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Register_Tracker.With(Persona.SystemManager(), TRACKER_KEY, ORGANIZATION_KEY);
+            _Register_Tracker.With(Persona.SystemManager(ApplicationKey), TRACKER_KEY, ORGANIZATION_KEY);
 
             var tracker = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(TRACKER_KEY);
             tracker.ShouldNotBeNull();

@@ -23,7 +23,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Boundaries
         [Test]
         public void Finds_Boundaries_When_Searching_By_Organization()
         {
-            _Create_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID);
+            _Create_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID);
 
             var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute(ORGANIZATION_KEY);
 

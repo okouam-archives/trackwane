@@ -76,6 +76,8 @@ namespace Trackwane.AccessControl.Contracts.Events
         public string Email { get; set; }
 
         public string Password { get; set; }
+
+        public string ApplicationKey { get; set; }
     }
 
     public class UserUpdated : DomainEvent

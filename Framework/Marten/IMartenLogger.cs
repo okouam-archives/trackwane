@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using Marten.Services;
 using Npgsql;
 
 namespace Marten

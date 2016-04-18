@@ -23,23 +23,23 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Register_Organization.With(Persona.User(), ORGANIZATION_KEY);
+                Register_Organization.With(Persona.User(ApplicationKey), ORGANIZATION_KEY);
             });
         }
 
         [Test]
         public void When_Successful_Publishes_Events()
         {
-            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
             WasPosted<OrganizationRegistered>().ShouldBeTrue();
         }
 
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
 
-            EngineHost.ExecutionEngine.Query<FindByKey>(ORGANIZATION_KEY).Execute().ShouldNotBeNull();
+            EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey, ORGANIZATION_KEY).Execute().ShouldNotBeNull();
         }
 
         [Test]
@@ -47,8 +47,8 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
             });
         }
 
@@ -57,7 +57,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Assert.Throws<ValidationException>(() =>
             {
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY, null);
+                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, null);
             });
         }
 
@@ -69,10 +69,10 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
 
             Assert.Throws<BusinessRuleException>(() =>
             {
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY_A,
-                    String.Format("Test Org {0}", ORGANIZATION_KEY_A));
-                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY_B,
-                    String.Format("Test Org {0}", ORGANIZATION_KEY_A));
+                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY_A,
+                    string.Format("Test Org {0}", ORGANIZATION_KEY_A));
+                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY_B,
+                    string.Format("Test Org {0}", ORGANIZATION_KEY_A));
             });
         }
     }

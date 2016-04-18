@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Framework.Common;
-using Trackwane.Framework.Infrastructure.Requests.Metrics;
 using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure.Requests

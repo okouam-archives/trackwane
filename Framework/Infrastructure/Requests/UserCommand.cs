@@ -1,8 +1,8 @@
 ﻿namespace Trackwane.Framework.Infrastructure.Requests
 {
-    public abstract class UserCommand : SystemCommand
+    public abstract class UserCommand : ApplicationCommand
     {
-        protected UserCommand(string requesterId)
+        protected UserCommand(string applicationKey, string requesterId) : base(applicationKey)
         {
             RequesterId = requesterId;
         }

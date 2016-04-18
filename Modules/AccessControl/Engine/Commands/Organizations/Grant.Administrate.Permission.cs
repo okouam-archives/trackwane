@@ -8,7 +8,7 @@ namespace Trackwane.AccessControl.Engine.Commands.Organizations
 
         public string OrganizationKey { get; set; }
 
-        public GrantAdministratePermission(string requesterKey, string organizationKey, string userKey) : base(requesterKey)
+        public GrantAdministratePermission(string applicationKey, string requesterKey, string organizationKey, string userKey) : base(applicationKey, requesterKey)
         {
             UserKey = userKey;
             OrganizationKey = organizationKey;

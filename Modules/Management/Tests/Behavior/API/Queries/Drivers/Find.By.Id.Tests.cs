@@ -23,7 +23,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Drivers
         [Test]
         public void Finds_Drivers_By_Id()
         {
-            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID);
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID);
 
             var driver = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(DRIVER_ID);
             driver.ShouldNotBeNull();

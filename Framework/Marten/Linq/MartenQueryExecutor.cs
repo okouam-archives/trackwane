@@ -10,7 +10,6 @@ using Marten.Services.Includes;
 using Npgsql;
 using Remotion.Linq;
 using Remotion.Linq.Clauses.ResultOperators;
-using Remotion.Linq.Parsing.Structure;
 
 namespace Marten.Linq
 {

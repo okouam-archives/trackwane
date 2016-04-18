@@ -19,14 +19,14 @@ namespace Trackwane.Management.Engine.Listeners.Organizations.Vehicles
 
         protected override IEnumerable<DomainEvent> Handle(VehicleArchived evt, IRepository repository)
         {
-            var organization = repository.Load<Organization>(evt.OrganizationKey);
+            var organization = repository.Find<Organization>(evt.OrganizationKey, evt.ApplicationKey);
 
             if (organization == null)
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_ORGANIZATION, evt.OrganizationKey));
             }
 
-            var boundary = repository.Load<Vehicle>(evt.VehicleKey);
+            var boundary = repository.Find<Vehicle>(evt.VehicleKey, evt.ApplicationKey);
 
             organization.Vehicles = organization.Vehicles.Where(x => x != boundary.Identifier).ToList();
 

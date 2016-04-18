@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.Framework.Common;
@@ -13,8 +15,10 @@ namespace Trackwane.AccessControl.Domain.Organizations
     {
         /* Public */
 
-        public string Name { get; internal set; }
+        [JsonProperty]
+        public string Name { get; set; }
 
+        [JsonProperty]
         public bool IsArchived { get; set; }
 
         public void Update(string name)
@@ -29,12 +33,12 @@ namespace Trackwane.AccessControl.Domain.Organizations
             Administrators = new List<string>();
         }
 
-        public Organization(string id, string name)
+        public Organization(string applicationKey, string id, string name)
         {
             Viewers = new List<string>();
             Managers = new List<string>();
             Administrators = new List<string>();
-            Causes(new OrganizationRegistered {Name = name, OrganizationKey = id});
+            Causes(new OrganizationRegistered { ApplicationKey = applicationKey, Name = name, OrganizationKey = id});
         }
 
         public void Archive()
@@ -156,15 +160,19 @@ namespace Trackwane.AccessControl.Domain.Organizations
 
         /* Private */
 
+        [JsonProperty]
         private IList<string> Managers { get; set; }
 
+        [JsonProperty]
         private IList<string> Viewers { get; set; }
 
+        [JsonProperty]
         private IList<string> Administrators { get; set; }
 
         private void When(OrganizationRegistered evt)
         {
             Name = evt.Name;
+            ApplicationKey = evt.ApplicationKey;
             Key = evt.OrganizationKey;
         }
 

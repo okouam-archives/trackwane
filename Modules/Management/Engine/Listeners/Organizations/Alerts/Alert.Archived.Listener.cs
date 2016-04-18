@@ -19,14 +19,14 @@ namespace Trackwane.Management.Engine.Listeners.Organizations.Alerts
 
         protected override IEnumerable<DomainEvent> Handle(AlertArchived evt, IRepository repository)
         {
-            var organization = repository.Load<Organization>(evt.OrganizationKey);
+            var organization = repository.Find<Organization>(evt.OrganizationKey, evt.ApplicationKey);
 
             if (organization == null)
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_ORGANIZATION, evt.OrganizationKey));
             }
             
-            var alert = repository.Load<Alert>(evt.AlertKey);
+            var alert = repository.Find<Alert>(evt.AlertKey, evt.ApplicationKey);
 
             if (alert == null)
             {

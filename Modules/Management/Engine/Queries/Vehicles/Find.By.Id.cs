@@ -1,4 +1,4 @@
-﻿using Raven.Client;
+﻿using Marten;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
 using Trackwane.Management.Contracts.Models;
@@ -6,13 +6,13 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Queries.Vehicles
 {
-    public class FindById : Query<VehicleDetails>, IScopedQuery
+    public class FindById : Query<VehicleDetails>, IOrganizationQuery
     {
         public VehicleDetails Execute(string vehicleId)
         {
             return Execute(repository =>
             {
-                var vehicle = repository.Load<Vehicle>(vehicleId);
+                var vehicle = repository.Find<Vehicle>(vehicleId, ApplicationKey);
 
                 if (vehicle == null) return null;
 
@@ -20,7 +20,7 @@ namespace Trackwane.Management.Engine.Queries.Vehicles
 
                 if (vehicle.TrackerId != null)
                 {
-                    var tracker = repository.Load<Tracker>(vehicle.TrackerId);
+                    var tracker = repository.Find<Tracker>(vehicle.TrackerId, ApplicationKey);
 
                     if (tracker != null)
                     {
@@ -32,7 +32,7 @@ namespace Trackwane.Management.Engine.Queries.Vehicles
 
                 if (vehicle.DriverId != null)
                 {
-                    var driver = repository.Load<Driver>(vehicle.DriverId);
+                    var driver = repository.Find<Driver>(vehicle.DriverId, ApplicationKey);
 
                     if (driver != null)
                     {

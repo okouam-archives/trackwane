@@ -22,7 +22,7 @@ namespace Trackwane.Management.Engine.Handlers.Locations
 
         protected override IEnumerable<DomainEvent> Handle(ArchiveLocation cmd, IRepository repository)
         {
-            var location = repository.Load<Location>(cmd.LocationId);
+            var location = repository.Find<Location>(cmd.LocationId, cmd.ApplicationKey);
 
             if (location == null)
             {

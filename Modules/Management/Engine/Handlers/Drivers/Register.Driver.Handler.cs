@@ -25,7 +25,7 @@ namespace Trackwane.Management.Engine.Handlers.Drivers
 
         protected override IEnumerable<DomainEvent> Handle(RegisterDriver cmd, IRepository repository)
         {
-            var organization = repository.Load<Organization>(cmd.OrganizationKey);
+            var organization = repository.Find<Organization>(cmd.OrganizationKey, cmd.ApplicationKey);
 
             if (organization == null)
             {

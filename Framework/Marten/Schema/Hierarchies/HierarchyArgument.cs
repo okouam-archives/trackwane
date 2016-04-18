@@ -1,5 +1,3 @@
-using System.Security.Permissions;
-
 namespace Marten.Schema.Hierarchies
 {
     public class HierarchyArgument : StorageArgument

@@ -21,7 +21,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 
         protected override IEnumerable<DomainEvent> Handle(ArchiveOrganization cmd, IRepository repository)
         {
-            var organization = repository.Load<Organization>(cmd.OrganizationKey);
+            var organization = repository.Find<Organization>(cmd.OrganizationKey, cmd.ApplicationKey);
 
             if (organization == null)
             {
@@ -29,6 +29,8 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
             }
 
             organization.Archive();
+
+            repository.Persist(organization);
 
             return organization.GetUncommittedChanges();
         }

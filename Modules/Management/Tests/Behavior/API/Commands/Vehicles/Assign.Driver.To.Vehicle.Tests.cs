@@ -30,9 +30,9 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_KEY, "ALLEN PAUL");
-            _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY);
-            _Assign_Driver_To_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY, DRIVER_KEY);
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_KEY, "ALLEN PAUL");
+            _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY);
+            _Assign_Driver_To_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY, DRIVER_KEY);
 
             var vehicle = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(VEHICLE_KEY);
 
@@ -45,10 +45,10 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_KEY);
-                _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY);
-                _ArchiveDriver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_KEY);
-                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY, DRIVER_KEY);
+                _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_KEY);
+                _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY);
+                _ArchiveDriver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_KEY);
+                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY, DRIVER_KEY);
             });
         }
 
@@ -57,10 +57,10 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_KEY);
-                _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY);
-                _Archive_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY);
-                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY, DRIVER_KEY);
+                _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_KEY);
+                _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY);
+                _Archive_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY);
+                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY, DRIVER_KEY);
             });
         }
     
@@ -69,8 +69,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_KEY);
-                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, Guid.NewGuid().ToString(), DRIVER_KEY);
+                _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_KEY);
+                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, Guid.NewGuid().ToString(), DRIVER_KEY);
             });
         }
 
@@ -79,8 +79,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY);
-                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY, Guid.NewGuid().ToString());
+                _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY);
+                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY, Guid.NewGuid().ToString());
             });
         }
 
@@ -92,9 +92,9 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
             Assert.Throws<BusinessRuleException>(() =>
             {
                 _Organization_Registered.With(OTHER_ORGANIZATION_KEY);
-                _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_KEY);
-                _Register_Vehicle.With(Persona.SystemManager(), OTHER_ORGANIZATION_KEY, VEHICLE_KEY);
-                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY, DRIVER_KEY);
+                _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_KEY);
+                _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), OTHER_ORGANIZATION_KEY, VEHICLE_KEY);
+                _Assign_Driver_To_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY, DRIVER_KEY);
             });
         }
     }

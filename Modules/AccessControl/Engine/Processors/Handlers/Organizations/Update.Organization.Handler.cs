@@ -27,7 +27,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 
         protected override IEnumerable<DomainEvent> Handle(UpdateOrganization cmd, IRepository repository)
         {
-            var organization = repository.Load<Organization>(cmd.OrganizationKey);
+            var organization = repository.Find<Organization>(cmd.OrganizationKey, cmd.ApplicationKey);
 
             if (organization == null)
             {
@@ -36,12 +36,14 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 
             if (!string.IsNullOrEmpty(cmd.Name))
             {
-                if (organizationService.IsExistingOrganizationName(cmd.Name, repository))
+                if (organizationService.IsExistingOrganizationName(cmd.ApplicationKey, cmd.Name, repository))
                 {
                     throw new BusinessRuleException();
                 }
 
                 organization.Update(cmd.Name);
+
+                repository.Persist(organization);
 
                 return organization.GetUncommittedChanges();
             }

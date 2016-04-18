@@ -6,7 +6,7 @@ namespace Trackwane.Management.Engine.Commands.Locations
     {
         public string LocationId { get; private set; }
 
-        public ArchiveLocation(string requesterId, string organizationId, string locationId) : base(requesterId)
+        public ArchiveLocation(string applicationKey, string requesterId, string organizationId, string locationId) : base(applicationKey, requesterId)
         {
             LocationId = locationId;
             OrganizationId = organizationId;

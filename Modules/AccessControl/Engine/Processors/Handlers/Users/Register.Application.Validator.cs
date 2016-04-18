@@ -3,7 +3,7 @@ using Trackwane.AccessControl.Engine.Commands.Users;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 {
-    public class CreateRootUserValidator : AbstractValidator<CreateRootUser>
+    public class CreateRootUserValidator : AbstractValidator<RegisterApplication>
     {
         public CreateRootUserValidator() 
         {

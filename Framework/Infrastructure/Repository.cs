@@ -1,8 +1,6 @@
 ﻿using System.Linq;
-using Raven.Abstractions.Data;
-using Raven.Client;
-using Raven.Client.Connection;
-using Raven.Client.Linq;
+using Marten;
+using Marten.Linq;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Interfaces;
 
@@ -12,28 +10,22 @@ namespace Trackwane.Framework.Infrastructure
     {
         /* Public */
 
-        public Repository(IDocumentSession session, IDatabaseCommands databaseCommands)
+        public Repository(IDocumentSession session)
         {
             this.session = session;
-            this.databaseCommands = databaseCommands;
         }
 
-        public T Load<T>(string key, string organizationKey) where T : ScopedAggregateRoot
+        public T Find<T>(string key, string organizationKey, string applicationKey) where T : ScopedAggregateRoot
         {
-            return session.Query<T>().Customize(x => x.WaitForNonStaleResults()).SingleOrDefault(x => x.Key == key && x.OrganizationKey == organizationKey);
+            return session.Query<T>().SingleOrDefault(x => x.Key == key && x.OrganizationKey == organizationKey && x.ApplicationKey == applicationKey);
         }
 
-        public T Load<T>(string key) where T : AggregateRoot
+        public T Find<T>(string key, string applicationKey) where T : AggregateRoot
         {
-            return session.Query<T>().Customize(x => x.WaitForNonStaleResults()).SingleOrDefault(x => x.Key == key);
+            return session.Query<T>().SingleOrDefault(x => x.Key == key && x.ApplicationKey == applicationKey);
         }
 
-        public JsonDocument Get(string id)
-        {
-            return databaseCommands.Get(id);
-        }
-
-        public IRavenQueryable<T> Query<T>() 
+        public IMartenQueryable<T> Query<T>() 
         {
             return session.Query<T>();
         }
@@ -51,6 +43,5 @@ namespace Trackwane.Framework.Infrastructure
         /* Private */
 
         private readonly IDocumentSession session;
-        private readonly IDatabaseCommands databaseCommands;
     }
 }

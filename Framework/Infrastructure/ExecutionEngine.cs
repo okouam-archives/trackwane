@@ -70,14 +70,16 @@ namespace Trackwane.Framework.Infrastructure
             throw new NotImplementedException();
         }
 
-        public T Query<T>() where T : IUnscopedQuery
-        {
-            return container.GetInstance<T>();
-        }
-
-        public T Query<T>(string organizationKey) where T : IScopedQuery
+        public T Query<T>(string applicationKey) where T : IApplicationQuery
         {
             var query = container.GetInstance<T>();
+            query.ApplicationKey = applicationKey;
+            return query;
+        }
+
+        public T Query<T>(string applicationKey, string organizationKey) where T : IOrganizationQuery
+        {
+            var query = Query<T>(applicationKey);
             query.OrganizationKey = organizationKey;
             return query;
         }

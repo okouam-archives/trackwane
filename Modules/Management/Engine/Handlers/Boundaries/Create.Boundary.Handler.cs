@@ -25,7 +25,7 @@ namespace Trackwane.Management.Engine.Handlers.Boundaries
 
         protected override IEnumerable<DomainEvent> Handle(CreateBoundary cmd, IRepository repository)
         {
-            var organization = repository.Load<Organization>(cmd.OrganizationId);
+            var organization = repository.Find<Organization>(cmd.OrganizationId, cmd.ApplicationKey);
 
             if (organization == null)
             {
@@ -39,7 +39,7 @@ namespace Trackwane.Management.Engine.Handlers.Boundaries
 
             if (!string.IsNullOrEmpty(cmd.BoundaryId))
             {
-                var existingBoundary = repository.Load<Boundary>(cmd.BoundaryId);
+                var existingBoundary = repository.Find<Boundary>(cmd.BoundaryId, cmd.ApplicationKey);
 
                 if (existingBoundary != null)
                 {

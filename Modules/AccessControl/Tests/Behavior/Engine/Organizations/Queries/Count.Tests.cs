@@ -17,14 +17,14 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Queries
             ORGANIZATION_A_KEY = Guid.NewGuid().ToString();
             ORGANIZATION_B_KEY = Guid.NewGuid().ToString();
 
-            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_A_KEY);
-            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_B_KEY);
+            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_A_KEY);
+            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_B_KEY);
         }
 
         [Test]
         public void Counts_All_Organizations_In_System()
         {
-            var num = EngineHost.ExecutionEngine.Query<Count>().Execute();
+            var num = EngineHost.ExecutionEngine.Query<Count>(ApplicationKey).Execute();
             num.ShouldBeGreaterThanOrEqualTo(2);
         }
     }

@@ -19,9 +19,9 @@ namespace Trackwane.Management.Engine.Listeners.Organizations.Locations
 
         protected override IEnumerable<DomainEvent> Handle(LocationArchived evt, IRepository repository)
         {
-            var location = repository.Load<Location>(evt.LocationKey);
+            var location = repository.Find<Location>(evt.LocationKey, evt.ApplicationKey);
 
-            var organization = repository.Load<Organization>(location.OrganizationKey);
+            var organization = repository.Find<Organization>(location.OrganizationKey, evt.ApplicationKey);
 
             if (organization == null)
             {

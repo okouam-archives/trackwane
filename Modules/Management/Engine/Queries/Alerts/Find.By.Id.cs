@@ -1,4 +1,4 @@
-﻿using Raven.Client;
+﻿using Marten;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
 using Trackwane.Management.Contracts.Models;
@@ -6,13 +6,13 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Queries.Alerts
 {
-    public class FindByKey : Query<AlertDetails>, IScopedQuery
+    public class FindByKey : Query<AlertDetails>, IOrganizationQuery
     {
         public AlertDetails Execute(string alertId)
         {
             return Execute(repository =>
             {
-                var alert = repository.Load<Alert>(alertId);
+                var alert = repository.Find<Alert>(alertId, ApplicationKey);
 
                 if (alert == null) return null;
 

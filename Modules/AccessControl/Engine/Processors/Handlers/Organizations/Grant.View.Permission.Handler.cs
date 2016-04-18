@@ -21,14 +21,14 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 
         protected override IEnumerable<DomainEvent> Handle(GrantViewPermission cmd, IRepository repository)
         {
-            var organization = repository.Load<Organization>(cmd.OrganizationKey);
+            var organization = repository.Find<Organization>(cmd.OrganizationKey, cmd.ApplicationKey);
 
             if (organization == null)
             {
                 throw new BusinessRuleException();
             }
 
-            var user = repository.Load<User>(cmd.UserKey);
+            var user = repository.Find<User>(cmd.UserKey, cmd.ApplicationKey);
 
             if (user == null)
             {
@@ -36,6 +36,8 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
             }
 
             organization.GrantViewPermission(cmd.UserKey);
+
+            repository.Persist(organization);
 
             return organization.GetUncommittedChanges();
         }

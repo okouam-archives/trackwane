@@ -23,7 +23,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Locations
         [Test]
         public void Finds_Locations_When_Searching_By_Organization()
         {
-            _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_ID);
+            _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_ID);
 
             var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute();
 

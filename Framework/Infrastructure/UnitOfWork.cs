@@ -1,4 +1,4 @@
-﻿using Raven.Client;
+﻿using Marten;
 using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure
@@ -9,12 +9,11 @@ namespace Trackwane.Framework.Infrastructure
         {
             this.documentStore = documentStore;
             session = documentStore.OpenSession();
-            session.Advanced.MaxNumberOfRequestsPerSession = 1000; // THIS IS WRONG! REMOVE THIS! NO!!!! 
         }
 
         public IRepository GetRepository()
         {
-            return repository ?? (repository = new Repository(session, documentStore.DatabaseCommands));
+            return repository ?? (repository = new Repository(session));
         }
 
         public void Commit()

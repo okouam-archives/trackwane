@@ -5,13 +5,30 @@ services:
   trackwane_access_control:
     build: ./../Modules/AccessControl
     container_name: trackwane_access_control
+    depends_on:
+      - "etcd"
+      - "etcd_viewer"
+      - "rabbitmq"
+      - "prometheus"
+      - "grafana"
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/Docker/postgres/data/:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: trackwane
+      POSTGRES_PASSWORD: trackwane
 
   etcd:
     image: quay.io/coreos/etcd
     container_name: etcd
     command: --listen-client-urls http://0.0.0.0:2379 --advertise-client-urls http://0.0.0.0:2379 --name etcd --data-dir /data
     volumes:
-      - ./data/etcd:/data
+      - ~/Docker/etcd/data:/data
     ports:
       - "2379:2379"
 
@@ -33,7 +50,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./config/prometheus/:/etc/prometheus/
+      - ~/Docker/prometheus/config/:/etc/prometheus/
     command:  -config.file=/etc/prometheus/prometheus.yml
 
   grafana:

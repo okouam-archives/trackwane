@@ -73,6 +73,10 @@
       <Project>{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Marten\Marten.csproj">
+      <Project>{3d44a648-636e-4d4e-b943-361d103f1fa2}</Project>
+      <Name>Marten</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
       <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
       <Name>paramore.brighter.commandprocessor</Name>

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Marten.Linq;
 using Marten.Services.Includes;
 
 namespace Marten.Services.BatchQuerying

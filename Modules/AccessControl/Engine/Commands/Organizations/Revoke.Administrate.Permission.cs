@@ -8,7 +8,7 @@ namespace Trackwane.AccessControl.Engine.Commands.Organizations
 
         public string OrganizationKey { get; set; }
 
-        public RevokeAdministratePermission(string requesterKey, string organizationKey, string userKey) : base(requesterKey)
+        public RevokeAdministratePermission(string applicationKey, string requesterKey, string organizationKey, string userKey) : base(applicationKey, requesterKey)
         {
             UserKey = userKey;
             OrganizationKey = organizationKey;

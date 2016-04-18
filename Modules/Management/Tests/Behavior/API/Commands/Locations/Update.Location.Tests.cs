@@ -28,8 +28,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Locations
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_KEY);
-            _Update_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_KEY, "A NEW NAME");
+            _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_KEY);
+            _Update_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_KEY, "A NEW NAME");
             
             var location = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(LOCATION_KEY);
             location.Name.ShouldBe("A NEW NAME");
@@ -42,9 +42,9 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Locations
 
             Should.Throw<BusinessRuleException>(() =>
             {
-                _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_KEY, "MY NAME");
-                _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, OTHER_LOCATION_ID, "MY OTHER NAME");
-                _Update_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_KEY, "MY OTHER NAME");
+                _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_KEY, "MY NAME");
+                _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, OTHER_LOCATION_ID, "MY OTHER NAME");
+                _Update_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_KEY, "MY OTHER NAME");
             });
         }
     }

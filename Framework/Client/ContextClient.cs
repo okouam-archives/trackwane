@@ -13,12 +13,14 @@ namespace Trackwane.Framework.Client
     {
         private readonly string baseUrl;
         private readonly IPlatformConfig config;
+        private readonly string applicationKey;
         protected RestClient client;
 
-        protected ContextClient(string baseUrl, IPlatformConfig config)
+        protected ContextClient(string baseUrl, IPlatformConfig config, string applicationKey)
         {
             this.baseUrl = baseUrl;
             this.config = config;
+            this.applicationKey = applicationKey;
         }
 
         public T Use(UserClaims userClaims)
@@ -26,6 +28,7 @@ namespace Trackwane.Framework.Client
             if (userClaims != null)
             {
                 client = new RestClient(baseUrl);
+                client.AddDefaultHeader("Trackwane-Application", applicationKey);
                 client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.Get("secret-key"))}");
             }
 

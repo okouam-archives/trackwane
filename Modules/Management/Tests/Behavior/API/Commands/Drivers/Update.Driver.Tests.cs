@@ -29,8 +29,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Drivers
         [Test]
         public void When_Successful_Publishes_Driver_Updated_Event()
         {
-            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID, "John Smith");
-            _Update_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID, "Karen Smith");
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID, "John Smith");
+            _Update_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID, "Karen Smith");
 
             WasPosted<DriverUpdated>().ShouldBeTrue();
         }
@@ -38,8 +38,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Drivers
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID, "John Smith");
-            _Update_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID, "Karen Smith");
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID, "John Smith");
+            _Update_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID, "Karen Smith");
 
             var driver = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(DRIVER_ID);
             driver.ShouldNotBeNull();

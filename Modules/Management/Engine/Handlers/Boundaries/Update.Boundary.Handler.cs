@@ -23,11 +23,11 @@ namespace Trackwane.Management.Engine.Handlers.Boundaries
 
         protected override IEnumerable<DomainEvent> Handle(UpdateBoundary cmd, IRepository repository)
         {
-            var boundary = repository.Load<Boundary>(cmd.BoundaryId);
+            var boundary = repository.Find<Boundary>(cmd.BoundaryId, cmd.ApplicationKey);
 
             if (!string.IsNullOrEmpty(cmd.Name))
             {
-                var organization = repository.Load<Organization>(cmd.OrganizationId);
+                var organization = repository.Find<Organization>(cmd.OrganizationId, cmd.ApplicationKey);
                 
                 if (organization == null)
                 {

@@ -8,8 +8,9 @@ namespace Trackwane.AccessControl.Engine.Commands.Organizations
 
         public string Name { get; set; }
 
-        public RegisterOrganization(string requesterKey, string organizationKey, string name) : base(requesterKey)
+        public RegisterOrganization(string applicationKey, string requesterKey, string organizationKey, string name) : base(applicationKey, requesterKey)
         {
+            ApplicationKey = applicationKey;
             OrganizationKey = organizationKey;
             Name = name;
         }

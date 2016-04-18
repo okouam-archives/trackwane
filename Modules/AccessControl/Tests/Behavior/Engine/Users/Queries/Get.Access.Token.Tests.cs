@@ -21,26 +21,26 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Queries
             EMAIL = Guid.NewGuid().ToString();
             PASSWORD = Guid.NewGuid().ToString();
 
-            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
-            Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, Guid.NewGuid().ToString(), EMAIL, PASSWORD);
+            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, Guid.NewGuid().ToString(), EMAIL, PASSWORD);
         }
 
         [Test]
         public void Gets_Access_Token_When_User_Exists()
         {
-            EngineHost.ExecutionEngine.Query<GetAccessToken>().Execute(EMAIL, PASSWORD).ShouldNotBeNull();
+            EngineHost.ExecutionEngine.Query<GetAccessToken>(ApplicationKey).Execute(EMAIL, PASSWORD).ShouldNotBeNull();
         }
 
         [Test]
         public void Finds_Nothing_When_User_With_Correct_Email_But_Different_Password_Exists()
         {
-            EngineHost.ExecutionEngine.Query<GetAccessToken>().Execute(EMAIL, Guid.NewGuid().ToString()).ShouldBeNull();
+            EngineHost.ExecutionEngine.Query<GetAccessToken>(ApplicationKey).Execute(EMAIL, Guid.NewGuid().ToString()).ShouldBeNull();
         }
 
         [Test]
         public void Finds_Nothing_When_User_With_Correct_Password_But_Different_Email_Exists()
         {
-            EngineHost.ExecutionEngine.Query<GetAccessToken>().Execute(Guid.NewGuid().ToString(), PASSWORD).ShouldBeNull();
+            EngineHost.ExecutionEngine.Query<GetAccessToken>(ApplicationKey).Execute(Guid.NewGuid().ToString(), PASSWORD).ShouldBeNull();
         }
     }
 }

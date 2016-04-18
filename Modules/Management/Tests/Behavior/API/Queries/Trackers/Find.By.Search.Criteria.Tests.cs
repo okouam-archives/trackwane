@@ -23,7 +23,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Trackers
         [Test]
         public void Finds_Trackers_When_Searching_By_Organization()
         {
-            _Register_Tracker.With(Persona.SystemManager(), TRACKER_ID, ORGANIZATION_KEY);
+            _Register_Tracker.With(Persona.SystemManager(ApplicationKey), TRACKER_ID, ORGANIZATION_KEY);
 
             var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute();
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using Raven.Client;
+using Marten;
 using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure.Queries
@@ -7,6 +7,8 @@ namespace Trackwane.Framework.Infrastructure.Queries
     public abstract class Query<TResult>
     {
         protected readonly IDocumentStore documentStore;
+
+        public string ApplicationKey { get; set; }
 
         protected Query(IDocumentStore documentStore)
         {

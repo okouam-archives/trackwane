@@ -1,4 +1,4 @@
-﻿using Raven.Client;
+﻿using Marten;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
 using Trackwane.Management.Contracts.Models;
@@ -6,13 +6,13 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Queries.Boundaries
 {
-    public class FindById : Query<BoundaryDetails>, IScopedQuery
+    public class FindById : Query<BoundaryDetails>, IOrganizationQuery
     {
         public BoundaryDetails Execute(string boundaryId)
         {
             return Execute(repository =>
             {
-                var boundary = repository.Load<Boundary>(boundaryId);
+                var boundary = repository.Find<Boundary>(boundaryId, ApplicationKey);
 
                 if (boundary == null) return null;
 

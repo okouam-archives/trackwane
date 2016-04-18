@@ -38,6 +38,9 @@
     <Reference Include="log4net">
       <HintPath>..\..\..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Host.HttpListener\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\..\..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
     </Reference>
@@ -87,4 +90,15 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="Mono.Posix">
+          <HintPath>..\..\..\packages\Mono.Posix\lib\net40\Mono.Posix.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
 </Project>

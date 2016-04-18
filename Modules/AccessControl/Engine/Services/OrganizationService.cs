@@ -6,16 +6,14 @@ namespace Trackwane.AccessControl.Engine.Services
 {
     public class OrganizationService : IOrganizationService
     {
-        public bool IsExistingOrganizationName(string name, IRepository repository)
+        public bool IsExistingOrganizationName(string applicationKey, string name, IRepository repository)
         {
-            return repository.Query<Organization>().Any(x => x.Name == name);
+            return repository.Query<Organization>().Any(x => x.Name == name && x.ApplicationKey == applicationKey);
         }
 
-        public bool IsExistingOrganization(string organizationKey, IRepository repository)
+        public bool IsExistingOrganization(string applicationKey, string organizationKey, IRepository repository)
         {
-            var existingOrganization = repository.Load<Organization>(organizationKey);
-
-            return existingOrganization != null;
+           return repository.Query<Organization>().Any(x => x.Key == organizationKey && x.ApplicationKey == applicationKey); 
         }
     }
 }

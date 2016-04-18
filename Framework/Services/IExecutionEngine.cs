@@ -8,8 +8,8 @@ namespace Trackwane.Framework.Interfaces
     {
         event EventHandler<IRequest> MessagePosted;
 
-        T Query<T>() where T : IUnscopedQuery;
+        T Query<T>(string applicationKey) where T : IApplicationQuery;
 
-        T Query<T>(string organizationKey) where T : IScopedQuery;
+        T Query<T>(string applicationKey, string organizationKey) where T : IOrganizationQuery;
     }
 }

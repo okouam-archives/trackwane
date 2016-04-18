@@ -13,7 +13,7 @@ namespace Trackwane.Management.Engine.Commands.Locations
 
         public Point Coordinates { get; set; }
 
-        public UpdateLocation(string requesterId, string organizationId, string locationId) : base(requesterId)
+        public UpdateLocation(string applicationKey, string requesterId, string organizationId, string locationId) : base(applicationKey, requesterId)
         {
             LocationId = locationId;
             OrganizationId = organizationId;

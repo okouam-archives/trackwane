@@ -22,7 +22,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 
         protected override IEnumerable<DomainEvent> Handle(UpdateUser cmd, IRepository repository)
         {
-            var user = repository.Load<User>(cmd.UserKey);
+            var user = repository.Find<User>(cmd.UserKey, cmd.ApplicationKey);
 
             if (user == null)
             {
@@ -32,6 +32,8 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
             if (!string.IsNullOrEmpty(cmd.DisplayName))
             {
                 user.Update(cmd.DisplayName);
+
+                repository.Persist(user);
 
                 return user.GetUncommittedChanges();
             }

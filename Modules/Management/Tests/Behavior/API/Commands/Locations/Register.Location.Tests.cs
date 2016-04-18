@@ -28,7 +28,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Locations
         [Test]
         public void Can_Be_Executed_By_System_Administrators()
         {
-            _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_KEY);
+            _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_KEY);
 
             var location = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(LOCATION_KEY);
             location.ShouldNotBeNull();
@@ -39,7 +39,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Locations
         {
             Assert.Throws<ValidationException>(() =>
             {
-                _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_KEY, String.Empty);
+                _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_KEY, String.Empty);
             });
         }
 
@@ -48,7 +48,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Locations
         {
             Assert.Throws<ValidationException>(() =>
             {
-                _Register_Location.With(Persona.SystemManager(), LOCATION_KEY, ORGANIZATION_KEY, "My Location Name", null);
+                _Register_Location.With(Persona.SystemManager(ApplicationKey), LOCATION_KEY, ORGANIZATION_KEY, "My Location Name", null);
             });
         }
 
@@ -57,8 +57,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Locations
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, LOCATION_KEY, "My Location Name");
-                _Register_Location.With(Persona.SystemManager(), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "My Location Name");
+                _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, LOCATION_KEY, "My Location Name");
+                _Register_Location.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "My Location Name");
             });
         }
     }

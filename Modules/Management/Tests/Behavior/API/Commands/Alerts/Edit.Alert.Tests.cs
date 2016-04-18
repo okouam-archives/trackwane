@@ -29,8 +29,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         [Test]
         public void When_Successful_Publishes_Alert_Edited_Event()
         {
-            _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY, "HERE BE DRAGONS");
-            _Edit_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY, "NO MORE DRAGONS");
+            _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY, "HERE BE DRAGONS");
+            _Edit_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY, "NO MORE DRAGONS");
 
             WasPosted<AlertEdited>().ShouldBeTrue();
         }
@@ -38,8 +38,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY, "HERE BE DRAGONS");
-            _Edit_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY, "NO MORE DRAGONS");
+            _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY, "HERE BE DRAGONS");
+            _Edit_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY, "NO MORE DRAGONS");
 
             var alert = EngineHost.ExecutionEngine.Query<FindByKey>(ORGANIZATION_KEY).Execute(ALERT_KEY);
             alert.Name.ShouldBe("NO MORE DRAGONS");
@@ -50,9 +50,9 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Alerts
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY, "A");
-                _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "B");
-                _Edit_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_KEY, "B");
+                _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY, "A");
+                _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "B");
+                _Edit_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_KEY, "B");
             });
         }
     }

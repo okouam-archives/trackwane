@@ -19,14 +19,14 @@ namespace Trackwane.Management.Engine.Listeners.Organizations.Drivers
 
         protected override IEnumerable<DomainEvent> Handle(DriverArchived evt, IRepository repository)
         {
-            var driver = repository.Load<Driver>(evt.DriverKey);
+            var driver = repository.Find<Driver>(evt.DriverKey, evt.ApplicationKey);
 
             if (driver == null)
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_DRIVER, evt.DriverKey));
             }
 
-            var organization = repository.Load<Organization>(driver.OrganizationKey);
+            var organization = repository.Find<Organization>(driver.OrganizationKey, evt.ApplicationKey);
 
             if (organization == null)
             {

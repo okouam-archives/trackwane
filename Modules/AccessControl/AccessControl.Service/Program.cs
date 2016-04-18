@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using log4net;
 using log4net.Config;
+using Mono.Unix;
+using Mono.Unix.Native;
 using Trackwane.AccessControl.Engine;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Infrastructure;
-using Trackwane.Framework.Infrastructure.Factories;
-using Trackwane.Framework.Infrastructure.Storage;
 
 namespace Trackwane.AccessControl.Service
 {
@@ -33,11 +32,36 @@ namespace Trackwane.AccessControl.Service
 
             log.Info("Listening for connections at <" + moduleConfig.Get("uri") + ">");
 
-            Console.ReadLine();
+
+            if (IsRunningOnMono())
+            {
+                var terminationSignals = GetUnixTerminationSignals();
+                UnixSignal.WaitAny(terminationSignals);
+            }
+            else
+            {
+                Console.ReadLine();
+            }
 
             log.Info("Stopping Trackwane.AccessControl");
 
             host.Stop();
+        }
+
+        private static bool IsRunningOnMono()
+        {
+            return Type.GetType("Mono.Runtime") != null;
+        }
+
+        private static UnixSignal[] GetUnixTerminationSignals()
+        {
+            return new[]
+            {
+                new UnixSignal(Signum.SIGINT),
+                new UnixSignal(Signum.SIGTERM),
+                new UnixSignal(Signum.SIGQUIT),
+                new UnixSignal(Signum.SIGHUP)
+            };
         }
 
         static readonly ILog log = LogManager.GetLogger("Trackwane.AccessControl");

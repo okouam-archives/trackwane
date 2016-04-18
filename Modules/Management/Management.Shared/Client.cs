@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Trackwane.Framework.Client;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Management.Contracts.Models;
@@ -11,7 +7,7 @@ namespace Trackwane.Management.Contracts
 {
     public class ManagementContext : ContextClient<ManagementContext>
     {
-        public ManagementContext(string baseUrl, IPlatformConfig config) : base(baseUrl, config)
+        public ManagementContext(string baseUrl, IPlatformConfig config) : base(baseUrl, config, null)
         {
         }
 

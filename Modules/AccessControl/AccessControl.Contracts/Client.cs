@@ -1,5 +1,4 @@
-﻿using System;
-using Trackwane.AccessControl.Contracts.Models;
+﻿using Trackwane.AccessControl.Contracts.Models;
 using Trackwane.Framework.Client;
 using Trackwane.Framework.Common.Interfaces;
 
@@ -7,7 +6,7 @@ namespace Trackwane.AccessControl.Contracts
 {
     public class AccessControlContext : ContextClient<AccessControlContext>
     {
-        public AccessControlContext(string baseUrl, IPlatformConfig config) : base(baseUrl, config)
+        public AccessControlContext(string baseUrl, IPlatformConfig config, string applicationKey) : base(baseUrl, config, applicationKey)
         {
 
         }
@@ -28,12 +27,12 @@ namespace Trackwane.AccessControl.Contracts
         private const string GET_ACCESS_TOKEN_URL = "/token?username={0}&password={1}";
         private const string CREATE_ROOT_USER_URL = "/root";
 
-        public UserDetails CreateRootUser(RegisterUserModel model)
+        public UserDetails CreateRootUser(CreateApplicationModel model)
         {
             return POST<UserDetails>(Expand(CREATE_ROOT_USER_URL), model);
         }
 
-        public void RegisterUser(string organizationKey, RegisterUserModel model)
+        public void RegisterUser(string organizationKey, CreateApplicationModel model)
         {
             POST(Expand(USER_COLLECTION_URL, organizationKey), model);
         }

@@ -6,7 +6,16 @@ namespace Trackwane.Framework.Common
     {
         /* Public */
        
+        public string ApplicationKey { get; set; }
+
         public string Key { get; set; }
+
+        // Required for Martern persistence
+        public string Id
+        {
+            get { return Key; }
+            set { Key = value; }
+        }
 
         public IEnumerable<DomainEvent> GetUncommittedChanges()
         {

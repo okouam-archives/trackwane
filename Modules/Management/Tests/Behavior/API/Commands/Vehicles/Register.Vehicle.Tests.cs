@@ -27,7 +27,7 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY);
+            _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY);
 
             var vehicle = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(VEHICLE_KEY);
             vehicle.ShouldNotBeNull();

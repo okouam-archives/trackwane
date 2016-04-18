@@ -10,6 +10,8 @@ namespace Trackwane.Framework.Common
     {
         public string UserId { get; set; }
 
+        public string ApplicationKey { get; set; }
+
         public bool IsSystemManager { get; set; }
 
         public List<string> View { get; set; } = new List<string>();
@@ -30,6 +32,7 @@ namespace Trackwane.Framework.Common
                     new Claim(nameof(IsSystemManager), IsSystemManager.ToString())
                 };
 
+                if (ApplicationKey != null) claims.Add(new Claim(nameof(ApplicationKey), ApplicationKey));
                 if (ParentOrganizationKey != null) claims.Add(new Claim(nameof(ParentOrganizationKey), ParentOrganizationKey));
                 if (View != null) claims.Add(new Claim(nameof(View), string.Join(",", View)));
                 if (Manage != null) claims.Add(new Claim(nameof(Manage), string.Join(",", Manage)));
@@ -38,6 +41,7 @@ namespace Trackwane.Framework.Common
                 return claims;
             }
         }
+
 
         public UserClaims()
         {
@@ -60,6 +64,8 @@ namespace Trackwane.Framework.Common
 
             Administrate = userClaims.SingleOrDefault(x => x.Type == nameof(Administrate))?.Value.Split(',').ToList();
 
+            ApplicationKey = userClaims.SingleOrDefault(x => x.Type == nameof(ApplicationKey))?.Value;
+
             ParentOrganizationKey = userClaims.SingleOrDefault(x => x.Type == nameof(ParentOrganizationKey))?.Value;
 
             IsSystemManager = userClaims.Any(x => x.Type == nameof(IsSystemManager)) && Boolean.Parse(userClaims.Single(x => x.Type == nameof(IsSystemManager)).Value);
@@ -72,6 +78,8 @@ namespace Trackwane.Framework.Common
             UserId = payload["subject"].ToString();
 
             ParentOrganizationKey = payload["parent_organization"]?.ToString();
+
+            ApplicationKey = payload["application"]?.ToString();
 
             Manage = ExtractOrganizationList(payload, "manage");
 
@@ -91,6 +99,7 @@ namespace Trackwane.Framework.Common
             {
                 { "iss", "Trackwane" },
                 { "subject", UserId },
+                { "application", ApplicationKey },
                 { "parent_organization", ParentOrganizationKey },
                 { "is_system_manager", IsSystemManager },
                 { "view", GenerateOrganizationList(View)},

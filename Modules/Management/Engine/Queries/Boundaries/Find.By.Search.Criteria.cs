@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using Raven.Client;
-using Raven.Client.Linq;
+using Marten;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;
@@ -9,7 +8,7 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Queries.Boundaries
 {
-    public class FindBySearchCriteria : Query<ResponsePage<BoundarySummary>>, IScopedQuery
+    public class FindBySearchCriteria : Query<ResponsePage<BoundarySummary>>, IOrganizationQuery
     {
         public ResponsePage<BoundarySummary> Execute(string name = null)
         {

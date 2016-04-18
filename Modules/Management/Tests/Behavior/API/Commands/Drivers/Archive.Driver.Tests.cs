@@ -29,8 +29,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Drivers
         [Test]
         public void On_Success_Publishes_Driver_Archived_Event()
         {
-            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID);
-            _ArchiveDriver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID);
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID);
+            _ArchiveDriver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID);
 
             WasPosted<DriverArchived>().ShouldBeTrue();
         }
@@ -38,8 +38,8 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Drivers
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID);
-            _ArchiveDriver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_ID);
+            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID);
+            _ArchiveDriver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_ID);
 
             var driver = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(DRIVER_ID);
             driver.IsArchived.ShouldBeTrue();

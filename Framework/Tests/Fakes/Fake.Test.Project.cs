@@ -2,9 +2,9 @@
 
 namespace Trackwane.Framework.Tests.Fakes
 {
-    public class CheckFramework : UserCommand
+    public class CheckFramework : SystemCommand
     {
-        public CheckFramework(string requesterId) : base(requesterId)
+        public CheckFramework(string requesterId)
         {
         }
     }

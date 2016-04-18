@@ -22,7 +22,7 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpPost, Route(RESOURCE_URL)]
         public void UpdateLocation(string organizationKey, string key, UpdateLocationModel model)
         {
-            dispatcher.Send(new UpdateLocation(CurrentClaims.UserId, organizationKey, key)
+            dispatcher.Send(new UpdateLocation(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key)
             {
                 Coordinates = model.Coordinates,
                 Name = model.Name
@@ -44,13 +44,13 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveBoundary(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveLocation(CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Send(new ArchiveLocation(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void RegisterLocation(string organizationKey, RegisterLocationModel model)
         {
-            dispatcher.Send(new RegisterLocation(CurrentClaims.UserId, organizationKey,
+            dispatcher.Send(new RegisterLocation(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey,
                 model.Name,
                 model.Coordinates != null ? new Geo.IO.GeoJson.GeoJsonReader().Read(model.Coordinates) as Point : null,
                 model.Key)

@@ -13,6 +13,7 @@ using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using paramore.brighter.serviceactivator;
 using Prometheus;
 using StructureMap;
+using Swashbuckle.Application;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Requests.Metrics;
@@ -195,7 +196,6 @@ namespace Trackwane.Framework.Infrastructure
             {
                 log.Info("Starting the Web API");
                 webApi = CreateStandaloneServer(container, Configuration.Get("uri"));
-                //webApi.OpenAsync().Wait();
                 log.Info("The Web API is start and waiting for connections");
             }
         }
@@ -208,12 +208,12 @@ namespace Trackwane.Framework.Infrastructure
 
         private static void ApplyConfiguration(IContainer container, HttpConfiguration configuration)
         {
-            //configuration.EnableSwagger(c =>
-            //{
-            //    //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
-            //    c.SingleApiVersion("v1", "Trackwane API");
-            //    c.UseFullTypeNameInSchemaIds();
-            //}).EnableSwaggerUi();
+            configuration.EnableSwagger(c =>
+            {
+                //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
+                c.SingleApiVersion("v1", "Trackwane API");
+                c.UseFullTypeNameInSchemaIds();
+            }).EnableSwaggerUi();
 
             ResolveDependencies(configuration, container);
             RegisterRoutes(configuration);

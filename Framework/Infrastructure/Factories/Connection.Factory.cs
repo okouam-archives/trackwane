@@ -24,7 +24,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
                    let connectionName = new ConnectionName(command.Name)
                    let channelName = new ChannelName(command.Name)
                    let routingKey = command.Name
-                   select new Connection(connectionName, inputChannelFactory, command, channelName, routingKey);
+                   select new Connection(connectionName, inputChannelFactory, command, channelName, routingKey, 1, 5000);
         }
     }
 }

@@ -180,7 +180,7 @@ namespace Trackwane.Framework.Infrastructure
 
         private void StartMetricsCollection()
         {
-            metricsCollection = new MetricServer("127.0.0.1", int.Parse(Configuration.Get("metrics-port")));
+            metricsCollection = new MetricServer(Configuration.Get("metrics-hostname"), int.Parse(Configuration.Get("metrics-port")));
             metricsCollection.Start();
         }
 

@@ -1,7 +1,6 @@
 using System.Web.Http;
 using Owin;
 using StructureMap;
-using Swashbuckle.Application;
 using Trackwane.Framework.Infrastructure.Web.DependencyResolution;
 using Trackwane.Framework.Infrastructure.Web.Filters;
 
@@ -20,12 +19,6 @@ namespace Trackwane.Framework.Infrastructure
 
         private static void ApplyConfiguration(IContainer container, HttpConfiguration configuration)
         {
-            configuration.EnableSwagger(c =>
-            {
-                //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
-                c.SingleApiVersion("v1", "Trackwane API");
-                c.UseFullTypeNameInSchemaIds();
-            }).EnableSwaggerUi();
             ResolveDependencies(configuration, container);
             RegisterRoutes(configuration);
         }

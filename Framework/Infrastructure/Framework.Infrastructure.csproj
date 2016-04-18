@@ -73,6 +73,7 @@
     <Compile Include="Requests\Metrics\Metrics.Attribute.cs" />
     <Compile Include="Requests\Metrics\Metrics.Handler_T.cs" />
     <Compile Include="Requests\Metrics\Metrics.Provider.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Validation\Base.Validator.cs" />
     <Compile Include="EngineHost.cs" />
     <Compile Include="Factories\Connection.Factory.cs" />

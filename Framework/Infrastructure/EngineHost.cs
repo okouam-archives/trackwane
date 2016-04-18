@@ -2,24 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web.Http;
 using System.Web.Http.SelfHost;
 using log4net;
 using Marten;
 using Microsoft.Owin.Hosting;
-using Owin;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using paramore.brighter.serviceactivator;
 using Prometheus;
 using StructureMap;
-using Swashbuckle.Application;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Requests.Metrics;
 using Trackwane.Framework.Infrastructure.Storage;
-using Trackwane.Framework.Infrastructure.Web.DependencyResolution;
-using Trackwane.Framework.Infrastructure.Web.Filters;
 using Trackwane.Framework.Interfaces;
 using ConnectionFactory = Trackwane.Framework.Infrastructure.Factories.ConnectionFactory;
 
@@ -205,63 +200,5 @@ namespace Trackwane.Framework.Infrastructure
             Startup.Container = container;
             return WebApp.Start<Startup>(url);
         }
-
-        private static void ApplyConfiguration(IContainer container, HttpConfiguration configuration)
-        {
-            configuration.EnableSwagger(c =>
-            {
-                //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
-                c.SingleApiVersion("v1", "Trackwane API");
-                c.UseFullTypeNameInSchemaIds();
-            }).EnableSwaggerUi();
-
-            ResolveDependencies(configuration, container);
-            RegisterRoutes(configuration);
-        }
-        
-        private static void RegisterRoutes(HttpConfiguration config)
-        {
-            config.MapHttpAttributeRoutes();
-            config.Filters.Add(new BusinessRuleExceptionFilter());
-            config.Filters.Add(new ValidationExceptionFilter());
-        }
-
-        private static void ResolveDependencies(HttpConfiguration configuration, IContainer container)
-        {
-            container.AssertConfigurationIsValid();
-            configuration.DependencyResolver = new WebApiDependencyResolver(container, false);
-        }
     }
-
-    public class Startup
-    {
-        public static IContainer Container { get; set; }
-
-        public void Configuration(IAppBuilder appBuilder)
-        {
-            var config = new HttpConfiguration();
-            ApplyConfiguration(Container, config);
-            appBuilder.UseWebApi(config);
-        }
-
-        private static void ApplyConfiguration(IContainer container, HttpConfiguration configuration)
-        {
-            ResolveDependencies(configuration, container);
-            RegisterRoutes(configuration);
-        }
-
-        private static void RegisterRoutes(HttpConfiguration config)
-        {
-            config.MapHttpAttributeRoutes();
-            config.Filters.Add(new BusinessRuleExceptionFilter());
-            config.Filters.Add(new ValidationExceptionFilter());
-        }
-
-        private static void ResolveDependencies(HttpConfiguration configuration, IContainer container)
-        {
-            container.AssertConfigurationIsValid();
-            configuration.DependencyResolver = new WebApiDependencyResolver(container, false);
-        }
-    }
-
 }

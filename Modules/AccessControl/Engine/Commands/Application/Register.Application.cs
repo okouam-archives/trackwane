@@ -1,6 +1,6 @@
 ﻿using Trackwane.Framework.Infrastructure.Requests;
 
-namespace Trackwane.AccessControl.Engine.Commands.Users
+namespace Trackwane.AccessControl.Engine.Commands.Application
 {
     public class RegisterApplication : ApplicationCommand
     {

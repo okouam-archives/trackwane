@@ -40,22 +40,25 @@ namespace Trackwane.AccessControl.Contracts.Models
         public string Email { get; set; }
     }
 
-    public class CreateApplicationModel
+    public class RegisterApplicationModel
     {
-        public CreateApplicationModel(string applicationKey, string userKey, string email, string displayName, string password)
+        public RegisterApplicationModel(string applicationKey, string userKey, string email, string displayName, string password, string secretKey)
         {
             UserKey = userKey;
             ApplicationKey = applicationKey;
             Email = email;
             DisplayName = displayName;
             Password = password;
+            SecretKey = secretKey;
         }
 
-        public CreateApplicationModel()
+        public RegisterApplicationModel()
         {
         }
 
         public string ApplicationKey { get; set; }
+
+        public string SecretKey { get; set; }
 
         public string Password { get; set; }
 

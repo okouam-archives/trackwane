@@ -28,7 +28,7 @@ namespace Trackwane.AccessControl.Tests
 
             public static void With(UserClaims persona, string organizationKey, string userKey, string displayName, string email, string password)
             {
-                Client.Use(persona).RegisterUser(organizationKey, new CreateApplicationModel
+                Client.Use(persona).RegisterUser(organizationKey, new RegisterApplicationModel
                 {
                     UserKey = userKey,
                     DisplayName = displayName,

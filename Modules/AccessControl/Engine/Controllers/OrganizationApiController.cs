@@ -27,7 +27,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, Administrators, HttpGet, Route("organizations/{organizationKey}")]
         public OrganizationDetails FindById(string organizationKey)
         {
-            return executionEngine.Query<FindByKey>(organizationKey).Execute();
+            return executionEngine.Query<FindByKey>(CurrentClaims.ApplicationKey, organizationKey).Execute();
         }
 
         [Secured, SystemManagers, HttpGet, Route("organizations")]

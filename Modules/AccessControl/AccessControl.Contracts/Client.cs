@@ -27,12 +27,12 @@ namespace Trackwane.AccessControl.Contracts
         private const string GET_ACCESS_TOKEN_URL = "/token?username={0}&password={1}";
         private const string CREATE_ROOT_USER_URL = "/root";
 
-        public UserDetails CreateRootUser(CreateApplicationModel model)
+        public UserDetails CreateRootUser(RegisterApplicationModel model)
         {
             return POST<UserDetails>(Expand(CREATE_ROOT_USER_URL), model);
         }
 
-        public void RegisterUser(string organizationKey, CreateApplicationModel model)
+        public void RegisterUser(string organizationKey, RegisterApplicationModel model)
         {
             POST(Expand(USER_COLLECTION_URL, organizationKey), model);
         }

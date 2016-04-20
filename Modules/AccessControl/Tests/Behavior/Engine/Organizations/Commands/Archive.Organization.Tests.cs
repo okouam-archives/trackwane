@@ -54,7 +54,8 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
             Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
             Archive_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
 
-            EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey, ORGANIZATION_KEY).Execute().IsArchived.ShouldBeTrue();
+            var organization = Client.Use(Persona.SystemManager(ApplicationKey)).FindByKey(ORGANIZATION_KEY);
+            organization.IsArchived.ShouldBeTrue();
         }
 
         [Test]

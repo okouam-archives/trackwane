@@ -2,6 +2,7 @@
 using System.Web.Http;
 using HashidsNet;
 using Trackwane.AccessControl.Contracts.Models;
+using Trackwane.AccessControl.Engine.Commands.Application;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.Framework.Common.Interfaces;
@@ -29,22 +30,6 @@ namespace Trackwane.AccessControl.Engine.Controllers
            return "Bearer " + executionEngine.Query<GetAccessToken>(CurrentClaims.ApplicationKey).Execute(email, password);
         }
         
-        [HttpPost, Route("root")]
-        public string CreateRootUser(CreateApplicationModel model)
-        {
-            var cmd = new RegisterApplication(model.ApplicationKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks))
-            {
-                Email = model.Email,
-                DisplayName = model.DisplayName,
-                Password = model.Password,
-                UserKey = new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks)
-            };
-
-            executionEngine.Send(cmd);
-
-            return cmd.UserKey;
-        }
-
         [Secured, HttpGet, Route("users/{userKey}")]
         public UserDetails FindById(string userKey)
         {
@@ -69,7 +54,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, Administrators, HttpPost, Route(COLLECTION_URL)]
-        public string RegisterUser(string organizationKey, CreateApplicationModel model)
+        public string RegisterUser(string organizationKey, RegisterApplicationModel model)
         {
             var cmd = new RegisterUser(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
             cmd.UserKey = cmd.UserKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);

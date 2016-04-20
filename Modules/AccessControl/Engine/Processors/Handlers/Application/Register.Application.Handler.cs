@@ -4,7 +4,7 @@ using System.Linq;
 using paramore.brighter.commandprocessor.Logging;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Domain.Users;
-using Trackwane.AccessControl.Engine.Commands.Users;
+using Trackwane.AccessControl.Engine.Commands.Application;
 using Trackwane.AccessControl.Engine.Services;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
@@ -12,11 +12,11 @@ using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
 using Role = Trackwane.AccessControl.Domain.Users.Role;
 
-namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
+namespace Trackwane.AccessControl.Engine.Processors.Handlers.Application
 {
-    public class CreateApplicationHandler : TransactionalHandler<RegisterApplication>
+    public class RegisterApplicationHandler : TransactionalHandler<RegisterApplication>
     {
-        public CreateApplicationHandler(
+        public RegisterApplicationHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, 
             ILog log) : 

@@ -1,3 +1,31 @@
-task :default do
-  puts "Hello World!"
+task :default => [:build]
+
+desc "Builds the solution using Mono"
+task :build do
+  sh ".paket/paket.exe install"
+  sh "xbuild"
+end
+
+namespace :docker do
+
+  desc "Shows running containers for solution"
+  task :active do
+    sh "docker ps"
+  end
+
+  desc "Rebuilds solution images"
+  task :rebuild do
+
+  end
+
+  desc "Starts all containers with available images"
+  task :up do
+
+  end
+
+  desc "Stops all containers"
+  task :down do
+
+  end
+
 end

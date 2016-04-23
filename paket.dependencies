@@ -4,6 +4,7 @@ framework: net45
 nuget CommonServiceLocator
 nuget Faker
 nuget FluentValidation
+nuget Gelf4NetAppender
 nuget Geo
 nuget Hashids.net
 nuget JWT

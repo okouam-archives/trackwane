@@ -14,7 +14,7 @@ namespace Trackwane.AccessControl.Service
     {
         public static void Main(string[] args)
         {
-            BasicConfigurator.Configure();
+            XmlConfigurator.Configure();
 
             log.Info("Starting Trackwane.AccessControl");
 

@@ -177,6 +177,17 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
+        <Reference Include="gelf4net">
+          <HintPath>..\..\..\packages\Gelf4NetAppender\lib\net40\gelf4net.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
         <Reference Include="Geo">
           <HintPath>..\..\..\packages\Geo\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Geo.dll</HintPath>
           <Private>True</Private>
@@ -190,6 +201,17 @@
       <ItemGroup>
         <Reference Include="JWT">
           <HintPath>..\..\..\packages\JWT\lib\3.5\JWT.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="log4net">
+          <HintPath>..\..\..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

@@ -3,7 +3,7 @@ version: "2"
 services:
 
   trackwane_access_control:
-    build: ./../Modules/AccessControl
+    build: ./Modules/AccessControl
     container_name: trackwane_access_control
     depends_on:
       - "etcd"

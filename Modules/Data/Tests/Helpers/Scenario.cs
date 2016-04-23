@@ -15,6 +15,8 @@ namespace Trackwane.Data.Tests.Helpers
             Posted = new List<IRequest>();
         }
 
+        protected string ApplicationKey { get; private set; }
+
         protected IList<IRequest> Posted { get; set; }
 
         protected IEngineHost EngineHost
@@ -27,7 +29,14 @@ namespace Trackwane.Data.Tests.Helpers
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new DataContext(Setup.EngineHost.Configuration.Get("uri"), new PlatformConfig());
+            var server = "localhost";
+            var platformConfig = new PlatformConfig();
+            var apiPort = Setup.EngineHost.Configuration.Get("api-port");
+            var metricsPort = Setup.EngineHost.Configuration.Get("metrics-port");
+            var secretKey = platformConfig.SecretKey;
+            var protocol = Setup.EngineHost.Configuration.Get("protocol");
+
+            Client = new DataContext(server, protocol, apiPort, secretKey, metricsPort, ApplicationKey);
 
             EngineHost.ExecutionEngine.MessagePosted += (o, request) => Posted.Add(request); ;
         }

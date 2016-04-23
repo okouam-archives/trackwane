@@ -47,7 +47,7 @@ namespace Trackwane.Management.Engine.Handlers.Boundaries
                 }
             }
 
-            var boundary = new Boundary(cmd.BoundaryId, cmd.OrganizationId, cmd.Name, cmd.Coordinates);
+            var boundary = new Boundary(cmd.ApplicationKey, cmd.BoundaryId, cmd.OrganizationId, cmd.Name, cmd.Coordinates);
 
             repository.Persist(boundary);
 

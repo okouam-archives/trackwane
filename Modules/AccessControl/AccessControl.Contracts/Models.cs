@@ -7,9 +7,9 @@ namespace Trackwane.AccessControl.Contracts.Models
     {
         public UserDetails()
         {
-            View = new List<Tuple<string, string>>();
-            Manage = new List<Tuple<string, string>>();
-            Administrate = new List<Tuple<string, string>>();
+            View = new List<KeyValuePair<string, string>>(); 
+            Manage = new List<KeyValuePair<string, string>>();
+            Administrate = new List<KeyValuePair<string, string>>();
         }
 
         public string Key { get; set; }
@@ -22,11 +22,11 @@ namespace Trackwane.AccessControl.Contracts.Models
 
         public string Role { get; set; }
 
-        public IList<Tuple<string, string>> View { get; set; }
+        public List<KeyValuePair<string, string>> View { get; set; }
 
-        public IList<Tuple<string, string>> Manage { get; set; }
+        public List<KeyValuePair<string, string>> Manage { get; set; }
 
-        public IList<Tuple<string, string>> Administrate { get; set; }
+        public List<KeyValuePair<string, string>> Administrate { get; set; }
 
         public string ParentOrganizationKey { get; set; }
     }
@@ -39,13 +39,12 @@ namespace Trackwane.AccessControl.Contracts.Models
 
         public string Email { get; set; }
     }
-
+    
     public class RegisterApplicationModel
     {
-        public RegisterApplicationModel(string applicationKey, string userKey, string email, string displayName, string password, string secretKey)
+        public RegisterApplicationModel(string userKey, string email, string displayName, string password, string secretKey)
         {
             UserKey = userKey;
-            ApplicationKey = applicationKey;
             Email = email;
             DisplayName = displayName;
             Password = password;
@@ -55,8 +54,6 @@ namespace Trackwane.AccessControl.Contracts.Models
         public RegisterApplicationModel()
         {
         }
-
-        public string ApplicationKey { get; set; }
 
         public string SecretKey { get; set; }
 
@@ -95,11 +92,11 @@ namespace Trackwane.AccessControl.Contracts.Models
 
         public bool IsArchived { get; set; }
 
-        public IList<UserSummary> Viewers { get; set; }
+        public List<UserSummary> Viewers { get; set; }
 
-        public IList<UserSummary> Managers { get; set; }
+        public List<UserSummary> Managers { get; set; }
 
-        public IList<UserSummary> Administrators { get; set; }
+        public List<UserSummary> Administrators { get; set; }
     }
 
     public class RegisterOrganizationModel

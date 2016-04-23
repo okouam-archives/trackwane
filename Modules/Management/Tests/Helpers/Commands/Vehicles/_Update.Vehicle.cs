@@ -9,7 +9,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationKey, string key, string identifier)
             {
-                Client.Use(claims).UpdateVehicle(organizationKey, key, new UpdateVehicleModel {Identifier = identifier});
+                Client.Use(claims).Vehicles.Update(organizationKey, key, new UpdateVehicleModel {Identifier = identifier});
             }
         }
     }

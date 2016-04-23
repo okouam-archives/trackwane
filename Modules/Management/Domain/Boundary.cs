@@ -110,11 +110,12 @@ namespace Trackwane.Management.Domain
         {
         }
 
-        public Boundary(string id, string OrganizationKey, string name, Polygon coordinates)
+        public Boundary(string applicationKey, string id, string OrganizationKey, string name, Polygon coordinates)
         {
             Causes(new BoundaryCreated
             {
                 BoundaryKey = id,
+                ApplicationKey = applicationKey,
                 Name = name,
                 Coordinates = coordinates,
                 OrganizationKey = OrganizationKey
@@ -145,6 +146,7 @@ namespace Trackwane.Management.Domain
         {
             Key = evt.BoundaryKey;
             OrganizationKey = evt.OrganizationKey;
+            ApplicationKey = evt.ApplicationKey;
             Coordinates = evt.Coordinates;
             Name = evt.Name;
         }

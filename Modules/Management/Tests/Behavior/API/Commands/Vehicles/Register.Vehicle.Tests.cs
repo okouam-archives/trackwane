@@ -16,20 +16,20 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
         [SetUp]
         public void SetUp()
         {
-            ORGANIZATION_KEY = Guid.NewGuid().ToString();
-            USER_ID = Guid.NewGuid().ToString();
-            VEHICLE_KEY = Guid.NewGuid().ToString();
+            ORGANIZATION_KEY = GenerateKey();
+            USER_ID = GenerateKey();
+            VEHICLE_KEY = GenerateKey();
 
-            _Organization_Registered.With(ORGANIZATION_KEY);
-            _User_Registered.With(USER_ID);
+            _Organization_Registered.With(ApplicationKey, ORGANIZATION_KEY);
+            _User_Registered.With(ApplicationKey, USER_ID);
         }
 
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY);
+            _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY);
 
-            var vehicle = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(VEHICLE_KEY);
+            var vehicle = Setup.EngineHost.ExecutionEngine.Query<FindById>(ApplicationKey, ORGANIZATION_KEY).Execute(VEHICLE_KEY);
             vehicle.ShouldNotBeNull();
         }
     }

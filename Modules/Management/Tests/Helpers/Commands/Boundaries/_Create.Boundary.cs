@@ -13,7 +13,7 @@ namespace Trackwane.Management.Tests.Helpers
             public static void With(UserClaims claims, string key, string name, string organizationKey,
                 Polygon coordinates)
             {
-                Client.Use(claims).CreateBoundary(organizationKey, new CreateBoundaryModel {
+                Client.Use(claims).Boundaries.Create(organizationKey, new CreateBoundaryModel {
                     Key = key, Name = name, Coordinates = coordinates, Type = BoundaryType.ExclusionZone.ToString()
                 });
             }

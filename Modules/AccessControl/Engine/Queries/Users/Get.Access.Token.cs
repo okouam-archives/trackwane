@@ -20,23 +20,24 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
         {
             return Execute(repository =>
             {
-                var user = repository.Query<User>().SingleOrDefault(x => x.Email == email);
+                var user = repository.Query<User>().SingleOrDefault(x => x.Email == email && x.ApplicationKey == ApplicationKey);
 
                 if (user != null && user.Credentials.IsValid(password))
                 {
-                    var userDetails = new FindByKey(documentStore).Execute(user.Key);
+                    var query = new FindByKey(documentStore) {ApplicationKey = ApplicationKey};
+                    var userDetails = query.Execute(user.Key);
 
                     var userClaims = new UserClaims
                     {
                         UserId = userDetails.Key,
                         ParentOrganizationKey = userDetails.ParentOrganizationKey,
                         IsSystemManager = user.Role == Role.SystemManager,
-                        Administrate = userDetails.Administrate.Select(x => x.Item1).ToList(),
-                        Manage = userDetails.Manage.Select(x => x.Item1).ToList(),
-                        View = userDetails.View.Select(x => x.Item1).ToList()
+                        Administrate = userDetails.Administrate.Select(x => x.Key).ToList(),
+                        Manage = userDetails.Manage.Select(x => x.Key).ToList(),
+                        View = userDetails.View.Select(x => x.Key).ToList()
                     };
 
-                    return userClaims.GenerateToken(config.Get("secret-key"));
+                    return userClaims.GenerateToken(config.SecretKey);
                 }
 
                 return null;

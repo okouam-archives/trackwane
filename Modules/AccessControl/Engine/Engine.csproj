@@ -86,7 +86,8 @@
     <Compile Include="Processors\Handlers\Users\Update.User.Validator.cs" />
     <Compile Include="Queries\Organizations\Count.cs" />
     <Compile Include="Queries\Organizations\Find.By.Key.cs" />
-    <Compile Include="Queries\Users\Count.cs" />
+    <Compile Include="Queries\Users\Count.In.System.cs" />
+    <Compile Include="Queries\Users\Count.In.Organization.cs" />
     <Compile Include="Queries\Organizations\Find.cs" />
     <Compile Include="Queries\Users\Get.Access.Token.cs" />
     <Compile Include="Queries\Users\Find.By.Key.cs" />

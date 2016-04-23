@@ -20,7 +20,7 @@ namespace Trackwane.Management.Engine.Handlers.Trackers
 
         protected override IEnumerable<DomainEvent> Handle(RegisterTracker cmd, IRepository repository)
         {
-            var tracker = new Tracker(cmd.TrackerId, cmd.OrganizationId, cmd.HardwareId, cmd.Model, cmd.Identifier);
+            var tracker = new Tracker(cmd.ApplicationKey, cmd.TrackerId, cmd.OrganizationId, cmd.HardwareId, cmd.Model, cmd.Identifier);
 
             repository.Persist(tracker);
 

@@ -22,15 +22,15 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Boundaries
             USER_ID = Guid.NewGuid().ToString();
             BOUNDARY_ID = Guid.NewGuid().ToString();
 
-            _Organization_Registered.With(ORGANIZATION_KEY);
-            _User_Registered.With(USER_ID);
+            _Organization_Registered.With(ApplicationKey, ORGANIZATION_KEY);
+            _User_Registered.With(ApplicationKey, USER_ID);
         }
 
         [Test]
         public void When_Successful_Publishes_Boundary_Updated_Event()
         {
-            _Create_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID, "HERE BE DRAGONS");
-            _Edit_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID, "NO MORE DRAGONS");
+            _Create_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID, "HERE BE DRAGONS");
+            _Edit_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID, "NO MORE DRAGONS");
 
             WasPosted<BoundaryUpdated>().ShouldBeTrue();
         }
@@ -38,10 +38,10 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Boundaries
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Create_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID, "HERE BE DRAGONS");
-            _Edit_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID, "NO MORE DRAGONS");
+            _Create_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID, "HERE BE DRAGONS");
+            _Edit_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID, "NO MORE DRAGONS");
 
-            var boundary = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(BOUNDARY_ID);
+            var boundary = Setup.EngineHost.ExecutionEngine.Query<FindById>(ApplicationKey, ORGANIZATION_KEY).Execute(BOUNDARY_ID);
             boundary.Name.ShouldBe("NO MORE DRAGONS");
         }
 
@@ -50,9 +50,9 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Boundaries
         {
             Assert.Throws<BusinessRuleException>(() =>
             {
-                _Create_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID, "A");
-                _Create_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "B");
-                _Edit_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID, "B");
+                _Create_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID, "A");
+                _Create_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "B");
+                _Edit_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID, "B");
             });
         }
     }

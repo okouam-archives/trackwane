@@ -13,8 +13,6 @@ namespace Trackwane.AccessControl.Engine.Controllers
 {
     public class UserApiController : BaseApiController
     {
-        private const string RESOURCE_URL = "organizations/{organizationKey}/users/{userKey}";
-        private const string COLLECTION_URL = "organizations/{organizationKey}/users";
         private readonly IExecutionEngine executionEngine;
         private readonly IPlatformConfig config;
 
@@ -27,25 +25,38 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [HttpGet, Route("token")]
         public string GetAccessToken(string email, string password)
         {
-           return "Bearer " + executionEngine.Query<GetAccessToken>(CurrentClaims.ApplicationKey).Execute(email, password);
+           return "Bearer " + executionEngine.Query<GetAccessToken>(AppKeyFromHeader).Execute(email, password);
         }
         
         [Secured, HttpGet, Route("users/{userKey}")]
         public UserDetails FindById(string userKey)
         {
-            return executionEngine.Query<FindByKey>(CurrentClaims.ApplicationKey).Execute(userKey);
+            return executionEngine.Query<FindByKey>(AppKeyFromHeader).Execute(userKey);
         }
 
-        [Secured, Administrators, HttpDelete, Route(RESOURCE_URL)]
+        [Secured, Administrators, HttpDelete, Route("organizations/{organizationKey}/users/{userKey}")]
         public void ArchiveUser(string organizationKey, string userKey)
         {
-            executionEngine.Send(new ArchiveUser(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey));
+            executionEngine.Send(new ArchiveUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey));
         }
 
-        [Secured, AdministratorsOrUser, HttpPost, Route(RESOURCE_URL)]
+        [Secured, Administrators, HttpGet, Route("organizations/{organizationKey}/users/count")]
+        public int CountInOrganization(string organizationKey)
+        {
+            return executionEngine.Query<CountInOrganization>(AppKeyFromHeader, organizationKey).Execute();
+        }
+
+
+        [Secured, SystemManagers, HttpGet, Route("users/count")]
+        public int CountInSystem()
+        {
+            return executionEngine.Query<CountInSystem>(AppKeyFromHeader).Execute();
+        }
+
+        [Secured, AdministratorsOrUser, HttpPost, Route("organizations/{organizationKey}/users/{userKey}")]
         public void UpdateUser(string organizationKey, string userKey, UpdateUserModel model)
         {
-            executionEngine.Send(new UpdateUser(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, userKey)
+            executionEngine.Send(new UpdateUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey)
             {
                 DisplayName = model.DisplayName,
                 Email = model.Email,
@@ -53,10 +64,10 @@ namespace Trackwane.AccessControl.Engine.Controllers
             });
         }
 
-        [Secured, Administrators, HttpPost, Route(COLLECTION_URL)]
+        [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}/users")]
         public string RegisterUser(string organizationKey, RegisterApplicationModel model)
         {
-            var cmd = new RegisterUser(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
+            var cmd = new RegisterUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
             cmd.UserKey = cmd.UserKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Send(cmd);
             return cmd.UserKey;

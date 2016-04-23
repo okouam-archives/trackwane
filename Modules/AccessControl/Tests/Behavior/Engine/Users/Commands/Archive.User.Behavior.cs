@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Shouldly;
 using Trackwane.AccessControl.Contracts.Events;
-using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Fixtures;
 
@@ -16,17 +15,17 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         [SetUp]
         public void SetUp()
         {
-            USER_KEY = Guid.NewGuid().ToString();
-            ORGANIZATION_KEY = Guid.NewGuid().ToString();
+            USER_KEY = GenerateKey();
+            ORGANIZATION_KEY = GenerateKey();
 
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
-            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+            Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
         }
 
         [Test]
         public void When_Successful_Publishes_Event()
         {
-            _Archive_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+            _Archive_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
 
             WasPosted<UserArchived>().ShouldBeTrue();
         }
@@ -34,9 +33,10 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Archive_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+            _Archive_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
 
-            EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey).Execute(USER_KEY).IsArchived.ShouldBeTrue();
+            var user = Client.Use(Persona.SystemManager()).Users.FindByKey(USER_KEY);
+            Assert.That(user["IsArchived"], Is.True);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.NotThrow(() =>
             {
-                _Archive_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+                _Archive_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
             });
         }
 

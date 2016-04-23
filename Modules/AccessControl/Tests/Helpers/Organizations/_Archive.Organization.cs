@@ -8,7 +8,7 @@ namespace Trackwane.AccessControl.Tests
         {
             public static void With(UserClaims persona, string organizationKey)
             {
-                Client.Use(persona).ArchiveOrganization(organizationKey);
+                Client.Use(persona).Organizations.ArchiveOrganization(organizationKey);
             }
         }
     }

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using HashidsNet;
 using NUnit.Framework;
-using paramore.brighter.commandprocessor;
 using Trackwane.AccessControl.Contracts;
 using Trackwane.Framework.Common.Configuration;
-using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Tests
 {
@@ -13,33 +10,38 @@ namespace Trackwane.AccessControl.Tests
     {
         protected string ApplicationKey { get; private set; }
 
-        public Scenario()
-        {
-            Posted = new List<IRequest>();
-        }
-
-        protected IList<IRequest> Posted { get; set; }
-
-        protected IEngineHost EngineHost
-        {
-            get { return Setup.EngineHost; }
-        }
-
-        protected static AccessControlContext Client { get; set; }
+        protected static AccessControlClient Client { get; set; }
         
         [SetUp]
         public void BeforeEachTest()
         {
-            Client = new AccessControlContext(Setup.EngineHost.Configuration.Get("uri"), new PlatformConfig(), ApplicationKey);
+            ApplicationKey = GenerateKey();
+            Client = SetupClient(ApplicationKey);
+            Register_Application.With(new PlatformConfig().SecretKey, GenerateKey(), "application_creator@nowhere.com", "xxx", "APPLICATION CREATOR");
+        }
 
-            EngineHost.ExecutionEngine.MessagePosted += (o, request) => Posted.Add(request);
+        protected static AccessControlClient SetupClient(string appKey = null)
+        {
+            var server = "localhost";
+            var platformConfig = new PlatformConfig();
+            var apiPort = Setup.EngineHost.Configuration.ApiConfig.Port;
+            var metricsPort = Setup.EngineHost.Configuration.MetricConfig.Port;
+            var secretKey = platformConfig.SecretKey;
+            var protocol = Setup.EngineHost.Configuration.Get("protocol");
 
-            ApplicationKey = Guid.NewGuid().ToString();
+            return new AccessControlClient(server, protocol, apiPort, secretKey, metricsPort, appKey);
         }
 
         protected bool WasPosted<T>()
         {
-            return Posted.Any(x => x.GetType() == typeof (T));
+            return Client.Metrics.Published<T>() > 0;
         }
+
+        protected static string GenerateKey()
+        {
+            return new Hashids().EncodeLong(DateTime.Now.Ticks) + SEQUENCE++;
+        }
+
+        private static long SEQUENCE;
     }
 }

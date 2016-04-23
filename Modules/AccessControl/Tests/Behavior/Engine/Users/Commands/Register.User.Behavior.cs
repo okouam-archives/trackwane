@@ -1,7 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using Shouldly;
-using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Fixtures;
 
@@ -16,23 +15,24 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         [SetUp]
         public void SetUp()
         {
-            USER_KEY = Guid.NewGuid().ToString();
-            ORGANIZATION_KEY = Guid.NewGuid().ToString();
-            OTHER_ORGANIZATION_KEY = Guid.NewGuid().ToString();
+            USER_KEY = GenerateKey();
+            ORGANIZATION_KEY = GenerateKey();
+            OTHER_ORGANIZATION_KEY = GenerateKey();
 
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), OTHER_ORGANIZATION_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+            Register_Organization.With(Persona.SystemManager(), OTHER_ORGANIZATION_KEY);
         }
 
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, "John Smith", "john.smith@nowhere.com");
+            Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, "John Smith", "john.smith@nowhere.com");
 
-            var user = EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey).Execute(USER_KEY);
-            user.DisplayName.ShouldBe("John Smith");
-            user.Email.ShouldBe("john.smith@nowhere.com");
-            user.ParentOrganizationKey.ShouldBe(ORGANIZATION_KEY);
+            var user = Client.Use(Persona.SystemManager()).Users.FindByKey(USER_KEY);
+
+            Assert.That(user["DisplayName"], Is.EqualTo("John Smith"));
+            Assert.That(user["Email"], Is.EqualTo("john.smith@nowhere.com"));
+            Assert.That(user["ParentOrganizationKey"], Is.EqualTo(ORGANIZATION_KEY));
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.NotThrow(() =>
             {
-                Register_User.With(Persona.Administrator(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
+                Register_User.With(Persona.Administrator(ApplicationKey, ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -49,7 +49,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Register_User.With(Persona.Administrator(OTHER_ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
+                Register_User.With(Persona.Administrator(ApplicationKey, OTHER_ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -58,7 +58,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.NotThrow(() =>
             {
-                Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+                Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -67,7 +67,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Register_User.With(Persona.Viewer(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
+                Register_User.With(Persona.Viewer(ApplicationKey, ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -76,7 +76,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Register_User.With(Persona.Manager(ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
+                Register_User.With(Persona.Manager(ApplicationKey, ORGANIZATION_KEY), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -87,8 +87,8 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
 
             Assert.Throws<BusinessRuleException>(() =>
             {
-                Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "John Smith", EMAIL);
-                Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, Guid.NewGuid().ToString(), "Alex Smith", EMAIL);
+                Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, GenerateKey(), "John Smith", EMAIL);
+                Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, GenerateKey(), "Alex Smith", EMAIL);
             });
         }
 
@@ -97,7 +97,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Assert.Throws<ValidationException>(() =>
             {
-                Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, "John Smith", Guid.NewGuid() + "@nowhere.com", null);
+                Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, "John Smith", Guid.NewGuid() + "@nowhere.com", null);
             });
         }
 
@@ -106,7 +106,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Assert.Throws<ValidationException>(() =>
             {
-                Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, "John Smith", string.Empty);
+                Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, "John Smith", string.Empty);
             });
         }
 
@@ -115,7 +115,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Assert.Throws<ValidationException>(() =>
             {
-                Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, "John Smith", Guid.NewGuid() + "@nowhere.com", string.Empty);
+                Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, "John Smith", Guid.NewGuid() + "@nowhere.com", string.Empty);
             });
         }
 
@@ -124,7 +124,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
            Assert.Throws<ValidationException>(() =>
             {
-                Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, string.Empty);
+                Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, string.Empty);
             });
         }
 
@@ -133,7 +133,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Commands
         {
             Assert.Throws<ValidationException>(() =>
             {
-                Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY, null);
+                Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY, null);
             });
         }
     }

@@ -18,8 +18,6 @@ namespace Trackwane.Management.Domain
 
         public AlertType Type { get; set; }
 
-        public string Id { get; internal set; }
-
         protected override void Apply(DomainEvent evt)
         {
             When((dynamic)evt);
@@ -40,10 +38,11 @@ namespace Trackwane.Management.Domain
 
         }
 
-        public Alert(string id, string name, string OrganizationKey)
+        public Alert(string appKey, string id, string name, string OrganizationKey)
         {
             Causes(new AlertCreated
             {
+                ApplicationKey = appKey,
                 AlertKey = id,
                 Name = name,
                 OrganizationKey = OrganizationKey
@@ -52,6 +51,7 @@ namespace Trackwane.Management.Domain
 
         public void When(AlertCreated evt)
         {
+            ApplicationKey = evt.ApplicationKey;
             Key = evt.AlertKey;
             OrganizationKey = evt.OrganizationKey;
             Threshold = evt.Threshold;

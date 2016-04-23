@@ -8,7 +8,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationKey, string key)
             {
-                Client.Use(claims).ArchiveDriver(organizationKey, key);
+                Client.Use(claims).Vehicles.ArchiveDriver(organizationKey, key);
             }
         }
     }

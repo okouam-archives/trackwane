@@ -33,7 +33,7 @@ namespace Trackwane.Management.Engine.Handlers.Alerts
                 throw new BusinessRuleException(PhraseBook.Generate(Message.DUPLICATE_ALERT_NAME, cmd.Name));
             }
 
-            var alert = new Alert(cmd.AlertKey, cmd.Name, cmd.OrganizationKey);
+            var alert = new Alert(cmd.ApplicationKey, cmd.AlertKey, cmd.Name, cmd.OrganizationKey);
 
             repository.Persist(alert);
 

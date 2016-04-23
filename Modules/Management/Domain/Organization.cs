@@ -17,8 +17,9 @@ namespace Trackwane.Management.Domain
 
         public IList<string> Locations = new List<string>();
 
-        public Organization(string organizationKey)
+        public Organization(string applicationKey, string organizationKey)
         {
+            ApplicationKey = applicationKey;
             Key = organizationKey;
         }
 

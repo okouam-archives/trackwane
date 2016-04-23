@@ -24,10 +24,11 @@ namespace Trackwane.Management.Domain
         {
         }
 
-        public Vehicle(string vehicleId, string OrganizationKey, string identifier)
+        public Vehicle(string applicationKey, string vehicleId, string OrganizationKey, string identifier)
         {
             Causes(new VehicleRegistered
             {
+                ApplicationKey = applicationKey,
                 Identifier = identifier,
                 VehicleKey = vehicleId,
                 OrganizationKey = OrganizationKey
@@ -106,6 +107,7 @@ namespace Trackwane.Management.Domain
         private void When(VehicleRegistered evt)
         {
             Key = evt.VehicleKey;
+            ApplicationKey = evt.ApplicationKey;
             Identifier = evt.Identifier;
             OrganizationKey = evt.OrganizationKey;
         }

@@ -8,7 +8,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims persona, string organizationKey, string key)
             {
-                Client.Use(persona).ArchiveLocation(organizationKey, key);
+                Client.Use(persona).Locations.Archive(organizationKey, key);
             }
         }
     }

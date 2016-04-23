@@ -8,7 +8,7 @@ namespace Trackwane.Data.Shared.Client
 {
     public class DataContext : ContextClient<DataContext>
     {
-        public DataContext(string baseUrl, IPlatformConfig config) : base(baseUrl, config, null)
+        public DataContext(string server, string protocol, string apiPort, string secretKey, string metricsPort, string applicationKey) : base(server, protocol, apiPort, secretKey, metricsPort, applicationKey)
         {
             
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using Shouldly;
-using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.Framework.Fixtures;
 
 namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Queries
@@ -17,30 +16,30 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Queries
         [SetUp]
         public void SetUp()
         {
-            USER_1_IN_ORGANIZATION_A_KEY = Guid.NewGuid().ToString();
-            USER_2_IN_ORGANIZATION_A_KEY = Guid.NewGuid().ToString();
-            USER_IN_ORGANIZATION_B_KEY = Guid.NewGuid().ToString();
-            ORGANIZATION_A_KEY = Guid.NewGuid().ToString();
-            ORGANIZATION_B_KEY = Guid.NewGuid().ToString();
+            USER_1_IN_ORGANIZATION_A_KEY = GenerateKey();
+            USER_2_IN_ORGANIZATION_A_KEY = GenerateKey();
+            USER_IN_ORGANIZATION_B_KEY = GenerateKey();
+            ORGANIZATION_A_KEY = GenerateKey();
+            ORGANIZATION_B_KEY = GenerateKey();
 
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_A_KEY);
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_B_KEY);
-            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_A_KEY, USER_1_IN_ORGANIZATION_A_KEY);
-            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_A_KEY, USER_2_IN_ORGANIZATION_A_KEY);
-            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_B_KEY, USER_IN_ORGANIZATION_B_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_A_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_B_KEY);
+            Register_User.With(Persona.SystemManager(), ORGANIZATION_A_KEY, USER_1_IN_ORGANIZATION_A_KEY);
+            Register_User.With(Persona.SystemManager(), ORGANIZATION_A_KEY, USER_2_IN_ORGANIZATION_A_KEY);
+            Register_User.With(Persona.SystemManager(), ORGANIZATION_B_KEY, USER_IN_ORGANIZATION_B_KEY);
         }
 
         [Test]
         public void Counts_All_Users_In_Organization()
         {
-            var num = EngineHost.ExecutionEngine.Query<Count>(ApplicationKey).Execute(ORGANIZATION_A_KEY);
+            var num = Client.Use(Persona.SystemManager()).Users.Count(ORGANIZATION_A_KEY);
             num.ShouldBe(2);
         }
 
         [Test]
         public void Counts_All_Users_In_System()
         {
-            var num = EngineHost.ExecutionEngine.Query<Count>(ApplicationKey).Execute();
+            var num = Client.Use(Persona.SystemManager()).Users.Count();
             num.ShouldBeGreaterThanOrEqualTo(3);
         }
     }

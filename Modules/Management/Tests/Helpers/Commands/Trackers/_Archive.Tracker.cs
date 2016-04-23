@@ -8,7 +8,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationId, string trackerId)
             {
-                Client.Use(claims).ArchiveTracker(organizationId, trackerId);
+                Client.Use(claims).Trackers.Archive(organizationId, trackerId);
             }
         }
     }

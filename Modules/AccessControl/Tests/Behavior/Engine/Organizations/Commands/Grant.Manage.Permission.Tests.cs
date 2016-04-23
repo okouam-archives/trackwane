@@ -1,8 +1,6 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Shouldly;
 using Trackwane.AccessControl.Contracts.Events;
-using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Fixtures;
 
@@ -16,21 +14,21 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         [SetUp]
         public void SetUp()
         {
-            USER_KEY = Guid.NewGuid().ToString();
-            ORGANIZATION_KEY = Guid.NewGuid().ToString();
+            USER_KEY = GenerateKey();
+            ORGANIZATION_KEY = GenerateKey();
             Background();
         }
 
         private void Background()
         {
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
-            Register_User.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+            Register_User.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
         }
 
         [Test]
         public void When_Successful_Publishes_Event()
         {
-            Grant_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+            Grant_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
 
             WasPosted<ManagePermissionGranted>().ShouldBeTrue();
         }
@@ -38,13 +36,11 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         [Test]
         public void Can_Be_Executed_Multiple_Times_For_Same_User()
         {
-            Grant_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
-            Grant_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
-
-            var user = EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey).Execute(USER_KEY);
-
-            user.Manage.Count.ShouldBe(1);
-            user.Manage[0].Item1.ShouldBe(ORGANIZATION_KEY);
+            Grant_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
+            Grant_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
+            var user = Client.Use(Persona.SystemManager()).Users.FindByKey(USER_KEY);
+            Assert.That(user["Manage"].Count, Is.EqualTo(1));
+            Assert.That(user["Manage"][0]["Key"], Is.EqualTo(ORGANIZATION_KEY));
         }
         
         [Test]
@@ -70,7 +66,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Assert.DoesNotThrow(() =>
             {
-                Grant_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+                Grant_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
             });
         }
 
@@ -86,12 +82,12 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         [Test]
         public void Removes_Other_Permissions_In_Organization_For_User()
         {
-            Grant_View_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
-            Grant_Manage_Permission.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, USER_KEY);
+            Grant_View_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
+            Grant_Manage_Permission.With(Persona.SystemManager(), ORGANIZATION_KEY, USER_KEY);
 
-            var user = EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey).Execute(USER_KEY);
+            var user = Client.Use(Persona.SystemManager()).Users.FindByKey(USER_KEY);
 
-            user.View.ShouldBeEmpty();
+            Assert.That(user["View"].Count, Is.EqualTo(0));
         }
     }
 }

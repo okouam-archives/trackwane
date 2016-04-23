@@ -16,7 +16,7 @@ namespace Trackwane.Management.Engine.Listeners.Organizations
 
         protected override IEnumerable<DomainEvent> Handle(OrganizationRegistered cmd, IRepository repository)
         {
-            var organization = new Organization(cmd.OrganizationKey);
+            var organization = new Organization(cmd.ApplicationKey, cmd.OrganizationKey);
             repository.Persist(organization);
             return organization.GetUncommittedChanges();
         }

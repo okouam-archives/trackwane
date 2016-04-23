@@ -36,10 +36,11 @@ namespace Trackwane.Management.Domain
             
         }
 
-        public Driver(string key, string OrganizationKey, string name)
+        public Driver(string applicationKey, string key, string OrganizationKey, string name)
         {
             Causes(new DriverRegistered
             {
+                ApplicationKey = applicationKey,
                 DriverKey = key,
                 OrganizationKey = OrganizationKey,
                 Name = name
@@ -70,6 +71,7 @@ namespace Trackwane.Management.Domain
         {
             Key = evt.DriverKey;
             Name = evt.Name;
+            ApplicationKey = evt.ApplicationKey;
             OrganizationKey = evt.OrganizationKey;
         }
 

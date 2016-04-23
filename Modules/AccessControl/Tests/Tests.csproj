@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hashids.net, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Hashids.net\lib\net45\Hashids.net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin.Host.HttpListener">
       <HintPath>..\..\..\packages\Microsoft.Owin.Host.HttpListener\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
     </Reference>
@@ -62,6 +66,7 @@
     <Compile Include="Behavior\Engine\Organizations\Commands\Revoke.Manage.Permission.Tests.cs" />
     <Compile Include="Behavior\Engine\Organizations\Commands\Update.Organization.Tests.cs" />
     <Compile Include="Behavior\Domain\Organization.Tests.cs" />
+    <Compile Include="Helpers\Application\_Register.Application.cs" />
     <Compile Include="Helpers\Organizations\_Archive.Organization.cs" />
     <Compile Include="Helpers\Organizations\_Grant.Administrate.Permission.cs" />
     <Compile Include="Helpers\Organizations\_Grant.Manage.Permission.cs" />

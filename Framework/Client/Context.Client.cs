@@ -5,31 +5,21 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
-using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Client
 {
-    public abstract class ContextClient<T> where T : class
-    {
-        private readonly string baseUrl;
-        private readonly IPlatformConfig config;
-        private readonly string applicationKey;
-        protected RestClient client;
-
-        protected ContextClient(string baseUrl, IPlatformConfig config, string applicationKey)
+    public abstract class ContextClient<T> : ContextClient where T : class
+    { 
+        protected ContextClient(string server, string protocol, string apiPort, string secretKey, string metricsPort, string applicationKey) : base(server, protocol, apiPort, secretKey, metricsPort, applicationKey)
         {
-            this.baseUrl = baseUrl;
-            this.config = config;
-            this.applicationKey = applicationKey;
         }
 
         public T Use(UserClaims userClaims)
         {
             if (userClaims != null)
             {
-                client = new RestClient(baseUrl);
-                client.AddDefaultHeader("Trackwane-Application", applicationKey);
-                client.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(config.Get("secret-key"))}");
+                apiClient = CreateRestClientForApplication(applicationKey, baseUrl);
+                apiClient.AddDefaultHeader("Authorization", $"Bearer {userClaims.GenerateToken(secretKey)}");
             }
 
             return this as T;
@@ -37,16 +27,45 @@ namespace Trackwane.Framework.Client
 
         public T UseWithoutAuthentication()
         {
-            client = new RestClient(baseUrl);
+            apiClient = CreateRestClientForApplication(applicationKey, baseUrl);
             return this as T;
         }
 
-        protected string Expand(string url, params object[] values)
+        private static RestClient CreateRestClientForApplication(string appKey, string uri)
+        {
+            var client = new RestClient(uri);
+            client.AddDefaultHeader(Constants.HTTP_TRACKWANE_APPLICATION_KEY, appKey);
+            return client;
+        }
+    }
+
+    public abstract class ContextClient 
+    {
+        protected readonly string baseUrl;
+        protected readonly string secretKey;
+        protected readonly string applicationKey;
+        protected readonly RestClient metricsClient;
+        protected RestClient apiClient;
+
+        protected ContextClient(string server, string protocol, string apiPort, string secretKey, string metricsPort, string applicationKey)
+        {
+            baseUrl = protocol + "://" + server + ":" + apiPort;
+            this.secretKey = secretKey;
+            this.applicationKey = applicationKey;
+            metricsClient = new RestClient(protocol + "://" + server + ":" + metricsPort);
+        }
+
+        public string Expand(string url, params object[] values)
         {
             return string.Format(url, values);
         }
 
-        protected void POST(string url, object model = null)
+        public string GetMetrics()
+        {
+            return metricsClient.Get(new RestRequest("/metrics")).Content;
+        }
+
+        public void POST(string url, object model = null)
         {
             var request = new RestRequest(url)
             {
@@ -59,10 +78,10 @@ namespace Trackwane.Framework.Client
                 request.AddJsonBody(model);
             }
 
-            Execute(() => client.Execute(request));
+            Execute(() => apiClient.Execute(request));
         }
 
-        protected TModel POST<TModel>(string url, object model = null) where TModel : new()
+        public TModel POST<TModel>(string url, object model = null) where TModel : new()
         {
             var request = new RestRequest(url)
             {
@@ -79,7 +98,7 @@ namespace Trackwane.Framework.Client
 
             Execute(() =>
             {
-                var result = client.Execute<TModel>(request);
+                var result = apiClient.Execute<TModel>(request);
                 data = result.Data;
                 return result;
             });
@@ -87,20 +106,20 @@ namespace Trackwane.Framework.Client
             return data;
         }
 
-        protected void DELETE(string url)
+        public void DELETE(string url)
         {
-            Execute(() => client.Execute(new RestRequest(url, Method.DELETE)));
+            Execute(() => apiClient.Execute(new RestRequest(url, Method.DELETE)));
         }
 
-        protected TModel GET<TModel>(string url, object model = null) where TModel : new()
+        public TModel GET<TModel>(string url, object model = null) where TModel : new()
         {
             var data = default(TModel);
-            
+
             Execute(() =>
             {
                 var request = RequestBuilder.GET(url, model);
 
-                var result = client.Execute<TModel>(request);
+                var result = apiClient.Execute<TModel>(request);
 
                 data = result.Data;
 

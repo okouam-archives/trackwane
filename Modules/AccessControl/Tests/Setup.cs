@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
 using Trackwane.AccessControl.Contracts;
 using Trackwane.AccessControl.Engine;
@@ -23,7 +22,9 @@ namespace Trackwane.AccessControl.Tests
 
             var module = new ModuleConfig(engine);
 
-            EngineHost = new EngineHost<Registry>(module, engine, typeof(_Access_Control_Contracts_Assembly_).Assembly.GetDomainEvents().ToArray());
+            var server = "localhost";
+
+            EngineHost = new EngineHost<Registry>(server, module, engine, typeof(_Access_Control_Contracts_Assembly_).Assembly.GetDomainEvents().ToArray());
 
             EngineHost.Start();
         }

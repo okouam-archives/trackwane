@@ -26,7 +26,7 @@ namespace Trackwane.Management.Tests.Helpers
 
             public static void With(UserClaims persona, string organizationKey, string key, string name, Point coordinates)
             {
-                Client.Use(persona).RegisterLocation(organizationKey, new RegisterLocationModel
+                Client.Use(persona).Locations.Register(organizationKey, new RegisterLocationModel
                 {
                     Key = key,
                     Name = name,

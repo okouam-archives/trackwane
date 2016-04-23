@@ -10,8 +10,8 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims claims, string organizationKey, string key)
             {
-                Client.Use(claims)
-                    .RegisterVehicle(organizationKey,
+                Client.Use(claims).Vehicles
+                    .Register(organizationKey,
                         new RegisterVehicleModel {Key = key, Identifier = Guid.NewGuid().ToString()});
             }
         }

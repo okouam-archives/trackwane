@@ -26,16 +26,14 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Application
 
         protected override IEnumerable<DomainEvent> Handle(RegisterApplication cmd, IRepository repository)
         {
-            if (repository.Query<User>().Any())
+            var applicationKeyInUse = repository.Query<User>().Any(x => x.ApplicationKey == cmd.ApplicationKey);
+
+            if (applicationKeyInUse)
             {
-                throw new BusinessRuleException(PhraseBook.Generate(Message.ROOT_ATTEMPT_WHEN_EXISTING_USERS));
+                throw new Exception("The application key {XXX} is already in use");
             }
 
-            var organization = new Organization(cmd.ApplicationKey, Guid.NewGuid().ToString(), "--INTERNAL--");
-
-            repository.Persist(organization);
-
-            var user = new User(cmd.ApplicationKey, organization.Key, cmd.UserKey, cmd.DisplayName, cmd.Email, Role.SystemManager, cmd.Password);
+            var user = new User(cmd.ApplicationKey, null, cmd.UserKey, cmd.DisplayName, cmd.Email, Role.SystemManager, cmd.Password);
 
             repository.Persist(user);
 

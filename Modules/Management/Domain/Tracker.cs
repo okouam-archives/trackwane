@@ -21,10 +21,11 @@ namespace Trackwane.Management.Domain
 
         }
 
-        public Tracker(string id, string organizationKey, string hardwareId, string model, string identifier)
+        public Tracker(string applicationKey, string id, string organizationKey, string hardwareId, string model, string identifier)
         {
             Causes(new TrackerRegistered
             {
+                ApplicationKey = applicationKey,
                 TrackerKey = id,
                 HardwareId = hardwareId,
                 Model = model,
@@ -52,6 +53,7 @@ namespace Trackwane.Management.Domain
 
         private void When(TrackerRegistered evt)
         {
+            ApplicationKey = evt.ApplicationKey;
             Key = evt.TrackerKey;
             OrganizationKey = evt.OrganizationKey;
             HardwareId = evt.HardwareId;

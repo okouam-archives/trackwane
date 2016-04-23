@@ -51,6 +51,7 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ModuleConfig.cs" />
     <Compile Include="Configuration\PlatformConfig.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="DomainEvent.cs" />
     <Compile Include="Exceptions\BusinessRuleException.cs" />
     <Compile Include="Exceptions\InvalidConfigurationException.cs" />

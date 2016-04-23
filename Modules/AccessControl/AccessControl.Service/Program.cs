@@ -26,7 +26,7 @@ namespace Trackwane.AccessControl.Service
 
             log.Info("Using the etcd instance located at <" + moduleConfig.Etcd + ">");
 
-            var host = new EngineHost<Engine.Registry>(moduleConfig, assembly, assembly.GetDomainEvents().ToArray());
+            var host = new EngineHost<Engine.Registry>("localhost", moduleConfig, assembly, assembly.GetDomainEvents().ToArray());
 
             host.Start();
 

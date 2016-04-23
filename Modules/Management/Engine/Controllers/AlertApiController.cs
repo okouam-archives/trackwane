@@ -22,31 +22,31 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpPost, Route(RESOURCE_URL)]
         public void UpdateAlert(string organizationKey, string key, UpdateAlertModel model)
         {
-            dispatcher.Send(new UpdateAlert(CurrentClaims.UserId, organizationKey, key, model.Name));
+            dispatcher.Send(new UpdateAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key, model.Name));
         }       
         
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
         public AlertDetails FindById(string organizationKey, string key)
         {
-            return dispatcher.Query<FindByKey>(organizationKey).Execute(key);
+            return dispatcher.Query<FindByKey>(AppKeyFromHeader, organizationKey).Execute(key);
         }
 
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
         public ResponsePage<AlertSummary> FindBySearchCriteria(string organizationKey, SearchAlertsModel model)
         {
-            return dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(model.Name);
+            return dispatcher.Query<FindBySearchCriteria>(AppKeyFromHeader, organizationKey).Execute(model.Name);
         }
 
         [Secured, Viewers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveAlert(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveAlert(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Send(new ArchiveAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void CreateAlert(string organizationKey, CreateAlertModel model)
         {
-            dispatcher.Send(new CreateAlert(CurrentClaims.UserId, organizationKey, model.Name, model.Key));
+            dispatcher.Send(new CreateAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name, model.Key));
         }
     }
 }

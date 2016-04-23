@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using log4net.Config;
 using NUnit.Framework;
 using Trackwane.AccessControl.Contracts;
 using Trackwane.AccessControl.Engine;
@@ -18,6 +19,8 @@ namespace Trackwane.AccessControl.Tests
         [OneTimeSetUp]
         public void RunBeforeAnyTests()
         {
+            XmlConfigurator.Configure();
+
             var engine = typeof (_Access_Control_Engine_Assembly_).Assembly;
 
             var module = new ModuleConfig(engine);

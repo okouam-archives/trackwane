@@ -9,6 +9,8 @@ NUGET
     FAKE (4.25.4)
     Faker (1.2)
     FluentValidation (6.2.1)
+    Gelf4NetAppender (1.2.11.8)
+      log4net (>= 1.2.11)
     Geo (0.14.1)
     Hashids.net (1.1.2)
     JWT (1.3.4)

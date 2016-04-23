@@ -12,6 +12,15 @@ services:
       - "prometheus"
       - "grafana"
 
+  graylog:
+    image: graylog2/allinone
+    ports:
+      - "9000:9000"
+      - "12201:12201"
+    volumes:
+      - ~/Docker/graylog/data:/var/opt/graylog/data
+      - ~/Docker/graylog/logs:/var/log/graylog
+
   postgres:
     image: postgres
     container_name: postgres

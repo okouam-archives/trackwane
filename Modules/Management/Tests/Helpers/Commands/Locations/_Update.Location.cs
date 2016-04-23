@@ -15,7 +15,7 @@ namespace Trackwane.Management.Tests.Helpers
 
             public static void With(UserClaims claims, string organizationId, string locationId, string name, Point coordinates)
             {
-                Client.Use(claims).UpdateLocation(organizationId, locationId, new UpdateLocationModel
+                Client.Use(claims).Locations.Update(organizationId, locationId, new UpdateLocationModel
                 {
                     Name = name,
                     Coordinates = coordinates

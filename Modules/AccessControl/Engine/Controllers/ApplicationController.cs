@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using HashidsNet;
 using Trackwane.AccessControl.Contracts.Models;
@@ -34,7 +30,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
                 throw new Exception("The platform secret key provided is invalid");
             }
 
-            var cmd = new RegisterApplication(model.ApplicationKey ?? new Hashids(secretKey).EncodeLong(DateTime.Now.Ticks))
+            var cmd = new RegisterApplication(AppKeyFromHeader)
             {
                 Email = model.Email,
                 DisplayName = model.DisplayName,

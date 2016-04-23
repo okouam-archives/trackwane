@@ -28,7 +28,7 @@ namespace Trackwane.Management.Tests
 
             var config = new ModuleConfig(engine);
 
-            EngineHost = new EngineHost<Registry>(config, engine,  events);
+            EngineHost = new EngineHost<Registry>("localhost", config, engine,  events);
 
             EngineHost.Start();
         }

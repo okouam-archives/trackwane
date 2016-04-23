@@ -44,10 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scopes\Alert.Scope.cs" />
+    <Compile Include="Scopes\Boundary.Scope.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="Scopes\Location.Scope.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scopes\Vehicle.Scope.cs" />
+    <Compile Include="Scopes\Tracker.Scope.cs" />
     <Compile Include="_Management_Contracts_Assembly.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(UserClaims persona, string organizationKey, string key, string name)
             {
-                Client.Use(persona).RegisterDriver(organizationKey, new CreateDriverModel {Key = key, Name = name});
+                Client.Use(persona).Vehicles.RegisterDriver(organizationKey, new CreateDriverModel {Key = key, Name = name});
             }
 
             public static void With(UserClaims persona, string organizationKey, string key)

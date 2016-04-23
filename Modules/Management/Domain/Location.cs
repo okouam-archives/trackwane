@@ -58,10 +58,11 @@ namespace Trackwane.Management.Domain
             
         }
 
-        public Location(string id, string OrganizationKey, string name, Point coordinates)
+        public Location(string applicationKey, string id, string OrganizationKey, string name, Point coordinates)
         {
             Causes(new LocationRegistered
             {
+                ApplicationKey = applicationKey,
                 LocationKey = id,
                 Name = name,
                 OrganizationKey = OrganizationKey,
@@ -81,6 +82,7 @@ namespace Trackwane.Management.Domain
         private void When(LocationRegistered evt)
         {
             Key = evt.LocationKey;
+            ApplicationKey = evt.ApplicationKey;
             Name = evt.Name;
             OrganizationKey = evt.OrganizationKey;
             Coordinates = evt.Coordinates;

@@ -1,8 +1,6 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Shouldly;
 using Trackwane.AccessControl.Contracts.Events;
-using Trackwane.AccessControl.Engine.Queries.Organizations;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Fixtures;
 
@@ -15,7 +13,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         [SetUp]
         public void SetUp()
         {
-            ORGANIZATION_KEY = Guid.NewGuid().ToString();
+            ORGANIZATION_KEY = GenerateKey();
         }
 
         [Test]
@@ -23,7 +21,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
                 Archive_Organization.With(Persona.Administrator(ORGANIZATION_KEY), ORGANIZATION_KEY);
             });
         }
@@ -33,7 +31,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
                 Archive_Organization.With(Persona.Manager(ORGANIZATION_KEY), ORGANIZATION_KEY);
             });
         }
@@ -43,7 +41,7 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.Throw<UnauthorizedException>(() =>
             {
-                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
                 Archive_Organization.With(Persona.Viewer(ORGANIZATION_KEY), ORGANIZATION_KEY);
             });
         }
@@ -51,10 +49,10 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
-            Archive_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+            Archive_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
 
-            var organization = Client.Use(Persona.SystemManager(ApplicationKey)).FindByKey(ORGANIZATION_KEY);
+            var organization = Client.Use(Persona.SystemManager()).Organizations.FindByKey(ORGANIZATION_KEY);
             organization.IsArchived.ShouldBeTrue();
         }
 
@@ -63,16 +61,16 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Commands
         {
             Should.NotThrow(() =>
             {
-                Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
-                Archive_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+                Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+                Archive_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
             });
         }
 
         [Test]
         public void When_Successful_Publishes_Event()
         {
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
-            Archive_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
+            Archive_Organization.With(Persona.SystemManager(), ORGANIZATION_KEY);
 
             WasPosted<OrganizationArchived>().ShouldBeTrue();
         }

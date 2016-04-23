@@ -24,7 +24,7 @@ namespace Trackwane.Management.Engine.Controllers
         {
             var identity = User.Identity as ClaimsIdentity;
 
-            var cmd = new UpdateDriver(CurrentClaims.ApplicationKey, identity.Name, organizationKey, key)
+            var cmd = new UpdateDriver(AppKeyFromHeader, identity.Name, organizationKey, key)
             {
                 Name = model.Name
             };
@@ -35,25 +35,25 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
         public DriverDetails FindById(string organizationKey, string key)
         {
-            return dispatcher.Query<FindById>(organizationKey).Execute(key);
+            return dispatcher.Query<FindById>(AppKeyFromHeader, organizationKey).Execute(key);
         }
 
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
         public ResponsePage<DriverSummary> FindBySearchCriteria(string organizationKey, string name)
         {
-            return dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(name);
+            return dispatcher.Query<FindBySearchCriteria>(AppKeyFromHeader, organizationKey).Execute(name);
         }
 
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveDriver(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveDriver(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Send(new ArchiveDriver(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void CreateDriver(string organizationKey, CreateDriverModel model)
         {
-            dispatcher.Send(new RegisterDriver(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, model.Name, model.Key));
+            dispatcher.Send(new RegisterDriver(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name, model.Key));
         }
     }
 }

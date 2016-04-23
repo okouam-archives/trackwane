@@ -23,14 +23,30 @@ namespace Trackwane.Framework.Common.Configuration
             }
         }
 
+        public ApiConfig ApiConfig
+        {
+            get
+            {
+                return new ApiConfig(this);
+            }
+        }
+
+        public MetricConfig MetricConfig
+        {
+            get
+            {
+                return new MetricConfig(this);
+            }
+        }
+
         public string ConnectionString
         {
             get
             {
-                return "Server=127.0.0.1;Port=5432;Database=trackwane;User Id=trackwane;Password = trackwane;"; 
+                return Get("connection-string"); 
             }
         }
-
+        
         public ModuleConfig(Assembly assembly) 
         {
             this.assembly = assembly;
@@ -55,6 +71,36 @@ namespace Trackwane.Framework.Common.Configuration
         public void Set(string key, string value)
         {
             client.Set("trackwane/modules/" + ModuleName + "/" + key, value);
+        }
+    }
+
+    public class ApiConfig
+    {
+        private readonly ModuleConfig config;
+
+        public ApiConfig(ModuleConfig config)
+        {
+            this.config = config;
+        }
+
+        public string Port
+        {
+            get { return config.Get("api-port"); }
+        }
+    }
+
+    public class MetricConfig
+    {
+        private readonly ModuleConfig config;
+
+        public MetricConfig(ModuleConfig config)
+        {
+            this.config = config;
+        }
+
+        public string Port
+        {
+            get { return config.Get("metrics-port"); }
         }
     }
 }

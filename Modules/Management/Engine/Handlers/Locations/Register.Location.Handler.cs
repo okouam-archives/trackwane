@@ -34,7 +34,7 @@ namespace Trackwane.Management.Engine.Handlers.Locations
                 throw new BusinessRuleException();
             }
 
-            var location = new Location(cmd.LocationId, cmd.OrganizationId, cmd.Name, cmd.Coordinates);
+            var location = new Location(cmd.ApplicationKey, cmd.LocationId, cmd.OrganizationId, cmd.Name, cmd.Coordinates);
 
             repository.Persist(location);
 

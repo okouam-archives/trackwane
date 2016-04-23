@@ -16,21 +16,21 @@ namespace Trackwane.Management.Tests.Behavior.API.Commands.Vehicles
         [SetUp]
         public void SetUp()
         {
-            ORGANIZATION_KEY = "organization-" + Guid.NewGuid();
-            VEHICLE_KEY = "vehicle-" + Guid.NewGuid();
-            USER_KEY = "user-" + Guid.NewGuid();
+            ORGANIZATION_KEY = GenerateKey();
+            VEHICLE_KEY = GenerateKey();
+            USER_KEY = GenerateKey();
 
-            _Organization_Registered.With(ORGANIZATION_KEY);
-            _User_Registered.With(USER_KEY);
+            _Organization_Registered.With(ApplicationKey, ORGANIZATION_KEY);
+            _User_Registered.With(ApplicationKey, USER_KEY);
         }
 
         [Test]
         public void When_Successful_Persists_Changes()
         {
-            _Register_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY);
-            _Update_Vehicle.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, VEHICLE_KEY, "A NEW IDENTIFIER");
+            _Register_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY);
+            _Update_Vehicle.With(Persona.SystemManager(), ORGANIZATION_KEY, VEHICLE_KEY, "A NEW IDENTIFIER");
 
-            var vehicle = EngineHost.ExecutionEngine.Query<FindById>(ORGANIZATION_KEY).Execute(VEHICLE_KEY);
+            var vehicle = Setup.EngineHost.ExecutionEngine.Query<FindById>(ApplicationKey, ORGANIZATION_KEY).Execute(VEHICLE_KEY);
             vehicle.Identifier.ShouldBe("A NEW IDENTIFIER");
         }
     }

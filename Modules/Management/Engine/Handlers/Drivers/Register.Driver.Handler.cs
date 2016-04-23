@@ -37,7 +37,7 @@ namespace Trackwane.Management.Engine.Handlers.Drivers
                 throw new BusinessRuleException(PhraseBook.Generate(Message.DUPLICATE_DRIVER_NAME, cmd.Name));
             }
 
-            var driver = new Driver(cmd.DriverKey, cmd.OrganizationKey, cmd.Name);
+            var driver = new Driver(cmd.ApplicationKey, cmd.DriverKey, cmd.OrganizationKey, cmd.Name);
 
             repository.Persist(driver);
             

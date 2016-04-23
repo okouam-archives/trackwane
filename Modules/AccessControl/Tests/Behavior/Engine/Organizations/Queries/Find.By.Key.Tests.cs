@@ -1,7 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using Shouldly;
-using Trackwane.AccessControl.Engine.Queries.Organizations;
 using Trackwane.Framework.Fixtures;
 
 namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Queries
@@ -14,24 +13,24 @@ namespace Trackwane.AccessControl.Tests.Behavior.Engine.Organizations.Queries
         [SetUp]
         public void SetUp()
         {
-            ORGANIZATION_A_KEY = Guid.NewGuid().ToString();
-            ORGANIZATION_B_KEY = Guid.NewGuid().ToString();
+            ORGANIZATION_A_KEY = GenerateKey();
+            ORGANIZATION_B_KEY = GenerateKey();
 
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_A_KEY);
-            Register_Organization.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_B_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_A_KEY);
+            Register_Organization.With(Persona.SystemManager(), ORGANIZATION_B_KEY);
         }
 
         [Test]
         public void Finds_Organization_Details_When_Organization_Exists()
         {
-            var organization = EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey, ORGANIZATION_A_KEY).Execute();
+            var organization = Client.Use(Persona.SystemManager()).Organizations.FindByKey(ORGANIZATION_A_KEY);
             organization.Key.ShouldBe(ORGANIZATION_A_KEY);
         }
 
         [Test]
         public void Finds_Nothing_When_Organization_Does_Not_Exist()
         {
-            var organization = EngineHost.ExecutionEngine.Query<FindByKey>(ApplicationKey, Guid.NewGuid().ToString()).Execute();
+            var organization = Client.Use(Persona.SystemManager()).Organizations.FindByKey(GenerateKey());
             organization.ShouldBeNull();
         }
     }

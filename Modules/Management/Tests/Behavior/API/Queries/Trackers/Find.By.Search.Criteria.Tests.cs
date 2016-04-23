@@ -17,15 +17,15 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Trackers
         {
             TRACKER_ID = Guid.NewGuid().ToString();
             ORGANIZATION_KEY = Guid.NewGuid().ToString();
-            _Organization_Registered.With(ORGANIZATION_KEY);
+            _Organization_Registered.With(ApplicationKey, ORGANIZATION_KEY);
         }
 
         [Test]
         public void Finds_Trackers_When_Searching_By_Organization()
         {
-            _Register_Tracker.With(Persona.SystemManager(ApplicationKey), TRACKER_ID, ORGANIZATION_KEY);
+            _Register_Tracker.With(Persona.SystemManager(), TRACKER_ID, ORGANIZATION_KEY);
 
-            var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute();
+            var responsePage = Setup.EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ApplicationKey, ORGANIZATION_KEY).Execute();
 
             responsePage.Total.ShouldBe(1);
         }

@@ -17,15 +17,15 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Boundaries
         {
             BOUNDARY_ID = Guid.NewGuid().ToString();
             ORGANIZATION_KEY = Guid.NewGuid().ToString();
-            _Organization_Registered.With(ORGANIZATION_KEY);
+            _Organization_Registered.With(ApplicationKey, ORGANIZATION_KEY);
         }
 
         [Test]
         public void Finds_Boundaries_When_Searching_By_Organization()
         {
-            _Create_Boundary.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, BOUNDARY_ID);
+            _Create_Boundary.With(Persona.SystemManager(), ORGANIZATION_KEY, BOUNDARY_ID);
 
-            var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute(ORGANIZATION_KEY);
+            var responsePage = Setup.EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ApplicationKey, ORGANIZATION_KEY).Execute(ORGANIZATION_KEY);
 
             responsePage.Total.ShouldBe(1); 
         }

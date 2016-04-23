@@ -22,7 +22,7 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpPost, Route(RESOURCE_URL)]
         public void UpdateLocation(string organizationKey, string key, UpdateLocationModel model)
         {
-            dispatcher.Send(new UpdateLocation(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key)
+            dispatcher.Send(new UpdateLocation(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key)
             {
                 Coordinates = model.Coordinates,
                 Name = model.Name
@@ -32,25 +32,25 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
         public LocationDetails FindByKey(string organizationKey, string key)
         {
-            return dispatcher.Query<FindById>(organizationKey).Execute(key);
+            return dispatcher.Query<FindById>(AppKeyFromHeader, organizationKey).Execute(key);
         }
 
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
         public ResponsePage<LocationSummary> FindBySearchCriteria(string organizationKey, SearchLocationsModel model)
         {
-            return dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute();
+            return dispatcher.Query<FindBySearchCriteria>(AppKeyFromHeader, organizationKey).Execute();
         }
 
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveBoundary(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveLocation(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Send(new ArchiveLocation(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void RegisterLocation(string organizationKey, RegisterLocationModel model)
         {
-            dispatcher.Send(new RegisterLocation(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey,
+            dispatcher.Send(new RegisterLocation(AppKeyFromHeader, CurrentClaims.UserId, organizationKey,
                 model.Name,
                 model.Coordinates != null ? new Geo.IO.GeoJson.GeoJsonReader().Read(model.Coordinates) as Point : null,
                 model.Key)

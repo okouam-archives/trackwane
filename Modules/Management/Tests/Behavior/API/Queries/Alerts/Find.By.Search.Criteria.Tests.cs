@@ -17,15 +17,15 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Alerts
         {
             ALERT_ID = Guid.NewGuid().ToString();
             ORGANIZATION_KEY = Guid.NewGuid().ToString();
-            _Organization_Registered.With(ORGANIZATION_KEY);
+            _Organization_Registered.With(ApplicationKey, ORGANIZATION_KEY);
         }
 
         [Test]
         public void Find_Alerts_By_ORGANIZATION_KEY()
         {
-            _Create_Alert.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ALERT_ID);
+            _Create_Alert.With(Persona.SystemManager(), ORGANIZATION_KEY, ALERT_ID);
 
-            var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute();
+            var responsePage = Setup.EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ApplicationKey, ORGANIZATION_KEY).Execute();
 
             responsePage.Total.ShouldBe(1);
         }

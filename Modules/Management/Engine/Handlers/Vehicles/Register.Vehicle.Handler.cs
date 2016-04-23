@@ -20,7 +20,7 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
 
         protected override IEnumerable<DomainEvent> Handle(RegisterVehicle cmd, IRepository repository)
         {
-            var vehicle = new Vehicle(cmd.VehicleId, cmd.OrganizationId, cmd.Identifier);
+            var vehicle = new Vehicle(cmd.ApplicationKey, cmd.VehicleId, cmd.OrganizationId, cmd.Identifier);
 
             repository.Persist(vehicle);
 

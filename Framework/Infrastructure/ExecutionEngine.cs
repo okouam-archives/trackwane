@@ -79,7 +79,8 @@ namespace Trackwane.Framework.Infrastructure
 
         public T Query<T>(string applicationKey, string organizationKey) where T : IOrganizationQuery
         {
-            var query = Query<T>(applicationKey);
+            var query = container.GetInstance<T>();
+            query.ApplicationKey = applicationKey;
             query.OrganizationKey = organizationKey;
             return query;
         }

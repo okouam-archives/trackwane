@@ -8,7 +8,7 @@ namespace Trackwane.AccessControl.Tests
         {
             public static void With(UserClaims persona, string organizationKey, string key)
             {
-                Client.Use(persona).RevokeAdministratePermission(organizationKey, key);
+                Client.Use(persona).Organizations.RevokeAdministratePermission(organizationKey, key);
             }
         }
     }

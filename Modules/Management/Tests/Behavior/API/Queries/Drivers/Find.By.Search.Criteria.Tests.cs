@@ -21,18 +21,18 @@ namespace Trackwane.Management.Tests.Behavior.API.Queries.Drivers
             ANOTHER_DRIVER_KEY = Guid.NewGuid().ToString();
             ANOTHER_ORGANIZATION_KEY = Guid.NewGuid().ToString();
             ORGANIZATION_KEY = Guid.NewGuid().ToString();
-            _Organization_Registered.With(ORGANIZATION_KEY);
-            _Organization_Registered.With(ANOTHER_ORGANIZATION_KEY);
+            _Organization_Registered.With(ApplicationKey, ORGANIZATION_KEY);
+            _Organization_Registered.With(ApplicationKey, ANOTHER_ORGANIZATION_KEY);
         }
 
         [Test]
         public void Finds_Drivers_When_Searching_By_Organization()
         {
-            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, DRIVER_KEY, "A NAME");
-            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ORGANIZATION_KEY, ANOTHER_DRIVER_KEY, "ANOTHER NAME");
-            _Register_Driver.With(Persona.SystemManager(ApplicationKey), ANOTHER_ORGANIZATION_KEY, DRIVER_KEY, "YET ANOTHER NAME");
+            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, DRIVER_KEY, "A NAME");
+            _Register_Driver.With(Persona.SystemManager(), ORGANIZATION_KEY, ANOTHER_DRIVER_KEY, "ANOTHER NAME");
+            _Register_Driver.With(Persona.SystemManager(), ANOTHER_ORGANIZATION_KEY, DRIVER_KEY, "YET ANOTHER NAME");
 
-            var responsePage = EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ORGANIZATION_KEY).Execute("A NAME");
+            var responsePage = Setup.EngineHost.ExecutionEngine.Query<FindBySearchCriteria>(ApplicationKey, ORGANIZATION_KEY).Execute("A NAME");
 
             responsePage.Total.ShouldBe(1);
         }

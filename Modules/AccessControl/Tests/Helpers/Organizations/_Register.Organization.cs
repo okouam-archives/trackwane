@@ -10,7 +10,7 @@ namespace Trackwane.AccessControl.Tests
         {
             public static void With(UserClaims persona)
             {
-                With(persona, Guid.NewGuid().ToString());
+                With(persona, GenerateKey());
             }
 
             public static void With(UserClaims persona, string organizationKey)
@@ -20,7 +20,7 @@ namespace Trackwane.AccessControl.Tests
 
             public static void With(UserClaims persona, string organizationKey, string name)
             {
-                Client.Use(persona).RegisterOrganization(new RegisterOrganizationModel
+                Client.Use(persona).Organizations.RegisterOrganization(new RegisterOrganizationModel
                 {
                     OrganizationKey = organizationKey,
                     Name = name

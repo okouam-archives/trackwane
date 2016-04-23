@@ -9,7 +9,7 @@ namespace Trackwane.AccessControl.Tests
         {
             public static void With(UserClaims persona, string organizationKey, string userKey, string displayName = null, string email = null, string password = null)
             {
-                Client.Use(persona).UpdateUser(organizationKey, userKey, new UpdateUserModel
+                Client.Use(persona).Users.Update(organizationKey, userKey, new UpdateUserModel
                 {
                     DisplayName = displayName,
                     Email = email,

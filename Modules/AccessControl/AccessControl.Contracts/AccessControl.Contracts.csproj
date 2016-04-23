@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scopes\Organization.Scope.cs" />
+    <Compile Include="Scopes\Application.Scope.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Models.cs" />
+    <Compile Include="Scopes\User.Scope.cs" />
     <Compile Include="_Access_Control_Contracts_Assembly_.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

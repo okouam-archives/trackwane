@@ -17,18 +17,18 @@ namespace Trackwane.AccessControl.Tests
             {
                 With(persona, organizationKey, userKey, displayName,
                     String.Format("{0} [{1}]", Faker.InternetFaker.Email(), userKey),
-                    Guid.NewGuid().ToString());
+                    GenerateKey());
             }
 
             public static void With(UserClaims persona, string organizationKey, string userKey, string displayName,
                 string email)
             {
-                With(persona, organizationKey, userKey, displayName, email, Guid.NewGuid().ToString());
+                With(persona, organizationKey, userKey, displayName, email, GenerateKey());
             }
 
             public static void With(UserClaims persona, string organizationKey, string userKey, string displayName, string email, string password)
             {
-                Client.Use(persona).RegisterUser(organizationKey, new RegisterApplicationModel
+                Client.Use(persona).Users.Register(organizationKey, new RegisterApplicationModel
                 {
                     UserKey = userKey,
                     DisplayName = displayName,

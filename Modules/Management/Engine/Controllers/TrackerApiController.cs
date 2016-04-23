@@ -21,25 +21,25 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
         public TrackerDetails FindByKey(string organizationKey, string key)
         {
-            return dispatcher.Query<FindById>(organizationKey).Execute(key);
+            return dispatcher.Query<FindById>(AppKeyFromHeader, organizationKey).Execute(key);
         }
 
         [Secured, Viewers, HttpGet, Route(COLLECTION_URL)]
         public ResponsePage<TrackerSummary> FindBySearchCriteria(string organizationKey, string name)
         {
-            return dispatcher.Query<FindBySearchCriteria>(organizationKey).Execute(name);
+            return dispatcher.Query<FindBySearchCriteria>(AppKeyFromHeader, organizationKey).Execute(name);
         }
 
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveTracker(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveTracker(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Send(new ArchiveTracker(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void RegisterTracker(string organizationKey, RegisterTrackerModel model)
         {
-            dispatcher.Send(new RegisterTracker(CurrentClaims.ApplicationKey, CurrentClaims.UserId, organizationKey, model.HardwareId, model.Model,
+            dispatcher.Send(new RegisterTracker(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.HardwareId, model.Model,
                 model.Key));
         }
     }

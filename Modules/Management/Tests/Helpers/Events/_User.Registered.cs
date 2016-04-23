@@ -6,10 +6,11 @@ namespace Trackwane.Management.Tests.Helpers
     {
         protected class _User_Registered
         {
-            public static void With(string userId)
+            public static void With(string applicationKey, string userId)
             {
-                EngineHost.ExecutionEngine.Publish(new UserRegistered
+                Setup.EngineHost.ExecutionEngine.Publish(new UserRegistered
                 {
+                    ApplicationKey = applicationKey,
                     UserKey = userId
                 });
             }

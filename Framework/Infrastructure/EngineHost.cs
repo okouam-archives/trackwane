@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web.Http.SelfHost;
 using log4net;
 using Marten;
 using Microsoft.Owin.Hosting;
@@ -14,7 +13,6 @@ using StructureMap;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Factories;
 using Trackwane.Framework.Infrastructure.Requests.Metrics;
-using Trackwane.Framework.Infrastructure.Storage;
 using Trackwane.Framework.Interfaces;
 using ConnectionFactory = Trackwane.Framework.Infrastructure.Factories.ConnectionFactory;
 
@@ -22,6 +20,7 @@ namespace Trackwane.Framework.Infrastructure
 {
     public class EngineHost<T> : IEngineHost where T : StructureMap.Registry, new()
     {
+        private readonly string server;
         private readonly Assembly engine;
         private readonly Type[] events;
         private readonly IServiceLocator<T> locator;
@@ -36,8 +35,9 @@ namespace Trackwane.Framework.Infrastructure
 
         public IModuleConfig Configuration { get; set; }
 
-        public EngineHost(IModuleConfig moduleConfig, Assembly engine, params Type[] events)
+        public EngineHost(string server, IModuleConfig moduleConfig, Assembly engine, params Type[] events)
         {
+            this.server = server;
             this.engine = engine;
             this.events = events;
             locator = new ServiceLocator<T>(new ServiceLocationFactory()); 
@@ -112,7 +112,7 @@ namespace Trackwane.Framework.Infrastructure
                 StopDispatcher();
             }
 
-            if (engine.GetHandlers() != null && Configuration.Get("uri") != null)
+            if (engine.GetHandlers() != null && Configuration.Get("protocol") != null && Configuration.Get("api-port") != null)
             {
                 StopWebApi();
             }
@@ -176,7 +176,7 @@ namespace Trackwane.Framework.Infrastructure
 
         private void StartMetricsCollection()
         {
-            metricsCollection = new MetricServer(Configuration.Get("metrics-hostname"), int.Parse(Configuration.Get("metrics-port")));
+            metricsCollection = new MetricServer("*", int.Parse(Configuration.Get("metrics-port")));
             metricsCollection.Start();
         }
 
@@ -187,10 +187,14 @@ namespace Trackwane.Framework.Infrastructure
 
         private void StartWebApi(IContainer container)
         {
-            if (engine.GetHandlers().Any() && Configuration.Get("uri") != null)
+            var protocol = Configuration.Get("protocol");
+            var port = Configuration.Get("api-port");
+
+            if (engine.GetHandlers().Any() && protocol != null && port != null)
             {
                 log.Info("Starting the Web API");
-                webApi = CreateStandaloneServer(container, Configuration.Get("uri"));
+                var uri = protocol + "://" + server + ":" + port;
+                webApi = CreateStandaloneServer(container, uri);
                 log.Info("The Web API is start and waiting for connections");
             }
         }

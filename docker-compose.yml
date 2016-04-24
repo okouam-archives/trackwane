@@ -18,8 +18,8 @@ services:
       - "9000:9000"
       - "12201:12201"
     volumes:
-      - ~/Docker/graylog/data:/var/opt/graylog/data
-      - ~/Docker/graylog/logs:/var/log/graylog
+      - /opt/docker/graylog/data:/var/opt/graylog/data
+      - /opt/docker/graylog/logs:/var/log/graylog
 
   postgres:
     image: postgres
@@ -27,7 +27,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ~/Docker/postgres/data/:/var/lib/postgresql/data
+      - /opt/docker/postgres/data/:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: trackwane
       POSTGRES_PASSWORD: trackwane
@@ -37,7 +37,7 @@ services:
     container_name: etcd
     command: --listen-client-urls http://0.0.0.0:2379 --advertise-client-urls http://0.0.0.0:2379 --name etcd --data-dir /data
     volumes:
-      - ~/Docker/etcd/data:/data
+      - /opt/docker/etcd/data:/data
     ports:
       - "2379:2379"
 
@@ -59,7 +59,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ~/Docker/prometheus/config/:/etc/prometheus/
+      - /opt/docker/prometheus/config/:/etc/prometheus/
     command:  -config.file=/etc/prometheus/prometheus.yml
 
   grafana:

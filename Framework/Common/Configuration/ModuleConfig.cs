@@ -59,7 +59,7 @@ namespace Trackwane.Framework.Common.Configuration
 
         public string Get(string key)
         {
-            var identifier = "trackwane/modules/" + ModuleName + "/" + key;
+            var identifier = "trackwane/" + Environment + "/modules/" + ModuleName + "/" + key;
             var response = client.Get(identifier);
             if (response.Node == null)
             {
@@ -70,7 +70,7 @@ namespace Trackwane.Framework.Common.Configuration
 
         public void Set(string key, string value)
         {
-            client.Set("trackwane/modules/" + ModuleName + "/" + key, value);
+            client.Set("trackwane/" + Environment + "/modules/" + ModuleName + "/" + key, value);
         }
     }
 

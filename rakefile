@@ -56,6 +56,11 @@ namespace :docker do
     sh "docker-compose ps"
   end
 
+  task :clean do
+    sh "docker rm -v $(docker ps -a -q -f status=exited)"
+    sh "docker rmi $(docker images -f ""dangling=true"" -q)"
+  end
+
   desc "Starts all containers"
   task :up do
     sh "docker-compose up -d"

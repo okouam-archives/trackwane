@@ -12,11 +12,26 @@ namespace Trackwane.Framework.Common.Configuration
             client = new EtcdClient(new Uri(Etcd));
         }
 
+        public string Environment
+        {
+            get
+            {
+                var uri = System.Environment.GetEnvironmentVariable("TRACKWANE_ENVIRONMENT");
+
+                if (string.IsNullOrWhiteSpace(uri))
+                {
+                    throw new Exception("The environment variable TRACKWANE_ENVIRONMENT needs to be available and point to a etcd instance");
+                }
+
+                return uri;
+            }
+        }
+
         public string Etcd
         {
             get
             {
-                var uri = Environment.GetEnvironmentVariable("TRACKWANE_ETCD");
+                var uri = System.Environment.GetEnvironmentVariable("TRACKWANE_ETCD");
 
                 if (string.IsNullOrWhiteSpace(uri))
                 {

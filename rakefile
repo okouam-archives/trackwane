@@ -51,6 +51,8 @@ end
 
 namespace :docker do
 
+  groups = [:databases, :monitoring, :trackwane, :infrastructure]
+
   desc "Shows running containers for solution"
   task :running do
     sh "docker-compose ps"
@@ -61,19 +63,22 @@ namespace :docker do
     sh "docker rmi $(docker images -f ""dangling=true"" -q)"
   end
 
-  desc "Starts all containers"
-  task :up do
-    sh "docker-compose up -d"
+  namespace :up do
+    groups.each do |group|
+      desc "Starts all " + group.to_s + " containers"
+      task group do
+        sh "docker-compose --file ./docker/" + group.to_s + ".yml up -d"
+      end
+    end
   end
 
-  desc "Shows container logs"
-  task :logs do
-    sh "docker-compose logs"
-  end
-
-  desc "Stops all containers"
-  task :down do
-    sh "docker-compose down &"
+  namespace :down do
+    groups.each do |group|
+      desc "Stops all " + group.to_s + " containers"
+      task group do
+        sh "docker-compose --file ./docker/" + group.to_s + ".yml down"
+      end
+    end
   end
 
 end

@@ -1,0 +1,38 @@
+version: "2"
+
+services:
+
+  etcd:
+    image: quay.io/coreos/etcd
+    network_mode: "host"
+    container_name: etcd
+    command: --listen-client-urls http://0.0.0.0:2379 --advertise-client-urls http://0.0.0.0:2379 --name etcd --data-dir /data
+    volumes:
+      - /opt/docker/etcd/data:/data
+    ports:
+      - "2379:2379"
+
+  etcd_viewer:
+    image: nikfoundas/etcd-viewer
+    network_mode: "host"
+    container_name: etcd_viewer
+    ports:
+      - "8080:8080"
+
+  nginx:
+    network_mode: "host"
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+
+  rabbitmq:
+    container_name: rabbitmq
+    network_mode: "host"
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest

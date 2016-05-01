@@ -2,28 +2,6 @@ version: "2"
 
 services:
 
-  elasticsearch:
-    image: "elasticsearch:1.7.4"
-    network_mode: "host"
-    container_name: elasticsearch
-    volumes:
-      - "/opt/docker/elasticsearch/:/usr/share/elasticsearch/config"
-    environment:
-      ES_HEAP_SIZE: 1g
-    ports:
-      - "9300:9300"
-      - "9200:9200"
-
-  mongodb:
-    image: "mongo:3.0.4"
-    network_mode: "host"
-    container_name: mongodb
-    command: "mongod --config /conf/mongo.conf"
-    ports:
-      - "27017:27017"
-    volumes:
-      - "/opt/docker/mongo:/conf/"
-
   postgres:
     image: postgres
     network_mode: "host"

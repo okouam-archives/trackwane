@@ -3,45 +3,25 @@ version: "2"
 services:
 
   graylog:
-    image: etki/graylog-server
-    network_mode: "host"
+    image: graylog2/allinone
+    container_name: graylog
     ports:
-      - "9000:9000" # Web interface
-      - "12900:12900" # API
-      - "12201:12201" # GELF input
+      - "8888:80"
+      - "12201:12201/udp" # GELF input
     volumes:
       - "/opt/docker/graylog:/data"
-    environment:
-      GRAYLOG2_PASSWORD_SECRET: somepasswordpepper
-      GRAYLOG2_ROOT_PASSWORD_SHA2: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
-      GRAYLOG2_REST_TRANSPORT_URI: http://127.0.0.1:12900
-      GRAYLOG2_ELASTICSEARCH_HOSTS: 127.0.0.1:9300
-      GRAYLOG2_WEB_LISTEN_URI: http://127.0.0.1:9000
-      GRAYLOG2_WEB_ENABLE: "true"
-      GRAYLOG2_REST_LISTEN_URI: http://127.0.0.1:9100
-      GRAYLOG2_MONGODB_URI: mongodb://localhost:27017/test
-      GRAYLOG2_ELASTICSEARCH_DISCOVERY_ZEN_PING_MULTICAST_ENABLED: "false"
-      GRAYLOG2_ELASTICSEARCH_DISCOVERY_ZEN_PING_UNICAST_HOSTS: 127.0.0.1:9300
-      GRAYLOG2_ELASTICSEARCH_SHARDS: 1
-      GRAYLOG2_ELASTICSEARCH_REPLICAS: 0
-
-  graylog_web:
-    image: etki/graylog-web-interface
-    network_mode: "host"
-    environment:
-      GRAYLOG2_SERVER_URI: http://127.0.0.1:9100
 
   logspout:
     image: "micahhausler/logspout:gelf"
     container_name: logspout
     network_mode: "host"
-    command: "gelf://localhost:12201"
-    environment:
-      LOGSPOUT: ignore
+    command: "gelf://127.0.0.1:12201 --publish=0.0.0.0:9999:80"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      HTTP_PORT: 9843
     ports:
-      - "8000:80"
+      - "8888:80"
 
   prometheus:
     image: prom/prometheus

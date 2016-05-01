@@ -1,0 +1,7 @@
+---
+trackwane:
+  production:
+    platform:
+      secret-key: "sdfsdf"
+    modules:
+      access-control: "sdsdfsdf"

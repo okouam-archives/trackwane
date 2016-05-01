@@ -6,11 +6,17 @@ services:
     image: quay.io/coreos/etcd
     network_mode: "host"
     container_name: etcd
-    command: --listen-client-urls http://0.0.0.0:2379 --advertise-client-urls http://0.0.0.0:2379 --name etcd --data-dir /data
+    environment:
+      ETCD_NAME: etcd
+      ETCD_DATA_DIR: /data
+      ETCD_LISTEN_PEER_URLS: http://0.0.0.0:5556
+      ETCD_LISTEN_CLIENT_URLS: http://0.0.0.0:5555
+      ETCD_INITIAL_ADVERTISE_PEER_URLS: http://0.0.0.0:5556
+      ETCD_ADVERTISE_CLIENT_URLS: http://0.0.0.0:5555
     volumes:
       - /opt/docker/etcd/data:/data
     ports:
-      - "2379:2379"
+      - "5555:5555"
 
   etcd_viewer:
     image: nikfoundas/etcd-viewer
@@ -25,6 +31,8 @@ services:
     container_name: nginx
     ports:
       - "80:80"
+    volumes:
+      - /opt/docker/nginx/:/etc/nginx/
 
   rabbitmq:
     container_name: rabbitmq

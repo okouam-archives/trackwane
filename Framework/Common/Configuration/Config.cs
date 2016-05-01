@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using etcetera;
 
 namespace Trackwane.Framework.Common.Configuration
@@ -16,7 +17,8 @@ namespace Trackwane.Framework.Common.Configuration
         {
             get
             {
-                var uri = System.Environment.GetEnvironmentVariable("TRACKWANE_ENVIRONMENT");
+                const string key = "TRACKWANE_ENVIRONMENT";
+                var uri = ConfigurationManager.AppSettings[key] ?? System.Environment.GetEnvironmentVariable(key);
 
                 if (string.IsNullOrWhiteSpace(uri))
                 {
@@ -31,7 +33,8 @@ namespace Trackwane.Framework.Common.Configuration
         {
             get
             {
-                var uri = System.Environment.GetEnvironmentVariable("TRACKWANE_ETCD");
+                const string key = "TRACKWANE_ETCD";
+                var uri = ConfigurationManager.AppSettings[key] ?? System.Environment.GetEnvironmentVariable(key);
 
                 if (string.IsNullOrWhiteSpace(uri))
                 {

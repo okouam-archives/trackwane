@@ -7,7 +7,7 @@ namespace Trackwane.Framework.Common.Configuration
     {
         public string Get(string key)
         {
-            var node = "trackwane/platform/" + key;
+            var node = "trackwane/" + Environment + "/platform/" + key;
             var response = client.Get(node);
             if (response.Node == null)
             {

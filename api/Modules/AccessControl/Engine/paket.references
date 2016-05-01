@@ -1,0 +1,10 @@
+FluentValidation
+Geo
+JWT
+Polly
+RabbitMQ.Client
+RavenDB.Database
+structuremap
+Microsoft.AspNet.WebApi.Core
+Hashids.net
+PusherServer

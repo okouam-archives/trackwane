@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Configuration;
-using etcetera;
+
 
 namespace Trackwane.Framework.Common.Configuration
 {
     public abstract class Config
     {
-        protected readonly EtcdClient client;
-
-        protected Config()
-        {
-            client = new EtcdClient(new Uri(Etcd));
-        }
-
         public string Environment
         {
             get

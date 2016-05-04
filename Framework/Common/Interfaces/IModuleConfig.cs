@@ -6,8 +6,6 @@ namespace Trackwane.Framework.Common.Interfaces
     {
         string Get(string key);
 
-        void Set(string key, string value);
-
         string ModuleName { get; }
 
         string ConnectionString { get; }

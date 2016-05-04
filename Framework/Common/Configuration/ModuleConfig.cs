@@ -59,18 +59,7 @@ namespace Trackwane.Framework.Common.Configuration
 
         public string Get(string key)
         {
-            var identifier = "trackwane/" + Environment + "/modules/" + ModuleName + "/" + key;
-            var response = client.Get(identifier);
-            if (response.Node == null)
-            {
-                throw new Exception($"The key <{identifier}> was not found");
-            }
-            return response.Node.Value;
-        }
-
-        public void Set(string key, string value)
-        {
-            client.Set("trackwane/" + Environment + "/modules/" + ModuleName + "/" + key, value);
+            return key;
         }
     }
 

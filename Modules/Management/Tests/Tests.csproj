@@ -102,7 +102,6 @@
     <Compile Include="Helpers\Events\_User.Registered.cs" />
     <Compile Include="Helpers\Scenario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Setup.cs" />
     <Compile Include="Behavior\API\Commands\Trackers\Archive.Tracker.Tests.cs" />
     <Compile Include="Behavior\API\Commands\Trackers\Register.Tracker.Tests.cs" />
     <Compile Include="Behavior\API\Commands\Vehicles\Archive.Vehicle.Tests.cs" />
@@ -124,10 +123,6 @@
       <Project>{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
-      <Project>{2acb382a-38fa-49a6-a9cd-212881d3cd37}</Project>
-      <Name>paramore.brighter.commandprocessor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
@@ -136,13 +131,13 @@
       <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>
       <Name>AccessControl.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
+    <ProjectReference Include="..\Domain\Management.Domain.csproj">
       <Project>{A11C1439-E356-4D86-82D5-03F4576E3D6E}</Project>
-      <Name>Domain</Name>
+      <Name>Management.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Engine\Engine.csproj">
+    <ProjectReference Include="..\Engine\Management.Engine.csproj">
       <Project>{AC82FE86-A127-4131-9270-4B43618276EB}</Project>
-      <Name>Engine</Name>
+      <Name>Management.Engine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Management.Shared\Management.Contracts.csproj">
       <Project>{a3065b16-fe4d-4b25-b9f7-2ab2a89d5dad}</Project>

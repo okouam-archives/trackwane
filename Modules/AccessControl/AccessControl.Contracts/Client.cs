@@ -1,7 +1,5 @@
-﻿using System.Dynamic;
-using Trackwane.AccessControl.Contracts.Scopes;
+﻿using Trackwane.AccessControl.Contracts.Scopes;
 using Trackwane.Framework.Client;
-using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.AccessControl.Contracts
 {

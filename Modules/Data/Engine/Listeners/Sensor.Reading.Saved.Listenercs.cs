@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using paramore.brighter.commandprocessor.Logging;
+using log4net;
 using Trackwane.Data.Domain;
 using Trackwane.Data.Shared.Events;
 using Trackwane.Framework.Common;

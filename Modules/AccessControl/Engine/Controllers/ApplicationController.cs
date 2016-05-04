@@ -38,7 +38,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
                 UserKey = new Hashids(secretKey).EncodeLong(DateTime.Now.Ticks)
             };
 
-            executionEngine.Send(cmd);
+            executionEngine.Handle(cmd);
 
             return cmd.UserKey;
         }

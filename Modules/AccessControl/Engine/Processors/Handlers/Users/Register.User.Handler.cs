@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using paramore.brighter.commandprocessor.Logging;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Services;
@@ -9,6 +8,7 @@ using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
 using Message = Trackwane.AccessControl.Engine.Services.Message;
 using Role = Trackwane.AccessControl.Domain.Users.Role;
+using log4net;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 {

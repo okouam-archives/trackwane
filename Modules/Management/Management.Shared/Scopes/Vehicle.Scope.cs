@@ -1,5 +1,4 @@
-﻿using System;
-using Trackwane.Management.Contracts.Models;
+﻿using Trackwane.Management.Contracts.Models;
 
 namespace Trackwane.Management.Contracts.Scopes
 {

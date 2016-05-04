@@ -16,7 +16,7 @@ namespace Trackwane.Framework.Tests.Fakes
         [Route("check"), HttpPost]
         public void RunCheck()
         {
-            executionEngine.Send(new CheckFramework(CurrentClaims.UserId));
+            executionEngine.Handle(new CheckFramework(CurrentClaims.UserId));
         }
     }
 }

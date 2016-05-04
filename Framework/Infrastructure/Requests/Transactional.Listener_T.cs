@@ -1,39 +1,36 @@
 ﻿using System.Collections.Generic;
-using paramore.brighter.commandprocessor;
-using paramore.brighter.commandprocessor.Logging;
+using System.Threading.Tasks;
+using log4net;
+using MassTransit;
 using Trackwane.Framework.Common;
-using Trackwane.Framework.Infrastructure.Requests.Logging;
-using Trackwane.Framework.Infrastructure.Requests.Metrics;
 using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure.Requests
 {
-    public abstract class TransactionalListener<T> : RuntimeRequestHandler<T> where T : class, IRequest
+    public abstract class TransactionalListener<T> : RuntimeRequestHandler<T> where T : class
     {
         protected TransactionalListener(
             IProvideTransactions transaction, 
             IExecutionEngine engine, 
             ILog log) 
-            : base(transaction, engine, log)
+            : base(transaction, log)
         {
         }
 
-        [Metrics(1, HandlerTiming.Before)]
-        [Log(2, HandlerTiming.Before)]
-        public override T Handle(T cmd)
+        public override Task Consume(ConsumeContext<T> ctx)
         {
             using (var uow = transaction.Begin())
             {
                 var repository = uow.GetRepository();
 
-                var events = Handle(cmd, repository);
+                var events = Handle(ctx.Message, repository);
 
                 uow.Commit();
 
-                Publish(events);
-            }
+                Publish(ctx, events);
 
-            return base.Handle(cmd);
+                return Task.CompletedTask;
+            }
         }
 
         /* Protected */

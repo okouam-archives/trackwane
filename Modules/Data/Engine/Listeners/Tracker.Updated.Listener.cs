@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using paramore.brighter.commandprocessor.Logging;
+using log4net;
 using PusherServer;
 using Trackwane.Data.Domain;
 using Trackwane.Data.Engine.Services;

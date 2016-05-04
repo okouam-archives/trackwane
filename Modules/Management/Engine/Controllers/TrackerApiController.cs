@@ -33,13 +33,13 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveTracker(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveTracker(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Handle(new ArchiveTracker(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void RegisterTracker(string organizationKey, RegisterTrackerModel model)
         {
-            dispatcher.Send(new RegisterTracker(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.HardwareId, model.Model,
+            dispatcher.Handle(new RegisterTracker(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.HardwareId, model.Model,
                 model.Key));
         }
     }

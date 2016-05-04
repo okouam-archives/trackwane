@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using paramore.brighter.commandprocessor.Logging;
+using log4net;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.AccessControl.Engine.Commands.Organizations;

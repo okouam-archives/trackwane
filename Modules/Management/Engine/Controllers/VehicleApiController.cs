@@ -21,7 +21,7 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpPost, Route(RESOURCE_URL)]
         public void UpdateVehicle(string organizationKey, string key, UpdateVehicleModel model)
         {
-            dispatcher.Send(new UpdateVehicle(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key, model.Identifier));
+            dispatcher.Handle(new UpdateVehicle(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key, model.Identifier));
         }
 
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
@@ -40,13 +40,13 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveBoundary(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveVehicle(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Handle(new ArchiveVehicle(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void RegisterVehicle(string organizationKey, RegisterVehicleModel model)
         {
-            dispatcher.Send(new RegisterVehicle(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Identifier, model.Key));
+            dispatcher.Handle(new RegisterVehicle(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Identifier, model.Key));
         }
     }
 }

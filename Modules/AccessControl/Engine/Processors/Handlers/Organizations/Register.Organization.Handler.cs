@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using paramore.brighter.commandprocessor.Logging;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Engine.Commands.Organizations;
 using Trackwane.AccessControl.Engine.Services;
@@ -7,6 +6,7 @@ using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
+using log4net;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {

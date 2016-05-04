@@ -2,7 +2,6 @@
 using System.Web.Http;
 using HashidsNet;
 using Trackwane.AccessControl.Contracts.Models;
-using Trackwane.AccessControl.Engine.Commands.Application;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.Framework.Common.Interfaces;
@@ -37,7 +36,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, Administrators, HttpDelete, Route("organizations/{organizationKey}/users/{userKey}")]
         public void ArchiveUser(string organizationKey, string userKey)
         {
-            executionEngine.Send(new ArchiveUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey));
+            executionEngine.Handle(new ArchiveUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey));
         }
 
         [Secured, Administrators, HttpGet, Route("organizations/{organizationKey}/users/count")]
@@ -56,7 +55,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, AdministratorsOrUser, HttpPost, Route("organizations/{organizationKey}/users/{userKey}")]
         public void UpdateUser(string organizationKey, string userKey, UpdateUserModel model)
         {
-            executionEngine.Send(new UpdateUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey)
+            executionEngine.Handle(new UpdateUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey)
             {
                 DisplayName = model.DisplayName,
                 Email = model.Email,
@@ -69,7 +68,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         {
             var cmd = new RegisterUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
             cmd.UserKey = cmd.UserKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);
-            executionEngine.Send(cmd);
+            executionEngine.Handle(cmd);
             return cmd.UserKey;
         }
     }

@@ -1,10 +1,15 @@
-﻿using paramore.brighter.commandprocessor;
-using paramore.brighter.commandprocessor.Logging;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using log4net;
+using MassTransit;
+using Trackwane.Framework.Common;
+using Trackwane.Framework.Interfaces;
+using System.Threading.Tasks;
+using log4net;
+using MassTransit;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
-using Trackwane.Framework.Infrastructure.Requests.Logging;
-using Trackwane.Framework.Infrastructure.Validation;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Contracts.Events;
 using Trackwane.Management.Domain;
@@ -19,14 +24,14 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
             IProvideTransactions transaction, 
             IExecutionEngine publisher,
             ILog log) :
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
         }
 
-        [Log(1, HandlerTiming.Before)]
-        [Validate(2, HandlerTiming.Before)]
-        public override UpdateVehicle Handle(UpdateVehicle cmd)
+        public override Task Consume(ConsumeContext<UpdateVehicle> ctx)
         {
+            var cmd = ctx.Message;
+
             using (var uow = transaction.Begin())
             {
                 var repository = uow.GetRepository();
@@ -41,19 +46,23 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
                 var oldIdentifier = vehicle.Identifier;
 
                 vehicle.Update(cmd.Identifier);
-                
-                Publish(new VehicleUpdated
+
+     
+
+                uow.Commit();
+
+                var events = new[] {new VehicleUpdated
                 {
                     VehicleKey = cmd.VehicleKey,
                     OrganizationKey = cmd.OrganizationKey,
-                    Previous = new VehicleUpdated.State {Identifier = oldIdentifier},
-                    Current = new VehicleUpdated.State { Identifier = cmd.Identifier}
-                });
-        
-                uow.Commit();
-            }
+                    Previous = new VehicleUpdated.State { Identifier = oldIdentifier },
+                    Current = new VehicleUpdated.State { Identifier = cmd.Identifier }
+                }};
 
-            return base.Handle(cmd);
+                Publish(ctx, events);
+
+                return Task.CompletedTask;
+            }
         }
     }
 }

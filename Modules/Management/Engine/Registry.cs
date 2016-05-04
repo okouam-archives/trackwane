@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using paramore.brighter.commandprocessor;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Management.Engine.Commands.Vehicles;
 using Trackwane.Management.Engine.Controllers;
@@ -23,8 +22,6 @@ namespace Trackwane.Management.Engine
                 cfg.AssemblyContainingType<AlertApiController>();
 
                 cfg.ConnectImplementationsToTypesClosing(typeof(AbstractValidator<>));
-
-                cfg.ConnectImplementationsToTypesClosing(typeof(RequestHandler<>));
 
                 cfg.ConnectImplementationsToTypesClosing(typeof(RuntimeRequestHandler<>));
 

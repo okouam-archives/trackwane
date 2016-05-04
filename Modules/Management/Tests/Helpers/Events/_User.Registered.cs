@@ -8,7 +8,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(string applicationKey, string userId)
             {
-                Setup.EngineHost.ExecutionEngine.Publish(new UserRegistered
+                Setup.EngineHost.ExecutionEngine.Handle(new UserRegistered
                 {
                     ApplicationKey = applicationKey,
                     UserKey = userId

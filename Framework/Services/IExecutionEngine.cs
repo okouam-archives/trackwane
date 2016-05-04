@@ -1,12 +1,11 @@
 ﻿using System;
-using paramore.brighter.commandprocessor;
 using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Interfaces
 {
-    public interface IExecutionEngine : IAmACommandProcessor
+    public interface IExecutionEngine
     {
-        event EventHandler<IRequest> MessagePosted;
+        void Handle<T>(T cmd);
 
         T Query<T>(string applicationKey) where T : IApplicationQuery;
 

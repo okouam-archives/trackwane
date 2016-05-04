@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Trackwane.Framework.Fixtures;
 
 namespace Trackwane.AccessControl.Tests.Behavior.Engine.Users.Queries

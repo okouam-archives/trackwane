@@ -1,6 +1,0 @@
-type file
-id Trackwane.Data
-description The Windows Service engine for Trackwane.Data
-authors The Wylesight Team
-projectUrl http://www.trackwane.com
-files Standalone/bin/Debug/**/* ==> tools

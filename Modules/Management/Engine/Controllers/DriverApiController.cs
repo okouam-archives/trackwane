@@ -29,7 +29,7 @@ namespace Trackwane.Management.Engine.Controllers
                 Name = model.Name
             };
 
-            dispatcher.Send(cmd);
+            dispatcher.Handle(cmd);
         }
 
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
@@ -47,13 +47,13 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveDriver(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveDriver(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Handle(new ArchiveDriver(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void CreateDriver(string organizationKey, CreateDriverModel model)
         {
-            dispatcher.Send(new RegisterDriver(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name, model.Key));
+            dispatcher.Handle(new RegisterDriver(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name, model.Key));
         }
     }
 }

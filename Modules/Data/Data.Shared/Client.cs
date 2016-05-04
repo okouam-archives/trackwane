@@ -1,6 +1,5 @@
 ﻿using Trackwane.Data.Shared.Models;
 using Trackwane.Framework.Client;
-using Trackwane.Framework.Common.Interfaces;
 
 // ReSharper disable CheckNamespace
 namespace Trackwane.Data.Shared.Client

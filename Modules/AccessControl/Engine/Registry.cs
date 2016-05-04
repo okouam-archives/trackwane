@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using paramore.brighter.commandprocessor;
 using Trackwane.AccessControl.Engine.Processors.Handlers.Users;
 using Trackwane.Framework.Infrastructure.Requests;
 
@@ -18,8 +17,6 @@ namespace Trackwane.AccessControl.Engine
                 cfg.WithDefaultConventions();
 
                 cfg.ConnectImplementationsToTypesClosing(typeof(AbstractValidator<>));
-
-                cfg.ConnectImplementationsToTypesClosing(typeof(RequestHandler<>));
 
                 cfg.ConnectImplementationsToTypesClosing(typeof(RuntimeRequestHandler<>));
             });

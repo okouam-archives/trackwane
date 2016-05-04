@@ -84,7 +84,6 @@
     <Compile Include="Helpers\Users\_Update.User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\Scenario.cs" />
-    <Compile Include="Setup.cs" />
     <Compile Include="Behavior\Engine\Users\Commands\Archive.User.Behavior.cs" />
     <Compile Include="Behavior\Engine\Users\Commands\Register.User.Behavior.cs" />
     <Compile Include="Behavior\Engine\Users\Commands\Update.User.Behavior.cs" />
@@ -102,10 +101,6 @@
       <Project>{c13c821f-cf91-43d1-bbc3-6d0bb62732b5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Framework\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
-      <Project>{2ACB382A-38FA-49A6-A9CD-212881D3CD37}</Project>
-      <Name>paramore.brighter.commandprocessor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Services\Framework.Interfaces.csproj">
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
@@ -114,20 +109,20 @@
       <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>
       <Name>AccessControl.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
+    <ProjectReference Include="..\Domain\AccessControl.Domain.csproj">
       <Project>{53B04BB7-734F-4A79-A73A-579F75082A67}</Project>
-      <Name>Domain</Name>
+      <Name>AccessControl.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Engine\Engine.csproj">
+    <ProjectReference Include="..\Engine\AccessControl.Engine.csproj">
       <Project>{D82A16D0-B813-4A71-93A9-0752A549E197}</Project>
-      <Name>Engine</Name>
+      <Name>AccessControl.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="paket.references" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

@@ -27,7 +27,7 @@ namespace Trackwane.Data.Engine.Controller
         [HttpPost, Route("data")]
         public void Save(SaveSensorReadingModel model)
         {
-            executionEngine.Send(new SaveSensorReading
+            executionEngine.Handle(new SaveSensorReading
             {
                 HardwareId = model.HardwareId,
                 Timestamp = DateTime.Now,

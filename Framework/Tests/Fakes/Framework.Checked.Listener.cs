@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
+using log4net;
 
 namespace Trackwane.Framework.Tests.Fakes
 {

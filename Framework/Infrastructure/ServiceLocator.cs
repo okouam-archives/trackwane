@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using paramore.brighter.commandprocessor;
 using StructureMap;
 using Trackwane.Framework.Interfaces;
 
@@ -16,14 +15,6 @@ namespace Trackwane.Framework.Infrastructure
             if (serviceFactory == null) throw new ArgumentNullException("serviceFactory");
 
             this.serviceFactory = serviceFactory;
-        }
-
-        public SubscriberRegistry GetSubscribers(Assembly engine, IEnumerable<Type> events)
-        {
-            return serviceFactory
-             .WithListeners(engine.GetListeners(), events)
-             .WithHandlers(engine.GetHandlers(), engine.GetCommands())
-             .AsSubscriberRegistry();
         }
 
         public IContainer GetContainer()

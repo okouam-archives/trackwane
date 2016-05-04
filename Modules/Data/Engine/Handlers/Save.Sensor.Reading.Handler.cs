@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using paramore.brighter.commandprocessor.Logging;
+using log4net;
 using Trackwane.Data.Domain;
 using Trackwane.Data.Engine.Commands;
 using Trackwane.Data.Shared.Events;

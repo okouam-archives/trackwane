@@ -1,4 +1,4 @@
-﻿using paramore.brighter.commandprocessor.Logging;
+﻿using log4net;
 using Trackwane.Framework.Common.Configuration;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
@@ -15,7 +15,7 @@ namespace Trackwane.Framework.Infrastructure
 
             For<IUnitOfWork>().Use<UnitOfWork>();
 
-            For<ILog>().Use(LogProvider.GetCurrentClassLogger());
+            For<ILog>().Use(s => LogManager.GetLogger(s.RootType));
         }
     }
 }

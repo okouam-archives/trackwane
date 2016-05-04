@@ -22,7 +22,7 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpPost, Route(RESOURCE_URL)]
         public void UpdateBoundary(string organizationKey, string key, UpdateBoundaryModel model)
         {
-            dispatcher.Send(new UpdateBoundary(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key)
+            dispatcher.Handle(new UpdateBoundary(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key)
             {
                 Coordinates = model.Coordinates,
                 Name = model.Name
@@ -44,13 +44,13 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveBoundary(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveBoundary(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Handle(new ArchiveBoundary(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void CreateBoundary(string organizationKey, CreateBoundaryModel model)
         {
-            dispatcher.Send(new CreateBoundary(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name, model.Coordinates,
+            dispatcher.Handle(new CreateBoundary(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name, model.Coordinates,
                 (BoundaryType) Enum.Parse(typeof (BoundaryType), model.Type), model.Key));
         }
     }

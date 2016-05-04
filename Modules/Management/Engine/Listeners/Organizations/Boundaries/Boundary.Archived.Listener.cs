@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using paramore.brighter.commandprocessor.Logging;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
@@ -8,6 +7,7 @@ using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Contracts.Events;
 using Trackwane.Management.Domain;
 using Trackwane.Management.Engine.Services;
+using log4net;
 
 namespace Trackwane.Management.Engine.Listeners.Organizations.Boundaries
 {

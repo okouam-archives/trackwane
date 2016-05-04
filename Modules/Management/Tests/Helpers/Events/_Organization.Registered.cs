@@ -1,6 +1,4 @@
-﻿using System;
-using RabbitMQ.Client;
-using Trackwane.AccessControl.Contracts.Events;
+﻿using Trackwane.AccessControl.Contracts.Events;
 
 namespace Trackwane.Management.Tests.Helpers
 {
@@ -10,7 +8,7 @@ namespace Trackwane.Management.Tests.Helpers
         {
             public static void With(string applicationKey, string organizationKey)
             {
-                Setup.EngineHost.ExecutionEngine.Publish(new OrganizationRegistered {OrganizationKey = organizationKey, ApplicationKey = applicationKey });
+                Setup.EngineHost.ExecutionEngine.Handle(new OrganizationRegistered {OrganizationKey = organizationKey, ApplicationKey = applicationKey });
             }
         }
     }

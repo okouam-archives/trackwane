@@ -22,7 +22,7 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Managers, HttpPost, Route(RESOURCE_URL)]
         public void UpdateAlert(string organizationKey, string key, UpdateAlertModel model)
         {
-            dispatcher.Send(new UpdateAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key, model.Name));
+            dispatcher.Handle(new UpdateAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key, model.Name));
         }       
         
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
@@ -40,13 +40,13 @@ namespace Trackwane.Management.Engine.Controllers
         [Secured, Viewers, HttpDelete, Route(RESOURCE_URL)]
         public void ArchiveAlert(string organizationKey, string key)
         {
-            dispatcher.Send(new ArchiveAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
+            dispatcher.Handle(new ArchiveAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, key));
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
         public void CreateAlert(string organizationKey, CreateAlertModel model)
         {
-            dispatcher.Send(new CreateAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name, model.Key));
+            dispatcher.Handle(new CreateAlert(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name, model.Key));
         }
     }
 }

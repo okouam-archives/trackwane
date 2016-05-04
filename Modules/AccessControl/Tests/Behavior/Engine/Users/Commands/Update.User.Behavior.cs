@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Shouldly;
 using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.Framework.Common.Exceptions;

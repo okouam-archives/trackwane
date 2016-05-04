@@ -1,51 +1,41 @@
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using paramore.brighter.commandprocessor;
-using paramore.brighter.commandprocessor.Logging;
+using System.Threading.Tasks;
+using log4net;
+using MassTransit;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure.Requests
 {
-    public abstract class RuntimeRequestHandler<T> : RequestHandler<T> where T : class, IRequest
+    public abstract class RuntimeRequestHandler<T> : IConsumer<T> where T : class
     {
-        protected RuntimeRequestHandler(IProvideTransactions transaction, IExecutionEngine engine, ILog log) : base(log)
+        protected RuntimeRequestHandler(IProvideTransactions transaction, ILog log)
         {
             this.transaction = transaction;
-            this.engine = engine;
+            this.log = log;
         }
 
-        protected void Publish(IEnumerable<DomainEvent> changes)
+        public ILog log { get; set; }
+
+        protected void Publish(ConsumeContext<T> ctx, IEnumerable<DomainEvent> changes)
         {
-            Publish(changes.ToArray());
+            Publish(ctx, changes.ToArray());
         }
 
-        protected void Publish(params DomainEvent[] changes)
+        protected void Publish(ConsumeContext<T> ctx, params DomainEvent[] changes)
         {
             if (changes != null && changes.Any())
             {
                 foreach (var evt in changes)
                 {
-                    PublishEvent(evt);
+                    ctx.Publish(evt);
                 }
             }
         }
         
-        private void PublishEvent(DomainEvent evt)
-        {
-            Logger.Debug(string.Format("Posting the event <{0}>: \r\n", evt.GetType().Name) + JsonConvert.SerializeObject(evt, Formatting.Indented));
-
-            var executionEngineType = typeof(IAmACommandProcessor);
-
-            var method =    executionEngineType .GetMethod("Post");
-
-            var genericMethod = method.MakeGenericMethod(evt.GetType());
-
-            genericMethod.Invoke(engine, new object[] {evt});
-        }
+        public abstract Task Consume(ConsumeContext<T> ctx);
 
         protected readonly IProvideTransactions transaction;
-        protected readonly IExecutionEngine engine;
     }
 }

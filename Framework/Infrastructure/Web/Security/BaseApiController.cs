@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Web.Http;
 using Trackwane.Framework.Common;

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using paramore.brighter.commandprocessor.Logging;
-using Trackwane.AccessControl.Domain.Organizations;
+using log4net;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.AccessControl.Engine.Commands.Application;
-using Trackwane.AccessControl.Engine.Services;
 using Trackwane.Framework.Common;
-using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
 using Role = Trackwane.AccessControl.Domain.Users.Role;

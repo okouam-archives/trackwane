@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using log4net;
-using paramore.brighter.commandprocessor;
 using StructureMap;
 using Trackwane.Framework.Interfaces;
 
@@ -35,11 +34,7 @@ namespace Trackwane.Framework.Infrastructure.Factories
             return this;
         }
 
-        public SubscriberRegistry AsSubscriberRegistry()
-        {
-            return subscribers;
-        }
-
+  
         /* Private */
 
         private void RegisterListeners(IEnumerable<Type> listeners, IEnumerable<Type> events)
@@ -51,13 +46,6 @@ namespace Trackwane.Framework.Infrastructure.Factories
                 foreach (var candidate in listenerCollection)
                 {
                     log.Debug(String.Format("Found the candidate listener <{0}> while registering listeners", candidate.Name));
-                }
-
-                foreach (var evt in events)
-                {
-                    var target = typeof (RequestHandler<>).MakeGenericType(evt);
-
-                    FindSubscribers(subscribers, listenerCollection, target, evt);
                 }
             }
             else
@@ -97,38 +85,10 @@ namespace Trackwane.Framework.Infrastructure.Factories
             foreach (var command in commandCollection)
             {
                 log.Debug(String.Format("Found the command <{0}> while registering handlers", command.Name));
-
-                var target = typeof(RequestHandler<>).MakeGenericType(command);
-
-                FindSubscribers(subscribers, handlerCollection, target, command);
             }
         }
 
-        private static void FindSubscribers(SubscriberRegistry subscribers, IEnumerable<Type> candidates, Type target, Type request)
-        {
-            foreach (var candidate in candidates)
-            {
-                var current = candidate;
-
-                while (true)
-                {
-                    if (current == typeof(object)) break;
-
-                    var baseType = current.BaseType;
-
-                    if (baseType == target)
-                    {
-                        log.Debug(String.Format("Added <{0}> for <{1}>", candidate.Name, request.Name));
-                        subscribers.Add(request, candidate);
-                        break;
-                    }
-
-                    current = current.BaseType;
-                }
-            }
-        }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ServiceLocationFactory));
-        private readonly SubscriberRegistry subscribers = new SubscriberRegistry();
     }
 }

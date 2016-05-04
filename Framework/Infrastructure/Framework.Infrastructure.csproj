@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Trackwane.Framework.Infrastructure</RootNamespace>
     <AssemblyName>Trackwane.Framework.Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -38,9 +38,34 @@
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Marten, Version=0.9.1.401, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Marten.0.9.1.401\lib\net46\Marten.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MassTransit, Version=3.3.1.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MassTransit.3.3.1\lib\net452\MassTransit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="NewId, Version=2.1.3.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NewId.2.1.3\lib\net45\NewId.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=3.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Npgsql.3.0.3\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="prometheus-net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\prometheus-net\lib\net40\prometheus-net.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
@@ -70,37 +95,21 @@
     </Compile>
     <Compile Include="Extensions\Assembly.Extensions.cs" />
     <Compile Include="Requests\ApplicationCommand.cs" />
-    <Compile Include="Requests\Metrics\Metrics.Attribute.cs" />
-    <Compile Include="Requests\Metrics\Metrics.Handler_T.cs" />
-    <Compile Include="Requests\Metrics\Metrics.Provider.cs" />
-    <Compile Include="Startup.cs" />
-    <Compile Include="Validation\Base.Validator.cs" />
-    <Compile Include="EngineHost.cs" />
-    <Compile Include="Factories\Connection.Factory.cs" />
     <Compile Include="Registry.cs" />
-    <Compile Include="Factories\Mapper.Factory.cs" />
-    <Compile Include="Requests\Request.Mapper_T.cs" />
     <Compile Include="Factories\Service.Location.Factory.cs" />
     <Compile Include="ServiceLocator.cs" />
-    <Compile Include="Storage\DocumentMessageStore.cs" />
     <Compile Include="ExecutionEngine.cs" />
     <Compile Include="Requests\SystemCommand.cs" />
-    <Compile Include="Factories\Command.Processor.Factory.cs" />
     <Compile Include="Queries\Query_T.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Requests\Transactional.Handler_T.cs" />
     <Compile Include="Requests\Runtime.Request.Handler_T.cs" />
     <Compile Include="Requests\UserCommand.cs" />
-    <Compile Include="Requests\Logging\Log.Attribute.cs" />
-    <Compile Include="Requests\Logging\Log.Handler_T.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\Transactional.Listener_T.cs" />
-    <Compile Include="Factories\Handler.Factory.cs" />
     <Compile Include="Transaction.Provider.cs" />
     <Compile Include="Extensions\Type.Extensions.cs" />
     <Compile Include="UnitOfWork.cs" />
-    <Compile Include="Validation\Validate.Attribute.cs" />
-    <Compile Include="Validation\Validate.Handler.cs" />
     <Compile Include="Web\AddAuthorizationHeaderParameterOperationFilter.cs" />
     <Compile Include="Web\DependencyResolution\WebApiDependencyResolver.cs" />
     <Compile Include="Web\Filters\BusinessRuleExceptionFilter.cs" />
@@ -115,33 +124,18 @@
     <Compile Include="Web\Security\Viewers.Attribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="paket.references" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Common\Framework.Common.csproj">
       <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Marten\Marten.csproj">
-      <Project>{3D44A648-636E-4D4E-B943-361D103F1FA2}</Project>
-      <Name>Marten</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Paramore\paramore.brighter.commandprocessor.messaginggateway.rmq\paramore.brighter.commandprocessor.messaginggateway.rmq.csproj">
-      <Project>{380AF497-D2B5-49B2-AA7A-B0D86991B390}</Project>
-      <Name>paramore.brighter.commandprocessor.messaginggateway.rmq</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Paramore\paramore.brighter.commandprocessor\paramore.brighter.commandprocessor.csproj">
-      <Project>{2ACB382A-38FA-49A6-A9CD-212881D3CD37}</Project>
-      <Name>paramore.brighter.commandprocessor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Paramore\paramore.brighter.serviceactivator\paramore.brighter.serviceactivator.csproj">
-      <Project>{B9126B00-5A97-4C7D-B395-755456E5FA28}</Project>
-      <Name>paramore.brighter.serviceactivator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Services\Framework.Interfaces.csproj">
       <Project>{4545aa51-b436-4d91-bcde-19afcb294f5c}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
@@ -151,7 +145,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
@@ -307,29 +300,11 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
-      <ItemGroup>
-        <Reference Include="RabbitMQ.Client">
-          <HintPath>..\..\packages\RabbitMQ.Client\lib\net45\RabbitMQ.Client.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'" />
   </Choose>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
-        <Reference Include="Raven.Abstractions">
-          <HintPath>..\..\packages\RavenDB.Client\lib\net45\Raven.Abstractions.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="Raven.Client.Lightweight">
-          <HintPath>..\..\packages\RavenDB.Client\lib\net45\Raven.Client.Lightweight.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
         <Reference Include="System.ComponentModel.Composition">
           <Paket>True</Paket>
         </Reference>
@@ -341,11 +316,6 @@
       <ItemGroup>
         <Reference Include="Raven.Abstractions">
           <HintPath>..\..\packages\RavenDB.Database\lib\net45\Raven.Abstractions.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="Raven.Database">
-          <HintPath>..\..\packages\RavenDB.Database\lib\net45\Raven.Database.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

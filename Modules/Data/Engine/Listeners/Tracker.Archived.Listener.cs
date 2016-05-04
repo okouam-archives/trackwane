@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using paramore.brighter.commandprocessor.Logging;
+using log4net;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;

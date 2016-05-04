@@ -9,12 +9,12 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Controllers
 {
-    public class ApplicationController : BaseApiController
+    public class ApplicationsController : BaseApiController
     {
         private readonly IExecutionEngine executionEngine;
         private readonly IPlatformConfig config;
 
-        public ApplicationController(IExecutionEngine executionEngine, IPlatformConfig config)
+        public ApplicationsController(IExecutionEngine executionEngine, IPlatformConfig config)
         {
             this.executionEngine = executionEngine;
             this.config = config;

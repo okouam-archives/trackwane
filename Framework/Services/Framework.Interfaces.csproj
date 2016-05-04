@@ -48,7 +48,6 @@
     <Compile Include="..\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
-    <Compile Include="IDocumentStoreBuilder.cs" />
     <Compile Include="IEngineHost.cs" />
     <Compile Include="IExecutionEngine.cs" />
     <Compile Include="IProvideTransactions.cs" />

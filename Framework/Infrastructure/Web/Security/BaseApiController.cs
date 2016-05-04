@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using Trackwane.Framework.Common;
@@ -11,6 +12,13 @@ namespace Trackwane.Framework.Infrastructure.Web.Security
         {
             get
             {
+                var hasAppKey = Request.Headers.Contains(Constants.HTTP_TRACKWANE_APPLICATION_KEY);
+
+                if (!hasAppKey)
+                {
+                    throw new Exception($"The HTTP Header {Constants.HTTP_TRACKWANE_APPLICATION_KEY} cannot be found");
+                }
+
                 return Request.Headers.GetValues(Constants.HTTP_TRACKWANE_APPLICATION_KEY).First(); 
             }
         }

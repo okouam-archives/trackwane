@@ -52,8 +52,8 @@
       <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Npgsql, Version=3.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Npgsql.3.0.3\lib\net45\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=3.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Npgsql.3.0.7\lib\net45\Npgsql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
@@ -99,7 +99,7 @@
     <Compile Include="Commands\Users\Register.User.cs" />
     <Compile Include="Commands\Users\Role.cs" />
     <Compile Include="Commands\Users\Update.User.cs" />
-    <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Processors\Handlers\Organizations\Archive.Organization.Handler.cs" />
     <Compile Include="Processors\Handlers\Organizations\Archive.Organization.Validator.cs" />
     <Compile Include="Processors\Handlers\Organizations\Grant.View.Permission.Handler.cs" />
@@ -133,8 +133,8 @@
     <Compile Include="Queries\Users\Find.By.Key.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="Controllers\AdministratorsOrUserAttribute.cs" />
-    <Compile Include="Controllers\OrganizationApiController.cs" />
-    <Compile Include="Controllers\UserApiController.cs" />
+    <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Services\IOrganizationService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\OrganizationService.cs" />

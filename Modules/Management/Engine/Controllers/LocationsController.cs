@@ -10,12 +10,12 @@ using Trackwane.Management.Engine.Queries.Locations;
 namespace Trackwane.Management.Engine.Controllers
 {
     [RoutePrefix("organizations/{organizationKey}")]
-    public class LocationApiController : BaseManagementController
+    public class LocationsController : BaseManagementController
     {
         private const string RESOURCE_URL = "locations/{key}";
         private const string COLLECTION_URL = "locations";
 
-        public LocationApiController(IExecutionEngine dispatcher) : base(dispatcher)
+        public LocationsController(IExecutionEngine dispatcher) : base(dispatcher)
         {
         }
 

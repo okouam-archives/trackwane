@@ -9,12 +9,12 @@ using Trackwane.Management.Engine.Queries.Vehicles;
 namespace Trackwane.Management.Engine.Controllers
 {
     [RoutePrefix("organizations/{organizationKey}")]
-    public class VehicleApiController : BaseManagementController
+    public class VehiclesController : BaseManagementController
     {
         private const string RESOURCE_URL = "vehicles/{key}";
         private const string COLLECTION_URL = "vehicles";
 
-        public VehicleApiController(IExecutionEngine dispatcher) : base(dispatcher)
+        public VehiclesController(IExecutionEngine dispatcher) : base(dispatcher)
         {
         }
 

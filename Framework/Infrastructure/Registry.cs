@@ -16,6 +16,8 @@ namespace Trackwane.Framework.Infrastructure
             For<IUnitOfWork>().Use<UnitOfWork>();
 
             For<ILog>().Use(s => LogManager.GetLogger(s.RootType));
+
+            For<IExecutionEngine>().Use<ExecutionEngine>();
         }
     }
 }

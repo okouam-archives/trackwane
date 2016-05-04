@@ -19,7 +19,7 @@ namespace Trackwane.Management.Engine
 
                 cfg.AssemblyContainingType<DriverRegisteredListener>();
 
-                cfg.AssemblyContainingType<AlertApiController>();
+                cfg.AssemblyContainingType<AlertsController>();
 
                 cfg.ConnectImplementationsToTypesClosing(typeof(AbstractValidator<>));
 

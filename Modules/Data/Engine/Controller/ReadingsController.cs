@@ -9,11 +9,11 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Data.Engine.Controller
 {
-    public class DataController : ApiController
+    public class ReadingsController : ApiController
     {
         private readonly IExecutionEngine executionEngine;
 
-        public DataController(IExecutionEngine executionEngine)
+        public ReadingsController(IExecutionEngine executionEngine)
         {
             this.executionEngine = executionEngine;
         }

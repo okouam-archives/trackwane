@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Marten, Version=0.9.1.401, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Marten.0.9.1.401\lib\net46\Marten.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -59,6 +63,10 @@
     </Reference>
     <Reference Include="StructureMap.Net4, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.2.0.402\lib\net40\StructureMap.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.3.2\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -93,6 +101,10 @@
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Owin">
@@ -115,6 +127,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -136,9 +149,21 @@
       <Project>{C13C821F-CF91-43D1-BBC3-6D0BB62732B5}</Project>
       <Name>Framework.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework\Services\Framework.Interfaces.csproj">
+      <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
+      <Name>Framework.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\AccessControl\Engine\AccessControl.Engine.csproj">
       <Project>{d82a16d0-b813-4a71-93a9-0752a549e197}</Project>
       <Name>AccessControl.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Data\Engine\Data.Engine.csproj">
+      <Project>{8a8b8472-101d-41d7-b7ec-48dcbaa778bf}</Project>
+      <Name>Data.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Management\Engine\Management.Engine.csproj">
+      <Project>{ac82fe86-a127-4131-9270-4b43618276eb}</Project>
+      <Name>Management.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

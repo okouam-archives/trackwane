@@ -9,12 +9,12 @@ using Trackwane.Management.Engine.Queries.Alerts;
 namespace Trackwane.Management.Engine.Controllers
 {
     [RoutePrefix("organizations/{organizationKey}")]
-    public class AlertApiController : BaseManagementController
+    public class AlertsController : BaseManagementController
     {
         private const string RESOURCE_URL = "alerts/{key}";
         private const string COLLECTION_URL = "alerts";
 
-        public AlertApiController(IExecutionEngine dispatcher) : base(dispatcher)
+        public AlertsController(IExecutionEngine dispatcher) : base(dispatcher)
         {
             
         }

@@ -51,8 +51,8 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=3.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Npgsql.3.0.3\lib\net45\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=3.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Npgsql.3.0.7\lib\net45\Npgsql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
@@ -104,13 +104,13 @@
     <Compile Include="Commands\Vehicles\Remove.Driver.From.Vehicle.cs" />
     <Compile Include="Commands\Vehicles\Remove.Tracker.From.Vehicle.cs" />
     <Compile Include="Commands\Vehicles\Update.Vehicle.cs" />
-    <Compile Include="Controllers\AlertApiController.cs" />
+    <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\BaseManagementController.cs" />
-    <Compile Include="Controllers\BoundaryApiController.cs" />
-    <Compile Include="Controllers\DriverApiController.cs" />
-    <Compile Include="Controllers\LocationApiController.cs" />
-    <Compile Include="Controllers\TrackerApiController.cs" />
-    <Compile Include="Controllers\VehicleApiController.cs" />
+    <Compile Include="Controllers\BoundariesController.cs" />
+    <Compile Include="Controllers\DriversController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="Controllers\TrackersController.cs" />
+    <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Handlers\Alerts\Archive.Alert.Handler.cs" />
     <Compile Include="Handlers\Alerts\Create.Alert.Handler.cs" />
     <Compile Include="Handlers\Alerts\Update.Alert.Handler.cs" />

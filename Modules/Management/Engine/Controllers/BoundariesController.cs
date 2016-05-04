@@ -10,12 +10,12 @@ using Trackwane.Management.Engine.Queries.Boundaries;
 namespace Trackwane.Management.Engine.Controllers
 {
     [RoutePrefix("organizations/{organizationKey}")]
-    public class BoundaryApiController : BaseManagementController
+    public class BoundariesController : BaseManagementController
     {
         private const string RESOURCE_URL = "boundaries/{key}";
         private const string COLLECTION_URL = "boundaries";
 
-        public BoundaryApiController(IExecutionEngine dispatcher) : base(dispatcher)
+        public BoundariesController(IExecutionEngine dispatcher) : base(dispatcher)
         {
         }
 

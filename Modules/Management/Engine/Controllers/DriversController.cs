@@ -10,12 +10,12 @@ using Trackwane.Management.Engine.Queries.Drivers;
 namespace Trackwane.Management.Engine.Controllers
 {
     [RoutePrefix("organizations/{organizationKey}")]
-    public class DriverApiController : BaseManagementController
+    public class DriversController : BaseManagementController
     {
         private const string RESOURCE_URL = "drivers/{key}";
         private const string COLLECTION_URL = "drivers";
 
-        public DriverApiController(IExecutionEngine dispatcher) : base(dispatcher)
+        public DriversController(IExecutionEngine dispatcher) : base(dispatcher)
         {
         }
 

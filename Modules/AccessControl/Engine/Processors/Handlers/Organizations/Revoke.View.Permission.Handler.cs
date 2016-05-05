@@ -12,11 +12,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
     public class RevokeReadAccessHandler : TransactionalHandler<RevokeViewPermission>
     {
-        public RevokeReadAccessHandler(
-            IProvideTransactions transaction,
-            IExecutionEngine publisher,
-            ILog log) : 
-            base(transaction, publisher, log)
+        public RevokeReadAccessHandler(IProvideTransactions transaction, ILog log) : base(transaction, log)
         {
         }
 

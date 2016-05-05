@@ -20,7 +20,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
             IExecutionEngine publisher, 
             ILog log,
             IOrganizationService organizationService) : 
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
             this.organizationService = organizationService;
         }

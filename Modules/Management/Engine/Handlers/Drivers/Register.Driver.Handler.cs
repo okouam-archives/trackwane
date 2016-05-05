@@ -15,11 +15,7 @@ namespace Trackwane.Management.Engine.Handlers.Drivers
     {
         /* Public */
 
-        public RegisterDriverHandler(
-            IProvideTransactions transaction,
-            IExecutionEngine publisher, 
-            ILog log) :
-            base(transaction, publisher, log)
+        public RegisterDriverHandler(IProvideTransactions transaction, ILog log) : base(transaction, log)
         {
         }
 

@@ -15,14 +15,12 @@ namespace Trackwane.AccessControl.Domain.Users
         {
             Salt = salt;
             Password = password;
-            ApiToken = Guid.NewGuid().ToString();
         }
 
         public string Password { get; set; }
 
         public byte[] Salt { get; set; }
 
-        public string ApiToken { get; set; }
 
         public bool IsValid(string password)
         {

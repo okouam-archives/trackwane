@@ -12,7 +12,7 @@ namespace Trackwane.Management.Engine.Handlers.Alerts
 {
     public class UpdateAlertHandler : TransactionalHandler<UpdateAlert>
     {
-        public UpdateAlertHandler(IProvideTransactions transaction, IExecutionEngine publisher, ILog log) : base(transaction, publisher, log)
+        public UpdateAlertHandler(IProvideTransactions transaction, IExecutionEngine publisher, ILog log) : base(transaction, log)
         {
         }
         

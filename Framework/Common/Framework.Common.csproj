@@ -46,7 +46,6 @@
     </Compile>
     <Compile Include="AggregateRoot.cs" />
     <Compile Include="Background.cs" />
-    <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ModuleConfig.cs" />
     <Compile Include="Configuration\PlatformConfig.cs" />
     <Compile Include="Constants.cs" />

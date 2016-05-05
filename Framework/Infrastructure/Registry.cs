@@ -17,7 +17,7 @@ namespace Trackwane.Framework.Infrastructure
 
             For<ILog>().Use(s => LogManager.GetLogger(s.RootType));
 
-            For<IExecutionEngine>().Use<ExecutionEngine>();
+            For<IExecutionEngine>().Use<ExecutionEngine>().Singleton();
         }
     }
 }

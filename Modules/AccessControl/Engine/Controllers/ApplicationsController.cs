@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using HashidsNet;
-using Trackwane.AccessControl.Contracts.Models;
+using Trackwane.AccessControl.Contracts.Contracts;
 using Trackwane.AccessControl.Engine.Commands.Application;
+using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Web.Security;
 using Trackwane.Framework.Interfaces;
@@ -21,26 +22,36 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [HttpPost, Route("application")]
-        public string RegisterApplication(RegisterApplicationModel model)
+        public IHttpActionResult RegisterApplication(RegisterApplicationRequest request)
         {
-            var secretKey = config.Get("secret-key");
-
-            if (secretKey != model.SecretKey)
+            if (ModelState.IsValid)
             {
-                throw new Exception("The platform secret key provided is invalid");
+                var applicationExists = executionEngine.Query<CountInApplication>(AppKeyFromHeader).Execute() > 0;
+
+                if (applicationExists)
+                {
+                    return BadRequest($"The application with key {AppKeyFromHeader} already exists");
+                }
+
+                if (config.SecretKey != request.SecretKey)
+                {
+                    return BadRequest("The platform secret key provided is invalid");
+                }
+
+                var cmd = new RegisterApplication(AppKeyFromHeader)
+                {
+                    Email = request.Email,
+                    DisplayName = request.DisplayName,
+                    Password = request.Password,
+                    UserKey = new Hashids(config.SecretKey).EncodeLong(DateTime.Now.Ticks)
+                };
+
+                executionEngine.Handle(cmd);
+
+                return Ok(cmd.UserKey);
             }
 
-            var cmd = new RegisterApplication(AppKeyFromHeader)
-            {
-                Email = model.Email,
-                DisplayName = model.DisplayName,
-                Password = model.Password,
-                UserKey = new Hashids(secretKey).EncodeLong(DateTime.Now.Ticks)
-            };
-
-            executionEngine.Handle(cmd);
-
-            return cmd.UserKey;
+            return BadRequest(ModelState);
         }
     }
 }

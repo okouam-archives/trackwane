@@ -15,7 +15,7 @@ namespace Trackwane.Management.Engine.Handlers.Locations
         public UpdateLocationHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
         }
 

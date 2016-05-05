@@ -16,7 +16,7 @@ namespace Trackwane.Data.Engine.Handlers
         public SaveSensorReadingHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
         }
 

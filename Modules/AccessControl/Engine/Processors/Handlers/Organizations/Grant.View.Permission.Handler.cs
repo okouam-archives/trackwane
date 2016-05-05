@@ -15,7 +15,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
         public GrantViewPermissionHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
         }
 

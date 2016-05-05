@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>5</LangVersion>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +34,10 @@
   <ItemGroup>
     <Reference Include="FluentValidation">
       <HintPath>..\..\..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.WebApi, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\FluentValidation.WebApi.6.2.1.0\lib\Net45\FluentValidation.WebApi.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Hashids.net">
       <HintPath>..\..\..\packages\hashids.net.1.1.2\lib\net45\Hashids.net.dll</HintPath>
@@ -101,11 +105,9 @@
     <Compile Include="Commands\Users\Update.User.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Processors\Handlers\Organizations\Archive.Organization.Handler.cs" />
-    <Compile Include="Processors\Handlers\Organizations\Archive.Organization.Validator.cs" />
     <Compile Include="Processors\Handlers\Organizations\Grant.View.Permission.Handler.cs" />
     <Compile Include="Processors\Handlers\Organizations\Grant.View.Permission.Validator.cs" />
     <Compile Include="Processors\Handlers\Organizations\Grant.Manage.Permission.Handler.cs" />
-    <Compile Include="Processors\Handlers\Organizations\Grant.Manage.Permission.Validator.cs" />
     <Compile Include="Processors\Handlers\Organizations\Register.Organization.Handler.cs" />
     <Compile Include="Processors\Handlers\Organizations\Register.Organization.Validator.cs" />
     <Compile Include="Processors\Handlers\Organizations\Revoke.Manage.Permission.Handler.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Processors\Handlers\Users\Register.User.Validator.cs" />
     <Compile Include="Processors\Handlers\Users\Update.User.Handler.cs" />
     <Compile Include="Processors\Handlers\Users\Update.User.Validator.cs" />
+    <Compile Include="Queries\Users\Count.In.Application.cs" />
     <Compile Include="Queries\Organizations\Count.cs" />
     <Compile Include="Queries\Organizations\Find.By.Key.cs" />
     <Compile Include="Queries\Users\Count.In.System.cs" />
@@ -155,9 +158,9 @@
       <Project>{4545AA51-B436-4D91-BCDE-19AFCB294F5C}</Project>
       <Name>Framework.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Contracts.csproj">
+    <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Messages.csproj">
       <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>
-      <Name>AccessControl.Contracts</Name>
+      <Name>AccessControl.Messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\AccessControl.Domain.csproj">
       <Project>{53b04bb7-734f-4a79-a73a-579f75082a67}</Project>
@@ -167,6 +170,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Queries\Applications\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

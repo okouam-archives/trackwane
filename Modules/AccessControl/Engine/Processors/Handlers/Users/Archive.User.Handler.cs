@@ -15,7 +15,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
         public ArchiveUserHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
         }
 

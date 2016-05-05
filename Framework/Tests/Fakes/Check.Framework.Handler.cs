@@ -8,7 +8,7 @@ namespace Trackwane.Framework.Tests.Fakes
 {
     public class CheckFrameworkHandler : TransactionalHandler<CheckFramework>
     {
-        public CheckFrameworkHandler(IProvideTransactions transaction, IExecutionEngine engine, ILog log) : base(transaction, null, log)
+        public CheckFrameworkHandler(IProvideTransactions transaction, IExecutionEngine engine, ILog log) : base(transaction, log)
         {
         }
 

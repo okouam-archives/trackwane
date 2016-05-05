@@ -15,7 +15,7 @@ namespace Trackwane.Management.Engine.Handlers.Alerts
         public CreateAlertHandler(IProvideTransactions transaction,
             IExecutionEngine publisher, 
             ILog log) :
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
         }
 

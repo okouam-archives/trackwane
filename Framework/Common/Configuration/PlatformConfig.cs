@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Configuration;
 using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Common.Configuration
 {
-    public class PlatformConfig : Config, IPlatformConfig
+    public class PlatformConfig : IPlatformConfig
     {
         public string Get(string key)
         {
-            return null;
+            return ConfigurationManager.AppSettings[key];
         }
 
         public string SecretKey
         {
-            get { return Get("secret-key"); }
+            get { return Get("TRACKWANE:PLATFORM:SECRET-KEY"); }
         }
     }
 }

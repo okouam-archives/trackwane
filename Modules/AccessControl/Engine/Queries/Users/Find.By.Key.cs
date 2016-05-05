@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Marten;
-using Trackwane.AccessControl.Contracts.Models;
+using Trackwane.AccessControl.Contracts.Contracts;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.Framework.Common.Interfaces;
@@ -10,13 +10,13 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Queries.Users
 {
-    public class FindByKey : Query<UserDetails>, IApplicationQuery
+    public class FindByKey : Query<UserDetailsResponse>, IApplicationQuery
     {
         public FindByKey(IDocumentStore documentStore) : base(documentStore)
         {
         }
 
-        public UserDetails Execute(string userId)
+        public UserDetailsResponse Execute(string userId)
         {
             return Execute(repository =>
             {
@@ -24,7 +24,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Users
 
                 if (user == null) return null;
 
-                var details = new UserDetails
+                var details = new UserDetailsResponse
                 {
                     DisplayName = user.DisplayName,
 

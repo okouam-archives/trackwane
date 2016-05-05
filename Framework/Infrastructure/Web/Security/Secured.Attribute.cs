@@ -47,7 +47,7 @@ namespace Trackwane.Framework.Infrastructure.Web.Security
         private static void SetClaimsPrincipalFromToken(HttpAuthenticationContext context)
         {
             var req = context.Request;
-            var userClaims = GetClaimsFromToken(req, new PlatformConfig().Get("secret-key"));
+            var userClaims = GetClaimsFromToken(req, new PlatformConfig().SecretKey);
             context.Principal = new ClaimsPrincipal(new[] {new ClaimsIdentity(userClaims.Claims, "JWT")});
         }
 

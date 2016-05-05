@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using log4net;
+using MassTransit;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Engine.Commands.Organizations;
 using Trackwane.AccessControl.Engine.Services;
@@ -10,12 +11,9 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
-    public class ArchiveOrganizationHandler : TransactionalHandler<ArchiveOrganization>
+    public class ArchiveOrganizationHandler : TransactionalHandler<ArchiveOrganization>, IConsumer<ArchiveOrganization>
     {
-        public ArchiveOrganizationHandler(
-            IProvideTransactions transaction,
-            IExecutionEngine publisher, ILog log) : 
-            base(transaction, publisher, log)
+        public ArchiveOrganizationHandler(IProvideTransactions transaction, ILog log) : base(transaction, log)
         {
         }
 

@@ -21,7 +21,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
             IExecutionEngine publisher, 
             ILog log, 
             IUserService userService) : 
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
             this.userService = userService;
         }

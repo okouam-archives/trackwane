@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,13 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scopes\Organization.Scope.cs" />
-    <Compile Include="Scopes\Application.Scope.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="Models.cs" />
-    <Compile Include="Scopes\User.Scope.cs" />
-    <Compile Include="_Access_Control_Contracts_Assembly_.cs" />
-    <Compile Include="Events.cs" />
+    <Compile Include="Contracts\Organization.Details.Response.cs" />
+    <Compile Include="Contracts\Register.Application.Request.cs" />
+    <Compile Include="Contracts\Register.Organization.Request.cs" />
+    <Compile Include="Contracts\RegisterUserRequest.cs" />
+    <Compile Include="Contracts\Update.Organization.Request.cs" />
+    <Compile Include="Contracts\Update.User.Request.cs" />
+    <Compile Include="Contracts\User.Details.Response.cs" />
+    <Compile Include="Contracts\User.Summary.Response.cs" />
+    <Compile Include="Validators\Register.Application.Request.Validator.cs" />
+    <Compile Include="_Access_Control_Messages_Assembly_.cs" />
+    <Compile Include="Events\Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +68,9 @@
       <Project>{70068E07-298E-435C-9623-4141BDEAC4D0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

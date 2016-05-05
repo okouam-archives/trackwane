@@ -60,9 +60,9 @@
       <Project>{70068e07-298e-435c-9623-4141bdeac4d0}</Project>
       <Name>Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Contracts.csproj">
+    <ProjectReference Include="..\AccessControl.Contracts\AccessControl.Messages.csproj">
       <Project>{55876580-B0E0-4508-B1EF-E30F5C6E0106}</Project>
-      <Name>AccessControl.Contracts</Name>
+      <Name>AccessControl.Messages</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

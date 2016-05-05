@@ -5,7 +5,7 @@ using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Common.Configuration
 {
-    public class ModuleConfig : Config, IModuleConfig
+    public class ModuleConfig : IModuleConfig
     {
         private readonly Assembly assembly;
 

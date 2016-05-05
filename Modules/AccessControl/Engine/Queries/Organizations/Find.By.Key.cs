@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Marten;
-using Trackwane.AccessControl.Contracts.Models;
+using Trackwane.AccessControl.Contracts.Contracts;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.Framework.Common.Interfaces;
@@ -9,13 +9,13 @@ using Trackwane.Framework.Infrastructure.Queries;
 
 namespace Trackwane.AccessControl.Engine.Queries.Organizations
 {
-    public class FindByKey : Query<OrganizationDetails>, IOrganizationQuery
+    public class FindByKey : Query<OrganizationDetailsResponse>, IOrganizationQuery
     {
         public FindByKey(IDocumentStore documentStore) : base(documentStore)
         {
         }
 
-        public OrganizationDetails Execute()
+        public OrganizationDetailsResponse Execute()
         {
             return Execute(repository =>
             {
@@ -23,7 +23,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Organizations
 
                 if (organization == null) return null;
 
-                var result = new OrganizationDetails
+                var result = new OrganizationDetailsResponse
                 {
                     IsArchived = organization.IsArchived,
                     Key = OrganizationKey,
@@ -49,9 +49,9 @@ namespace Trackwane.AccessControl.Engine.Queries.Organizations
             });
         }
 
-        private static void Add(ICollection<UserSummary> summaries, User user)
+        private static void Add(ICollection<UserSummaryResponse> summaries, User user)
         {
-            summaries.Add(new UserSummary
+            summaries.Add(new UserSummaryResponse
             {
                 Email = user.Email,
                 DisplayName = user.DisplayName,

@@ -9,7 +9,7 @@ namespace Trackwane.Framework.Infrastructure.Requests
 {
     public abstract class TransactionalHandler<T> : RuntimeRequestHandler<T> where T : class
     {
-        protected TransactionalHandler(IProvideTransactions transaction, IExecutionEngine engine, ILog log) : base(transaction, log)
+        protected TransactionalHandler(IProvideTransactions transaction, ILog log) : base(transaction, log)
         {
         }
 

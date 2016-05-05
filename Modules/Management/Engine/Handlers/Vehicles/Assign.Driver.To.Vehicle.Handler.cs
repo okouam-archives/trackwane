@@ -16,7 +16,7 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
             IProvideTransactions transaction,
             IExecutionEngine publisher,
             ILog log) :
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
         }
 

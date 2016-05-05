@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using HashidsNet;
-using Trackwane.AccessControl.Contracts.Models;
+using Trackwane.AccessControl.Contracts.Contracts;
 using Trackwane.AccessControl.Engine.Commands.Users;
 using Trackwane.AccessControl.Engine.Queries.Users;
 using Trackwane.Framework.Common.Interfaces;
@@ -22,13 +22,20 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [HttpGet, Route("token")]
-        public string GetAccessToken(string email, string password)
+        public IHttpActionResult GetAccessToken(string email, string password)
         {
-           return "Bearer " + executionEngine.Query<GetAccessToken>(AppKeyFromHeader).Execute(email, password);
+            var token = executionEngine.Query<GetAccessToken>(AppKeyFromHeader).Execute(email, password);
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest("The credentials provided were not recognized");
+            }
+
+            return Ok("Bearer " + token);
         }
         
         [Secured, HttpGet, Route("users/{userKey}")]
-        public UserDetails FindById(string userKey)
+        public UserDetailsResponse FindById(string userKey)
         {
             return executionEngine.Query<FindByKey>(AppKeyFromHeader).Execute(userKey);
         }
@@ -53,20 +60,20 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, AdministratorsOrUser, HttpPost, Route("organizations/{organizationKey}/users/{userKey}")]
-        public void UpdateUser(string organizationKey, string userKey, UpdateUserModel model)
+        public void UpdateUser(string organizationKey, string userKey, UpdateUserRequest request)
         {
             executionEngine.Handle(new UpdateUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey)
             {
-                DisplayName = model.DisplayName,
-                Email = model.Email,
-                Password = model.Password
+                DisplayName = request.DisplayName,
+                Email = request.Email,
+                Password = request.Password
             });
         }
 
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}/users")]
-        public string RegisterUser(string organizationKey, RegisterApplicationModel model)
+        public string RegisterUser(string organizationKey, RegisterUserRequest request)
         {
-            var cmd = new RegisterUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.UserKey, model.DisplayName, model.Email, model.Password);
+            var cmd = new RegisterUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, request.UserKey, request.DisplayName, request.Email, request.Password);
             cmd.UserKey = cmd.UserKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Handle(cmd);
             return cmd.UserKey;

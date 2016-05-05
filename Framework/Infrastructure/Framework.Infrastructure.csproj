@@ -140,6 +140,7 @@
     <Compile Include="Web\Security\Secured.Attribute.cs" />
     <Compile Include="Web\Security\System.Managers.Attribute.cs" />
     <Compile Include="Web\Security\Viewers.Attribute.cs" />
+    <Compile Include="Web\WebApiValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Framework.Common.csproj">

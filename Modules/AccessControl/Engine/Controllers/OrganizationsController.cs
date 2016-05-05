@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Http;
 using HashidsNet;
-using Trackwane.AccessControl.Contracts.Models;
+using Trackwane.AccessControl.Contracts.Contracts;
 using Trackwane.AccessControl.Engine.Commands.Organizations;
 using Trackwane.AccessControl.Engine.Queries.Organizations;
 using Trackwane.Framework.Common.Interfaces;
@@ -25,13 +25,13 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, Administrators, HttpGet, Route("organizations/{organizationKey}")]
-        public OrganizationDetails FindById(string organizationKey)
+        public OrganizationDetailsResponse FindById(string organizationKey)
         {
             return executionEngine.Query<FindByKey>(AppKeyFromHeader, organizationKey).Execute();
         }
 
         [Secured, SystemManagers, HttpGet, Route("organizations")]
-        public List<OrganizationDetails> Find()
+        public List<OrganizationDetailsResponse> Find()
         {
             return executionEngine.Query<Find>(AppKeyFromHeader).Execute();
         }
@@ -79,9 +79,9 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, SystemManagers, HttpPost, Route("organizations")]
-        public string RegisterOrganization(RegisterOrganizationModel model)
+        public string RegisterOrganization(RegisterOrganizationRequest request)
         {
-            var cmd = new RegisterOrganization(AppKeyFromHeader, CurrentClaims.UserId, model.OrganizationKey, model.Name);
+            var cmd = new RegisterOrganization(AppKeyFromHeader, CurrentClaims.UserId, request.OrganizationKey, request.Name);
             
             cmd.OrganizationKey = cmd.OrganizationKey ?? new Hashids(config.SecretKey).EncodeLong(DateTime.Now.Ticks);
             executionEngine.Handle(cmd);
@@ -89,9 +89,9 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
       
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}")]
-        public void UpdateOrganization(string organizationKey, UpdateOrganizationModel model)
+        public void UpdateOrganization(string organizationKey, UpdateOrganizationRequest request)
         {
-            executionEngine.Handle(new UpdateOrganization(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.Name));
+            executionEngine.Handle(new UpdateOrganization(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, request.Name));
         }
     }
 }

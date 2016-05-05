@@ -12,11 +12,7 @@ namespace Trackwane.Management.Engine.Handlers.Alerts
 {
     public class ArchiveAlertHandler : TransactionalHandler<ArchiveAlert>
     {
-        public ArchiveAlertHandler(
-            IProvideTransactions transaction,
-            IExecutionEngine publisher,
-            ILog log) :
-            base(transaction, publisher, log)
+        public ArchiveAlertHandler(IProvideTransactions transaction, IExecutionEngine publisher, ILog log) : base(transaction, log)
         {
         }
         

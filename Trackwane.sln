@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Contracts", "Modules\D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Contracts", "Modules\Management\Management.Shared\Management.Contracts.csproj", "{A3065B16-FE4D-4B25-B9F7-2AB2A89D5DAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessControl.Contracts", "Modules\AccessControl\AccessControl.Contracts\AccessControl.Contracts.csproj", "{55876580-B0E0-4508-B1EF-E30F5C6E0106}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessControl.Messages", "Modules\AccessControl\AccessControl.Contracts\AccessControl.Messages.csproj", "{55876580-B0E0-4508-B1EF-E30F5C6E0106}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{4339FEF1-CFF6-4C9C-827A-6628E8D5669D}"
 EndProject

@@ -8,7 +8,7 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.Framework.Infrastructure.Requests
 {
-    public abstract class RuntimeRequestHandler<T> : IConsumer<T> where T : class
+    public abstract class RuntimeRequestHandler<T> where T : class
     {
         protected RuntimeRequestHandler(IProvideTransactions transaction, ILog log)
         {

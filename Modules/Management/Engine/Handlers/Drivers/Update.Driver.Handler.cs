@@ -17,7 +17,7 @@ namespace Trackwane.Management.Engine.Handlers.Drivers
         public UpdateDriverHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, publisher, log)
+            base(transaction, log)
         {
         }
 

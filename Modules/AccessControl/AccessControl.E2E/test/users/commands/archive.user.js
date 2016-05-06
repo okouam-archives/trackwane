@@ -1,18 +1,15 @@
-var pp = require('jsome'),
-﻿	 chakram = require('chakram'),
-	sleep = require('../../../helpers/sleep'),
-	inspect = require('../../../helpers/inspect'),
-	client = require('../../../helpers/api'),
-	defaults = require('../../../helpers/defaults'),
-	expect = chakram.expect;
- 	_ = require('lodash'),
-	Hashids = require("hashids"),
-	hashids = new Hashids("this is my salt");
+require(process.cwd() + '/background')();
 
-describe("Archive User Command", function() {
+describe("Users :: Commands :: Archive User", function() {
+
+	var api, ctx;
+
+	beforeEach(function () {
+		api = new API(defaults.HOST, chakram);
+		ctx = {};
+	});
 
 	it("returns a 204 when the user is active", function() {
-		var organizationKey, api = new client(defaults.HOST, chakram);
 		return api
 			.createApplication(defaults.APPLICATION_OWNER)
 			.then(function() {
@@ -20,28 +17,27 @@ describe("Archive User Command", function() {
 			}).then(function(result) {
 				return api.organizations.register("random-organization-name");
 			}).then(function(result) {
-				organizationKey = result.body;
-				return api.users.register(organizationKey, "john smith", "john@nowhere.com", "random-password");
+				ctx.organizationKey = result.body;
+				return api.users.register(ctx.organizationKey, "john smith", "john@nowhere.com", "random-password");
 			}).then(function(result) {
-				var userKey = result.body;
-				return api.users.archive(organizationKey, userKey, false)
+				return api.users.archive(ctx.organizationKey, result.body, false)
 			}).then(function(result) {
 				expect(result).to.have.status(204);
 			});
 	});
 
 	xit("returns a 204 when the user is already archived", function() {
-		var api = new client(defaults.HOST, chakram);
 		return api
-			.createApplication(defaults.APPLICATION_OWNER)
+			.createApplication(ctx, defaults.APPLICATION_OWNER)
 			.then(function() {
-				api.authenticate(defaults.APPLICATION_OWNER.email, defaults.APPLICATION_OWNER.password)
+				return api.authenticate(ctx, defaults.APPLICATION_OWNER.email, defaults.APPLICATION_OWNER.password)
 			}).then(function() {
-				var userKey = api.users.register("sdfsdf", "sdfsdf", "sdfsdfdsf")
+				return api.users.register(ctx, "sdfsdf", "sdfsdf", "sdfsdfdsf")
+			}).then(function(result) {
+				ctx.userKey = result.body
+				return api.users.archive(ctx.userKey);
 			}).then(function() {
-				return api.users.archive(userKey);
-			}).then(function() {
-				return api.users.archive(userKey);
+				return api.users.archive(ctx.userKey);
 			});
 	});
 });

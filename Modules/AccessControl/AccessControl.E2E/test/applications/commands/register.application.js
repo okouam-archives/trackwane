@@ -1,40 +1,30 @@
-var pp = require('jsome'),
-﻿	 chakram = require('chakram'),
-	sleep = require('../../../helpers/sleep'),
-	inspect = require('../../../helpers/inspect'),
-	client = require('../../../helpers/api'),
-	defaults = require('../../../helpers/defaults'),
-	expect = chakram.expect;
- 	_ = require('lodash'),
-	Hashids = require("hashids"),
-	hashids = new Hashids("this is my salt");
+require(process.cwd() + '/background')();
 
-describe("Register Application Command", function() {
+describe("Applications :: Commands :: Register Application", function() {
 
-	var api;
+	var api, ctx;
 
-	beforeEach("create random application", function () {
-		api = new client(defaults.HOST, chakram);
+	beforeEach(function () {
+		api = new API(defaults.HOST, chakram);
+		ctx = {};
 	});
 
 	it("returns a 200 and creates the application owner", function() {
-		var userKey;
-		var done = api
+		return api
 			.createApplication(defaults.APPLICATION_OWNER)
 			.then(function(result) {
-				userKey = result.body;
+				ctx.userKey = result.body;
 			})
 			.then(function() {
 				return api.login(defaults.APPLICATION_OWNER.email, defaults.APPLICATION_OWNER.password)
 			})
 			.then(function(result) {
-				return api.users.findByKey(userKey);
+				return api.users.findByKey(ctx.userKey);
 			})
 			.then(function(result) {
 				expect(result).to.have.status(200);
 				expect(result.body.DisplayName).to.equal(defaults.APPLICATION_OWNER.displayName);
 			});
-		return done;
 	});
 
 	it("returns a 400 because it does not allow duplicate applications to be registered", function() {

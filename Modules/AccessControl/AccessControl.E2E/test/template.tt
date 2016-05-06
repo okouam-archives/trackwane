@@ -1,0 +1,12 @@
+require(process.cwd() + '/background')();
+
+describe("--TITLE--", function() {
+
+	var api, ctx;
+
+	beforeEach(function () {
+		api = new API(defaults.HOST, chakram);
+		ctx = {};
+	});
+
+});

@@ -1,19 +1,9 @@
-var root = process.cwd(),
-    pp = require('jsome'),
-﻿	 chakram = require('chakram'),
-	sleep = require(root + '/helpers/sleep'),
-	inspect = require(root + '/helpers/inspect'),
-	client = require(root + '/helpers/api'),
-	defaults = require(root + '/helpers/defaults'),
-	expect = chakram.expect;
- 	_ = require('lodash'),
-	Hashids = require("hashids"),
-	hashids = new Hashids("this is my salt");
+require(process.cwd() + '/background')();
 
-describe("Get Access Token Query", function() {
+describe("Users :: Queries :: Get Access Token", function() {
 
 	it("returns a 200 when the credentials provided are valid", function() {
-		var api = new client(defaults.HOST, chakram);
+		var api = new API(defaults.HOST, chakram);
 		return api
 			.createApplication(defaults.APPLICATION_OWNER)
 			.then(function(result) {
@@ -22,7 +12,7 @@ describe("Get Access Token Query", function() {
 	});
 
 	it("returns a 400 when the password provided is incorrect", function() {
-		var api = new client(defaults.HOST, chakram);
+		var api = new API(defaults.HOST, chakram);
 		return api.createApplication(defaults.APPLICATION_OWNER)
 		.then(function() {
 			var result = api.authenticate(defaults.APPLICATION_OWNER.email, "RANDOM-INCORRECT-PASSWORD", true);
@@ -32,7 +22,7 @@ describe("Get Access Token Query", function() {
 	});
 
 	it("returns a 400 when the email provided is incorrect", function() {
-		var api = new client(defaults.HOST, chakram);
+		var api = new API(defaults.HOST, chakram);
 		return api.createApplication(defaults.APPLICATION_OWNER)
 		.then(function() {
 			var result = api.authenticate("RANDOM-INCORRECT-EMAIL", defaults.APPLICATION_OWNER.password, true);

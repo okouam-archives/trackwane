@@ -10,40 +10,74 @@ describe("Users :: Commands :: Register User", function() {
 	});
 
 	it("returns a 200 when a new user is created", function() {
-		return api
-			.createApplication(defaults.APPLICATION_OWNER)
-			.then(function() {
-				return api.login(defaults.APPLICATION_OWNER.email, defaults.APPLICATION_OWNER.password);
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function(result) {
+				return api.users.register(ctx["Nike"].key, "john smith", "john@nowhere.com", "random-password", true)
 			}).then(function(result) {
-				return api.organizations.register("random-organization-name");
-			}).then(function(result) {
-				ctx.organizationKey = result.body;
-				return api.users.register(ctx.organizationKey, "john smith", "john@nowhere.com", "random-password");
-			}).then(function(result) {
-				return api.users.archive(ctx.organizationKey, result.body, false)
-			}).then(function(result) {
-				expect(result).to.have.status(204);
+				expect(result).to.have.status(201);
 			});
 	});
 
-	xit("returns a 400 if a blank password is provided", function() {
+	it("returns a 400 if a blank password is provided", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function() {
+				return api.users.register(ctx["Nike"].key, "john smith", "john@nowhere.com", " ", true);
+			}).then(function(result) {
+				expect(result).to.have.status(400);
+			});
 	});
 
-	xit("returns a 400 if a blank email is provided", function() {
+	it("returns a 400 if a blank email is provided", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function() {
+				return api.users.register(ctx["Nike"].key, "john smith", " ", "random-password", true);
+			}).then(function(result) {
+				expect(result).to.have.status(400);
+			});
 	});
 
-	xit("returns a 400 if a blank display name is provided", function() {
+	it("returns a 400 if a blank display name is provided", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function() {
+				return api.users.register(ctx["Nike"].key, " ", "john@nowhere.com", "random-password", true);
+			}).then(function(result) {
+				expect(result).to.have.status(400);
+			});
 	});
 
-	xit("returns a 400 if no passowrd is provided", function() {
+	it("returns a 400 if no password is provided", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function() {
+				return api.users.register(ctx["Nike"].key, "john smith", "john@nowhere.com", null, true);
+			}).then(function(result) {
+				expect(result).to.have.status(400);
+			});
 	});
 
-	xit("returns a 400 if no email is provided", function() {
+	it("returns a 400 if no email is provided", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function() {
+				return api.users.register(ctx["Nike"].key, "john smith", null, "random-password", true);
+			}).then(function(result) {
+				expect(result).to.have.status(400);
+			});
 	});
 
-	xit("returns a 400 if no display name is provided", function() {
+	it("returns a 400 if no display name is provided", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function() {
+				return api.users.register(ctx["Nike"].key, null, "john@nowhere.com", "random-password", true);
+			}).then(function(result) {
+				expect(result).to.have.status(400);
+			});
 	});
 
-	xit("returns a 400 if the organization key provided does not correspond to a known organization", function() {
+	it("returns a 400 if the organization key provided does not correspond to a known organization", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function(result) {
+				return api.users.register("incorrect-organization-key", "john smith", "john@nowhere.com", "random-password", true);
+			}).then(function(result) {
+				expect(result).to.have.status(400);
+			});
 	});
 });

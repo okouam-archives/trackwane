@@ -123,7 +123,6 @@
     <Compile Include="Processors\Handlers\Application\Register.Application.Handler.cs" />
     <Compile Include="Processors\Handlers\Users\Register.User.Handler.cs" />
     <Compile Include="Processors\Handlers\Application\Register.Application.Validator.cs" />
-    <Compile Include="Processors\Handlers\Users\Register.User.Validator.cs" />
     <Compile Include="Processors\Handlers\Users\Update.User.Handler.cs" />
     <Compile Include="Processors\Handlers\Users\Update.User.Validator.cs" />
     <Compile Include="Queries\Users\Count.In.Application.cs" />
@@ -131,7 +130,6 @@
     <Compile Include="Queries\Organizations\Find.By.Key.cs" />
     <Compile Include="Queries\Users\Count.In.System.cs" />
     <Compile Include="Queries\Users\Count.In.Organization.cs" />
-    <Compile Include="Queries\Organizations\Find.cs" />
     <Compile Include="Queries\Users\Get.Access.Token.cs" />
     <Compile Include="Queries\Users\Find.By.Key.cs" />
     <Compile Include="Registry.cs" />

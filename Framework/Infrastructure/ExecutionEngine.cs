@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MassTransit;
-using MassTransit.Internals.Extensions;
+﻿using MassTransit;
 using StructureMap;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Interfaces;
@@ -20,6 +16,12 @@ namespace Trackwane.Framework.Infrastructure
         }
 
         public void Handle<T>(T cmd) where T : class
+        {
+            var handler = container.GetInstance<Requests.Handler<T>>();
+            handler.Handle(cmd);
+        }
+
+        public void Publish<T>(T cmd) where T : class
         {
             bus.Publish(cmd);
         }
@@ -41,8 +43,6 @@ namespace Trackwane.Framework.Infrastructure
 
         public void Start()
         {
-            var types = FindTypes<IConsumer>(container, x => true);
-
             bus = Bus.Factory.CreateUsingInMemory(cfg =>
             {
                 cfg.ReceiveEndpoint("queue_name", x =>
@@ -52,20 +52,6 @@ namespace Trackwane.Framework.Infrastructure
             });
 
             bus.Start();
-        }
-
-        static IList<Type> FindTypes<T>(IContainer container, Func<Type, bool> filter)
-        {
-            var types = container
-                .Model
-                .PluginTypes
-                .Where(x => x.PluginType.HasInterface<T>())
-                .Select(i => i.PluginType)
-                .Concat(container.Model.InstancesOf<T>().Select(x => x.ReturnedType))
-                .Where(filter)
-                .Distinct()
-                .ToList();
-            return types;
         }
     }
 }

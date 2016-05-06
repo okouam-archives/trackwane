@@ -12,18 +12,21 @@ using log4net;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 {
-    public class RegisterUserHandler : TransactionalHandler<RegisterUser>
+    public class RegisterUserHandler : Handler<RegisterUser>
     {
         private readonly IUserService userService;
+        private readonly IOrganizationService organizationService;
 
         public RegisterUserHandler(
             IProvideTransactions transaction,
-            IExecutionEngine publisher, 
+            IExecutionEngine engine, 
             ILog log, 
-            IUserService userService) : 
-            base(transaction, log)
+            IUserService userService,
+            IOrganizationService organizationService) : 
+            base(engine, transaction, log)
         {
             this.userService = userService;
+            this.organizationService = organizationService;
         }
 
         protected override IEnumerable<DomainEvent> Handle(RegisterUser cmd, IRepository repository)
@@ -36,6 +39,11 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
             if (userService.IsExistingEmail(cmd.ApplicationKey, cmd.Email, repository))
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.DUPLICATE_USER_EMAIL, cmd.Email));
+            }
+
+            if (!organizationService.IsExistingOrganization(cmd.ApplicationKey, cmd.OrganizationKey, repository))
+            {
+                throw new BusinessRuleException();
             }
 
             var user = new User(cmd.ApplicationKey, cmd.OrganizationKey, cmd.UserKey, cmd.DisplayName, cmd.Email, (Role)(int)cmd.Role, cmd.Password);

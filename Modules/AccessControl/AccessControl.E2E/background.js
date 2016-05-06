@@ -9,4 +9,5 @@ module.exports = function() {
 	this._ = require('lodash');
 	var Hashids = require("hashids");
 	this.hashids = new Hashids("this is my salt");
+	this.fixtures = require('./helpers/fixtures');
 }

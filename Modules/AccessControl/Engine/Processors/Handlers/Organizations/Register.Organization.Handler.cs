@@ -10,16 +10,17 @@ using log4net;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
-    public class RegisterOrganizationHandler : TransactionalHandler<RegisterOrganization>
+    public class RegisterOrganizationHandler : Handler<RegisterOrganization>
     {
         private readonly IOrganizationService organizationService;
         /* Public */
 
         public RegisterOrganizationHandler(
+            IExecutionEngine engine,
             IProvideTransactions transaction,
             ILog log,
             IOrganizationService organizationService) : 
-            base(transaction, log)
+            base(engine, transaction, log)
         {
             this.organizationService = organizationService;
         }

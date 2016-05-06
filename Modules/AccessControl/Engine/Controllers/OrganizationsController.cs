@@ -33,7 +33,7 @@ namespace Trackwane.AccessControl.Engine.Controllers
         [Secured, SystemManagers, HttpGet, Route("organizations")]
         public List<OrganizationDetailsResponse> Find()
         {
-            return executionEngine.Query<Find>(AppKeyFromHeader).Execute();
+            return null;
         }
 
         [Secured, Administrators, HttpGet, Route("organizations/count")]

@@ -11,7 +11,7 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
-    public class UpdateOrganizationHandler : TransactionalHandler<UpdateOrganization>
+    public class UpdateOrganizationHandler : Handler<UpdateOrganization>
     {
         private readonly IOrganizationService organizationService;
 
@@ -20,7 +20,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
             IExecutionEngine publisher, 
             ILog log,
             IOrganizationService organizationService) : 
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
             this.organizationService = organizationService;
         }

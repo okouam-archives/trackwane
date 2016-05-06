@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using log4net;
-using MassTransit;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.AccessControl.Engine.Commands.Application;
 using Trackwane.Framework.Common;
@@ -13,9 +11,9 @@ using Role = Trackwane.AccessControl.Domain.Users.Role;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Application
 {
-    public class RegisterApplicationHandler : TransactionalHandler<RegisterApplication>, IConsumer<RegisterApplication>
+    public class RegisterApplicationHandler : Handler<RegisterApplication>
     {
-        public RegisterApplicationHandler(IProvideTransactions transaction, ILog log) : base(transaction, log)
+        public RegisterApplicationHandler(IExecutionEngine engine, IProvideTransactions transaction, ILog log) : base(engine, transaction, log)
         {
         }
 

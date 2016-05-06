@@ -28,12 +28,16 @@ describe("Applications :: Commands :: Register Application", function() {
 	});
 
 	it("returns a 400 because it does not allow duplicate applications to be registered", function() {
-		return api.createApplication(defaults.APPLICATION_OWNER).then(function(result) {
-			return api.createApplication(defaults.APPLICATION_OWNER).then(function(result) {
-   				expect(result).to.have.status(400);
-				expect(result.response.body.Message).to.equal("The application with key " + api.APPLICATION_KEY + " already exists")
-   			});
-		});
+		return api
+			.createApplication(defaults.APPLICATION_OWNER)
+			.then(function(result) {
+				return api
+					.createApplication(defaults.APPLICATION_OWNER)
+					.then(function(result) {
+		   				expect(result).to.have.status(400);
+						expect(result.response.body.Message).to.equal("The application with key " + api.APPLICATION_KEY + " already exists")
+		   			});
+			});
 	})
 
     it("should return the key for the application owner", function () {

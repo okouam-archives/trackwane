@@ -25,7 +25,7 @@ namespace Trackwane.Framework.Infrastructure.Web.Filters
                 actionExecutedContext.Response = new HttpResponseMessage
                 {
                     Content = new StringContent(responseContent, Encoding.UTF8, "text/plain"),
-                    StatusCode = System.Net.HttpStatusCode.InternalServerError
+                    StatusCode = System.Net.HttpStatusCode.BadRequest
                 };
             }
 

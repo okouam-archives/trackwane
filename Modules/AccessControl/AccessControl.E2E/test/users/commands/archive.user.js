@@ -10,34 +10,26 @@ describe("Users :: Commands :: Archive User", function() {
 	});
 
 	it("returns a 204 when the user is active", function() {
-		return api
-			.createApplication(defaults.APPLICATION_OWNER)
-			.then(function() {
-				return api.login(defaults.APPLICATION_OWNER.email, defaults.APPLICATION_OWNER.password);
-			}).then(function(result) {
-				return api.organizations.register("random-organization-name");
-			}).then(function(result) {
-				ctx.organizationKey = result.body;
-				return api.users.register(ctx.organizationKey, "john smith", "john@nowhere.com", "random-password");
-			}).then(function(result) {
-				return api.users.archive(ctx.organizationKey, result.body, false)
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER,
+			[{ref: "Nike"}],
+			[{organization: "Nike", ref: "John"}])
+			.then(function(result) {
+				return api.users.archive(ctx["Nike"].key, ctx["Nike"]["John"].key, false)
 			}).then(function(result) {
 				expect(result).to.have.status(204);
 			});
 	});
 
-	xit("returns a 204 when the user is already archived", function() {
-		return api
-			.createApplication(ctx, defaults.APPLICATION_OWNER)
+	it("returns a 204 when the user is already archived", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER,
+			[{ref: "Nike"}],
+			[{organization: "Nike", ref: "John"}])
 			.then(function() {
-				return api.authenticate(ctx, defaults.APPLICATION_OWNER.email, defaults.APPLICATION_OWNER.password)
+				return api.users.archive(ctx["Nike"].key, ctx["Nike"]["John"].key)
 			}).then(function() {
-				return api.users.register(ctx, "sdfsdf", "sdfsdf", "sdfsdfdsf")
+				return api.users.archive(ctx["Nike"].key, ctx["Nike"]["John"].key, true);
 			}).then(function(result) {
-				ctx.userKey = result.body
-				return api.users.archive(ctx.userKey);
-			}).then(function() {
-				return api.users.archive(ctx.userKey);
+				expect(result).to.have.status(204);
 			});
 	});
 });

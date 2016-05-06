@@ -79,7 +79,7 @@ module.exports = function(host, chakram) {
 					displayName: displayName
 				}, REQUEST_OPTIONS)
 				.then(function(result) {
-					return verify(result, skipVerification);
+					return verify(result, skipVerification, 201);
 				});
 		}
 	}

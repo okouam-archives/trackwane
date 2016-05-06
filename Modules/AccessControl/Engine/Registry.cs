@@ -1,8 +1,6 @@
-﻿using System.Reflection;
-using FluentValidation;
+﻿using FluentValidation;
 using MassTransit;
 using Trackwane.AccessControl.Contracts;
-using Trackwane.AccessControl.Engine.Processors.Handlers.Users;
 using Trackwane.Framework.Infrastructure.Requests;
 
 namespace Trackwane.AccessControl.Engine
@@ -24,6 +22,8 @@ namespace Trackwane.AccessControl.Engine
                 cfg.SingleImplementationsOfInterface();
 
                 cfg.WithDefaultConventions();
+
+                cfg.ConnectImplementationsToTypesClosing(typeof(Handler<>));
 
                 cfg.ConnectImplementationsToTypesClosing(typeof(AbstractValidator<>));
 

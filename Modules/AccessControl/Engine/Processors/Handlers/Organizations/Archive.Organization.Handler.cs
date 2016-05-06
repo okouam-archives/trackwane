@@ -11,9 +11,9 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
-    public class ArchiveOrganizationHandler : TransactionalHandler<ArchiveOrganization>, IConsumer<ArchiveOrganization>
+    public class ArchiveOrganizationHandler : Handler<ArchiveOrganization>
     {
-        public ArchiveOrganizationHandler(IProvideTransactions transaction, ILog log) : base(transaction, log)
+        public ArchiveOrganizationHandler(IExecutionEngine engine, IProvideTransactions transaction, ILog log) : base(engine, transaction, log)
         {
         }
 

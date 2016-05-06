@@ -10,12 +10,12 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
-    public class GrantViewPermissionHandler : TransactionalHandler<GrantViewPermission>
+    public class GrantViewPermissionHandler : Handler<GrantViewPermission>
     {
         public GrantViewPermissionHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
         }
 

@@ -10,12 +10,13 @@ using Message = Trackwane.AccessControl.Engine.Services.Message;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 {
-    public class ArchiveUserHandler : TransactionalHandler<ArchiveUser>
+    public class ArchiveUserHandler : Handler<ArchiveUser>
     {
         public ArchiveUserHandler(
+            IExecutionEngine engine,
             IProvideTransactions transaction,
-            IExecutionEngine publisher, ILog log) : 
-            base(transaction, log)
+            ILog log) : 
+            base(engine, transaction, log)
         {
         }
 

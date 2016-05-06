@@ -55,6 +55,7 @@
     <Compile Include="Contracts\User.Details.Response.cs" />
     <Compile Include="Contracts\User.Summary.Response.cs" />
     <Compile Include="Validators\Register.Application.Request.Validator.cs" />
+    <Compile Include="Validators\Register.User..Request.Validator.cs" />
     <Compile Include="_Access_Control_Messages_Assembly_.cs" />
     <Compile Include="Events\Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

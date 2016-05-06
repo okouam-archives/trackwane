@@ -1,5 +1,4 @@
-﻿using System;
-using Trackwane.Framework.Common.Interfaces;
+﻿using Trackwane.Framework.Common.Interfaces;
 
 namespace Trackwane.Framework.Interfaces
 {
@@ -12,5 +11,7 @@ namespace Trackwane.Framework.Interfaces
         T Query<T>(string applicationKey, string organizationKey) where T : IOrganizationQuery;
 
         void Start();
+
+        void Publish<T>(T evt) where T : class;
     }
 }

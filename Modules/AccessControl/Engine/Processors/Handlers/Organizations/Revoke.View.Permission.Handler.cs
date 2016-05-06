@@ -10,9 +10,9 @@ using log4net;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
-    public class RevokeReadAccessHandler : TransactionalHandler<RevokeViewPermission>
+    public class RevokeReadAccessHandler : Handler<RevokeViewPermission>
     {
-        public RevokeReadAccessHandler(IProvideTransactions transaction, ILog log) : base(transaction, log)
+        public RevokeReadAccessHandler(IExecutionEngine engine, IProvideTransactions transaction, ILog log) : base(engine, transaction, log)
         {
         }
 

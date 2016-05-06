@@ -115,6 +115,7 @@
     <Compile Include="Requests\ApplicationCommand.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="Factories\Service.Location.Factory.cs" />
+    <Compile Include="Requests\Handler_T.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="ExecutionEngine.cs" />
     <Compile Include="Requests\SystemCommand.cs" />

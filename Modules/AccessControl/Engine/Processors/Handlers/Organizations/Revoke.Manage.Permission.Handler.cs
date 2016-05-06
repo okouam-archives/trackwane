@@ -11,12 +11,12 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
-    public class RevokeManagePermissionHandler : TransactionalHandler<RevokeManagePermission>
+    public class RevokeManagePermissionHandler : Handler<RevokeManagePermission>
     {
         public RevokeManagePermissionHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
         }
 

@@ -10,13 +10,13 @@ using log4net;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 {
-    public class UpdateUserHandler : TransactionalHandler<UpdateUser>
+    public class UpdateUserHandler : Handler<UpdateUser>
     {
         public UpdateUserHandler(
             IProvideTransactions transaction,
-            IExecutionEngine publisher, 
+            IExecutionEngine engine, 
             ILog log) : 
-            base(transaction, log)
+            base(engine, transaction, log)
         {
         }
 

@@ -60,23 +60,34 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, AdministratorsOrUser, HttpPost, Route("organizations/{organizationKey}/users/{userKey}")]
-        public void UpdateUser(string organizationKey, string userKey, UpdateUserRequest request)
+        public IHttpActionResult UpdateUser(string organizationKey, string userKey, UpdateUserRequest request)
         {
-            executionEngine.Handle(new UpdateUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey)
+            if (ModelState.IsValid)
             {
-                DisplayName = request.DisplayName,
-                Email = request.Email,
-                Password = request.Password
-            });
+                executionEngine.Handle(new UpdateUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey)
+                {
+                    DisplayName = request.DisplayName,
+                    Email = request.Email,
+                    Password = request.Password
+                });
+            }
+
+            return BadRequest(ModelState);
         }
 
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}/users")]
-        public string RegisterUser(string organizationKey, RegisterUserRequest request)
+        public IHttpActionResult RegisterUser(string organizationKey, RegisterUserRequest request)
         {
-            var cmd = new RegisterUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, request.UserKey, request.DisplayName, request.Email, request.Password);
-            cmd.UserKey = cmd.UserKey ?? new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);
-            executionEngine.Handle(cmd);
-            return cmd.UserKey;
+            if (ModelState.IsValid)
+            {
+                var userKey = new Hashids(config.Get("secret-key")).EncodeLong(DateTime.Now.Ticks);
+                var cmd = new RegisterUser(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey, request.DisplayName, request.Email, request.Password);
+                executionEngine.Handle(cmd);
+                return Created(Request.RequestUri.Host + "/users/" +  userKey, userKey);
+            }
+
+            return BadRequest(ModelState);
+
         }
     }
 }

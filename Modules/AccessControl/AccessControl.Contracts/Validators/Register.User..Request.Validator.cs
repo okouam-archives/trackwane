@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using Trackwane.AccessControl.Engine.Commands.Users;
+using Trackwane.AccessControl.Engine.Controllers;
 
-namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
+namespace Trackwane.AccessControl.Contracts.Validators
 {
-    public class RegisterUserValidator : AbstractValidator<RegisterUser>
+    public class RegisterUserValidator : AbstractValidator<RegisterUserRequest>
     {
         public RegisterUserValidator() 
         {

@@ -36,6 +36,7 @@ module.exports = function(host, chakram) {
 	this.login = function(email, password, skipVerification) {
 		sleep(2);
 		var opts = _.merge({}, REQUEST_OPTIONS, {qs: {email: email, password: password}});
+		REQUEST_OPTIONS.headers.Authorization = null;
 		return chakram
 			.get(host + "/token", opts)
 			.then(function(result) {
@@ -51,7 +52,7 @@ module.exports = function(host, chakram) {
 					name: name
 				}, REQUEST_OPTIONS)
 				.then(function(result) {
-					return verify(result, skipVerification);
+					return verify(result, skipVerification, 201);
 				});
 		}
 	};

@@ -79,13 +79,21 @@ namespace Trackwane.AccessControl.Engine.Controllers
         }
 
         [Secured, SystemManagers, HttpPost, Route("organizations")]
-        public string RegisterOrganization(RegisterOrganizationRequest request)
+        public IHttpActionResult RegisterOrganization(RegisterOrganizationRequest request)
         {
-            var cmd = new RegisterOrganization(AppKeyFromHeader, CurrentClaims.UserId, request.OrganizationKey, request.Name);
-            
-            cmd.OrganizationKey = cmd.OrganizationKey ?? new Hashids(config.SecretKey).EncodeLong(DateTime.Now.Ticks);
-            executionEngine.Handle(cmd);
-            return cmd.OrganizationKey;
+            if (ModelState.IsValid)
+            {
+                var cmd = new RegisterOrganization(AppKeyFromHeader, CurrentClaims.UserId, request.OrganizationKey, request.Name)
+                {
+                    OrganizationKey = new Hashids(config.SecretKey).EncodeLong(DateTime.Now.Ticks)
+                };
+
+                executionEngine.Handle(cmd);
+
+                return Created("sdf", cmd.OrganizationKey);
+            }
+
+            return BadRequest(ModelState);
         }
       
         [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}")]

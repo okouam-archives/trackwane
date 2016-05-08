@@ -9,8 +9,9 @@ describe("Users :: Commands :: Register User", function() {
 		ctx = {};
 	});
 
-	it("returns a 200 when a new user is created", function() {
-		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+	it("returns a 201 when a new user is created", function() {
+		return fixtures
+			.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
 			.then(function(result) {
 				return api.users.register(ctx["Nike"].key, "john smith", "john@nowhere.com", "random-password", true)
 			}).then(function(result) {
@@ -19,7 +20,8 @@ describe("Users :: Commands :: Register User", function() {
 	});
 
 	it("returns a 400 if a blank password is provided", function() {
-		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+		return fixtures
+			.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
 			.then(function() {
 				return api.users.register(ctx["Nike"].key, "john smith", "john@nowhere.com", " ", true);
 			}).then(function(result) {
@@ -28,7 +30,8 @@ describe("Users :: Commands :: Register User", function() {
 	});
 
 	it("returns a 400 if a blank email is provided", function() {
-		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+		return fixtures
+			.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
 			.then(function() {
 				return api.users.register(ctx["Nike"].key, "john smith", " ", "random-password", true);
 			}).then(function(result) {

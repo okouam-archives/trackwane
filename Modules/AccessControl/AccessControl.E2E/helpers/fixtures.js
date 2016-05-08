@@ -18,9 +18,15 @@ exports.makeSandboxApplication = function(ctx, api, owner, organizations, users)
 	if (users) {
 		_.each(users, function(user) {
 			chain = chain.then(function(result) {
-				return api.users.register(ctx[user.organization].key, "john smith", "john@nowhere.com", "random-password");
+				ctx[user.organization][user.ref] = {
+					email: user.email || "john@nowhere.com",
+					password: user.password || "random-password",
+					displayName: user.displayName || "John Smith"
+				}
+				var current = ctx[user.organization][user.ref];
+				return api.users.register(ctx[user.organization].key, current.displayName, current.email, current.password);
 			}).then(function(result) {
-				ctx[user.organization][user.ref] = {key: result.body};
+				ctx[user.organization][user.ref].key = result.body;
 			});
 		});
 	}

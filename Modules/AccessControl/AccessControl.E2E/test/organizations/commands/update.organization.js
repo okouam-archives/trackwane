@@ -11,23 +11,22 @@ describe("Organizations :: Commands :: Update Organization", function() {
 
 
 	xit("returns a 200 when the organization is successfully updated", function() {
+		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER, [{ref: "Nike"}])
+			.then(function(result) {
+				return api.organizations.update(ctx["Nike"].key, {name: "A-NEW-NAME"}, true);
+			}).then(function(result) {
+				expect(result).to.have.status(300);
+			});
 	});
 
-	xit("returns a 401 when the requester is not a system administrator or has administrate permission on the organization", function() {
-	});
-
-	xit("returns a 200 when requested by a user with administrate permission on the organization", function() {
-
-	});
-
-	it("returns a 400 when the user is not a system manager", function() {
+	xit("returns a 400 when the user is not a system manager", function() {
 		return fixtures.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER,
 			[{ref: "Nike"}],
-			[{organization: "Nike", ref: "John"}])
+			[{organization: "Nike", ref: "John", view: ["Nike"]}])
 			.then(function(result) {
 				return api.login(ctx["Nike"]["John"].email, ctx["Nike"]["John"].password)
 			}).then(function(result) {
-				return api.organizations.archive(ctx["Nike"].key, true);
+				return api.organizations.update(ctx["Nike"].key, {name: "A-NEW-NAME"}, true);
 			}).then(function(result) {
 				expect(result).to.have.status(400);
 			});

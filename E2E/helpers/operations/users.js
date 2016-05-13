@@ -16,6 +16,30 @@ module.exports = function(host, chakram, REQUEST_OPTIONS, verify) {
 			});
 	};
 
+	this.update = function(organizationKey, userKey, changes, skipVerification) {
+		return chakram
+			.post(host + "/organizations/" + organizationKey + "/users/" + userKey, changes, REQUEST_OPTIONS)
+			.then(function(result) {
+				return verify(result, skipVerification, 201);
+			});
+	};
+
+	this.countInApplication = function(skipVerification) {
+		return chakram
+			.get(host + "/users/count", REQUEST_OPTIONS)
+			.then(function(result) {
+				return verify(result, skipVerification)
+			});
+	};
+
+	this.countInOrganization = function(organizationKey, skipVerification) {
+		return chakram
+			.get(host + "/organizations/" + organizationKey + "/users/count", REQUEST_OPTIONS)
+			.then(function(result) {
+				return verify(result, skipVerification)
+			});
+	};
+
 	this.register = function(organizationKey, displayName, email, password, skipVerification) {
 		return chakram
 			.post(host + "/organizations/" + organizationKey + "/users", {

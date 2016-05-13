@@ -23,7 +23,7 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 
             if (organization == null)
             {
-                throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_ORGANIZATION, cmd.OrganizationKey));
+                throw new NotFoundException(PhraseBook.Generate(Message.UNKNOWN_ORGANIZATION, cmd.OrganizationKey));
             }
 
             organization.Archive();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Web.Http;
 using HashidsNet;
 using Trackwane.AccessControl.Contracts.Contracts;
@@ -52,11 +53,10 @@ namespace Trackwane.AccessControl.Engine.Controllers
             return executionEngine.Query<CountInOrganization>(AppKeyFromHeader, organizationKey).Execute();
         }
 
-
         [Secured, SystemManagers, HttpGet, Route("users/count")]
-        public int CountInSystem()
+        public long CountInSystem()
         {
-            return executionEngine.Query<CountInSystem>(AppKeyFromHeader).Execute();
+            return executionEngine.Query<CountInApplication>(AppKeyFromHeader).Execute();
         }
 
         [Secured, AdministratorsOrUser, HttpPost, Route("organizations/{organizationKey}/users/{userKey}")]
@@ -70,6 +70,8 @@ namespace Trackwane.AccessControl.Engine.Controllers
                     Email = request.Email,
                     Password = request.Password
                 });
+
+                return StatusCode(HttpStatusCode.NoContent);
             }
 
             return BadRequest(ModelState);

@@ -53,7 +53,13 @@ namespace Trackwane.AccessControl.Engine.Controllers
         {
             executionEngine.Handle(new GrantManagePermission(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey));
         }
-        
+
+        [Secured, Administrators, HttpPost, Route("organizations/{organizationKey}/users/{userKey}/administrate")]
+        public void GrantAdministratePermission(string organizationKey, string userKey)
+        {
+            executionEngine.Handle(new GrantAdministratePermission(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, userKey));
+        }
+
         [Secured, Administrators, HttpDelete, Route("organizations/{organizationKey}/users/{userKey}/view")]
         public void RevokeViewPermission(string organizationKey, string userKey)
         {

@@ -6,6 +6,8 @@ module.exports = function(host, chakram) {
 
 	this.APPLICATION_KEY = hashids.encode(new Date().getTime());
 
+	//console.log("Creating new Trackwane Application with key: ", this.APPLICATION_KEY);
+
 	var REQUEST_OPTIONS = {
 		headers: {
 			"X-Trackwane-Application": this.APPLICATION_KEY

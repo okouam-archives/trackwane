@@ -1,6 +1,6 @@
 require(process.cwd() + '/background')();
 
-describe("Users :: Queries :: Find By Key", function() {
+describe("Organizations :: Queries :: Find By Key", function() {
 
 	var api, ctx;
 
@@ -9,7 +9,21 @@ describe("Users :: Queries :: Find By Key", function() {
 		ctx = {};
 	});
 
-	xit("returns a 200 and returns an organization when found", function() {
+	it("returns a 200 and returns an organization when found", function() {
+		return fixtures
+			.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER,
+				[{ref: "Nike"}, {ref: "Reebok"}]
+			)
+			.then(function(result) {
+				return api.organizations.findByKey(ctx["Nike"].key, true);
+			})
+			.then(function(result) {
+				var organization = result.body;
+				expect(organization.Key).to.equal(ctx["Nike"].key);
+				expect(organization.Name).to.equal("Nike");
+				expect(organization.IsArchived).to.equal(false);
+				expect(result).to.have.status(200);
+			});
 	});
 
 });

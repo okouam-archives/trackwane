@@ -9,7 +9,17 @@ describe("Organizations :: Queries :: Find All", function() {
 		ctx = {};
 	});
 
-	xit("returns a 200 and returns all organizations in an application", function() {
+	it("returns a 200 and returns all organizations in an application", function() {
+		return fixtures
+			.makeSandboxApplication(ctx, api, defaults.APPLICATION_OWNER,
+				[{ref: "Nike"}, {ref: "Reebok"}, {ref: "Converse"}]
+			)
+			.then(function(result) {
+				return api.organizations.findAll(true);
+			})
+			.then(function(result) {
+				expect(result).to.have.status(200);
+			});
 	});
 
 });

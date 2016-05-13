@@ -31,14 +31,22 @@ namespace Trackwane.AccessControl.Engine.Processors.Handlers.Users
 
             if (!string.IsNullOrEmpty(cmd.DisplayName))
             {
-                user.Update(cmd.DisplayName);
-
-                repository.Persist(user);
-
-                return user.GetUncommittedChanges();
+                user.UpdateDisplayName(cmd.DisplayName);
             }
 
-            return Enumerable.Empty<DomainEvent>();
-        }
+            if (!string.IsNullOrEmpty(cmd.Email))
+            {
+                user.UpdateEmail(cmd.Email);
+            }
+
+            if (!string.IsNullOrEmpty(cmd.Password))
+            {
+                user.UpdatePassword(cmd.Password);
+            }
+
+            repository.Persist(user);
+
+            return user.GetUncommittedChanges();
+       }
     }
 }

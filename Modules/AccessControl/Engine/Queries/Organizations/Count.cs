@@ -15,7 +15,7 @@ namespace Trackwane.AccessControl.Engine.Queries.Organizations
 
         public int Execute()
         {
-            return Execute(repository => repository.Query<Organization>().Count());
+            return Execute(repository => repository.Query<Organization>().Count(x => x.ApplicationKey == ApplicationKey));
         }
     }
 }

@@ -35,11 +35,32 @@ namespace Trackwane.AccessControl.Domain.Users
             });
         }
 
-        public void Update(string displayName)
+        public void UpdateEmail(string email)
         {
-            Causes(new UserUpdated {
+            Causes(new UserUpdated
+            {
                 UserKey = Key,
-                Previous = new UserUpdated.State {Email = Email, DisplayName = DisplayName},
+                Previous = new UserUpdated.State { Email = Email, DisplayName = DisplayName },
+                Current = new UserUpdated.State { Email = email, DisplayName = DisplayName }
+            });
+        }
+
+        public void UpdatePassword(string password)
+        {
+            Causes(new UserUpdated
+            {
+                UserKey = Key,
+                Previous = new UserUpdated.State { Email = Email, DisplayName = DisplayName },
+                Current = new UserUpdated.State { Email = Email, DisplayName = DisplayName, Password = password}
+            });
+        }
+
+        public void UpdateDisplayName(string displayName)
+        {
+            Causes(new UserUpdated
+            {
+                UserKey = Key,
+                Previous = new UserUpdated.State { Email = Email, DisplayName = DisplayName },
                 Current = new UserUpdated.State { Email = Email, DisplayName = displayName }
             });
         }
@@ -83,6 +104,11 @@ namespace Trackwane.AccessControl.Domain.Users
         private void When(UserUpdated evt)
         {
             DisplayName = evt.Current.DisplayName;
+            if (!string.IsNullOrEmpty(evt.Current.Password))
+            {
+                Credentials = Credentials.Create(evt.Current.Password);
+            }
+            Email = evt.Current.Email;
         }
     }
 }

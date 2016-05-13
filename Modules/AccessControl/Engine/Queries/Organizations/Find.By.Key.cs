@@ -30,17 +30,17 @@ namespace Trackwane.AccessControl.Engine.Queries.Organizations
                     Name = organization.Name
                 };
 
-                foreach (var user in organization.GetViewers().Select(key => repository.Find<User>(key, ApplicationKey)))
+                foreach (var user in organization.Viewers.Select(key => repository.Find<User>(key, ApplicationKey)))
                 {
                     Add(result.Viewers, user);
                 }
 
-                foreach (var user in organization.GetManagers().Select(key => repository.Find<User>(key, ApplicationKey)))
+                foreach (var user in organization.Managers.Select(key => repository.Find<User>(key, ApplicationKey)))
                 {
                     Add(result.Managers, user);
                 }
 
-                foreach (var user in organization.GetAdministrators().Select(key => repository.Find<User>(key, ApplicationKey)))
+                foreach (var user in organization.Administrators.Select(key => repository.Find<User>(key, ApplicationKey)))
                 {
                     Add(result.Administrators, user);
                 }

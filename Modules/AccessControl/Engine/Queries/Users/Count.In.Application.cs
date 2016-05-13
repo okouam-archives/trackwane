@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Marten;
-using Trackwane.AccessControl.Contracts.Contracts;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Queries;

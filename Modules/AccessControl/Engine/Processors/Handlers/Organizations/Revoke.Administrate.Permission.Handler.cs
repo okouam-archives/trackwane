@@ -3,6 +3,7 @@ using log4net;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.AccessControl.Engine.Commands.Organizations;
+using Trackwane.AccessControl.Engine.Services;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
@@ -10,32 +11,32 @@ using Trackwane.Framework.Interfaces;
 
 namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
 {
-    public class GrantManagePermissionHandler : Handler<GrantManagePermission>
+    public class RevokeAdministratePermissionHandler : Handler<RevokeAdministratePermission>
     {
-        public GrantManagePermissionHandler(
+        public RevokeAdministratePermissionHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
             base(publisher, transaction, log)
         {
         }
 
-        protected override IEnumerable<DomainEvent> Handle(GrantManagePermission cmd, IRepository repository)
+        protected override IEnumerable<DomainEvent> Handle(RevokeAdministratePermission cmd, IRepository repository)
         {
             var organization = repository.Find<Organization>(cmd.OrganizationKey, cmd.ApplicationKey);
 
             if (organization == null)
             {
-                throw new BusinessRuleException("Unable to find organization with key " + cmd.OrganizationKey);
+                throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_ORGANIZATION, cmd.OrganizationKey));
             }
 
             var user = repository.Find<User>(cmd.UserKey, cmd.ApplicationKey);
 
             if (user == null)
             {
-                throw new BusinessRuleException("Unable to find user with key " + cmd.UserKey);
+                throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_USER, cmd.UserKey));
             }
 
-            organization.GrantManagePermission(user.Key);
+            organization.RevokeAdministratePermission(user.Key);
 
             repository.Persist(organization);
 

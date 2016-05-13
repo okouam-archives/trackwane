@@ -133,6 +133,7 @@
     <Compile Include="Web\DependencyResolution\WebApiDependencyResolver.cs" />
     <Compile Include="Web\Filters\BusinessRuleExceptionFilter.cs" />
     <Compile Include="Web\Filters\LoggingFilter.cs" />
+    <Compile Include="Web\Filters\NotFoundExceptionFilter.cs" />
     <Compile Include="Web\Filters\ValidationExceptionFilter.cs" />
     <Compile Include="Web\Security\Administrators.Attribute.cs" />
     <Compile Include="Web\Security\BaseApiController.cs" />

@@ -3,18 +3,14 @@
 namespace Trackwane.Framework.Common.Exceptions
 {
     [Serializable]
-    public class NotFoundException<T> : Exception
+    public class NotFoundException : Exception
     {
-        public string Id { get; set; }
-
-        public NotFoundException(string id) : base(CreateMessage(typeof(T), id))
+        public NotFoundException()
         {
-            Id = id;
         }
 
-        private static string CreateMessage(Type type, string id)
+        public NotFoundException(string message) : base(message)
         {
-            return $"The {type.ToString().ToLower()} with ID <{id}> cannot be found";
         }
     }
 }

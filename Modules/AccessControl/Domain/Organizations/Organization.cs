@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
 using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.AccessControl.Domain.Users;
 using Trackwane.Framework.Common;
@@ -14,10 +13,14 @@ namespace Trackwane.AccessControl.Domain.Organizations
     {
         /* Public */
 
-        [JsonProperty]
         public string Name { get; set; }
 
-        [JsonProperty]
+        public IList<string> Managers { get; set; }
+
+        public IList<string> Viewers { get; set; }
+
+        public IList<string> Administrators { get; set; }
+
         public bool IsArchived { get; set; }
 
         public void Update(string name)
@@ -135,21 +138,6 @@ namespace Trackwane.AccessControl.Domain.Organizations
             });
         }
 
-        public IEnumerable<string> GetViewers()
-        {
-            return Viewers;
-        }
-
-        public IEnumerable<string> GetAdministrators()
-        {
-            return Administrators;
-        }
-
-        public IEnumerable<string> GetManagers()
-        {
-            return Managers;
-        }
-
         /* Protected */
         
         protected override void Apply(DomainEvent evt)
@@ -158,15 +146,6 @@ namespace Trackwane.AccessControl.Domain.Organizations
         }
 
         /* Private */
-
-        [JsonProperty]
-        private IList<string> Managers { get; set; }
-
-        [JsonProperty]
-        private IList<string> Viewers { get; set; }
-
-        [JsonProperty]
-        private IList<string> Administrators { get; set; }
 
         private void When(OrganizationRegistered evt)
         {

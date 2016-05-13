@@ -62,6 +62,7 @@ namespace Trackwane.API
             config.MapHttpAttributeRoutes();
             config.Filters.Add(new BusinessRuleExceptionFilter());
             config.Filters.Add(new ValidationExceptionFilter());
+            config.Filters.Add(new NotFoundExceptionFilter());
         }
 
         private static void ResolveDependencies(HttpConfiguration configuration, IContainer container)

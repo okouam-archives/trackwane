@@ -9,7 +9,7 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Listeners.Vehicles
 {
-    internal class TrackerArchivedListener : TransactionalListener<TrackerArchived>
+    internal class TrackerArchivedListener : TransactionalListener<SensorArchived>
     {
         public TrackerArchivedListener(
             IProvideTransactions transaction,
@@ -18,9 +18,9 @@ namespace Trackwane.Management.Engine.Listeners.Vehicles
         {
         }
 
-        protected override IEnumerable<DomainEvent> Handle(TrackerArchived evt, IRepository repository)
+        protected override IEnumerable<DomainEvent> Handle(SensorArchived evt, IRepository repository)
         {
-            var tracker = repository.Find<Tracker>(evt.TrackerKey, evt.ApplicationKey);
+            var tracker = repository.Find<Sensor>(evt.TrackerKey, evt.ApplicationKey);
 
             var vehicles = repository.Query<Vehicle>()
                 .Where(x => x.DriverId == evt.TrackerKey);

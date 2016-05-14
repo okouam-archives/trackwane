@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using Marten.Schema;
 using Trackwane.Framework.Common;
 
 namespace Trackwane.Management.Domain
 {
+    [DocumentAlias("management_organization")]
     public class Organization : AggregateRoot
     {
         public IList<string> Trackers = new List<string>();

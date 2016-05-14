@@ -20,7 +20,7 @@ namespace Trackwane.Management.Engine.Queries.Vehicles
 
                 if (vehicle.TrackerId != null)
                 {
-                    var tracker = repository.Find<Tracker>(vehicle.TrackerId, ApplicationKey);
+                    var tracker = repository.Find<Sensor>(vehicle.TrackerId, ApplicationKey);
 
                     if (tracker != null)
                     {

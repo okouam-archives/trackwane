@@ -14,7 +14,7 @@ namespace Trackwane.Management.Engine.Queries.Trackers
         {
             return Execute(repository =>
             {
-                var query = repository.Query<Tracker>()
+                var query = repository.Query<Sensor>()
                   .Where(x => x.OrganizationKey == OrganizationKey);
 
                 if (!string.IsNullOrEmpty(hardwareId))

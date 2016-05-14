@@ -6,17 +6,16 @@ using Trackwane.Data.Shared.Events;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
-using IProvideTransactions = Trackwane.Framework.Interfaces.IProvideTransactions;
-using IRepository = Trackwane.Framework.Interfaces.IRepository;
 
 namespace Trackwane.Data.Engine.Handlers
 {
-    public class SaveSensorReadingHandler : TransactionalHandler<SaveSensorReading>
+    public class SaveSensorReadingHandler : Handler<SaveSensorReading>
     {
         public SaveSensorReadingHandler(
+            IExecutionEngine executionEngine,
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, log)
+            base(executionEngine, transaction, log)
         {
         }
 

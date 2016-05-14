@@ -15,7 +15,7 @@ namespace Trackwane.Framework.Infrastructure.Requests
             this.log = log;
         }
 
-        public IList<DomainEvent> Handle(T cmd)
+        public IList<dynamic> Handle(T cmd)
         {
             using (var uow = transaction.Begin())
             {
@@ -27,12 +27,13 @@ namespace Trackwane.Framework.Infrastructure.Requests
 
                 if (events != null)
                 {
-                    var all = events.ToList();
+                    var all = events.Cast<dynamic>().ToList();
 
-                    if (all.Count > 0)
+                    if (all.Any())
                     {
                         foreach (var evt in all)
                         {
+                            log.Info($"Publishing event of type {evt.GetType()}");
                             engine.Publish(evt);
                         }
                     }
@@ -40,7 +41,7 @@ namespace Trackwane.Framework.Infrastructure.Requests
                     return all;
                 }
 
-                return new List<DomainEvent>();
+                return new List<dynamic>();
             }
         }
 

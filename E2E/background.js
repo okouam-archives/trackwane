@@ -4,6 +4,7 @@ module.exports = function() {
 	this.sleep = require('./helpers/sleep');
 	this.inspect = require('./helpers/inspect');
 	this.API = require('./helpers/api');
+	this.SensorAPI = require('./helpers/sensor-api');
 	this.defaults = require('./helpers/defaults');
 	this.expect = this.chakram.expect;
 	this._ = require('lodash');

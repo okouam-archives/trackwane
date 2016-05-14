@@ -10,7 +10,7 @@ using Trackwane.Management.Engine.Services;
 
 namespace Trackwane.Management.Engine.Handlers.Boundaries
 {
-    public class ArchiveBoundaryHandler : TransactionalHandler<ArchiveBoundary>
+    public class ArchiveBoundaryHandler : Handler<ArchiveBoundary>
     {
         /* Public */
 
@@ -18,7 +18,7 @@ namespace Trackwane.Management.Engine.Handlers.Boundaries
             IProvideTransactions transaction,
             IExecutionEngine publisher,
             ILog log) :
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
         }
         

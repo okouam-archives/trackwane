@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using log4net;
+using MassTransit;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
@@ -11,7 +12,7 @@ using Message = Trackwane.Management.Engine.Services.Message;
 
 namespace Trackwane.Management.Engine.Listeners.Organizations.Locations
 {
-    public class LocationUpdatedListener : TransactionalListener<LocationUpdated>
+    public class LocationUpdatedListener : TransactionalListener<LocationUpdated>, IConsumer<LocationUpdated>
     {
         public LocationUpdatedListener(IProvideTransactions transaction, IExecutionEngine publisher, ILog log) : base(transaction, publisher, log)
         {

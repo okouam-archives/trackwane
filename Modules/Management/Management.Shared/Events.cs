@@ -130,14 +130,14 @@ namespace Trackwane.Management.Contracts.Events
         }
     }
 
-    public class TrackerArchived : DomainEvent
+    public class SensorArchived : DomainEvent
     {
         public string TrackerKey { get; set; }
 
         public string OrganizationKey { get; set; }
     }
 
-    public class TrackerRegistered : DomainEvent
+    public class SensorRegistered : DomainEvent
     {
         public string TrackerKey { get; set; }
         public string OrganizationKey { get; set; }

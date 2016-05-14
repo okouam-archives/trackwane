@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using log4net;
 using Trackwane.AccessControl.Domain.Organizations;
 using Trackwane.AccessControl.Engine.Commands.Organizations;
 using Trackwane.AccessControl.Engine.Services;
@@ -6,9 +7,8 @@ using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
 using Trackwane.Framework.Interfaces;
-using log4net;
 
-namespace Trackwane.AccessControl.Engine.Processors.Handlers.Organizations
+namespace Trackwane.AccessControl.Engine.Handlers.Organizations
 {
     public class RegisterOrganizationHandler : Handler<RegisterOrganization>
     {

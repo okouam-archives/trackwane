@@ -9,7 +9,7 @@ namespace Trackwane.Framework.Infrastructure
     {
         public Registry()
         {
-            For<IPlatformConfig>().Use<PlatformConfig>();
+            For<IPlatformConfig>().Use<PlatformConfig>().Singleton();
 
             For<IProvideTransactions>().Use<TransactionProvider>();
 

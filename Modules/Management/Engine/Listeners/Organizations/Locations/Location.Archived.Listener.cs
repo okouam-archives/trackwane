@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using log4net;
+using MassTransit;
+using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Common.Exceptions;
 using Trackwane.Framework.Infrastructure.Requests;
@@ -11,7 +13,7 @@ using Trackwane.Management.Engine.Services;
 
 namespace Trackwane.Management.Engine.Listeners.Organizations.Locations
 {
-    public class LocationArchivedListener : TransactionalListener<LocationArchived>
+    public class LocationArchivedListener : TransactionalListener<LocationArchived>, IConsumer<LocationArchived>
     {
         public LocationArchivedListener(IProvideTransactions transaction, IExecutionEngine publisher, ILog log) : base(transaction, publisher, log)
         {

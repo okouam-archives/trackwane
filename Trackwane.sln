@@ -48,6 +48,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessControl.Messages", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{4339FEF1-CFF6-4C9C-827A-6628E8D5669D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -176,6 +178,14 @@ Global
 		{4339FEF1-CFF6-4C9C-827A-6628E8D5669D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4339FEF1-CFF6-4C9C-827A-6628E8D5669D}.Release|x64.ActiveCfg = Release|Any CPU
 		{4339FEF1-CFF6-4C9C-827A-6628E8D5669D}.Release|x64.Build.0 = Release|Any CPU
+		{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}.Debug|x64.Build.0 = Debug|Any CPU
+		{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}.Release|x64.ActiveCfg = Release|Any CPU
+		{B5A6B1EE-4D6E-471C-8AA1-0D11EFE62C89}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

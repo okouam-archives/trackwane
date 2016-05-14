@@ -10,14 +10,14 @@ using Trackwane.Management.Engine.Services;
 
 namespace Trackwane.Management.Engine.Handlers.Boundaries
 {
-    public class UpdateBoundaryHandler : TransactionalHandler<UpdateBoundary>
+    public class UpdateBoundaryHandler : Handler<UpdateBoundary>
     {
         /* Public */
 
         public UpdateBoundaryHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
         }
 

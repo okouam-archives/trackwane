@@ -10,13 +10,13 @@ using Trackwane.Management.Engine.Services;
 
 namespace Trackwane.Management.Engine.Handlers.Locations
 {
-    public class ArchiveLocationHandler : TransactionalHandler<ArchiveLocation>
+    public class ArchiveLocationHandler : Handler<ArchiveLocation>
     {
         public ArchiveLocationHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher,
             ILog log) :
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
         }
 

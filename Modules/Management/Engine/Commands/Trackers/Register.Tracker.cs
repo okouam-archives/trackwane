@@ -2,7 +2,7 @@
 
 namespace Trackwane.Management.Engine.Commands.Trackers
 {
-    public class RegisterTracker : UserCommand
+    public class RegisterSensor : UserCommand
     {
         public string TrackerId { get; set;  }
 
@@ -14,7 +14,7 @@ namespace Trackwane.Management.Engine.Commands.Trackers
 
         public string Identifier { get; private set; }
 
-        public RegisterTracker(string applicationKey, string requesterId, string organizationId, string hardwareId, string model, string identifier, string trackerId = null) : base(applicationKey, requesterId)
+        public RegisterSensor(string applicationKey, string requesterId, string organizationId, string hardwareId, string model, string identifier, string trackerId = null) : base(applicationKey, requesterId)
         {
             TrackerId = trackerId;
             HardwareId = hardwareId;

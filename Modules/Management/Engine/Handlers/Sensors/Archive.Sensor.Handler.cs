@@ -10,28 +10,28 @@ using log4net;
 
 namespace Trackwane.Management.Engine.Handlers.Trackers
 {
-    public class ArchiveTrackerHandler : TransactionalHandler<ArchiveTracker>
+    public class ArchiveTrackerHandler : Handler<ArchiveTracker>
     {
         public ArchiveTrackerHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher,
             ILog log) :
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
         }
         
         protected override IEnumerable<DomainEvent> Handle(ArchiveTracker cmd, IRepository repository)
         {
-            var tracker = repository.Find<Tracker>(cmd.TrackerId, cmd.ApplicationKey);
+            var sensor = repository.Find<Sensor>(cmd.TrackerId, cmd.ApplicationKey);
 
-            if (tracker == null)
+            if (sensor == null)
             {
                 throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_TRACKER, cmd.TrackerId));
             }
 
-            tracker.Archive();
+            sensor.Archive();
 
-            return tracker.GetUncommittedChanges();
+            return sensor.GetUncommittedChanges();
         }
     }
 }

@@ -10,13 +10,13 @@ using IRepository = Trackwane.Framework.Interfaces.IRepository;
 
 namespace Trackwane.Data.Engine.Listeners
 {
-    public class TrackerRegisteredListener : TransactionalListener<TrackerRegistered>
+    public class TrackerRegisteredListener : TransactionalListener<SensorRegistered>
     {
         public TrackerRegisteredListener(IProvideTransactions transaction, IExecutionEngine publisher, ILog log) : base(transaction, publisher, log)
         {
         }
 
-        protected override IEnumerable<DomainEvent> Handle(TrackerRegistered cmd, IRepository repository)
+        protected override IEnumerable<DomainEvent> Handle(SensorRegistered cmd, IRepository repository)
         {
             throw new NotImplementedException();
         }

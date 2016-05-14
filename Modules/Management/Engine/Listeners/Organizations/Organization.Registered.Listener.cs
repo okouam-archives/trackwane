@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using log4net;
+using MassTransit;
 using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.Framework.Common;
 using Trackwane.Framework.Infrastructure.Requests;
@@ -8,7 +9,7 @@ using Trackwane.Management.Domain;
 
 namespace Trackwane.Management.Engine.Listeners.Organizations
 {
-    public class OrganizationRegisteredListener : TransactionalListener<OrganizationRegistered>
+    public class OrganizationRegisteredListener : TransactionalListener<OrganizationRegistered>, IConsumer<OrganizationRegistered>
     {
         public OrganizationRegisteredListener(IProvideTransactions transaction, IExecutionEngine publisher, ILog log) : base(transaction, publisher, log)
         {

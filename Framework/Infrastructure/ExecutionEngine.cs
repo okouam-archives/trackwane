@@ -45,7 +45,7 @@ namespace Trackwane.Framework.Infrastructure
         {
             bus = Bus.Factory.CreateUsingInMemory(cfg =>
             {
-                cfg.ReceiveEndpoint("queue_name", x =>
+                cfg.ReceiveEndpoint("ServiceBus", x =>
                 {
                     x.LoadFrom(container);
                 });

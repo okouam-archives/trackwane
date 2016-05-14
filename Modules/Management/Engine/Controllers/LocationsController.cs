@@ -1,6 +1,9 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using Geo.Geometries;
+using HashidsNet;
 using Trackwane.Framework.Common;
+using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Web.Security;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Contracts.Models;
@@ -12,11 +15,13 @@ namespace Trackwane.Management.Engine.Controllers
     [RoutePrefix("organizations/{organizationKey}")]
     public class LocationsController : BaseManagementController
     {
+        private readonly IPlatformConfig config;
         private const string RESOURCE_URL = "locations/{key}";
         private const string COLLECTION_URL = "locations";
 
-        public LocationsController(IExecutionEngine dispatcher) : base(dispatcher)
+        public LocationsController(IExecutionEngine dispatcher, IPlatformConfig config) : base(dispatcher)
         {
+            this.config = config;
         }
 
         [Secured, Managers, HttpPost, Route(RESOURCE_URL)]
@@ -48,13 +53,17 @@ namespace Trackwane.Management.Engine.Controllers
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
-        public void RegisterLocation(string organizationKey, RegisterLocationModel model)
+        public IHttpActionResult RegisterLocation(string organizationKey, RegisterLocationModel model)
         {
+            var key = new Hashids(config.SecretKey).EncodeLong(DateTime.Now.Ticks);
+
             dispatcher.Handle(new RegisterLocation(AppKeyFromHeader, CurrentClaims.UserId, organizationKey,
                 model.Name,
                 model.Coordinates != null ? new Geo.IO.GeoJson.GeoJsonReader().Read(model.Coordinates) as Point : null,
-                model.Key)
+               key)
                 );
+
+            return Created(key, key);
         }
     }
 }

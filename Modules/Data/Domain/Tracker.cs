@@ -29,7 +29,7 @@ namespace Trackwane.Data.Domain
 
         public Tracker(string id, string organizationId, string hardwareId)
         {
-            Causes(new TrackerRegistered
+            Causes(new SensorRegistered
             {
                 TrackerKey = id,
                 HardwareId = hardwareId,
@@ -76,7 +76,7 @@ namespace Trackwane.Data.Domain
 
         /* Private */
 
-        private void When(TrackerRegistered evt)
+        private void When(SensorRegistered evt)
         {
             Key = evt.TrackerKey;
             OrganizationId = evt.OrganizationKey;

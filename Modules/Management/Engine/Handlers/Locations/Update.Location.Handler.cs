@@ -10,12 +10,12 @@ using log4net;
 
 namespace Trackwane.Management.Engine.Handlers.Locations
 {
-    public class UpdateLocationHandler : TransactionalHandler<UpdateLocation>
+    public class UpdateLocationHandler : Handler<UpdateLocation>
     {
         public UpdateLocationHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, ILog log) : 
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
         }
 

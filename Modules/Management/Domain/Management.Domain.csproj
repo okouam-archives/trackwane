@@ -35,6 +35,14 @@
     <Reference Include="Geo">
       <HintPath>..\..\..\packages\Geo.0.14.1\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Geo.dll</HintPath>
     </Reference>
+    <Reference Include="Marten, Version=0.9.2.427, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Marten.0.9.2.427\lib\net46\Marten.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=3.0.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Npgsql.3.0.4\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -50,7 +58,7 @@
     <Compile Include="Driver.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Organization.cs" />
-    <Compile Include="Tracker.cs" />
+    <Compile Include="Sensor.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

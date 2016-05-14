@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
+using MassTransit;
 using Trackwane.Framework.Infrastructure.Requests;
+using Trackwane.Management.Contracts;
 using Trackwane.Management.Engine.Commands.Vehicles;
 using Trackwane.Management.Engine.Controllers;
 using Trackwane.Management.Engine.Handlers.Vehicles;
@@ -11,21 +13,29 @@ namespace Trackwane.Management.Engine
     {
         public Registry()
         {
+            AssemblyScanner
+                       .FindValidatorsInAssembly(typeof(_Management_Contracts_Assembly_).Assembly)
+                       .ForEach(result => {
+                           For(result.InterfaceType).Use(result.ValidatorType);
+                       });
+
             Scan(cfg =>
             {
-                cfg.AssemblyContainingType<ArchiveVehicle>();
+                cfg.AssemblyContainingType<_Management_Engine_Assembly_>();
 
-                cfg.AssemblyContainingType<ArchiveVehicleValidator>();
+                cfg.SingleImplementationsOfInterface();
 
-                cfg.AssemblyContainingType<DriverRegisteredListener>();
+                cfg.WithDefaultConventions();
 
-                cfg.AssemblyContainingType<AlertsController>();
+                cfg.ConnectImplementationsToTypesClosing(typeof(Handler<>));
 
                 cfg.ConnectImplementationsToTypesClosing(typeof(AbstractValidator<>));
 
                 cfg.ConnectImplementationsToTypesClosing(typeof(RuntimeRequestHandler<>));
 
                 cfg.SingleImplementationsOfInterface();
+
+                cfg.ConnectImplementationsToTypesClosing(typeof(IConsumer<>));
             });
         }
     }

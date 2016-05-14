@@ -4,7 +4,7 @@ using Trackwane.Management.Contracts.Events;
 
 namespace Trackwane.Management.Domain
 {
-    public class Tracker : AggregateRoot, IResource
+    public class Sensor : AggregateRoot, IResource
     {
         public bool IsArchived { get; set; }
 
@@ -16,14 +16,14 @@ namespace Trackwane.Management.Domain
 
         public string Identifier { get; set; }
         
-        public Tracker()
+        public Sensor()
         {
 
         }
 
-        public Tracker(string applicationKey, string id, string organizationKey, string hardwareId, string model, string identifier)
+        public Sensor(string applicationKey, string id, string organizationKey, string hardwareId, string model, string identifier)
         {
-            Causes(new TrackerRegistered
+            Causes(new SensorRegistered
             {
                 ApplicationKey = applicationKey,
                 TrackerKey = id,
@@ -36,7 +36,7 @@ namespace Trackwane.Management.Domain
         
         public void Archive()
         {
-            Causes(new TrackerArchived
+            Causes(new SensorArchived
             {
                 TrackerKey = Key
             });
@@ -51,16 +51,17 @@ namespace Trackwane.Management.Domain
 
         /* Private */
 
-        private void When(TrackerRegistered evt)
+        private void When(SensorRegistered evt)
         {
             ApplicationKey = evt.ApplicationKey;
             Key = evt.TrackerKey;
+            Identifier = evt.Identifier;
             OrganizationKey = evt.OrganizationKey;
             HardwareId = evt.HardwareId;
             Model = evt.Model;
         }
 
-        private void When(TrackerArchived evt)
+        private void When(SensorArchived evt)
         {
             IsArchived = true;
         }

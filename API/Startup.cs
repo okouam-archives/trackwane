@@ -1,11 +1,15 @@
 ﻿using System.Web.Http;
 using FluentValidation.WebApi;
+using log4net;
+using log4net.Config;
 using Marten;
+using MassTransit.Log4NetIntegration.Logging;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using StructureMap;
 using Swashbuckle.Application;
+using Trackwane.AccessControl.Contracts.Events;
 using Trackwane.API;
 using Trackwane.Framework.Infrastructure.Web;
 using Trackwane.Framework.Infrastructure.Web.DependencyResolution;
@@ -22,16 +26,21 @@ namespace Trackwane.API
 
         public void Configuration(IAppBuilder app)
         {
+            Log4NetLogger.Use();
+
+            XmlConfigurator.Configure();
+
             Container = new Container(x =>
             {
                 x.AddRegistry<AccessControl.Engine.Registry>();
                 x.AddRegistry<Data.Engine.Registry>();
                 x.AddRegistry<Management.Engine.Registry>();
                 x.AddRegistry<Framework.Infrastructure.Registry>();
-                x.For<IDocumentStore>().Use(DocumentStore.For("Server=127.0.0.1;Port=5432;Database=trackwane;User Id=postgres;Password = com99123; "));
+                x.For<IDocumentStore>().Use(DocumentStore.For("Server=127.0.0.1;Port=5432;Database=trackwane;User Id=postgres;Password=com99123; "));
             });
 
-            Container.GetInstance<IExecutionEngine>().Start();
+            var executionEngine = Container.GetInstance<IExecutionEngine>();
+            executionEngine.Start();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             var config = new HttpConfiguration();

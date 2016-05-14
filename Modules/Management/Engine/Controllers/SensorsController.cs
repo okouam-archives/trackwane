@@ -1,5 +1,8 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
+using HashidsNet;
 using Trackwane.Framework.Common;
+using Trackwane.Framework.Common.Interfaces;
 using Trackwane.Framework.Infrastructure.Web.Security;
 using Trackwane.Framework.Interfaces;
 using Trackwane.Management.Contracts.Models;
@@ -9,13 +12,15 @@ using Trackwane.Management.Engine.Queries.Trackers;
 namespace Trackwane.Management.Engine.Controllers
 {
     [RoutePrefix("organizations/{organizationKey}")]
-    public class TrackersController : BaseManagementController
+    public class SensorsController : BaseManagementController
     {
-        private const string RESOURCE_URL = "trackers/{key}";
-        private const string COLLECTION_URL = "trackers";
+        private readonly IPlatformConfig config;
+        private const string RESOURCE_URL = "sensors/{key}";
+        private const string COLLECTION_URL = "sensors";
 
-        public TrackersController(IExecutionEngine dispatcher) : base(dispatcher)
+        public SensorsController(IExecutionEngine dispatcher, IPlatformConfig config) : base(dispatcher)
         {
+            this.config = config;
         }
 
         [Secured, Viewers, HttpGet, Route(RESOURCE_URL)]
@@ -37,10 +42,14 @@ namespace Trackwane.Management.Engine.Controllers
         }
 
         [Secured, Managers, HttpPost, Route(COLLECTION_URL)]
-        public void RegisterTracker(string organizationKey, RegisterTrackerModel model)
+        public IHttpActionResult RegisterTracker(string organizationKey, RegisterTrackerModel model)
         {
-            dispatcher.Handle(new RegisterTracker(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.HardwareId, model.Model,
-                model.Key));
+            var key = new Hashids(config.SecretKey).EncodeLong(DateTime.Now.Ticks);
+
+            dispatcher.Handle(new RegisterSensor(AppKeyFromHeader, CurrentClaims.UserId, organizationKey, model.HardwareId, model.Model,
+                model.Identifier, key));
+
+            return Created("sdsdf", key);
         }
     }
 }

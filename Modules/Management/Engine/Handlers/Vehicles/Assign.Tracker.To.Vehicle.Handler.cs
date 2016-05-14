@@ -29,7 +29,7 @@ namespace Trackwane.Management.Engine.Handlers.Vehicles
                 throw new BusinessRuleException(PhraseBook.Generate(Message.UNKNOWN_VEHICLE, cmd.VehicleId));
             }
 
-            var tracker = repository.Find<Tracker>(cmd.TrackerId, cmd.ApplicationKey);
+            var tracker = repository.Find<Sensor>(cmd.TrackerId, cmd.ApplicationKey);
 
             if (tracker == null)
             {

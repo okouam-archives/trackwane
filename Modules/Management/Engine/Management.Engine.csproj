@@ -38,6 +38,10 @@
     <Reference Include="Geo">
       <HintPath>..\..\..\packages\Geo.0.14.1\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Geo.dll</HintPath>
     </Reference>
+    <Reference Include="Hashids.net, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\hashids.net.1.1.2\lib\net45\Hashids.net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -109,7 +113,7 @@
     <Compile Include="Controllers\BoundariesController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
-    <Compile Include="Controllers\TrackersController.cs" />
+    <Compile Include="Controllers\SensorsController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Handlers\Alerts\Archive.Alert.Handler.cs" />
     <Compile Include="Handlers\Alerts\Create.Alert.Handler.cs" />
@@ -120,9 +124,6 @@
     <Compile Include="Handlers\Boundaries\Archive.Boundary.Handler.cs" />
     <Compile Include="Handlers\Boundaries\Create.Boundary.Handler.cs" />
     <Compile Include="Handlers\Boundaries\Update.Boundary.Handler.cs" />
-    <Compile Include="Handlers\Boundaries\Archive.Boundary.Validator.cs" />
-    <Compile Include="Handlers\Boundaries\Create.Boundary.Validator.cs" />
-    <Compile Include="Handlers\Boundaries\Update.Boundary.Validator.cs" />
     <Compile Include="Handlers\Drivers\Archive.Driver.Handler.cs" />
     <Compile Include="Handlers\Drivers\Register.Driver.Handler.cs" />
     <Compile Include="Handlers\Drivers\Update.Driver.Handler.cs" />
@@ -132,9 +133,6 @@
     <Compile Include="Handlers\Locations\Archive.Location.Handler.cs" />
     <Compile Include="Handlers\Locations\Register.Location.Handler.cs" />
     <Compile Include="Handlers\Locations\Update.Location.Handler.cs" />
-    <Compile Include="Handlers\Locations\Archive.Location.Validator.cs" />
-    <Compile Include="Handlers\Locations\Register.Location.Validator.cs" />
-    <Compile Include="Handlers\Locations\Update.Location.Validator.cs" />
     <Compile Include="Listeners\Organizations\Alerts\Alert.Archived.Listener.cs" />
     <Compile Include="Listeners\Organizations\Alerts\Alert.Created.Listener.cs" />
     <Compile Include="Listeners\Organizations\Alerts\Alert.Edited.Listener.cs" />
@@ -154,10 +152,8 @@
     <Compile Include="Listeners\Vehicles\Driver.Archived.Listener.cs" />
     <Compile Include="Listeners\Vehicles\Tracker.Archived.Listener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Handlers\Trackers\Archive.Tracker.Handler.cs" />
-    <Compile Include="Handlers\Trackers\Register.Tracker.Handler.cs" />
-    <Compile Include="Handlers\Trackers\Archive.Tracker.Validator.cs" />
-    <Compile Include="Handlers\Trackers\Register.Tracker.Validator.cs" />
+    <Compile Include="Handlers\Sensors\Archive.Sensor.Handler.cs" />
+    <Compile Include="Handlers\Sensors\Register.Sensor.Handler.cs" />
     <Compile Include="Handlers\Vehicles\Archive.Vehicle.Handler.cs" />
     <Compile Include="Handlers\Vehicles\Assign.Driver.To.Vehicle.Handler.cs" />
     <Compile Include="Handlers\Vehicles\Assign.Tracker.To.Vehicle.Handler.cs" />

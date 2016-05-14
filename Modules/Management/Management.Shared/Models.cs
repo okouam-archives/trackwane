@@ -109,8 +109,6 @@ namespace Trackwane.Management.Contracts.Models
 
     public class RegisterLocationModel
     {
-        public string Key { get; set; }
-
         public string Name { get; set; }
 
         public string Coordinates { get; set; }
@@ -144,7 +142,7 @@ namespace Trackwane.Management.Contracts.Models
 
     public class RegisterTrackerModel
     {
-        public string Key { get; set; }
+        public string Identifier { get; set; }
 
         public string HardwareId { get; set; }
 

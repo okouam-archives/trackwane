@@ -10,14 +10,14 @@ using Message = Trackwane.Management.Engine.Services.Message;
 
 namespace Trackwane.Management.Engine.Handlers.Boundaries
 {
-    public class CreateBoundaryHandler : TransactionalHandler<CreateBoundary>
+    public class CreateBoundaryHandler : Handler<CreateBoundary>
     {
 
         public CreateBoundaryHandler(
             IProvideTransactions transaction,
             IExecutionEngine publisher, 
             ILog log) :
-            base(transaction, log)
+            base(publisher, transaction, log)
         {
         }
 

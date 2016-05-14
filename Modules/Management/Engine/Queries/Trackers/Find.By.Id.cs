@@ -12,7 +12,7 @@ namespace Trackwane.Management.Engine.Queries.Trackers
         {
             return Execute(repository =>
             {
-                var tracker = repository.Find<Tracker>(trackerId, ApplicationKey);
+                var tracker = repository.Find<Sensor>(trackerId, ApplicationKey);
 
                 return tracker == null ? null : new TrackerDetails
                 {

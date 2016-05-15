@@ -1,23 +1,72 @@
-dashboard-page
+// Mixins
 
-	dashboard-trackers
+right-panel()
+	right: 10px;
+	top: 85px;
+	z-index: 20000;
+	background-color: #333;
+	 width: 210px;
+	 border-top: 1px #666 solid
+
+flexi()
+	flex: 1
+	display: flex
+
+listing()
+	width: 300px
+	min-width: 300px
+	background-color: #343434
+	ul
 		width: 300px
-		background-color: #343434
+	 	border-top: 1px solid #777
+	 	margin-top: 0
+	 	li.header
+		 	padding: 10px
+		 	font-weight: bold
+		 	border-bottom: 1px solid #777
+		 	a
+			 	color: white
+			a:hover
+				color: #039be5
+		li.entry
+			&:hover
+				background-color: #999
 
+// Components
+
+dashboard-page
+	dashboard-trackers
+		listing()
+		li.entry
+			padding: 10px
+			padding-bottom: 15px
+			border-bottom: 1px solid #777
+			span.identifier
+				margin-left: 5px
+			i
+				position: relative;
+				top: 8px
+			p.status
+				 margin-bottom: 0;
+				 margin-left: 33px;
+				 margin-top: 0px;
+				 font-size: 12px
 	dashboard-map
-		flex: 1
-		display: flex
+		flexi()
 		align-items: stretch;
 		ui-gmap-google-map
 			align-items: stretch;
 			flex: 1
+	dashboard-tracker
+		display: none;
+		right-panel()
+	dashboard-actions
+		right-panel()
 
 .map
-	display: flex;
-	flex: 1;
+	flexi()
 	background-color: #666;
 	align-items: stretch;
 
 .angular-google-map, .angular-google-map-container
-	flex: 1
-	display: flex
+	flexi()

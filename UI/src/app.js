@@ -1,6 +1,12 @@
-var app = angular.module("trackwane", [	"ui.router", 'uiGmapgoogle-maps']);
+var app = angular.module("trackwane", [	"ui.router", 'uiGmapgoogle-maps', 'ngMaterial']);
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+	$mdThemingProvider
+		.theme('default')
+		.primaryPalette('blue')
+	    .accentPalette('blue')
+		.dark();
+
     $urlRouterProvider.otherwise("/dashboard");
     $stateProvider
         //.state('login', {url: "/", templateUrl: "pages/login.html"})
@@ -19,6 +25,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		})
 		.state('timelines', {url: "/timelines", template: '<timelines-page class="page" />'})
 		.state('notifications', {url: "/notifications", template: '<notifications-page class="page" />'})
+		.state('access-control', {url: "/access-control", template: '<access-control-page class="page" />'})
         .state('dashboard', {
 			onEnter: [
 				'services.locations',

@@ -1,0 +1,31 @@
+(function() {
+
+	const MODULE_NAME = 'pages.login';
+
+	class Controller {
+
+	    constructor($state) {
+			this.$state = $state;
+	    }
+
+		authenticate(email, password) {
+			if (email == '' || password == '') {
+				alert("Please provide your email and password");
+			} else {
+				this.authenticateWithCredentials(email, password);
+			}
+		}
+
+		authenticateWithCredentials(email, password) {
+			this.$state.go('dashboard');
+		}
+	}
+
+	Controller.$inject = ['$state'];
+
+	angular
+		.module("trackwane")
+		.controller("login-page", Controller);
+
+
+})();

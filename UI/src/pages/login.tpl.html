@@ -1,0 +1,23 @@
+<div class="canvas">
+
+	<div style="flex: 1"></div>
+
+	<div style="flex: 1" ng-controller="trackwane.pages.login.controller as vm">
+		<form style="margin-top: 100px">
+			<div>
+				<label for="email" style="font-size: 20px">Email:</label>
+				<input type="text" ng-model="vm.email" name="email"/>
+			</div>
+			<div>
+				<label for="password" style="font-size: 20px">Password:</label>
+				<input type="password" ng-model="vm.password" name="password"/>
+				<button class="btn waves-effect waves-light" style="float: right; margin-top: 20px" type="submit" ng-click="vm.authenticate(vm.email, vm.password)" name="action">Login
+				    <i class="material-icons right">send</i>
+				</button>
+			</div>
+		</form>
+	</div>
+
+	<div style="flex: 1"></div>
+
+</div>

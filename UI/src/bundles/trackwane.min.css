@@ -1,0 +1,8 @@
+body,html{height:100%}body{background-color:#333;color:#ddd;display:flex}.page,body>div{flex:1;display:flex}.page .canvas{flex-direction:column;flex:1;display:flex}
+dashboard-page dashboard-trackers{width:300px;background-color:#343434}dashboard-page dashboard-map{flex:1;display:flex;align-items:stretch}dashboard-page dashboard-map ui-gmap-google-map{align-items:stretch;flex:1}.map{display:flex;flex:1;background-color:#666;align-items:stretch}.angular-google-map,.angular-google-map-container{flex:1;display:flex}
+reports-page{flex:1;display:flex}reports-page .canvas{flex-direction:column;flex:1;display:flex}
+
+
+
+
+top-navigation{background-color:#333}top-navigation>.wrapper{padding-bottom:10px}top-navigation>.wrapper h4{display:inline-block;margin-left:15px;margin-right:135px}top-navigation>.wrapper li,top-navigation>.wrapper ul{width:inherit;display:inline-block}top-navigation>.wrapper li{font-weight:700;margin-left:15px}top-navigation>.wrapper ul{margin-left:35px}

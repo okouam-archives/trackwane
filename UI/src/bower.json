@@ -1,0 +1,26 @@
+{
+  "name": "trackwane",
+  "homepage": "https://github.com/okouam/trackwane",
+  "authors": [
+    "Olivier Kouame <olivier.kouame@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chance": "^1.0.3",
+    "angular": "^1.5.5",
+    "lodash": "^4.12.0",
+    "jquery": "^2.2.3",
+    "angular-google-maps": "^2.3.3",
+    "angular-simple-logger": "^0.1.7"
+  }
+}

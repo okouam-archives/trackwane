@@ -15,7 +15,9 @@
 		.component('notificationsLocations', {
 			controller: NotificationsLocations,
 			template: (
-				<div></div>
+				<div>
+					SHOW LOCATIONS FOR ORGANIZATION
+				</div>
 			)
 		});
 })();

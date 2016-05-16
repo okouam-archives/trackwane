@@ -15,7 +15,9 @@
 		.component('notificationsBoundaries', {
 			controller: NotificationsBoundaries,
 			template: (
-				<div></div>
+				<div>
+					SHOW BOUNDARIES FOR ORGANIZATION
+				</div>
 			)
 		});
 })();

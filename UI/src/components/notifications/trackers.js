@@ -15,7 +15,9 @@
 		.component('notificationsTrackers', {
 			controller: NotificationsTrackers,
 			template: (
-				<div></div>
+				<div>
+					SHOW TRACKERS FOR ORGANIZATION
+				</div>
 			)
 		});
 })();

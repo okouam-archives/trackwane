@@ -5,47 +5,59 @@
 		.service('services.applicationState', [
 			function() {
 
-				this.boundaries = [];
-
-				this.locations = [];
-
-				for(var i = 0; i < 37; i++) {
-					this.locations.push({
-						name: faker.company.companyName(),
-						location: faker.address.streetAddress() + ", " + faker.address.city()
-					});
+				function generateFakes() {
+					var items = [];
+					var max = chance.integer({min: 0, max: 20});
+					for (var j = 0; j < max; j++) {
+						items.push({
+							key: "asdasd",
+							name: faker.company.companyName()
+						});
+					}
+					return items;
 				}
 
-				this.trackers = [
-					{identifier: "A SENSOR IDENTIFIER"},
-					{identifier: "A SENSOR A"},
-					{identifier: "A SENSOR B"},
-					{identifier: "A SENSOR C"},
-					{identifier: "A SENSOR IDENTIFIER"},
-					{identifier: "ANOTHER SENSOR ID", location: "Pulham Road, Battersea"},
-					{identifier: "CTA Bus 2034 on Route 6", location: "King's Road, Chelsea"},
-					{identifier: "ANOTHER SENSOR ID", location: "Sydenham High Street, Sydenham"},
-					{identifier: "CTA Bus 12 on Route 6"},
-					{identifier: "CTA Bus 93 on Route 12"},
-					{identifier: "CTA Bus 86 on Route 1"},
-					{identifier: "CTA Bus 123 on Route 5"},
-					{identifier: "CTA Bus 93 on Route 12"},
-					{identifier: "CTA Bus 86 on Route 1"},
-					{identifier: "CTA Bus 123 on Route 5"},
-					{identifier: "CTA Bus 93 on Route 12"},
-					{identifier: "CTA Bus 86 on Route 1"},
-					{identifier: "CTA Bus 123 on Route 5"}
-				];
+				this.boundaries = [];
 
-				_.each(this.trackers, function(tracker) {
-					tracker.icon = "http://www.nmr.ch.tum.de/images/stories/car.gif";
-					tracker.identifier = "CTA Bus " + chance.integer({min: 0, max: 80}) + " on Route " + chance.integer({min: 0, max: 80});
-					tracker.speed = chance.integer({min: 0, max: 80});
-					tracker.location = faker.address.streetAddress() + ", " + faker.address.city();
-					tracker.coords = {
-						longitude: chance.floating({min: -88, max: -87.5}),
-						latitude: chance.floating({min: 41, max: 42})
-					}
+				this.rules = [];
+
+				this.users =  _.times(chance.integer({min: 2, max: 30}), function(index) {
+					return {
+						displayName: faker.name.findName(),
+						email: faker.internet.email(),
+						administrate: generateFakes(),
+						manage: generateFakes(),
+						view: generateFakes(),
+						photo: faker.image.avatar()
+					};
+				});
+
+				this.organizations = _.times(chance.integer({min: 2, max: 30}), function(index) {
+					return {
+						name: faker.company.companyName(),
+						photo: faker.image.abstract(),
+						userCount: chance.integer({min: 2, max: 20})
+					};
+				});
+
+				this.locations = _.times(chance.integer({min: 2, max: 80}), function(index) {
+					return {
+						name: faker.company.companyName(),
+						location: faker.address.streetAddress() + ", " + faker.address.city()
+					};
+				});
+
+				this.trackers = _.times(chance.integer({min: 10, max: 60}), function(index) {
+					return {
+						icon: "http://www.nmr.ch.tum.de/images/stories/car.gif",
+						identifier: "CTA Bus " + chance.integer({min: 0, max: 80}) + " on Route " + chance.integer({min: 0, max: 80}),
+						speed: chance.integer({min: 0, max: 80}),
+						location: faker.address.streetAddress() + ", " + faker.address.city(),
+						coords: {
+							longitude: chance.floating({min: -88, max: -87.5}),
+							latitude: chance.floating({min: 41, max: 42})
+						}
+					};
 				});
 			}
 		]);

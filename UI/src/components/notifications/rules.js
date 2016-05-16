@@ -15,7 +15,9 @@
 		.component('notificationsRules', {
 			controller: NotificationsRules,
 			template: (
-				<div></div>
+				<div>
+					SHOW RULES FOR ORGANIZATION
+				</div>
 			)
 		});
 })();

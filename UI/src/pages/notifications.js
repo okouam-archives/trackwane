@@ -7,13 +7,13 @@
 				<div class="canvas">
 					<top-navigation />
 					<div style="flex-direction: row" class="flexable">
-						<notifications-organizations class="flexable"/>
-						<div class="flexable" style="flex-direction: column">
-							<notifications-trackers class="flexable"/>
-							<notifications-locations class="flexable"/>
-							<notifications-boundaries class="flexable"/>
-							<notifications-rules  class="flexable"/>
-							<notifications-actions class="flexable" />
+						<notifications-organizations style="min-width: 350px" />
+						<div flex style="flex-direction: column; display: flex">
+							<notifications-trackers flex />
+							<notifications-locations flex />
+							<notifications-boundaries flex />
+							<notifications-rules flex />
+							<notifications-actions flex />
 						</div>
 					</div>
 				</div>

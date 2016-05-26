@@ -4,7 +4,7 @@
 		.component('dashboardTrackers', {
 			template: (
 				<div>
-					<ul class="collapsible popout">
+					<ul>
 						<dashboard-trackers-header />
 					    <dashboard-trackers-rows />
 					</ul>

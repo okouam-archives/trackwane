@@ -1,11 +1,6 @@
-var app = angular.module("trackwane", [	"ui.router", 'uiGmapgoogle-maps', 'ngMaterial']);
+var app = angular.module("trackwane", [	"ui.router", 'uiGmapgoogle-maps']);
 
-app.config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
-	$mdThemingProvider
-		.theme('default')
-		.primaryPalette('blue')
-	    .accentPalette('blue')
-		.dark();
+app.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise("/dashboard");
     $stateProvider
@@ -13,7 +8,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
         //.state('logout', {url: "/logout", templateUrl: "pages/logout.html"})
 		.state('reports', {
 			url: "/reports",
-			template: '<reports-page class="page" />',
+			template: '<reports-page class="page flexable" />',
 			onEnter: [
 				'services.reports',
 				'services.trackers',
@@ -23,9 +18,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 				}
 			]
 		})
-		.state('timelines', {url: "/timelines", template: '<timelines-page class="page" />'})
-		.state('notifications', {url: "/notifications", template: '<notifications-page class="page" />'})
-		.state('access-control', {url: "/access-control", template: '<access-control-page class="page" />'})
+		.state('timelines', {url: "/timelines", template: '<timelines-page class="page flexable" />'})
+		.state('notifications', {url: "/notifications", template: '<notifications-page class="page flexable" />'})
+		.state('access-control', {url: "/access-control", template: '<access-control-page class="page flexable" />'})
         .state('dashboard', {
 			onEnter: [
 				'services.locations',
@@ -38,6 +33,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 				}
 			],
 			url: "/dashboard",
-			template: '<dashboard-page class="page" />'
+			template: '<dashboard-page class="page flexable" />'
 		});
 });

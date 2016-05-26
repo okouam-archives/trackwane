@@ -32,7 +32,7 @@
 					};
 				});
 
-				this.organizations = _.times(chance.integer({min: 2, max: 30}), function(index) {
+				this.organizations = _.times(chance.integer({min: 20, max: 40}), function(index) {
 					return {
 						name: faker.company.companyName(),
 						photo: faker.image.abstract(),
